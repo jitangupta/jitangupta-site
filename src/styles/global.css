@@ -8,6 +8,10 @@
 	background-color: #eb7329;
 }
 
+.theme-t-green {
+	color: #00a86b;
+}
+
 :root {
 	--accent: #2e2e2e;
 	--gray-light: 229, 233, 240;
