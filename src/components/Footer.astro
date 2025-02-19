@@ -1,53 +1,69 @@
 ---
 const today = new Date();
 ---
-
-<footer>
-	&copy; {today.getFullYear()} Jitan Gupta. All rights reserved.
-
-	Speical thanks to <a href="https://astro.build/" target="_blank">Astro</a> for this amazing static site generator, <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for the amazing CSS framework, and <a href="https://flowbite.com/" target="_blank">Flowbite</a> for amazing Tailwind components.
-	<div class="social-links">
-		<a href="https://www.linkedin.com/in/jitangupta/" target="_blank">
-			<span class="sr-only">Follow me on LinkedIn</span>
-			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 172 172" style="fill:#000">
-				<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal">
-					<path d="M0 172V0h172v172z" fill="none"></path>
-					<g fill="#666">
-						<path d="M40.3125 26.875c-7.34863.0-13.4375 6.08887-13.4375 13.4375v91.375c0 7.34864 6.08887 13.4375 13.4375 13.4375h91.375c7.34864.0 13.4375-6.08886 13.4375-13.4375v-91.375c0-7.34863-6.08886-13.4375-13.4375-13.4375zm0 10.75h91.375c1.53271.0 2.6875 1.15479 2.6875 2.6875v91.375c0 1.53271-1.15479 2.6875-2.6875 2.6875h-91.375c-1.53271.0-2.6875-1.15479-2.6875-2.6875v-91.375c0-1.53271 1.15479-2.6875 2.6875-2.6875zm15.78906 9.23828c-5.10205.0-9.23828 4.13623-9.23828 9.23828.0 5.10205 4.13623 9.23828 9.23828 9.23828 5.10205.0 9.23828-4.13623 9.23828-9.23828.0-5.10205-4.13623-9.23828-9.23828-9.23828zm48.54297 24.52344c-7.70557.0-12.82861 4.22021-14.94922 8.23047h-.33594V72.5625H74.24218v51.0625h15.78906V98.42969c0-6.65576 1.32276-13.10156 9.57422-13.10156 8.12549.0 8.23047 7.5166 8.23047 13.4375v24.85938h15.78906V95.57423c0-13.73144-2.91846-24.1875-18.98047-24.1875zM48.375 72.5625v51.0625h15.95703V72.5625z">
-						</path>
-					</g>
-				</g>
-			</svg>
-		</a>
-		<a href="https://github.com/jitangupta" target="_blank">
-			<span class="sr-only">Go to me's GitHub repo</span>
-			<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github"
-				><path
-					fill="currentColor"
-					d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-				></path></svg
-			>
-		</a>
-	</div>
+<footer class="bg-white dark:bg-gray-900">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+              <a href="https://jitangupta.com/" class="flex items-center">
+                  <img src="/jitan-gupta-logo.png" class="h-20 me-3" alt="Jitan Gupta" />
+              </a>
+          </div>
+          <div class="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3">
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">More</h2>
+                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                      <li class="mb-4">
+                          <a href="/articles" class="hover:underline">Articles</a>
+                      </li>
+                      <li class="mb-4">
+                          <a href="/about" class="hover:underline">Abount</a>
+                      </li>
+					  <li>
+						<a href="/contact" class="hover:underline">Contact</a>
+					</li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow me</h2>
+                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                      <li class="mb-4">
+                          <a href="https://github.com/jitangupta" target="_blank" class="hover:underline ">Github</a>
+                      </li>
+                      <li>
+                          <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" class="hover:underline">LinkedIn</a>
+                      </li>
+                  </ul>
+              </div>
+              <div>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Speical thanks to</h2>
+                  <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                      <li class="mb-4">
+						  <a href="https://astro.build/" target="_blank" class="hover:underline">Astro</a>
+                      </li>
+                      <li class="mb-4">
+						  <a href="https://tailwindcss.com/" target="_blank" class="hover:underline">Tailwind CSS</a>
+                      </li>
+					  <li>
+						  <a href="https://flowbite.com/" target="_blank" class="hover:underline">Flowbite</a>
+					  </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+      <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center">&copy; {today.getFullYear()} Jitan Gupta. All rights reserved.
+          </span>
+          <div class="flex mt-4 text-sm sm:justify-center sm:mt-0">
+          	<a href="#" class="mr-1.5 hover:underline">Privacy Policy</a>/<a href="#" class="ml-1.5 hover:underline">Terms &amp; Conditions</a>
+          </div>
+      </div>
+    </div>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
+		padding: 2em 1em 0em 1em;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
 	}
 </style>
