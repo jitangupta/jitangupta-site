@@ -4,6 +4,21 @@
 /* blue-color: #0571d3; */
 /* green-color: #00a86b; */
 
+/* Custom Spacing */
+@layer utilities {
+	.top-36 {
+	  top: 9rem;
+	}
+  }
+  
+  /* Extend Position Variants */
+  @layer variants {
+	.sticky\:top-36 {
+	  position: sticky;
+	  top: 9rem;
+	}
+}
+
 .bg-theme-primary {
 	background-color: #eb7329;
 }
@@ -56,4 +71,21 @@ body {
     background: url(/icons/double-underline-blue.svg);
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.toc{
+	position: relative;
+}
+.toc::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    top: 1px;
+    left: -21px;
+    background: url(/icons/chevron-right-orange.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: allease-in-out 0.2s;
 }

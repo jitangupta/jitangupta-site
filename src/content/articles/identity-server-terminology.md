@@ -1,8 +1,12 @@
 ---
-title: 'Identity Server Jargon & Related Terminology: A Complete Guide'
+title: 'Identity Server Jargon & Related Terminology'
+titleTag: 'A Complete Guide'
 description: 'A complete guide to Identity Server terminology, including authentication, authorization, OAuth 2.0, OpenID Connect, and the differences between Identity Server & IdentityServer4.'
 pubDate: '20 Feb 2025'
-heroImage: '/blog-placeholder-3.jpg'
+heroImage: '/articles/identity-server-terminology2.jpg'
+articleTag: 'Software Architecture'
+previousArticle: ''
+nextArticle: '/article/building-auth-service'
 ---
 
 ## Why do people often confuse Identity Server with IdentityServer4?

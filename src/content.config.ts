@@ -2,30 +2,23 @@ import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
 const article = defineCollection({
-	loader: glob({ base: './src/content/articles', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
-	}),
+    loader: glob({ base: './src/content/articles', pattern: '**/*.{md,mdx}' }),
+    // Type-check frontmatter using a schema
+    schema: z.object({
+        title: z.string(),
+        titleTag: z.string().optional(),
+        description: z.string(),
+        pubDate: z.coerce.date(),
+        updatedDate: z.coerce.date().optional(),
+        heroImage: z.string().optional(),
+        articleTag: z.string().optional(),
+        previousArticle: z.string().optional(),
+        nextArticle: z.string().optional(),
+        headings: z.array(z.object({
+            depth: z.number(),
+            text: z.string(),
+        })).optional(),
+    }),
 });
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
-	}),
-});
-
-export const collections = { article, blog };
+export const collections = { article };
