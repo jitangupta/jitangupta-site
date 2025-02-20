@@ -7,44 +7,14 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'article'>['data'];
 
-const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTag, headings } = Astro.props;
+const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTag } = Astro.props;
 
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			
-			.prose {
-				
-			}
-
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-
-			.article-details h2{
-				line-height: 1.2;
-				font-size: 25px;
-				font-weight: 600;
-				margin-top: 20px;
-				margin-bottom: 10px;
-			}
-		</style>
+		
 	</head>
 
 	<body>

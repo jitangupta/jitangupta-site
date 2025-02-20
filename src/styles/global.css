@@ -4,23 +4,12 @@
 /* blue-color: #0571d3; */
 /* green-color: #00a86b; */
 
-/* Custom Spacing */
-@layer utilities {
-	.top-36 {
-	  top: 9rem;
-	}
-  }
-  
-  /* Extend Position Variants */
-  @layer variants {
-	.sticky\:top-36 {
-	  position: sticky;
-	  top: 9rem;
-	}
-}
-
 .bg-theme-primary {
 	background-color: #eb7329;
+}
+
+.theme-color-primary {
+	color: #eb7329;
 }
 
 .theme-t-green {
@@ -76,6 +65,7 @@ body {
 .toc{
 	position: relative;
 }
+
 .toc::after {
     content: "";
     display: block;

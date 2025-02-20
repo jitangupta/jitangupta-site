@@ -18,6 +18,7 @@ const article = defineCollection({
             depth: z.number(),
             text: z.string(),
         })).optional(),
+        draft: z.boolean().optional(),
     }),
 });
 

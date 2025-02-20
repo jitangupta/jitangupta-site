@@ -15,97 +15,46 @@ const articles = (await getCollection('article')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title="Articles - Jitan Gupta" description={SITE_DESCRIPTION} />
-		<!-- <style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style> -->
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
+		<section class="bg-gray-100">
+			<div class="bg-white max-w-screen-xl mx-auto px-15 py-10 rounded-b-2xl">
+				<h1 class="text-4xl md:text-5xl lg:text-6xl mt-8 font-bold" style="line-height: 1.2;">Articles</h1>
+				
+			</div>
+		</section>
+		<section class="bg-gray-100">
+			<div class="max-w-screen-xl mx-auto py-10">
 				<ul>
 					{
 						articles.map((article) => (
+							article.data.draft == true ? null :
 							<li>
-								<a href={`/article/${article.id}/`}>
-									<img width={720} height={360} src={article.data.heroImage} alt="" />
-									<h4 class="title">{article.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={article.data.pubDate} />
-									</p>
-								</a>
+								<div class="p-5 bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 max-w-lg">
+									<div class="">
+										<img src={article.data.heroImage} alt="Article Banner" class="w-full h-60 rounded-2xl object-cover" />
+										<div class="p-5">
+											<h2 class="font-semibold text-2xl text-gray-900">{article.data.title}</h2>
+											<p class="text-sm text-gray-500 mt-1">Published on <FormattedDate date={article.data.pubDate} /></p>
+											<p class="text-gray-700 mt-3">{article.data.description}
+											</p>
+											<a href={`/article/${article.id}`} class="mt-4 inline-flex items-center theme-color-primary font-medium group">
+												Continue Reading
+												<span class="ml-2 transform transition-transform group-hover:translate-x-1">
+													→
+												</span>
+											</a>
+										</div>
+									</div>
+								</div>
 							</li>
 						))
 					}
 				</ul>
-			</section>
-		</main>
+			</div>			
+		</section>
 		<Footer />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 	</body>
 </html>
