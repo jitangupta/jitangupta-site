@@ -1,4 +1,5 @@
 ---
+import '../styles/global.css';
 import type { CollectionEntry  } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
@@ -13,8 +14,42 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		
+		<BaseHead title={title} description={description} />		
+		<style is:global>
+			.content-slot h2 {
+				color: #101828 !important;
+				margin-top: 20px;
+				margin-bottom: 5px;
+				font-size: 25px;
+				font-weight: 600;
+			}
+
+			.content-slot p {
+				color: #364153;
+			}
+
+			.content-slot ul {
+				list-style-type: auto;
+				margin-left: 20px;
+			}
+
+			.content-slot ul li > ul {
+				list-style-type: disc;
+			}
+
+			.content-slot strong {
+				color: #364153;
+				font-weight: 600;
+			}
+
+			.content-slot p strong {
+				margin-top: 15px;
+			}
+
+			.content-slot strong a:hover{
+				text-decoration: underline;
+			}
+		</style>
 	</head>
 
 	<body>

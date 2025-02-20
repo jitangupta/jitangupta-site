@@ -38,16 +38,18 @@ OAuth (Open Authorization) is an open standard for token-based authentication an
 
 ## What is OAuth 2.0?
 OAuth 2.0, introduced in 2012, is the current version of OAuth. It is widely used for secure API authorization. It replaced OAuth 1.0, simplifying the process by removing cryptographic signatures and introducing token-based authentication.
+
 **Key Features of OAuth 2.0**:
 - Access Tokens → Short-lived tokens used to access resources without sharing credentials.
 - Refresh Tokens → Long-lived tokens that get new access tokens when they expire.
 - Scopes → Define what data an application can access (e.g., "read emails" but not "send emails").
 - Flows (Grant Types) → Different ways to obtain access tokens based on use cases (e.g., authorization code flow for web apps, client credentials for machine-to-machine communication).
-**How People Confuse OAuth with Authentication?**
+## How People Confuse OAuth with Authentication?
 - OAuth is for Authorization, NOT Authentication
 - OAuth 2.0 grants access to resources, but it does not verify who the user is.
 - OpenID Connect (OIDC) extends OAuth 2.0 to provide authentication (who the user is).
 - Many confuse OAuth with authentication because services like Google and Facebook use OAuth and OIDC to log in.
+
 **Final Summary**
 - OAuth → A standard for secure authorization.
 - [OAuth Organization](http://OAuth.net) → Maintains OAuth specs but does not provide authentication.
