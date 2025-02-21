@@ -1,5 +1,3 @@
-export const prerender = false;
-
 export async function POST({ request }: { request: Request }) {
     const API_KEY = import.meta.env.KIT_API_KEY;
     const FORM_ID = import.meta.env.KIT_FORM_ID;
