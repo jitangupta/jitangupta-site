@@ -7,6 +7,9 @@
 .bg-theme-primary {
 	background-color: #eb7329;
 }
+a.bg-theme-primary:hover, button.bg-theme-primary:hover {
+	background-color: #c55611;
+}
 
 .theme-color-primary {
 	color: #eb7329;

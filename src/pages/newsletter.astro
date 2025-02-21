@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout	title="About Me - Jitan Gupta" description="Jitan Gupta is a full-stack engineer turned an entrepreneur.">
+    <section class="bg-gray-100">
+        <div class="bg-white max-w-screen-xl mx-auto px-15 py-10 rounded-b-2xl">
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl mt-8 font-bold" style="line-height: 1.2;">Stay Ahead in Tech 🚀</h1>
+
+            <!-- Convincing Notes -->
+            <p>Want to level up your full-stack development skills, master software architecture, and grow your tech career? Join my exclusive newsletter where I share:</p>
+            <ul class="list-none my-4">
+                <li>💡 Actionable coding tips & real-world solutions.</li>
+                <li>🛠️ Deep dives into debugging & software design.</li>
+                <li>🚀 Career growth insights for developers & IT professionals.</li>
+                <li>🔥 Early access to my latest articles & YouTube content.</li>
+            </ul>
+            <p>No spam. Just high-value insights to help you build better, scale smarter, and grow faster.</p>
+            <p>📩 Subscribe now and be part of the journey!</p>
+
+             <!-- Subscription Form -->
+             <form id="newsletter-form" class="mt-6 flex flex-col sm:flex-row gap-4">
+                <input 
+                    type="email" 
+                    id="email-input" 
+                    placeholder="Enter your email" 
+                    class="w-full sm:w-2/3 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required 
+                />
+                <button 
+                    type="submit" 
+                    class="w-full sm:w-auto bg-theme-primary text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300">
+                    Subscribe
+                </button>
+            </form>
+
+            <!-- Message Display -->
+            <p id="message" class="mt-4 text-sm"></p>
+        </div>
+    </section>
+
+    <!-- Client-side JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletter-form");
+            const emailInput = document.getElementById("email-input");
+            const message = document.getElementById("message");
+
+            form?.addEventListener("submit", async function (event) {
+                event.preventDefault();
+                message.textContent = ""; // Clear previous message
+                message.className = "mt-4 text-sm"; // Reset classes
+
+                const email = emailInput.value.trim();
+                if (!email) {
+                    message.textContent = "❌ Please enter a valid email.";
+                    message.classList.add("text-red-600");
+                    return;
+                }
+
+                const res = await fetch("/api/subscribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email }),
+                });
+
+                if (res.ok) {
+                    message.textContent = "✅ Subscription successful!";
+                    message.classList.add("text-green-600");
+                    emailInput.value = "";
+                } else {
+                    message.textContent = "❌ Subscription failed. Try again.";
+                    message.classList.add("text-red-600");
+                }
+            });
+        });
+    </script>
+</Layout>
