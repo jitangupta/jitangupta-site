@@ -6,7 +6,6 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,9 +19,4 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
   },
-
-  output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
 });
