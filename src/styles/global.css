@@ -15,8 +15,15 @@ a.bg-theme-primary:hover, button.bg-theme-primary:hover {
 	color: #eb7329;
 }
 
-.theme-t-green {
-	color: #00a86b;
+.theme-text-teal {
+	color: #00897b;
+}
+.theme-button-teal {
+	color: #fff;
+	background-color: #00897b;
+}
+.theme-button-teal:hover {
+	background-color: #00695c;
 }
 
 :root {
