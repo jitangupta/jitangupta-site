@@ -2,8 +2,24 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import CommonCTA from '../components/CommonCTA.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import '../styles/global.css';
+
+const caseStudies = [
+  {
+    image: "/case-study/case-study-placeholder.png", // Replace with actual image URL
+    title: "Migrating Microsoft Memebership to Centralized Identity",
+    achievement: "Coming Soon",
+    link: "#"
+  },
+  {
+    image: "/case-study/case-study-placeholder.png", // Replace with actual image URL
+    title: "VM to AKS Migration",
+    achievement: "Coming Soon",
+    link: "#"
+  }
+];
 ---
 
 <!doctype html>
@@ -72,10 +88,31 @@ import '../styles/global.css';
 			</div>	
 		</section>
 
-		<!-- Contact -->
+		<!-- Case Study -->
 		<section>
-			
+			<div class="py-12 bg-gray-100">
+				<div class="container mx-auto px-6 text-center">
+				  <h2 class="text-3xl font-bold text-gray-800 mb-8">Case Studies</h2>
+				  <div class="grid md:grid-cols-3 gap-6">
+					{caseStudies.map((study) => (
+					  <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+						<img src={study.image} alt={study.title} class="w-full h-48 object-cover" />
+						<div class="p-6">
+						  <h3 class="text-xl font-semibold text-gray-700">{study.title}</h3>
+						  <p class="text-gray-600 mt-2">{study.achievement}</p>
+						  <a href={study.link} class="inline-block mt-4 theme-color-primary font-semibold hover:underline">
+							View Case Study →
+						  </a>
+						</div>
+					  </div>
+					))}
+				  </div>
+				</div>
+			</div>		
 		</section>
+
+		<!-- Contact -->
+		<CommonCTA />
 
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
