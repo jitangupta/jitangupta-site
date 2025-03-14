@@ -9,7 +9,13 @@ import '../styles/global.css';
 const caseStudies = [
   {
     image: "/case-study/case-study-placeholder.png", // Replace with actual image URL
-    title: "Migrating Microsoft Memebership to Centralized Identity",
+    title: "Migrating Microsoft Membership to Centralized Identity",
+    achievement: "Coming Soon",
+    link: "#"
+  },
+  {
+    image: "/case-study/case-study-placeholder.png", // Replace with actual image URL
+    title: "Migrating of UI Layer from Bootstrap3 to Bootstrap4",
     achievement: "Coming Soon",
     link: "#"
   },
@@ -37,13 +43,13 @@ const caseStudies = [
 					<img src="/jitan-bg.png" class="w-72 sm:w-72 md:w-80 lg:w-96 px-4 mb-7" alt="jitan-gupta">
 				</div>  
 				<div class="mr-auto place-self-center lg:col-span-7">
-					<h3 class="max-w-2xl mb-1 text-4xl font-bold tracking-tight leading-none md:text-2xl xl:text-3xl">Migrate Legacy Systems Without the Headaches</h3>
+					<h3 class="max-w-2xl mb-1 text-4xl font-bold tracking-tight leading-none md:text-2xl xl:text-3xl">Migrate Legacy Systems Without Downtime</h3>
 					<p class="max-w-2xl font-light text-gray-700 md:text-xl lg:text-2xl">I help businesses <span class="theme-text-teal">modernize outdated systems</span> by migrating them to <span class="theme-text-teal">scalable</span>, <span class="theme-text-teal">cloud-native architectures</span>—reducing technical debt and unlocking efficiency.</p>
 					<p class="max-w-2xl mb-6 f font-light text-gray-600 md:text-lg">✅ 10+ years in software, specializing in <span class="underline font-bold">enterprise migrations</span>.</p>
-					<a href="/enterprise-migration-consultation" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center theme-button-teal rounded-lg transition">
+					<a href="/enterprise-migration-consultation" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center bg-secondary-500 hover:bg-secondary-700 text-white rounded-lg transition">
 						Get a Free Strategy Call
 					</a> 
-					<a href="/how-to-migrate-legacy-system" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
+					<a href="/how-to-migrate-legacy-system" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 ml-2">
 						See My Approach
 					</a> 
 				</div>             
@@ -89,28 +95,25 @@ const caseStudies = [
 		</section>
 
 		<!-- Case Study -->
-		<section>
-			<div class="py-12 bg-gray-100">
-				<div class="container mx-auto px-6 text-center">
-				  <h2 class="text-3xl font-bold text-gray-800 mb-8">Case Studies</h2>
-				  <div class="grid md:grid-cols-3 gap-6">
-					{caseStudies.map((study) => (
-					  <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-						<img src={study.image} alt={study.title} class="w-full h-48 object-cover" />
-						<div class="p-6">
-						  <h3 class="text-xl font-semibold text-gray-700">{study.title}</h3>
-						  <p class="text-gray-600 mt-2">{study.achievement}</p>
-						  <a href={study.link} class="inline-block mt-4 theme-color-primary font-semibold hover:underline">
-							View Case Study →
-						  </a>
-						</div>
-					  </div>
-					))}
+		<section class="bg-gray-100 py-16 px-6 text-center">
+			<div class="max-w-screen-xl mx-auto rounded-2xl">
+			  <h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-10">Case Studies</h2>
+			  <div class="grid md:grid-cols-3 gap-6">
+				{caseStudies.map((study) => (
+				  <div class="bg-white rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
+					<img src={study.image} alt={study.title} class="w-full h-48 object-cover" />
+					<div class="p-6">
+					  <h3 class="text-xl font-semibold text-gray-700">{study.title}</h3>
+					  <p class="text-gray-600 mt-2">{study.achievement}</p>
+					  <a href={study.link} class="inline-block mt-4 theme-color-primary font-semibold hover:underline">
+						View Case Study →
+					  </a>
+					</div>
 				  </div>
-				</div>
-			</div>		
+				))}
+			  </div>
+			</div>
 		</section>
-
 		<!-- Contact -->
 		<CommonCTA />
 
