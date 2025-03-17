@@ -6,7 +6,7 @@ import "../styles/global.css";
 
 // const title = "Jitan Gupta";
 // const description = "Jitan Gupta is a full-stack engineer turned an entrepreneur.";
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, pageTheme } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -14,7 +14,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />		
 	</head>
 	<body>
-		<Header />
+		<Header pageTheme={pageTheme} />
 
 		<slot />
 

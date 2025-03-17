@@ -1,22 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const title = "🚀 Tech Strategy & Cloud Architecture Insights | Join Jitan Gupta's Newsletter";
+const description = "Stay ahead in software architecture, cloud strategy, and consulting with exclusive insights from Jitan Gupta. Get high-impact tech strategies, case studies, and career growth blueprints—straight to your inbox. Subscribe now!";
 ---
-<Layout	title="About Me - Jitan Gupta" description="Jitan Gupta is a full-stack engineer turned an entrepreneur.">
+<Layout	title={title} description={description}>
     <section class="bg-gray-100 mx-2">
         <div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
             <!-- Title -->
-            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Stay Ahead in Tech 🚀</h1>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Stay Ahead in Tech & Business 🚀</h1>
 
             <!-- Convincing Notes -->
-            <p>Want to level up your full-stack development skills, master software architecture, and grow your tech career? Join my exclusive newsletter where I share:</p>
+            <p>Want to future-proof your career in software architecture, cloud strategy, and high-impact consulting? Join my <b>exclusive newsletter</b>, where I share:</p>
             <ul class="list-none my-4">
-                <li>💡 Actionable coding tips & real-world solutions.</li>
-                <li>🛠️ Deep dives into debugging & software design.</li>
-                <li>🚀 Career growth insights for developers & IT professionals.</li>
-                <li>🔥 Early access to my latest articles & YouTube content.</li>
+                <li>💡 <b>Strategic insights</b> on scaling software, cloud migrations & enterprise architecture.</li>
+                <li>🛠️ <b>Real-world</b> case studies from consulting & tech leadership.</li>
+                <li>🚀 <b>Blueprints</b> for career growth in tech, AI, and SaaS consulting.</li>
+                <li>🔥 <b>Early access</b> to frameworks, tools & premium resources.</li>
             </ul>
-            <p>No spam. Just high-value insights to help you build better, scale smarter, and grow faster.</p>
-            <p>📩 Subscribe now and be part of the journey!</p>
+            <p>No fluff. No spam. Only <b>high-value</b> insights to help you <b>architect smarter</b>, <b>scale faster</b>, and <b>lead with confidence</b>.</p>
+            <p>📩 Subscribe now and stay ahead of the curve!</p>
 
              <!-- Subscription Form -->
              <form id="newsletter-form" class="mt-6 flex flex-col sm:flex-row gap-4">
@@ -29,7 +31,7 @@ import Layout from '../layouts/Layout.astro';
                 />
                 <button 
                     type="submit" 
-                    class="w-full sm:w-auto bg-theme-primary text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300">
+                    class="w-full sm:w-auto bg-secondary-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300">
                     Subscribe
                 </button>
             </form>

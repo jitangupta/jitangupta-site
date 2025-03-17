@@ -1,44 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const title = "🔒 Privacy Policy | Jitan Gupta – Secure & Transparent Data Use";
+const description = "Your privacy matters! Read the Privacy Policy for JitanGupta.com to understand how we collect, use, and protect your data, including services, payments, and analytics. We prioritize security and transparency.";
 ---
-<Layout	title="Privacy Policy - Jitan Gupta" description="Jitan Gupta is a full-stack engineer turned an entrepreneur.">
+<Layout	title={title} description={description}>
 	<section class="bg-gray-100 mx-2">
 		<div class="bg-white max-w-screen-xl mx-auto px-6 py-12 rounded-b-2xl">
             <h1 class="text-2xl font-bold mb-4">Privacy Policy</h1>
 			<h2 class="text-xl font-semibold mt-6">1. Information We Collect</h2>
             <ul class="list-disc pl-5 mt-2">
-                <li><b>Personal Information:</b> When you subscribe to our mailing list, enroll in a course, or take a quiz, we collect your name and email address.</li>
-                <li><b>Payment Information:</b> If you purchase a course, payment details are processed through third-party payment gateways (e.g., Stripe, PayPal). We do not store credit card details.</li>
-                <li><b>Course & Quiz Data:</b> We track quiz responses, scores, and course progress to improve user experience and provide certifications.</li>
-                <li><b>Usage Data:</b> We may collect non-personal data such as IP addresses, browser type, and website usage statistics through cookies or analytics tools.</li>
+                <li><b>Personal Information:</b> When you book a free strategy call, subscribe to our newsletter, or contact us, we collect your name, email, and any details you voluntarily provide.</li>
+                <li><b>Business Information:</b> If you discuss projects or consulting services, we may collect high-level business information related to migration, scalability, or modernization needs.</li>
+                <li><b>Usage Data:</b> We may track website interactions, IP addresses, browser types, and analytics data through cookies to enhance your experience.</li>
             </ul>
 
             <h2 class="text-xl font-semibold mt-6">2. How We Use Your Information</h2>
+            <p class="">We use collected data to:</p>
             <ul class="list-disc pl-5 mt-2">
-                <li>To provide access to courses, quizzes, and personalized learning experiences.</li>
-                <li>To process payments securely.</li>
-                <li>To send you newsletters, updates, and relevant course content.</li>
-                <li>To analyze quiz results and issue certifications if applicable.</li>
-                <li>To improve website functionality and user experience.</li>
+                <li>Provide strategy calls, consultation, and personalized recommendations.</li>
+                <li>Send newsletters, case studies, and updates on cloud migration insights.</li>
+                <li>Improve website functionality and analyze engagement trends.</li>
+                <li>Respond to inquiries and maintain business communications.</li>
             </ul>
 
             <h2 class="text-xl font-semibold mt-6">3. Sharing Your Information</h2>
-            <p class="mt-2">We do not sell, rent, or trade your personal information. However, we may share data with trusted third-party service providers for payment processing, website analytics, and email delivery.</p>
+            <ul class="list-disc pl-5 mt-2">
+                <li><b>No Selling or Trading:</b> We do not sell or rent personal data.</li>
+                <li><b>Third-Party Services:</b> We may share data with trusted service providers for email delivery, analytics, and scheduling calls.</li>
+                <li><b>Legal Requirements:</b> If required by law, we may disclose your information.</li>
+            </ul>
 
             <h2 class="text-xl font-semibold mt-6">4. Data Security & Retention</h2>
-            <p class="mt-2">We take appropriate measures to protect your information. Quiz responses and course progress may be stored for up to [Insert Retention Period] for record-keeping purposes.</p>
+            <ul class="list-disc pl-5 mt-2">
+                <li>We implement security measures to protect your data.</li>
+                <li>Information collected for consultations is stored securely and retained only as long as necessary.</li>
+            </ul>
 
             <h2 class="text-xl font-semibold mt-6">5. Your Rights</h2>
             <ul class="list-disc pl-5 mt-2">
-                <li>You can opt out of our mailing list at any time.</li>
-                <li>You can request deletion of your quiz responses, course data, and personal details.</li>
+                <li><b>Opt-Out:</b> You can unsubscribe from emails anytime.</li>
+                <li><b>Data Deletion:</b> You may request the removal of your personal data.</li>
             </ul>
 
-            <h2 class="text-xl font-semibold mt-6">6. Changes to This Policy</h2>
-            <p class="mt-2">We may update this policy periodically. Changes will be posted on this page with an updated effective date.</p>
+            <h2 class="text-xl font-semibold mt-6">6. Updates to This Policy</h2>
+            <p class="mt-2">We may revise this policy as our services evolve. Changes will be posted with an updated effective date.</p>
 
             <h2 class="text-xl font-semibold mt-6">7. Contact Us</h2>
-            <p class="mt-2">If you have any questions, contact us at <a href="mailto:hi@jitangupta.com" class="underline">hi@jitangupta.com</a>.</p>
+            <p class="mt-2">For any questions or data requests, email <a href="mailto:hi@jitangupta.com" class="text-primary-500 hover:underline">hi@jitangupta.com</a>.</p>
 		</div>
 	</section>
 </Layout>

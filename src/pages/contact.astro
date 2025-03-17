@@ -1,25 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const title = "Contact Jitan Gupta | Migration Specialist & Cloud Expert";
+const description = "Need help migrating legacy systems, optimizing cloud solutions, or modernizing authentication? Contact Jitan Gupta, a Migration Specialist & Full-Stack Engineer, for expert consulting on scalable and secure enterprise solutions. Book a free strategy call today!";
 ---
-<Layout	title="About Me - Jitan Gupta" description="Jitan Gupta is a full-stack engineer turned an entrepreneur.">
+<Layout	title={title} description={description}>
     <section class="bg-gray-100 mx-2">
         <div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
             <!-- Title -->
-            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Let’s Connect! 🚀</h1>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">🚀 Let’s Talk <br><span class="text-2xl md:text-4xl">Migration, Scalability & Modernization</span></h1>
 
             <!-- Convincing Notes -->
-            <p>Got a question, collaboration idea, or just want to say hi? I’d love to hear from you! Whether it’s about <b>full-stack development</b>, <b>software architecture</b>, <b>debugging</b>, or <b>career growth</b>, I’m here to help.</p>
+            <p>Whether you’re looking to <b>migrate legacy systems</b>, <b>optimize cloud architecture</b>, or <b>modernize authentication</b>, I’m here to help. Let’s discuss how we can build <b>high-performance</b>, <b>scalable</b>, and <b>future-ready</b> solutions for your business.</p>
+            <a href="/enterprise-migration-consultation" class="inline-flex items-center justify-center my-3 px-5 py-3 text-base font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition">
+                Get a Free Strategy Call
+            </a> 
             <ul class="list-none my-4">
-                <li>📩 Email: <a href="mailto:hi@jitangupta.com" class="text-sky-700 hover:text-sky-900">hi@jitangupta.com</a></li>
+                <li>📩 Email: <a href="mailto:hi@jitangupta.com" class="text-primary-500 hover:underline">hi@jitangupta.com</a></li>
                 <li>💬 Socials: 
-                    <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" class="hover:text-sky-900">LinkedIn</a>,
-                    <a href="https://github.com/jitangupta" target="_blank" class="hover:text-sky-900">GitHub</a>,
-                    <a href="https://dev.to/jitangupta" target="_blank" class="hover:text-sky-900">Dev.to</a>,
-                    <a href="https://www.csharp.com/members/jitan-gupta" target="_blank" class="hover:text-sky-900">C# Corner</a>                    
+                    <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" class="text-secondary-600 hover:underline">LinkedIn</a>,
+                    <a href="https://github.com/jitangupta" target="_blank" class="text-secondary-600 hover:underline">GitHub</a>,
+                    <a href="https://dev.to/jitangupta" target="_blank" class="text-secondary-600 hover:underline">Dev.to</a>,
+                    <a href="https://www.csharp.com/members/jitan-gupta" target="_blank" class="text-secondary-600 hover:underline">C# Corner</a>                    
                 </li>
             </ul>
-            <p>Want to stay updated? <a href="/newsletter" class="text-sky-700 hover:text-sky-900">Join my newsletter</a> for exclusive insights, coding tips, and career advice.</p>
-            <p>Looking forward to connecting with you! 😊</p>
+            <p>Want to stay updated? <a href="/newsletter" class="text-primary-500 hover:underline">Join my newsletter</a> for exclusive insights, case studies, and migrations notes.</p>
+            <p>Excited to connect and help with your migration journey! 🚀</p>
         </div>
     </section>
 </Layout>
