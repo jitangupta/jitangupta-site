@@ -9,9 +9,97 @@ const pageTheme = "bg-primary-light";
 		<div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
             <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Migration Approach:<br>
                 <span class="text-2xl md:text-4xl">A Proven Framework for Seamless Transitions</span></h1>
-            <!-- <h3 class="text-gray-900 text-2xl">Why Migrate?</h3>
-            <p class="text-gray-700">Legacy systems come with technical debt, security vulnerabilities, and scalability limitations. A well-planned migration not only modernizes your tech stack but also improves performance, security, and business agility.</p>
-            <p class="text-gray-700">Whether you’re migrating from on-prem to cloud, .NET Framework to .NET Core, or decentralizing authentication, my approach ensures minimal downtime, maximum efficiency, and long-term success.</p> -->
+            <h3 class="text-gray-900 text-2xl mt-5 mb-2">Why Migrate?</h3>
+            <p class="text-gray-700 mb-2">Legacy systems come with technical debt, security vulnerabilities, and scalability limitations. A well-planned migration not only modernizes your tech stack but also improves performance, security, and business agility.</p>
+            <p class="text-gray-700">Whether you’re migrating from on-prem to cloud, .NET Framework to .NET Core, or decentralizing authentication, my approach ensures minimal downtime, maximum efficiency, and long-term success.</p>
+        
+            <!-- Diagram -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+                <!-- Background -->
+                <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10"/>
+                
+                <!-- Title -->
+                <text x="400" y="50" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Migration Approach</text>
+                
+                <!-- Circle Background -->
+                <circle cx="400" cy="300" r="220" fill="#ffffff" stroke="#dddddd" stroke-width="2"/>
+                
+                <!-- Phase Circles -->
+                <!-- Assessment -->
+                <circle cx="400" cy="120" r="70" fill="#4285f4" opacity="0.9"/>
+                <circle cx="400" cy="120" r="60" fill="#ffffff"/>
+                <text x="400" y="110" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Assessment</text>
+                <text x="400" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Understanding current</text>
+                <text x="400" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">system & pain points</text>
+                
+                <!-- Planning -->
+                <circle cx="580" cy="200" r="70" fill="#34a853" opacity="0.9"/>
+                <circle cx="580" cy="200" r="60" fill="#ffffff"/>
+                <text x="580" y="190" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Planning</text>
+                <text x="580" y="210" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Creating migration</text>
+                <text x="580" y="225" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">strategy with rollback</text>
+                
+                <!-- Decision Making -->
+                <circle cx="580" cy="400" r="70" fill="#fbbc05" opacity="0.9"/>
+                <circle cx="580" cy="400" r="60" fill="#ffffff"/>
+                <text x="580" y="390" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Decision Making</text>
+                <text x="580" y="410" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Presenting roadmap</text>
+                <text x="580" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">for approval</text>
+                
+                <!-- Execution -->
+                <circle cx="400" cy="480" r="70" fill="#ea4335" opacity="0.9"/>
+                <circle cx="400" cy="480" r="60" fill="#ffffff"/>
+                <text x="400" y="470" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Execution</text>
+                <text x="400" y="490" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Migration in single</text>
+                <text x="400" y="505" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">or multiple phases</text>
+                
+                <!-- Testing & Optimizing -->
+                <circle cx="220" cy="400" r="70" fill="#ab47bc" opacity="0.9"/>
+                <circle cx="220" cy="400" r="60" fill="#ffffff"/>
+                <text x="220" y="390" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Testing &</text>
+                <text x="220" y="410" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Optimizing</text>
+                <text x="220" y="430" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Performance,</text>
+                <text x="220" y="445" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">security & usability</text>
+                
+                <!-- Post-Migration Support -->
+                <circle cx="220" cy="200" r="70" fill="#0097a7" opacity="0.9"/>
+                <circle cx="220" cy="200" r="60" fill="#ffffff"/>
+                <text x="220" y="190" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Post-Migration</text>
+                <text x="220" y="210" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Support</text>
+                <text x="220" y="230" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Monitoring &</text>
+                <text x="220" y="245" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">future-proofing</text>
+                
+                <!-- Improved Arrows that stop at circle boundaries -->
+                <!-- Assessment to Planning -->
+                <path d="M465 145 Q510 160 535 180" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Planning to Decision Making -->
+                <path d="M580 270 Q580 320 580 330" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Decision Making to Execution -->
+                <path d="M520 430 Q480 450 460 460" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Execution to Testing -->
+                <path d="M340 450 Q300 435 280 425" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Testing to Post-Migration -->
+                <path d="M220 330 Q220 280 220 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Post-Migration to Assessment -->
+                <path d="M285 175 Q330 145 340 135" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Center Text -->
+                <text x="400" y="285" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Seamless</text>
+                <text x="400" y="310" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Migration</text>
+                <text x="400" y="335" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Process</text>
+                
+                <!-- Arrowhead definition -->
+                <defs>
+                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                  </marker>
+                </defs>
+              </svg>
         </div>
 	</section>
 
@@ -44,4 +132,12 @@ Security risks, downtime, data integrity, scalability issues, etc.
 Call to Action (CTA)
 
 Direct visitors to book a consultation with you.
+
+--------------------------
+✓ Expert Assessment: I'll analyze your current system architecture, identify technical debt, and understand your business objectives.
+✓ Strategic Roadmap: Receive a tailored migration path that minimizes disruption to your existing customers while maximizing business value.
+✓ Risk Mitigation: Learn how to navigate common migration pitfalls and ensure operational continuity throughout the transformation process.
+✓ Technology Recommendations: Get insights on the most suitable Azure cloud services and modern development frameworks for your specific needs.
+✓ Clear Next Steps: Walk away with actionable strategies whether you're just starting to consider migration or already in the midst of a transformation project.
+My business-first approach ensures that technical decisions align with your growth objectives. Let's discuss how modern architecture can transform your legacy systems while driving business growth.
 -->

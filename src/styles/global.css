@@ -91,6 +91,14 @@
 	font-display: swap;
 }
 
+@font-face{font-family:'Elza';font-style:normal;font-weight:400;font-display:fallback;src:url('/fonts/Elza-Regular.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Elza';font-style:italic;font-weight:400;font-display:fallback;src:url('/fonts/Elza-Oblique.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Elza';font-style:normal;font-weight:500;font-display:fallback;src:url('/fonts/Elza-Medium.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Elza';font-style:normal;font-weight:600;font-display:fallback;src:url('/fonts/Elza-Semibold.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Elza';font-style:normal;font-weight:700;font-display:fallback;src:url('/fonts/Elza-Bold.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Recoleta';font-style:normal;font-weight:600;font-display:fallback;src:url('/fonts/recoleta-semibold.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;font-display:fallback;src:url('/fonts/Inter-VariableFont_slnt,wght.woff2') format('woff2');font-stretch:normal;}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -103,6 +111,12 @@ body {
 	line-height: 1.7;
 }
 
+h1, h2, h3 {
+    font-family: "Recoleta", serif !important;
+}
+h1 p, h2 p, h3 p {
+    font-family: 'Atkinson', sans-serif !important;
+}
 .has-double-underline {
 	position: relative;
 }
