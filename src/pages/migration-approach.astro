@@ -1,108 +1,174 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const title = "Zero-Downtime Legacy System Migration Approach | Enterprise Cloud Migration | Jitan Gupta";
-const description = "Discover my proven end-to-end approach for migrating legacy systems to cloud-native architectures without disruption. Reduce technical debt while maintaining business continuity.";
+const title = "Legacy System Migration: Strategic Methodology for Enterprise Modernization";
+const description = "Discover our proven 6-phase legacy migration methodology that minimizes business disruption while maximizing ROI. Expert guidance for organizations facing complex modernization challenges.";
 const pageTheme = "bg-primary-light";
+const headings = [
+  { text: "Why Migrate?", depth: 2 },
+  { text: "Migration Approach", depth: 2 },
+  { text: "Type of Migrations", depth: 2 },
+  { text: "Risk Management", depth: 2 },
+  // { text: "Assessment: Understanding the current system & pain points", depth: 3 },
+  // { text: "Planning: Creating a migration strategy with a rollback plan", depth: 3 },
+  // { text: "Execution: Implementing the migration with minimal downtime", depth: 3 },
+  // { text: "Testing & Optimization: Ensuring performance, security, and usability", depth: 3 },
+  // { text: "Post-Migration Support: Monitoring & future-proofing the system", depth: 3 },
+  // { text: "Your Migration Framework (Step-by-Step Process)", depth: 2 },
+  // { text: "Case Studies / Success Stories (If available)", depth: 2 },
+  // { text: "Common Migration Challenges & How You Solve Them", depth: 2 },
+  // { text: "Call to Action (CTA)", depth: 2 },
+];
 ---
 <Layout	title={title} description={description}>
 	<section class="bg-gray-100 mx-2">
 		<div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
-            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Migration Approach:<br>
-                <span class="text-2xl md:text-4xl">A Proven Framework for Seamless Transitions</span></h1>
-            <h3 class="text-gray-900 text-2xl mt-5 mb-2">Why Migrate?</h3>
-            <p class="text-gray-700 mb-2">Legacy systems come with technical debt, security vulnerabilities, and scalability limitations. A well-planned migration not only modernizes your tech stack but also improves performance, security, and business agility.</p>
-            <p class="text-gray-700">Whether you’re migrating from on-prem to cloud, .NET Framework to .NET Core, or decentralizing authentication, my approach ensures minimal downtime, maximum efficiency, and long-term success.</p>
-        
-            <!-- Diagram -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-                <!-- Background -->
-                <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10"/>
-                
-                <!-- Title -->
-                <text x="400" y="50" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Migration Approach</text>
-                
-                <!-- Circle Background -->
-                <circle cx="400" cy="300" r="220" fill="#ffffff" stroke="#dddddd" stroke-width="2"/>
-                
-                <!-- Phase Circles -->
-                <!-- Assessment -->
-                <circle cx="400" cy="120" r="70" fill="#4285f4" opacity="0.9"/>
-                <circle cx="400" cy="120" r="60" fill="#ffffff"/>
-                <text x="400" y="110" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Assessment</text>
-                <text x="400" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Understanding current</text>
-                <text x="400" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">system & pain points</text>
-                
-                <!-- Planning -->
-                <circle cx="580" cy="200" r="70" fill="#34a853" opacity="0.9"/>
-                <circle cx="580" cy="200" r="60" fill="#ffffff"/>
-                <text x="580" y="190" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Planning</text>
-                <text x="580" y="210" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Creating migration</text>
-                <text x="580" y="225" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">strategy with rollback</text>
-                
-                <!-- Decision Making -->
-                <circle cx="580" cy="400" r="70" fill="#fbbc05" opacity="0.9"/>
-                <circle cx="580" cy="400" r="60" fill="#ffffff"/>
-                <text x="580" y="390" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Decision Making</text>
-                <text x="580" y="410" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Presenting roadmap</text>
-                <text x="580" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">for approval</text>
-                
-                <!-- Execution -->
-                <circle cx="400" cy="480" r="70" fill="#ea4335" opacity="0.9"/>
-                <circle cx="400" cy="480" r="60" fill="#ffffff"/>
-                <text x="400" y="470" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Execution</text>
-                <text x="400" y="490" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Migration in single</text>
-                <text x="400" y="505" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">or multiple phases</text>
-                
-                <!-- Testing & Optimizing -->
-                <circle cx="220" cy="400" r="70" fill="#ab47bc" opacity="0.9"/>
-                <circle cx="220" cy="400" r="60" fill="#ffffff"/>
-                <text x="220" y="390" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Testing &</text>
-                <text x="220" y="410" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Optimizing</text>
-                <text x="220" y="430" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Performance,</text>
-                <text x="220" y="445" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">security & usability</text>
-                
-                <!-- Post-Migration Support -->
-                <circle cx="220" cy="200" r="70" fill="#0097a7" opacity="0.9"/>
-                <circle cx="220" cy="200" r="60" fill="#ffffff"/>
-                <text x="220" y="190" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Post-Migration</text>
-                <text x="220" y="210" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">Support</text>
-                <text x="220" y="230" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Monitoring &</text>
-                <text x="220" y="245" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">future-proofing</text>
-                
-                <!-- Improved Arrows that stop at circle boundaries -->
-                <!-- Assessment to Planning -->
-                <path d="M465 145 Q510 160 535 180" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Planning to Decision Making -->
-                <path d="M580 270 Q580 320 580 330" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Decision Making to Execution -->
-                <path d="M520 430 Q480 450 460 460" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Execution to Testing -->
-                <path d="M340 450 Q300 435 280 425" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Testing to Post-Migration -->
-                <path d="M220 330 Q220 280 220 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Post-Migration to Assessment -->
-                <path d="M285 175 Q330 145 340 135" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                
-                <!-- Center Text -->
-                <text x="400" y="285" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Seamless</text>
-                <text x="400" y="310" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Migration</text>
-                <text x="400" y="335" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Process</text>
-                
-                <!-- Arrowhead definition -->
-                <defs>
-                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
-                  </marker>
-                </defs>
-              </svg>
+            <h1 class="text-3xl md:text-5xl lg:text-5xl mt-5 md:mt-8 mb-2" style="line-height: 1.5;">Strategic Software Migration Approach</h1>
+            <span class="text-2xl md:text-4xl">A Proven Framework for Seamless Transitions</span>
+            
+            <div class="absolute left-0 sm:left-auto">
+              <img src="/migration/software-growth-journey-with-migration.png" alt="Software Migration Approach" class="rounded-lg mt-10 w-full max-w-2xl md:w-2xl border-4 border-primary-100" />
+            </div>
+            <div class="p-10 sm:p-32"></div>
+            <!-- <img src="/migration/Migration Approach.png" alt="Software Migration Approach" class="rounded-lg mt-10" /> -->
+           
         </div>
 	</section>
+  <section class="pt-36 bg-gray-100 px-5 md:px-0">
+    <div class="flex flex-col md:flex-row mx-auto max-w-6xl px-0 py-8">
+      <!-- Approach -->
+      <main class="w-full md:w-3/4 content-slot">
+        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Why Migrate?</h2>
+        <p class="text-gray-700">The Legacy System represents both the organization’s history and the success it brought to the company along with <a href="#" class="text-primary-500 hover:underline">technical challenges</a>.</p>
+        <p class="text-gray-700">Legacy migration isn’t just a technical challenge—it’s a business transformation that requires technical expertise and strategic vision. My approach bridges the gap between your current system and future business goals, ensuring continuity while unlocking <a href="#" class="text-primary-500 hover:underline">new capabilities</a>.</p>        
+    
+        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Migration Approach</h2>
+        <p class="text-gray-700">Successful legacy migrations require more than technical expertise—they demand a structured methodology that addresses both technical and organizational challenges.</p>       
+        <img src="/migration/migration-process.png" alt="Software Migration Approach" class="rounded-lg mt-5 border-4 border-primary-100" />
+        <p class="text-gray-700 mt-5">My six-phase approach has been refined through multiple migrations across various industries and technical environments:</p>
+        <ul class="list-decimal list-inside text-gray-700">
+          <li>
+            <span class="font-bold">Discovery:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>In-depth analysis of existing architecture, codebase, and data structures</li>
+              <li>Business process mapping to understand how systems support operations</li>
+              <li>Technical debt assessment and quantification</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Assessment:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>Technical feasibility analysis for different migration strategies</li>
+              <li>Cost-benefit analysis for various approaches</li>
+              <li>Risk assessment across multiple dimensions</li>
+              <li>Target architecture definition & Resource requirements identification</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Planning:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>Detailed project planning with work breakdown structure</li>
+              <li>Migration sequence determination</li>
+              <li>Testing strategy development</li>
+              <li>Data migration planning</li>
+              <li>Resource allocation and responsibility assignment</li>
+              <li>Success metrics definition</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Execution:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>Staged implementation according to migration roadmap</li>
+              <li>Continuous integration and deployment pipeline establishment</li>
+              <li>Rigorous code and configuration quality control</li>
+              <li>Progressive data migration with validation</li>
+              <li>Progress Reviews & plan adjustments</li>
+              <li>Ongoing risk monitoring and mitigation</li>
+              <li>Knowledge transfer to internal teams</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Testing & Optimization:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>Comprehensive user acceptance testing</li>
+              <li>Performance optimization based on benchmarks</li>
+              <li>Production cutover planning and execution</li>
+              <li>End-user training delivery</li>
+              <li>Go-live support with rapid response protocols</li>
+              <li>Issue tracking and resolution</li>
+            </ul>           
+          </li>
+          <li>
+            <span class="font-bold">Post-Migration Support:</span> 
+            <ul class="list-disc list-inside ml-5">
+              <li>Extended monitoring of system performance and stability</li>
+              <li>User adoption tracking, Issue resolution and enhancement implementation</li>
+              <li>Final knowledge transfer sessions</li>
+              <li>Comprehensive documentation finalization</li>
+              <li>Lessons learned documentation and review</li>
+              <li>Future roadmap recommendations</li>
+            </ul>
+          </li>
+        </ul>
 
+        <h2 class="text-gray-900 text-3xl mt-10 tracking-wide">Migration Strategies</h2>
+        <h4 class="text-gray-900 text-xl mb-2">Strategic Approaches for Optimal Results</h4>
+        <p class="text-gray-700">Not all legacy systems require the same migration approach. My methodology begins with determining the most appropriate strategy based on your system's complexity, business value, and organizational goals.</p>
+        <ul class="list-decimal list-inside text-gray-700">
+          <li>
+            <span class="font-bold">Rehosting ("Lift and Shift"):</span>
+            <p class="mb-3 ml-5">Applications with limited technical debt but outdated infrastructure are moved to better environments without functionality & code changes.</p>
+          </li>
+          <li>
+            <span class="font-bold">Refactoring:</span>
+            <p class="ml-5">Restructuring and optimizing existing code while maintaining external behavior and functionality.</p>
+            <p class="ml-5">Applications where business logic remains valid but implementation is problematic.</p>
+            <p class="mb-3 ml-5">Cases where <span class="font-bold">incremental improvement</span> is preferred over wholesale replacement.</p>
+          </li>
+          <li>
+            <span class="font-bold">Rearchitecting:</span>
+            <p class="ml-5">Fundamentally altering how application components interact and operate while preserving core functionality.</p>
+            <p class="ml-5">Applications needing significant scalability or performance improvements.</p>
+            <p class="ml-5 mb-3">Scenarios requiring integration with modern service-oriented architectures.</p>
+          </li>
+          <li>
+            <span class="font-bold">Rebuilding:</span>
+            <p class="ml-5">Complete redevelopment using modern technologies, methodologies, and architecture.</p>
+            <p class="ml-5">Systems where both technology and business requirements have significantly evolved.</p>
+            <p class="ml-5 mb-3">Applications where maintenance costs exceed redevelopment investment.</p>
+          </li>
+          <li>
+            <span class="font-bold">Replacing:</span>
+            <p class="ml-5">Substituting custom legacy applications with commercial off-the-shelf or SaaS solutions.</p>
+            <p class="ml-5">Commoditized business functions without unique requirements.</p>
+            <p class="ml-5 mb-3">Systems where maintenance expertise is increasingly scarce.</p>
+          </li>
+        </ul>
+
+        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Risk Management</h2>
+        <p class="text-gray-700 mt-5">Migration projects are complex and carry inherent risks. I help you navigate these challenges by:</p>
+        <ul class="list-decimal list-inside text-gray-700">
+          <li>Identifying potential risks and mitigation strategies.</li>
+          <li>Creating a detailed migration plan with clear milestones.</li>
+          <li>Implementing a rollback strategy to minimize downtime.</li>
+          <li>Ensuring data integrity and security throughout the migration.</li>
+        </ul>
+      </main>		
+  
+      <!-- Table Of Content -->
+      <aside class="hidden md:block md:w-1/4 pl-6">
+        <div class="sticky top-4 p-4 bg-white shadow-lg rounded-lg">
+          <h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
+          <ul class="text-sm space-y-2">
+            {headings.map(heading => (
+              <li class="p-0.5" style={`margin-left: ${heading.depth * 10}px;`}>
+                <a class="text-gray-500 hover:text-gray-800 transition toc" href={`#${heading.text.replace(/\s+/g, '-').toLowerCase()}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>				 		
+    </div>
+  </section>
 
     <section class="bg-gray-100 mx-2">
         <div class="max-w-screen-md mx-auto px-5 py-5 md:px-15 md:py-10 rounded-2xl text-center bg-white">
