@@ -6,17 +6,58 @@ const pageTheme = "bg-primary-light";
 const headings = [
   { text: "Why Migrate?", depth: 2 },
   { text: "Migration Approach", depth: 2 },
-  { text: "Type of Migrations", depth: 2 },
+  { text: "Migration Strategies", depth: 2 },
   { text: "Risk Management", depth: 2 },
-  // { text: "Assessment: Understanding the current system & pain points", depth: 3 },
-  // { text: "Planning: Creating a migration strategy with a rollback plan", depth: 3 },
-  // { text: "Execution: Implementing the migration with minimal downtime", depth: 3 },
-  // { text: "Testing & Optimization: Ensuring performance, security, and usability", depth: 3 },
-  // { text: "Post-Migration Support: Monitoring & future-proofing the system", depth: 3 },
-  // { text: "Your Migration Framework (Step-by-Step Process)", depth: 2 },
-  // { text: "Case Studies / Success Stories (If available)", depth: 2 },
-  // { text: "Common Migration Challenges & How You Solve Them", depth: 2 },
-  // { text: "Call to Action (CTA)", depth: 2 },
+  { text: "Risk Mitigation Approach", depth: 2 },
+  { text: "Risk Management in Action", depth: 2 },
+  { text: "FAQs", depth: 2 }
+];
+
+const faqs = [
+  {
+    "question": "How long does migration take?",
+    "answer": "Depends on system complexity—small migrations: 3-6 months, enterprise-level: 12-24 months. I provide a detailed timeline after assessment."
+  },
+  {
+    "question": "What’s the cost?",
+    "answer": "Costs vary based on scope & strategy. I provide phased estimates after assessment."
+  },
+  {
+    "question": "Will this disrupt business operations?",
+    "answer": "I use phased rollouts, parallel systems & off-hours implementation to minimize downtime."
+  },
+  {
+    "question": "What if we lack complete documentation?",
+    "answer": "I use automated tools, code analysis & SME interviews to document missing features."
+  },
+  {
+    "question": "Can we migrate partially instead of the full system?",
+    "answer": "Yes! Incremental migration ensures a smooth transition without disrupting existing workflows."
+  },
+  {
+    "question": "How do you ensure data integrity?",
+    "answer": "I use multi-layered validation: pre-migration checks, transformation testing, and post-migration reconciliation."
+  },
+  {
+    "question": "What ROI can we expect?",
+    "answer": "Typical benefits:\n✅ 30-50% savings on maintenance\n✅ 10-30% efficiency gains\n✅ New revenue opportunities from modernized systems"
+  },
+  {
+    "question": "How do you handle change management?",
+    "answer": "Early stakeholder involvement, training, and ongoing support ensure smooth adoption."
+  },
+  {
+    "question": "What happens after migration?",
+    "answer": "I provide post-migration support + optional long-term maintenance."
+  },
+  {
+    "question": "What’s needed for an assessment?",
+    "answer": "System documentation (if available), architecture diagrams, key pain points & business goals."
+  },
+  {
+    "question": "Can we start with a pilot?",
+    "answer": "Yes! Proof-of-concept projects validate strategy before full migration."
+  }
 ];
 ---
 <Layout	title={title} description={description}>
@@ -37,15 +78,21 @@ const headings = [
     <div class="flex flex-col md:flex-row mx-auto max-w-6xl px-0 py-8">
       <!-- Approach -->
       <main class="w-full md:w-3/4 content-slot">
-        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Why Migrate?</h2>
+        <h2 id="why-migrate?" class="text-secondary-500 text-3xl mt-10 mb-2 tracking-wide">Why Migrate?</h2>
         <p class="text-gray-700">The Legacy System represents both the organization’s history and the success it brought to the company along with <a href="#" class="text-primary-500 hover:underline">technical challenges</a>.</p>
         <p class="text-gray-700">Legacy migration isn’t just a technical challenge—it’s a business transformation that requires technical expertise and strategic vision. My approach bridges the gap between your current system and future business goals, ensuring continuity while unlocking <a href="#" class="text-primary-500 hover:underline">new capabilities</a>.</p>        
     
-        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Migration Approach</h2>
+        <h2 id="migration-approach" class="text-secondary-500 text-3xl mt-10 mb-2 tracking-wide">Migration Approach</h2>
         <p class="text-gray-700">Successful legacy migrations require more than technical expertise—they demand a structured methodology that addresses both technical and organizational challenges.</p>       
         <img src="/migration/migration-process.png" alt="Software Migration Approach" class="rounded-lg mt-5 border-4 border-primary-100" />
         <p class="text-gray-700 mt-5">My six-phase approach has been refined through multiple migrations across various industries and technical environments:</p>
-        <ul class="list-decimal list-inside text-gray-700">
+        <p class=text-gray-700>1️⃣ <span class="font-bold">Discovery</span> → Identify system dependencies & pain points</p>
+        <p class=text-gray-700>2️⃣ <span class="font-bold">Assessment</span> → Evaluate risks, compliance & business impact</p>
+        <p class=text-gray-700>3️⃣ <span class="font-bold">Planning</span> → Define scope, migration strategy & testing plan</p>
+        <p class=text-gray-700>4️⃣ <span class="font-bold">Execution</span> → Data migration, system integration, phased rollout</p>
+        <p class=text-gray-700>5️⃣ <span class="font-bold">Testing & Optimization</span> → Validate performance, security & reliability</p>
+        <p class=text-gray-700>6️⃣ <span class="font-bold">Post-Migration Support</span> → Monitor, troubleshoot & optimize</p>
+        <!-- <ul class="list-decimal list-inside text-gray-700">
           <li>
             <span class="font-bold">Discovery:</span> 
             <ul class="list-disc list-inside ml-5">
@@ -108,12 +155,64 @@ const headings = [
               <li>Future roadmap recommendations</li>
             </ul>
           </li>
-        </ul>
+        </ul> -->
 
-        <h2 class="text-gray-900 text-3xl mt-10 tracking-wide">Migration Strategies</h2>
-        <h4 class="text-gray-900 text-xl mb-2">Strategic Approaches for Optimal Results</h4>
-        <p class="text-gray-700">Not all legacy systems require the same migration approach. My methodology begins with determining the most appropriate strategy based on your system's complexity, business value, and organizational goals.</p>
-        <ul class="list-decimal list-inside text-gray-700">
+        <h2 id="migration-strategies" class="text-secondary-500 text-3xl mt-10 tracking-wide">Migration Strategies</h2>
+        <h3 class="text-gray-700 text-xl mb-2">Strategic Approaches for Optimal Results</h3>
+        <img src="/migration/migration-strategies.png" alt="Software Migration Strategies" class="rounded-lg mt-5 border-4 border-primary-100" />
+        <p class="text-gray-700 mt-5">Not all legacy systems require the same migration approach. My methodology begins with determining the most appropriate strategy based on your system's complexity, business value, and organizational goals.</p>
+        <div class="relative overflow-x-auto mt-2">
+          <table class="w-full border-collapse border border-primary-300 text-gray-700">
+            <thead>
+                <tr class="bg-primary-100">
+                    <th class="border border-primary-300 px-4 py-2 text-left">Strategy</th>
+                    <th class="border border-primary-300 px-4 py-2 text-left">Best For</th>
+                    <th class="border border-primary-300 px-4 py-2 text-left">Key Benefit</th>
+                    <th class="border border-primary-300 px-4 py-2 text-left">Risk Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="border border-primary-300 px-4 py-2">Rehosting (Lift & Shift)</td>
+                    <td class="border border-primary-300 px-4 py-2">Fast migrations, minimal changes</td>
+                    <td class="border border-primary-300 px-4 py-2">Quickest time to value</td>
+                    <td class="border border-primary-300 px-4 py-2">May carry over legacy issues</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                    <td class="border border-primary-300 px-4 py-2">Refactoring</td>
+                    <td class="border border-primary-300 px-4 py-2">Modernizing apps for cloud-native benefits</td>
+                    <td class="border border-primary-300 px-4 py-2">Improves scalability</td>
+                    <td class="border border-primary-300 px-4 py-2">Higher effort, longer timeline</td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="border border-primary-300 px-4 py-2">Replatforming</td>
+                    <td class="border border-primary-300 px-4 py-2">Moving to a new runtime with minor tweaks</td>
+                    <td class="border border-primary-300 px-4 py-2">Balances speed & flexibility</td>
+                    <td class="border border-primary-300 px-4 py-2">Some dependency risks</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                    <td class="border border-primary-300 px-4 py-2">Rebuilding</td>
+                    <td class="border border-primary-300 px-4 py-2">Full re-engineering of the system</td>
+                    <td class="border border-primary-300 px-4 py-2">Future-proofing & performance</td>
+                    <td class="border border-primary-300 px-4 py-2">High effort & cost</td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="border border-primary-300 px-4 py-2">Retiring</td>
+                    <td class="border border-primary-300 px-4 py-2">Phasing out outdated apps</td>
+                    <td class="border border-primary-300 px-4 py-2">Cost savings</td>
+                    <td class="border border-primary-300 px-4 py-2">Data archival challenges</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+        <blockquote class="p-4 my-4 border-s-4 border-primary-300 bg-primary-50">
+          <p class="text-xl italic font-medium leading-relaxed text-gray-700">Which Strategy Is Right for You?        
+            <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+            <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+            <a href="" class="text-primary-600 underline" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/jitangupta/30min?primary_color=eb7329'});return false;">Let's find out!</a>
+          </p>
+        </blockquote>
+        <!-- <ul class="list-decimal list-inside text-gray-700">
           <li>
             <span class="font-bold">Rehosting ("Lift and Shift"):</span>
             <p class="mb-3 ml-5">Applications with limited technical debt but outdated infrastructure are moved to better environments without functionality & code changes.</p>
@@ -142,16 +241,132 @@ const headings = [
             <p class="ml-5">Commoditized business functions without unique requirements.</p>
             <p class="ml-5 mb-3">Systems where maintenance expertise is increasingly scarce.</p>
           </li>
+        </ul> -->
+
+        <h2 id="risk-management" class="text-secondary-500 text-3xl mt-10 mb-2 tracking-wide">Risk Management</h2>
+        <h3 class="text-gray-700 text-xl">Proactive Risk Mitigation for Seamless Transitions</h3>
+        <p class="text-gray-700">Legacy migrations inherently carry risks—but with proper identification, assessment, and mitigation strategies, these risks become manageable challenges rather than project-threatening obstacles. My comprehensive risk management framework draws on lessons learned from multiple of successful migrations across multiple industries</p>
+        <div class="relative overflow-x-auto mt-2">
+          <table class="w-full border-collapse border border-primary-300 text-gray-700">
+            <thead>
+                <tr class="bg-primary-100">
+                  <th class="border border-primary-300 px-4 py-2 text-left">Risk Category</th>
+                  <th class="border border-primary-300 px-4 py-2 text-left">Common Issues</th>
+                  <th class="border border-primary-300 px-4 py-2 text-left">Mitigation Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white hover:bg-gray-100">
+                <td class="border border-primary-300 px-4 py-2">Technical Risks</td>
+                <td class="border border-primary-300 px-4 py-2">Data loss, downtime, API failures</td>
+                <td class="border border-primary-300 px-4 py-2">Pre-migration backups, phased rollouts, rollback plans</td>
+            </tr>
+            <tr class="bg-gray-50 hover:bg-gray-100">
+                <td class="border border-primary-300 px-4 py-2">Business Risks</td>
+                <td class="border border-primary-300 px-4 py-2">Unexpected costs, scope creep</td>
+                <td class="border border-primary-300 px-4 py-2">Fixed-cost contracts, scope definition</td>
+            </tr>
+            <tr class="bg-white hover:bg-gray-100">
+                <td class="border border-primary-300 px-4 py-2">Security Risks</td>
+                <td class="border border-primary-300 px-4 py-2">Data breaches, compliance gaps</td>
+                <td class="border border-primary-300 px-4 py-2">Encryption, role-based access, compliance audits</td>
+            </tr>
+            <tr class="bg-gray-50 hover:bg-gray-100">
+                <td class="border border-primary-300 px-4 py-2">Operational Risks</td>
+                <td class="border border-primary-300 px-4 py-2">User resistance, training gaps</td>
+                <td class="border border-primary-300 px-4 py-2">Early stakeholder buy-in, training sessions</td>
+            </tr>
+              </tbody>
+          </table>
+        </div>
+        <blockquote class="p-4 my-4 border-s-4 border-blue-300 bg-blue-50">
+          <p class="text-xl italic font-medium leading-relaxed text-gray-700">Download Our Risk Assessment Checklist. Click <a class="underline text-blue-500" href="">here</a>!</p>
+        </blockquote>
+        <!-- <ul class="list-decimal list-inside text-gray-700">
+          <li>
+            <span class="font-bold">Business Continuity Risks:</span>
+            <ul class="list-disc list-inside ml-5">
+              <li>Service Disruption: Potential for business operations to be interrupted during migration</li>
+              <li>Data Integrity Issues: Risks of data corruption, loss, or inconsistency during transfer</li>
+              <li>Performance Degradation: Temporary or permanent system slowdowns</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Technical Risks:</span>
+            <ul class="list-disc list-inside ml-5">
+              <li>Unknown Dependencies: Hidden interconnections between systems not visible in documentation</li>
+              <li>Codebase Complexity: Undocumented features or business rules embedded in legacy code</li>
+              <li>Integration Failures: Incompatibility between migrated components and existing systems</li>
+            </ul>
+          </li>
+          <li>
+            <span class="font-bold">Organizational Risks:</span>
+            <ul class="list-disc list-inside ml-5">
+              <li>Stakeholder Resistance: Reluctance to change established workflows and processes</li>
+              <li>Knowledge Gaps: Loss of institutional knowledge about system functionality</li>
+              <li>Scope Creep: Project expansion beyond initial parameters</li>
+            </ul>
+          </li>
+        </ul> -->
+
+        <h2 id="risk-mitigation-approach" class="text-secondary-500 text-3xl mt-10 mb-2 tracking-wide">My Risk Mitigation Approach</h2>
+        <ul class="list-none list-inside text-gray-700">
+          <li>
+            <h3 class="font-bold">🛠️ Pre-Migration Safeguards</h3>
+            <ul class="list-disc list-inside ml-5">
+              <li>Conduct risk assessment workshops with key stakeholders</li>
+              <li>Evaluate database backups & rollback mechanisms</li>
+              <li>Set up a sandbox environment for testing before migration</li>
+            </ul>
+          </li>
+          <li>
+            <h3 class="font-bold">🚀 During Migration Controls</h3>
+            <ul class="list-disc list-inside ml-5">
+              <li>Implement phased rollouts instead of a big-bang migration</li>
+              <li>Use automated monitoring tools to catch early failures</li>
+              <li>Have a disaster recovery plan (DRP) in place</li>
+            </ul>
+          </li>
+          <li>
+            <h3 class="font-bold">📊 Post-Migration Stabilization</h3>
+            <ul class="list-disc list-inside ml-5">
+              <li>Run performance benchmarking tests</li>
+              <li>Provide dedicated hypercare support for 4-6 weeks</li>
+              <li>Collect feedback from users & iterate</li>
+            </ul>
+          </li>
         </ul>
 
-        <h2 class="text-gray-900 text-3xl mt-10 mb-2 tracking-wide">Risk Management</h2>
-        <p class="text-gray-700 mt-5">Migration projects are complex and carry inherent risks. I help you navigate these challenges by:</p>
-        <ul class="list-decimal list-inside text-gray-700">
-          <li>Identifying potential risks and mitigation strategies.</li>
-          <li>Creating a detailed migration plan with clear milestones.</li>
-          <li>Implementing a rollback strategy to minimize downtime.</li>
-          <li>Ensuring data integrity and security throughout the migration.</li>
+        <h2 id="risk-management-in-action" class="text-secondary-500 text-3xl mt-10 mb-2 tracking-wide">Risk Management in Action</h2>
+        <p class="text-gray-700">For each project, I develop a customized risk register that:</p>
+        <ul class="list-none list-inside text-gray-700">
+          <li>Step 1: Conduct impact analysis before the migration starts</li>
+          <li>Step 2: Pre-test all critical features in a staging environment</li>
+          <li>Step 3: Roll out in phases (start with non-critical systems)</li>
+          <li>Step 4: Set up real-time monitoring dashboards</li>
+          <li>Step 5: Have a rollback strategy for immediate recovery</li>
+          <li>Step 6: Conduct a post-mortem review to document learnings</li>
         </ul>
+
+        <h2 id="faqs" class="text-center text-2xl md:text-3xl text-secondary-500 my-10">FAQ</h2>
+        <h3 class="text-gray-700 text-xl mb-2">Common Questions About Legacy Migration</h3>
+        <div id="accordion-open" data-accordion="open" data-active-classes="bg-primary-50 rounded-t-xl text-primary-700">
+          {faqs.map((faq, index) => (
+          <h2 id={`faq-heading-${index}`}  class="border rounded-xl border-primary-200 bg-white gap-3 my-5">
+            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500" data-accordion-target={`#faq-open-body-${index}`} aria-expanded="false" aria-controls={`faq-open-body-${index}`}>
+              <span class="flex items-center">{faq.question}</span>
+              <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#b5571d" viewBox="0 0 10 6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+              </svg>
+            </button>
+            <div id={`faq-open-body-${index}`} class="hidden" aria-labelledby={`faq-heading-${index}`}>
+              <div class="p-5">
+                <p class="mb-2 text-gray-500">{faq.answer}</p>
+              </div>
+            </div>
+          </h2>
+          ))}        
+        </div>
       </main>		
   
       <!-- Table Of Content -->
@@ -170,7 +385,7 @@ const headings = [
     </div>
   </section>
 
-    <section class="bg-gray-100 mx-2">
+    <section class="bg-gray-100">
         <div class="max-w-screen-md mx-auto px-5 py-5 md:px-15 md:py-10 rounded-2xl text-center bg-white">
             <p class="text-gray-700 mb-5">Still have questions? Let's talk. Start Your Cloud Migration Journey.</p>
             <a href="#calendly-container" class="bg-primary-600 text-white py-2 px-5 rounded-lg transition">Book Now</a>
