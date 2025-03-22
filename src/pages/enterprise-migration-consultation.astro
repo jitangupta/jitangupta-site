@@ -9,17 +9,22 @@ const faqs = [
   {
     question: "What happens in the free consultation call?",
     answer:
-      "In this 30-minute session, we'll assess your current system, migration challenges, and business goals. You'll get expert insights on the best approach for cloud or application migration.",
+      "In this 30-minute session, we’ll look at your system, migration issues, and business goals. You'll get expert insights on the best approach for cloud or application migration.",
   },
   {
     question: "Who is this consultation for?",
     answer:
-      "This call is ideal for CTOs, engineering managers, and business owners who are planning to migrate legacy systems, optimize cloud costs, or improve scalability.",
+      "TThis call is great for product owners, engineering managers, and business owners. It's great for anyone who wants to move old systems, lower cloud costs, or improve scalability.",
   },
   {
     question: "What do I need to prepare before the call?",
     answer:
-      "To make the most of our session, you can share: A high-level overview of your current infrastructure, Key challenges you're facing, Your expected timeline and goals for migration.",
+      "To get the best out of our session, please share:",
+    lists: [
+      "A brief overview of your current infrastructure",
+      "Key challenges you’re facing ",
+      "Your timeline and goals for migration",
+    ]
   },
   {
     question: "Is there any obligation after the free consultation?",
@@ -34,12 +39,12 @@ const faqs = [
   {
     question: "How long does a typical enterprise migration take?",
     answer:
-      "The timeline varies depending on the complexity of your system. Small migrations can take a few weeks, while large-scale enterprise migrations may take months.",
+      "The timeline varies depending on the complexity of your system. Small migrations may take weeks, but large enterprise migrations can last months.",
   },
   {
     question: "What technologies and cloud platforms do you specialize in?",
     answer:
-      "I specialize in Azure, Kubernetes (AKS), Docker, microservices, and serverless architectures, ensuring seamless cloud adoption and cost optimization.",
+      "I focus on Azure, Kubernetes (AKS), Docker, microservices, and serverless architectures. My goal is to help businesses adopt the cloud easily and save costs.",
   },
   {
     question: "How can I schedule my free consultation?",
@@ -61,8 +66,8 @@ const faqs = [
 
   <section class="bg-gray-100 mx-2" id="calendly-container">
     <!-- Calendly inline widget begin -->
-    <div class="calendly-inline-widget" data-url="https://calendly.com/jitangupta/30min?primary_color=047a00" style="min-width:320px;height:700px;"></div>
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- <div class="calendly-inline-widget" data-url="https://calendly.com/jitangupta/30min?primary_color=047a00" style="min-width:320px;height:700px;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script> -->
   </section>
 
   <!-- What to expect -->
@@ -89,6 +94,13 @@ const faqs = [
           <div id={`faq-open-body-${index}`} class="hidden" aria-labelledby={`faq-heading-${index}`}>
             <div class="p-5">
               <p class="mb-2 text-gray-500">{faq.answer}</p>
+              {faq.lists && 
+                <ul class="text-gray-500 list-decimal list-inside">
+                  {faq.lists.map((list, index) => (
+                  <li>{list}</li>
+                  ))}
+                </ul>
+              }
             </div>
           </div>
         </h2>

@@ -115,7 +115,10 @@ h1, h2, h3 {
     font-family: "Recoleta", serif !important;
 }
 h1 p, h2 p, h3 p {
-    font-family: 'Atkinson', sans-serif !important;
+    font-family: 'Elza', sans-serif !important;
+}
+h1 li, h2 li, h3 li {
+    font-family: 'Elza', sans-serif !important;
 }
 .has-double-underline {
 	position: relative;
