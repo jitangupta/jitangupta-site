@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CommonCTA from '../components/CommonCTA.astro';
+
 const title = "Free Cloud Migration Strategy Call | Enterprise IT Experts";
 const description = "Struggling with outdated systems? Book a free cloud migration strategy call with Jitan Gupta. Get expert guidance on scalable, secure, and cost-effective enterprise migrations.";
 
@@ -95,10 +97,7 @@ const faqs = [
     </div>
   </section>
 
-  <section class="bg-gray-100 mx-2">
-    <div class="max-w-screen-md mx-auto px-5 py-5 md:px-15 md:py-10 rounded-2xl text-center bg-white">
-      <p class="text-gray-700 mb-5">Still have questions? Let's talk. Start Your Cloud Migration Journey.</p>
-      <a href="#calendly-container" class="bg-primary-600 text-white py-2 px-5 rounded-lg transition">Book Now</a>
-    </div>
-  </section>
+  <!-- Contact -->
+  <CommonCTA />
+
 </Layout>
