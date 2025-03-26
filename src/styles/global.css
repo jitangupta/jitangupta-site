@@ -162,3 +162,7 @@ h1 li, h2 li, h3 li {
     content: "✅";
     margin-left: -25px;
 }
+
+.text-md {
+    font-size: 1rem;
+}

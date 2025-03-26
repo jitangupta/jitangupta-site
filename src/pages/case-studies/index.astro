@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const caseStudies = (await getCollection('caseStudies')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const seoTitle = "Enterprise Migration Case Studies | Legacy System Modernization Success Stories | Jitan Gupta";
+const seoDescription = "Explore proven enterprise migration case studies from Microsoft identity systems to cloud-native applications. Learn how organizations reduced technical debt, cut costs, and modernized legacy systems with zero downtime.";
+const seoKeywords = "enterprise migration case studies, legacy system modernization, cloud-native applications, technical debt, zero downtime, Jitan Gupta";
+---
+<Layout	title={seoTitle} description={seoDescription}>
+    <section class="bg-gray-100 mx-2">
+        <div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
+            <!-- Title -->
+            <h1 class="text-3xl md:text-5xl lg:text-6xl mt-5 md:mt-8 mb-2 font-bold" style="line-height: 1.2;">Real-World Enterprise Migration Success Stories</h1>
+
+            <!-- Convincing Notes -->
+            <p>Strategic migration initiatives that transformed enterprise technology landscapes. From reducing technical debt to building cloud-native applications, each case demonstrates measurable business outcomes without disruption.</p>
+        </div>
+    </section>
+
+    <section class="bg-gray-100 mx-2">
+        <div class="max-w-screen-xl mx-auto py-5">
+            <ul>
+                {
+                    caseStudies.map((caseStudy) => (
+                    caseStudy.data.draft == true ? null :
+                        <li>
+                            <a href={`/case-studies/${caseStudy.id}`} class="mt-4 inline-flex items-center theme-color-primary font-medium group">
+                            <div class="p-5 bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 max-w-lg">
+                                <div class="">
+                                    <img src={caseStudy.data.heroImage} alt={caseStudy.data.title} class="w-full h-60 border-2 border-gray-300 rounded-2xl object-cover" />
+                                    <div class="p-5">
+                                        <h2 class="font-semibold text-2xl text-gray-900">{caseStudy.data.pageTitle}</h2>
+                                        <p class="text-gray-700 mt-3 text-md">{caseStudy.data.summary}</p>
+                                        Continue Reading
+                                        <span class="ml-2 transform transition-transform group-hover:translate-x-1">→</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>			
+    </section>
+</Layout>

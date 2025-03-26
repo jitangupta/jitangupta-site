@@ -5,7 +5,12 @@ import Header from '../components/Header.astro';
 import CommonCTA from '../components/CommonCTA.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import '../styles/global.css';
-import { CaseStudies } from '../data/caseStudies';
+
+import { getCollection } from 'astro:content';
+const caseStudies = (await getCollection('caseStudies')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
 
 ---
 
@@ -76,25 +81,24 @@ import { CaseStudies } from '../data/caseStudies';
 		</section>
 
 		<!-- Case Study -->
-		<!-- <section class="bg-gray-100 py-10 px-6 text-center">
+		<section class="bg-gray-100 py-10 px-6 text-center">
 			<div class="max-w-screen-xl mx-auto rounded-2xl">
 			  <h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-10">Case Studies</h2>
 			  <div class="grid md:grid-cols-3 gap-6">
-				{CaseStudies.map((study) => (
-				  <div class="bg-white rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
-					<img src={study.image} alt={study.title} class="w-full h-48 object-cover" />
-					<div class="p-6">
-					  <h3 class="text-xl font-semibold text-gray-700">{study.title}</h3>
-					  <p class="text-gray-600 mt-2">{study.achievement}</p>
-					  <a href={study.link} class="inline-block mt-4 theme-color-primary font-semibold hover:underline">
-						View Case Study →
-					  </a>
-					</div>
-				  </div>
+				{caseStudies.map((caseStudy) => (
+					<a href={`/case-studies/${caseStudy.id}`}>
+						<div class="bg-white rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
+							<img src={caseStudy.data.heroImage} alt={caseStudy.data.title} class="w-full h-48 object-cover" />
+							<div class="p-6">
+								<h3 class="text-xl font-semibold text-gray-700">{caseStudy.data.pageTitle}</h3>
+								<span class="inline-block mt-4 text-primary-500 font-semibold hover:underline">View Case Study →</span>
+							</div>
+						</div>
+					</a>
 				))}
 			  </div>
 			</div>
-		</section> -->
+		</section>
 		
 		<!-- Contact -->
 		<CommonCTA />
