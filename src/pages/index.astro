@@ -86,6 +86,7 @@ const caseStudies = (await getCollection('caseStudies')).sort(
 			  <h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-10">Case Studies</h2>
 			  <div class="grid md:grid-cols-3 gap-6">
 				{caseStudies.map((caseStudy) => (
+					caseStudy.data.draft == true ? null :
 					<a href={`/case-studies/${caseStudy.id}`}>
 						<div class="bg-white rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
 							<img src={caseStudy.data.heroImage} alt={caseStudy.data.title} class="w-full h-48 object-cover" />
