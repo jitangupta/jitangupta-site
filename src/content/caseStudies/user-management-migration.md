@@ -8,7 +8,7 @@ pubDate: '1 Apr 2025'
 heroImage: '/case-study/User Management Case Study.jpg'
 articleTag: 'Software Migration'
 previousArticle: ''
-nextArticle: ''
+nextArticle: 'university-credit-system-migration'
 serviceUsed: 'Refactoring & Rebuilding Strategy'
 testimonial: 'As part of our modernization efforts, Jitan led the assessment and execution of our User Management System migration to Azure App Services. His structured approach—including a proof of concept, risk assessment, and fallback mechanisms—ensured a smooth transition with minimal disruption. Thanks to this migration, we improved scalability, reduced technical debt, and aligned our system with cloud best practices.'
 testimonialAuthor: 'R██████ ███████'
@@ -17,11 +17,11 @@ testimonialAuthorCompany: '████████████'
 testimonialAuthorImage: '/case-study/testimonials/case-study-profile.jpg'
 stats:
   - percentage: "100%"
-    description: " Eliminated dependency on the outdated Microsoft Membership framework, ensuring future-proof authentication"
+    description: "Eliminated dependency on the outdated Microsoft Membership framework, ensuring future-proof authentication"
   - percentage: "85%"
-    description: "Faster – Reduced implementation time for new authentication features across modules, accelerating development cycles."
+    description: "Enhanced scalability through Azure cloud services"
   - percentage: "24/7"
-    description: "Auto-Scaling – Eliminated fixed capacity constraints, enabling seamless scalability without downtime."
+    description: "Flexible architecture supporting future growth"
 draft: false
 ---
 ## Seamless User Management Migration: Future-Proofing with Azure
