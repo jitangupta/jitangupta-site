@@ -5,16 +5,16 @@ seoTitle: 'University Legacy System Modernization | Credit Platform Rebuilt with
 summary: 'We helped a leading North American university modernize their outdated credit evaluation system by rebuilding it as a scalable, mobile-friendly, cloud-native platform using .NET Core, Angular, and Azure.'
 description: 'Case study: Discover how we replaced three monolithic WebForms applications with a unified .NET Core and Angular platform hosted on Azure—boosting usability, scalability, and performance for a university’s mission-critical credit system.'
 pubDate: '20 Apr 2025'
-heroImage: '/case-study/University Credit System Case Study.jpg'
+heroImage: '/case-study/credit-management/Credit Management System banner.png'
 articleTag: 'Legacy Modernization'
 previousArticle: 'user-management-migration'
 nextArticle: ''
 serviceUsed: 'Retire & Rebuild Strategy'
-testimonial: 'Jitan’s leadership was instrumental in turning around our legacy system. His structured approach—starting with thorough documentation and ending with a fully modern cloud-native platform—helped us deliver better experiences for students, evaluators, and administrators.'
-testimonialAuthor: 'Carlos F██████'
-testimonialAuthorTitle: 'Director Of Engineering'
-testimonialAuthorCompany: '███████'
-testimonialAuthorImage: '/case-study/testimonials/university-case-study-profile.jpg'
+testimonial: ''
+testimonialAuthor: ''
+testimonialAuthorTitle: ''
+testimonialAuthorCompany: ''
+testimonialAuthorImage: ''
 stats:
   - percentage: "40%"
     description: "Improved system usability based on user satisfaction scores"
@@ -24,148 +24,64 @@ stats:
     description: "Increased platform availability during peak enrollment periods with auto-scaling on Azure"
 draft: true
 ---
+[comment]:<> (Jitan’s leadership was instrumental in turning around our legacy system. His structured approach—starting with thorough documentation and ending with a fully modern cloud-native platform—helped us deliver better experiences for students, evaluators, and administrators.)
+## When did it all start?
+I was part of another project when some lead engineers left the organisation, and the project hung in between. Some senior members (Director of Engineering, Product Managers, aka stakeholders) with whom I had already worked. They assigned me the backend of the project to lead. 
+I was happy for the opportunity and furious as things were scattered due to:
+- Limited product knowledge 
+- MThere wasn’t any documentation
+- People worked for a few months, but there wasn’t noticeable progress in migration\
+Though a junior engineer was working on it.
 
-## Client Background
+## How did I take over?
+**Assessment:** The first thing I did was to communicate. I asked many questions to stakeholders to understand the goal, deadline, and working of the application to fill the product knowledge gap.
+_Coffee helped a lot during this time._
+And I started with documenting the first module and proposed plans of execution to the stakeholders.
 
-Our client's credit management system allows students to receive academic credit for prior experience, including:
+## The Proposal and First Noticeable Progress
+- Document one module at a time
+- Present it to stakeholders to gain confidence before we migrate. Sometimes Agile really helps a lot.
+- Once approved, I extracted the backend part from the documentation and converted it into small Jira tasks along with an epic for each module. The Frontend Engineering Manager did his part of the work.
+- The tasks were assigned to other backend engineers while I focused on documenting.
+- Within 3 weeks, the documentation was completed, the development of the first module was completed, and they were ready for frontend integration.
+<img src="/case-study/credit-management/Credit Management System-approach.png" class="" alt="" />
+TODO: Add image info here
+**Note:** This migration was before the Chatgpt moment, and I wasn’t aware of many tools; everything I did was manual.
 
-- Work experience
-- Military service
-- Prior learning
+## Architecture change
+The existing apps and services were deployed in IIS inside a VM in Azure. 
 
-The platform serves three user groups:
-- **Students** submitting portfolio credit requests with supporting documentation
-- **Evaluators** assessing submissions and awarding appropriate credits
-- **Administrators** managing the system
+With Migration, we used SOA architecture and built a cloud-native app using roles and permissions by unifying a single client-facing app used by all types of users (students, Evaluators and Admins).
 
-## The Challenge
+We used a CI/CP pipeline with Docker and deployed the application inside AKS.
 
-The system faced several critical issues:
+The deployed version included Kong, Helm-chart, and ArgoCD.
 
-### Technical Limitations
-- Three separate monolithic applications built on outdated .NET Framework
-- Limited scalability with single-server deployment
-- Poor mobile responsiveness
+## Let’s focus on KPIs
 
-### Leadership Void
-- Previous technical team departed, leaving knowledge gaps
-- Minimal documentation
-- Communication breakdowns between teams
+This migration was a huge jump in tech stack, system usability and revenue.
+### Tech Stack
+- When we shifted from IIS inside the VM to Containers, scalability improved. The system became fault-tolerant.
+- We cut the tech debt and improved system performance by utilising .net Core, EF Core and Docker.
+- Integration of the ELK stack helped us during and after migration to track the error handling of the system optimisations.
+- DevOps utilisation at full potential with the help of Jenkins, Helm chart, KONG, Argocd, and AKS, though they were out of my reach at the moment of modernisation
 
-### Business Impact
-- Degraded student experience during peak periods
-- Growing technical debt
-- Inability to implement new features
+**Before**
+<img src="/case-study/credit-management/Credit Management System architecture before.png" alt="" />
 
+**After**
+<img src="/case-study/credit-management/Credit Management System architecture after.png" alt="" />
 
-## Solution Approach
+### System Usability
+- The legacy system wasn’t responsive, so reaching out to mobile, and tablet devices was a significant improvement.
+- With migration, we leveraged UX considerations to enhance system usability even further.
 
-We implemented a "Retire & Rebuild" strategy instead of refactoring:
-### New Architecture:
-- **Backend**: .NET Core 6 with a service-oriented architecture
-- **Frontend**: Angular 14 providing responsive design across devices
-- **Messaging**: Azure Service Bus with Azure Functions for notification processing
-- **Hosting**: Azure App Services for improved scalability and reduced maintenance
-- **Monitoring**: ELK stack implementation for comprehensive error logging and system health
+### Revenue
+- With migration, revenue increased by 30%. 
+- Talking just numbers doesn’t justify this point, as a new system was in place, the organisations started marketing and promoting, which further increased revenue.
 
-The migration approach included parallel operation of both systems until the new platform demonstrated full capability—minimizing risk to academic operations while enabling incremental validation of the new system.
+## Learning
+On a personal level, working with a truly global team and leading the backend team was amazing and taught me the value of communication and stakeholders' involvement in product development. 
 
-## Technical Implementation
+I am grateful that stakeholders involved me in discussions that aligned me with business goals.
 
-The technical transformation focused on several key architectural improvements:
-
-### From Monolith to Service-Oriented Architecture
-The three separate monolithic applications were consolidated into a single platform with a service-oriented backend architecture. This approach:
-- Eliminated code redundancy while preserving distinct user workflows
-- Enabled independent scaling of high-demand services
-- Facilitated more focused testing and deployment
-
-### Cloud-Native Infrastructure
-Moving from VM-based hosting to Azure App Services provided:
-- Automatic scaling during peak enrollment periods
-- Reduced infrastructure management overhead
-- Enhanced security and compliance capabilities
-
-### Modern User Experience
-The Angular 14 frontend implementation delivered:
-- Responsive design supporting desktop, tablet, and mobile devices
-- Improved accessibility for all users
-- More intuitive workflow management
-
-### Enhanced Observability
-Implementation of the ELK (Elasticsearch, Logstash, Kibana) stack enabled:
-- Proactive error detection and resolution
-- System performance monitoring and optimization
-
-## Project Execution
-
-Taking over leadership of the backend team required a systematic approach to understand, plan, and execute the migration while maintaining stakeholder confidence:
-
-### 1. Analysis & Documentation
-The first priority was creating comprehensive documentation of all existing functionality:
-- Conducted knowledge transfer sessions with product managers
-- Mapped user journeys for all three user types (Students, Evaluators, Administrators)
-- Documented module dependencies and integration points
-- Created a functional baseline to ensure complete feature coverage
-
-### 2. Strategic Work Distribution
-With documentation in place, we:
-- Broke down functionality into discrete, manageable tasks
-- Prioritized development to enable parallel frontend development
-- Established clear acceptance criteria for each component
-- Created a development roadmap with measurable milestones
-
-### 3. Stakeholder Alignment
-To rebuild confidence in the project:
-- Presented the comprehensive documentation and work plan to key stakeholders
-- Established regular progress reviews and demonstration sessions
-- Implemented transparent progress tracking and reporting
-
-### 4. Parallel Execution & Team Leadership
-Leading the backend team required balancing multiple responsibilities:
-- Continued documentation and analysis of remaining modules
-- Conversion of requirements into actionable development tasks
-- Direct development of core architectural components
-- Cross-team coordination with frontend developers
-
-Within three weeks of implementing this approach, the project showed demonstrable progress with functioning APIs supporting initial frontend development, rebuilding stakeholder confidence in the migration initiative.
-
-## Results and Business Impact
-
-The modernization initiative delivered significant technical and business benefits:
-
-### Enhanced User Experience
-- **40% improvement in system usability** based on user satisfaction metrics
-- Responsive design extended platform access across all device types
-- Streamlined workflows reduced time needed to submit and evaluate credit requests
-
-### Technical Improvements
-- **Auto-scaling infrastructure** eliminated performance issues during peak enrollment periods
-- Consolidated codebase reduced maintenance overhead and simplified future enhancements
-- Cloud-native architecture reduced infrastructure costs while improving reliability
-
-### Business Outcomes
-- Expanded reach to mobile users increased potential student engagement
-- Improved evaluator efficiency reduced credit processing times
-- Enhanced system reliability built greater confidence in the credit evaluation process
-- Modern architecture enabled faster implementation of new academic policies and requirements
-
-## Lessons Learned
-
-The successful migration revealed several key insights applicable to similar modernization initiatives:
-
-- **Documentation First**
-Ensures coverage, clarity, and alignment
-
-- **Modular Migration Works**
-Enables parallel teams and risk mitigation
-
-- **Leadership Multiplies Impact**
-Architecture, people, and communication all matter
-
-- **Rebuild > Refactor (in the right context)**
-Cleaner, scalable architecture without legacy baggage
-
-## Conclusion
-
-Through strategic leadership and thoughtful execution, we transformed a brittle legacy platform into a modern cloud-native system. The result is a faster, scalable, and more accessible experience—empowering students, staff, and future innovations alike.

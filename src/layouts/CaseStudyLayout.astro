@@ -127,7 +127,8 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		</section>
 	 	
 		<!-- testimonial -->
-		<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
+		{
+			testimonial && <section class="bg-gray-100 py-5 mx-2 sm:mx-0">
 			<div class="max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center">	
 				<blockquote class="italic text-gray-700">
 					<svg class="w-8 h-8 text-gray-300 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
@@ -140,6 +141,7 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 				</blockquote>
 			</div>
 		</section>
+		}
 
 		<!-- case study details & TOC -->
 		<section class="bg-gray-100 px-5 md:px-0">
