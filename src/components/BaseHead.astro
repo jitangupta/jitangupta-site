@@ -12,6 +12,7 @@ interface Props {
 const canonicalURL = new URL(SITE_URL);
 
 const { title, description, image = '/jitan-bg.png' } = Astro.props;
+const isProd = import.meta.env.MODE === "production";
 ---
 
 <!-- Global Metadata -->
@@ -49,6 +50,7 @@ const { title, description, image = '/jitan-bg.png' } = Astro.props;
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Yandex.Metrika counter -->
+{isProd &&
 <script type="text/javascript" >
 	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 	m[i].l=1*new Date();
@@ -64,4 +66,5 @@ const { title, description, image = '/jitan-bg.png' } = Astro.props;
 	});
  </script>
  <noscript><div><img src="https://mc.yandex.ru/watch/100451952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+}
  <!-- /Yandex.Metrika counter -->
