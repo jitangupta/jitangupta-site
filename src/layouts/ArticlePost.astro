@@ -16,21 +16,41 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />		
 		<style is:global>
+			.content-slot {
+				color: #364153;
+				font-size: 18px;
+			}
 			.content-slot h2 {
-				color: #101828 !important;
+				color: #eb7329 !important;
+				margin-top: 25px;
+				margin-bottom: 0px;
+				font-size: 30px;
+			}
+
+			.content-slot h3 {
+				color: #1e2939  !important;
 				margin-top: 20px;
 				margin-bottom: 5px;
 				font-size: 25px;
-				font-weight: 600;
+			}
+
+			.content-slot h2 + h3 {
+				margin-top: 0px;
+			}
+
+			.content-slot h2:first-child {
+				margin-top: 0px;
 			}
 
 			.content-slot p {
 				color: #364153;
+				font-size: 18px;
 			}
 
 			.content-slot ul {
 				list-style-type: auto;
 				margin-left: 20px;
+				font-size: 18px;
 			}
 
 			.content-slot ul li > ul {
@@ -51,12 +71,25 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 			}
 			@media screen and (max-width: 768px) {
 				.content-slot h2 {
-				font-size: 22px;
+					font-size: 22px;
+				}
+				.content-slot h3 {
+					font-size: 20px;
+				}
+				.content-slot p, .content-slot ul li {
+					font-size: 17px;
+				}
 			}
-			.content-slot p, .content-slot ul li {
-				font-size: 18px;
+
+			.content-slot ol {
+				list-style-type: auto;
+				margin:5px 0 5px 20px;
 			}
+			.content-slot ul {
+				list-style-type: disc;
+				margin-left: 20px;
 			}
+			
 		</style>
 	</head>
 

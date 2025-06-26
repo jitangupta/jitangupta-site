@@ -24,35 +24,28 @@ const articles = (await getCollection('article')).sort(
 				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold" style="line-height: 1.2;">Articles</h1>				
 			</div>
 		</section>
-		<section class="bg-gray-100 mx-2">
-			<div class="max-w-screen-xl mx-auto py-4">
-				<ul>
-					{
-						articles.map((article) => (
-							article.data.draft == true ? null :
-							<li>
-								<div class="p-5 bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 max-w-lg">
-									<div class="">
-										<img src={article.data.heroImage} alt="Article Banner" class="w-full h-60 rounded-2xl object-cover" />
-										<div class="p-5">
-											<h2 class="font-semibold text-2xl text-gray-900">{article.data.title}</h2>
-											<p class="text-sm text-gray-500 mt-1">Published on <FormattedDate date={article.data.pubDate} /></p>
-											<p class="text-gray-700 mt-3">{article.data.description}
-											</p>
-											<a href={`/article/${article.id}`} class="mt-4 inline-flex items-center theme-color-primary font-medium group">
-												Continue Reading
-												<span class="ml-2 transform transition-transform group-hover:translate-x-1">
-													→
-												</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-						))
-					}
-				</ul>
-			</div>			
+
+		
+		<section class="bg-gray-100 py-5 px-6 text-center">
+			<div class="max-w-screen-xl mx-auto rounded-2xl">
+			<div class="grid md:grid-cols-3 gap-6">
+				{articles.map((article) => (
+					article.data.draft == true ? null :
+					<a href={`/article/${article.id}`}>
+						<div class="bg-white rounded-2xl border-3 border-gray-300 overflow-hidden transition-transform transform hover:scale-105">
+							<img src={article.data.heroImage} alt={article.data.title} class="w-full h-48 object-cover" />
+							<div class="p-6">
+								<h3 class="text-xl font-semibold text-gray-700">{article.data.title}</h3>
+								<p class="text-sm text-gray-500 mt-1">Published on <FormattedDate date={article.data.pubDate} /></p>
+								<p class="text-gray-700 mt-3">{article.data.description}</p>
+								<span class="inline-block mt-4 text-primary-500 font-semibold hover:underline">Read article →</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+			</div>
+		</section>
 		</section>
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
