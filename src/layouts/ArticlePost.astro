@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import CommonCTA from '../components/CommonCTA.astro';
 
 type Props = CollectionEntry<'article'>['data'];
 
@@ -178,6 +179,9 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 				</aside>				 		
 			</div>
 		</section>
+
+		<!-- TODO: Read more case studies -->
+		<CommonCTA /> 
 		
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
