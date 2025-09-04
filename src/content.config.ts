@@ -54,5 +54,15 @@ const caseStudies = defineCollection({
     }),
 });
 
+const notes = defineCollection({
+    loader: glob({ base: './src/content/self-notes', pattern: '**/*.{md,mdx}' }),
+    // Type-check frontmatter using a schema
+    schema: z.object({
+        title: z.string(),
+        pubDate: z.coerce.date(),
+        description: z.string(),
+        draft: z.boolean().optional(),
+    }),
+});
 
-export const collections = { article, caseStudies };
+export const collections = { article, caseStudies, notes };

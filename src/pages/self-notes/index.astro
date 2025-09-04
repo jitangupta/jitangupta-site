@@ -1,0 +1,52 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Chatwoot from '../../components/chatwoot.astro';
+import '../../styles/global.css';
+
+const articles = (await getCollection('notes')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Self Notes - Jitan Gupta" description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<section class="bg-gray-100 mx-2">
+			<div class="bg-white max-w-screen-xl mx-auto px-6 md:px-15 py-10 rounded-b-2xl">
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold" style="line-height: 1.2;">Self Notes</h1>				
+			</div>
+		</section>
+		
+		<section class="bg-gray-100 py-5 px-6">
+			<div class="max-w-screen-xl mx-auto rounded-2xl">
+			<div class="grid md:grid-cols-3 gap-6">
+				{articles.map((article) => (
+					article.data.draft == true ? null :
+					<a href={`/self-notes/${article.id}`}>
+						<div class="bg-white rounded-2xl border-2 border-gray-400 overflow-hidden transition-transform transform hover:scale-105">
+							<div class="p-6">
+								<h3 class="text-xl font-semibold text-gray-700">{article.data.title}</h3>
+								<p class="text-sm text-gray-500 mt-1">Published on <FormattedDate date={article.data.pubDate} /></p>
+								<p class="text-gray-700 mt-3">{article.data.description}</p>
+								<span class="inline-block mt-4 text-primary-500 font-semibold hover:underline">Read →</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+			</div>
+		</section>
+		<Footer />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+		<Chatwoot />
+	</body>
+</html>

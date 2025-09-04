@@ -1,0 +1,127 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Chatwoot from '../components/chatwoot.astro';
+import "../styles/global.css";
+
+// const title = "Jitan Gupta";
+// const description = "Jitan Gupta is a full-stack engineer turned an entrepreneur.";
+const { title, description, pubDate, updatedDate, heroImage, pageTheme } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={heroImage} />	
+		<style is:global>
+			.content-slot {
+				color: #364153;
+				font-size: 18px;
+				line-height: normal;
+			}
+			.content-slot h2 {
+				color: #eb7329 !important;
+				margin-top: 25px;
+				margin-bottom: 0px;
+				font-size: 30px;
+			}
+
+			.content-slot h3 {
+				color: #1e2939  !important;
+				margin-top: 20px;
+				margin-bottom: 5px;
+				font-size: 25px;
+			}
+
+			.content-slot h2 + h3 {
+				margin-top: 0px;
+			}
+
+			.content-slot h2:first-child {
+				margin-top: 0px;
+			}
+
+			.content-slot p {
+				color: #364153;
+				font-size: 18px;
+			}
+
+			.content-slot ul {
+				list-style-type: auto;
+				margin-left: 20px;
+				font-size: 18px;
+			}
+
+			.content-slot ul li > ul {
+				list-style-type: disc;
+			}
+
+			.content-slot strong {
+				color: #364153;
+				font-weight: 600;
+			}
+
+			.content-slot p strong {
+				margin-top: 15px;
+			}
+
+			.content-slot .line {
+				font-size: 14px;
+			}
+
+			.content-slot strong a:hover{
+				text-decoration: underline;
+			}
+			@media screen and (max-width: 768px) {
+				.content-slot h2 {
+					font-size: 22px;
+				}
+				.content-slot h3 {
+					font-size: 20px;
+				}
+				.content-slot p, .content-slot ul li {
+					font-size: 17px;
+				}
+			}
+
+			.content-slot ol {
+				list-style-type: auto;
+				margin:5px 0 5px 20px;
+			}
+			.content-slot ul {
+				list-style-type: disc;
+				margin-left: 20px;
+			}
+			
+		</style>	
+	</head>
+	<body>
+		<Header pageTheme={pageTheme} />
+
+		<section class="bg-gray-100 px-5 md:px-0">
+			<div class="bg-white max-w-screen-xl flex flex-col md:flex-row mx-auto px-5 md:px-15 py-10 rounded-b-2xl">
+				<!-- Blog Content -->
+				<main class="w-full md:w-3/4 content-slot">
+					<slot />
+				</main>		
+		
+				<!-- Table Of Content -->
+				<aside class="hidden md:block md:w-1/4 pl-6">
+					<div class="sticky top-4 p-4 bg-orange-100 shadow-lg rounded-lg">
+						<h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
+						<ul class="text-sm space-y-2">
+							{Astro.props.headings && Astro.props.headings.map(heading => (
+								<li class="p-0.5" style={`margin-left: ${heading.depth * 10}px;`}>
+									<a class="text-gray-500 hover:text-gray-800 transition toc" href={`#${heading.text.replace(/\s+/g, '-').toLowerCase()}`}>{heading.text}</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</aside>				 		
+			</div>
+		</section>
+		<Footer />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+		<Chatwoot />
+	</body>
+</html>
