@@ -1,50 +1,58 @@
 ---
-import { SITE_URL } from '../consts';
-const { pageTheme } = Astro.props;
-const bgHeaderColor = pageTheme || 'bg-white'; 
-const bgColor = pageTheme != undefined?'bg-white':'bg-gray-100'; 
+import { SITE_TITLE } from '../consts';
 ---
-<nav class=`bg-gray-100 mt-2 md:mt-4 mx-2`>
-	<div class={`${bgHeaderColor} max-w-screen-xl rounded-t-2xl flex flex-wrap items-center justify-between mx-auto py-5 px-6 md:px-15`} >
-		<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-			<img src="/jitan-gupta-logo.png" alt="Jitan Gupta" class="w-40 pt-0 md:w-50" />
-		</a>
-		<button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none ring-2 ring-gray-200 focus:ring-gray-300" aria-controls="navbar-default" aria-expanded="false">
-			<span class="sr-only">Open main menu</span>
-			<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-			</svg>
-		</button>
-		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
-			<ul class={`font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ${bgHeaderColor}`}>
-				<li>
-					<a href="/migration-approach" class="block py-1 px-3 text-gray-800 rounded-sm hover:underline">Migration Approach</a>
-				</li>
-				<li>
-					<a href="/case-studies" class="block py-1 px-3 text-gray-800 rounded-sm hover:underline">Case Studies</a>
-				</li>
-				<!-- <li>
-					<button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-1 px-3 text-gray-800 rounded-sm hover:underline">
-						Free Resources 
-						<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-						</svg>
-					</button>
-					<div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
-						<ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-						  <li>
-							<a href="https://github.com/jitangupta/jitangupta-site" target="_blank" class="block px-4 py-2 hover:bg-gray-100">Get site theme</a>
-						  </li>
-						</ul>
-						<div class="py-1">
-						  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
-						</div>
-					</div>
-				</li> -->
-				<li class="mt-0.5">
-					<a href="/enterprise-migration-consultation" class="text-white cursor-pointer rounded-4xl text-sm px-7 py-3 bg-secondary-600 hover:bg-secondary-800 transition inline-block sm:text-md">Get a Free Strategy Call</a>
-				</li>
-			</ul>
-		</div>				
-	</div>
-</nav>
+
+<header class="fixed w-full top-0 z-50 bg-[#0d1117]/80 backdrop-blur-md border-b border-gray-800/50 h-12">
+  <nav class="container-custom h-full flex justify-between items-center">
+    <a href="/" class="text-lg font-bold text-white font-mono tracking-tight hover:text-accent transition-colors">
+      Jitan Gupta
+    </a>
+    
+    <div class="hidden md:flex gap-8 items-center">
+      <a href="#services" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Services</a>
+      <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Work</a>
+      <a href="#how-i-work" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Process</a>
+      <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+      
+      <a href="#contact" class="px-4 py-2 text-xs font-bold text-accent bg-blue-500/10 hover:bg-blue-500/20 rounded border border-blue-500/20 transition-all">
+        LET'S TALK
+      </a>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#0d1117] border-b border-gray-800 absolute w-full">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="#services" class="text-sm font-medium text-gray-300 hover:text-white transition-colors py-2 border-b border-gray-800">Services</a>
+      <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-white transition-colors py-2 border-b border-gray-800">Work</a>
+      <a href="#how-i-work" class="text-sm font-medium text-gray-300 hover:text-white transition-colors py-2 border-b border-gray-800">Process</a>
+      <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors py-2 border-b border-gray-800">About</a>
+      <a href="#contact" class="text-sm font-bold text-accent py-2">Let's Talk</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking a link
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+  }
+</script>
