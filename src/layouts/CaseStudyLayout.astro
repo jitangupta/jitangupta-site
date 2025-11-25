@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CommonCTA from '../components/CommonCTA.astro';
+import Chatwoot from '../components/chatwoot.astro';
 
 type Props = CollectionEntry<'caseStudies'>['data'];
 
@@ -82,6 +83,16 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 					font-size: 17px;
 				}
 			}
+
+			.content-slot ol {
+				list-style-type: auto;
+				margin:5px 0 5px 20px;
+			}
+			.content-slot ul {
+				list-style-type: disc;
+				margin-left: 20px;
+			}
+			
 		</style>
 	</head>
 
@@ -102,21 +113,21 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 					</a> 					
 				</div>    
 				<div class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex">
-					{heroImage && <img src={heroImage} alt={seoTitle} class="rounded-3xl shadow-xl w-full max-w-2xl md:w-2xl border-4 border-primary-100" />}
+					{heroImage && <img src={heroImage} alt={seoTitle} class="rounded-xl shadow-xl w-full max-w-2xl md:w-2xl border-3 border-gray-300" />}
 				</div>           
 			</div>
 		</section>
 		
 		<!-- Stats -->
 		<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
-			<div class="bg-primary-50 max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center border-4 border-primary-200">	
+			<div class="bg-white max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center border-3 border-secondary-400">	
 				<span class="text-primary-500 mb-2 font-bold tracking-wide text-xl">BY THE NUMBERS</span>
 				<h3 class="text-gray-700 text-4xl">The Migration Difference</h3>
 				<div class=" flex items-center justify-center">
 					<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 pt-8 max-w-5xl">
 						{stats.map((item) => (
 							<div>
-								<h2 class="text-4xl font-bold text-primary-500">{item.percentage}</h2>
+								<h2 class="text-4xl md:text-5xl font-bold text-primary-500">{item.percentage}</h2>
 								<p class="text-gray-800">{item.description}</p>
 							</div>
 						  ))}
@@ -128,19 +139,23 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 	 	
 		<!-- testimonial -->
 		{
-			testimonial && <section class="bg-gray-100 py-5 mx-2 sm:mx-0">
-			<div class="max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center">	
-				<blockquote class="italic text-gray-700">
-					<svg class="w-8 h-8 text-gray-300 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
-						<path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
-					</svg>
-					<p class="text-2xl tracking-wider">"{testimonial}"</p>
-					{testimonialAuthor && <img src={testimonialAuthorImage} alt={testimonialAuthor} class="w-12 h-12 rounded-full mx-auto mt-4" />}
-					<cite class="block mt-2 text-gray-700">{testimonialAuthor}</cite>
-					<cite class="block text-gray-700">{testimonialAuthorTitle}, {testimonialAuthorCompany} </cite>
-				</blockquote>
-			</div>
-		</section>
+			testimonial && 
+			<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
+				<div class="max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center">	
+					<blockquote class="italic text-gray-700">
+						<svg class="w-8 h-8 text-gray-300 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+							<path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
+						</svg>
+						<p class="text-2xl tracking-wider">"{testimonial}"</p>
+						{
+							testimonialAuthor && 
+							<img src={testimonialAuthorImage} alt={testimonialAuthor} class="w-12 h-12 rounded-full mx-auto mt-4" />
+							<cite class="block mt-2 text-gray-700">{testimonialAuthor}</cite>
+							<cite class="block text-gray-700">{testimonialAuthorTitle}, {testimonialAuthorCompany} </cite>
+						}
+					</blockquote>
+				</div>
+			</section>
 		}
 
 		<!-- case study details & TOC -->
@@ -172,5 +187,6 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+		<Chatwoot />
 	</body>
 </html>

@@ -10,4 +10,6 @@ Built with ❤️ and lots of coffee ☕
 
 ## Credit
 
-The site is built with [Astro](https://astro.build).
+The site is built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com/).
+
+Thanks to [Flowbite](https://flowbite.com/) for the amazing Tailwind CSS snippets.
