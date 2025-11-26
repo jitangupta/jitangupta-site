@@ -19,26 +19,33 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 	<head>
 		<BaseHead title={seoTitle} description={description} image={heroImage} />		
 		<style is:global>
+			body {
+				background-color: #0d1117;
+				color: #c9d1d9;
+			}
 			.content-slot {
-				color: #364153;
+				color: #c9d1d9;
 				font-size: 18px;
+				line-height: 1.8;
 			}
 			.content-slot h2 {
-				color: #eb7329 !important;
-				margin-top: 25px;
-				margin-bottom: 0px;
+				color: #ffffff !important;
+				margin-top: 40px;
+				margin-bottom: 16px;
 				font-size: 30px;
+				font-weight: 700;
 			}
 
 			.content-slot h3 {
-				color: #1e2939  !important;
-				margin-top: 20px;
-				margin-bottom: 5px;
-				font-size: 25px;
+				color: #e6edf3 !important;
+				margin-top: 32px;
+				margin-bottom: 12px;
+				font-size: 24px;
+				font-weight: 600;
 			}
 
 			.content-slot h2 + h3 {
-				margin-top: 0px;
+				margin-top: 16px;
 			}
 
 			.content-slot h2:first-child {
@@ -46,112 +53,139 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 			}
 
 			.content-slot p {
-				color: #364153;
+				color: #c9d1d9;
 				font-size: 18px;
+				margin-bottom: 24px;
 			}
 
 			.content-slot ul {
-				list-style-type: auto;
-				margin-left: 20px;
+				list-style-type: disc;
+				margin-left: 24px;
+				margin-bottom: 24px;
 				font-size: 18px;
+				color: #c9d1d9;
+			}
+
+			.content-slot li {
+				margin-bottom: 8px;
 			}
 
 			.content-slot ul li > ul {
-				list-style-type: disc;
+				list-style-type: circle;
+				margin-top: 8px;
 			}
 
 			.content-slot strong {
-				color: #364153;
+				color: #ffffff;
 				font-weight: 600;
 			}
 
-			.content-slot p strong {
-				margin-top: 15px;
+			.content-slot a {
+				color: #58a6ff;
+				text-decoration: none;
 			}
 
-			.content-slot strong a:hover{
+			.content-slot a:hover {
 				text-decoration: underline;
 			}
+
 			@media screen and (max-width: 768px) {
 				.content-slot h2 {
-					font-size: 22px;
+					font-size: 24px;
 				}
 				.content-slot h3 {
 					font-size: 20px;
 				}
 				.content-slot p, .content-slot ul li {
-					font-size: 17px;
+					font-size: 16px;
 				}
 			}
-
-			.content-slot ol {
-				list-style-type: auto;
-				margin:5px 0 5px 20px;
-			}
-			.content-slot ul {
-				list-style-type: disc;
-				margin-left: 20px;
-			}
 			
+			/* TOC Styles */
+			.toc-link {
+				color: #8b949e;
+				transition: color 0.2s;
+			}
+			.toc-link:hover {
+				color: #58a6ff;
+			}
 		</style>
 	</head>
 
-	<body>
+	<body class="bg-[#0d1117] text-[#c9d1d9] antialiased">
 		<Header />
 
 		<!-- Hero -->
-		<section class="bg-gray-100 mx-2">
-			<div class="grid bg-white max-w-screen-xl px-4 py-4 md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 rounded-b-2xl">				
-				<div class="mr-auto place-self-center lg:col-span-7 p-5 md:p-10 md:pr-30">
-					<!-- Tags -->
-					<span class="text-primary-500 mb-2">Case Studies</span>
+		<section class="bg-[#0d1117] pt-16 pb-10 border-b border-gray-800">
+			<div class="container-custom">
+				<div class="grid lg:grid-cols-12 gap-12 items-center">				
+					<div class="lg:col-span-7">
+						<!-- Tags -->
+						<div class="mb-6">
+							<span class="inline-block px-3 py-1 text-xs font-mono text-blue-400 bg-blue-900/20 border border-blue-900/50 rounded-full">
+								CASE STUDY
+							</span>
+							{articleTag && (
+								<span class="inline-block ml-2 px-3 py-1 text-xs font-mono text-gray-400 bg-gray-800 border border-gray-700 rounded-full">
+									{articleTag}
+								</span>
+							)}
+						</div>
 
-					<h1 class="max-w-2xl mb-1 text-3xl font-bold tracking-wide leading-tight">{pageTitle}</h1>
-					<p class="max-w-2xl font-light text-gray-800 md:text-xl my-3">{summary}</p>
-					<a href="/enterprise-migration-consultation" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition">
-						Get a Free Strategy Call
-					</a> 					
-				</div>    
-				<div class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex">
-					{heroImage && <img src={heroImage} alt={seoTitle} class="rounded-xl shadow-xl w-full max-w-2xl md:w-2xl border-3 border-gray-300" />}
-				</div>           
+						<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">{pageTitle}</h1>
+						<p class="text-xl text-gray-400 mb-8 leading-relaxed">{summary}</p>
+						
+						<a href="/#contact" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]">
+							Start Your Migration
+						</a> 					
+					</div>    
+					<div class="lg:col-span-5">
+						{heroImage && (
+							<div class="relative rounded-xl overflow-hidden border border-gray-800 shadow-2xl bg-[#161b22]">
+								<div class="absolute inset-0 bg-blue-500/10 mix-blend-overlay"></div>
+								<img src={heroImage} alt={seoTitle} class="w-full h-auto object-cover" />
+							</div>
+						)}
+					</div>           
+				</div>
 			</div>
 		</section>
 		
 		<!-- Stats -->
-		<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
-			<div class="bg-white max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center border-3 border-secondary-400">	
-				<span class="text-primary-500 mb-2 font-bold tracking-wide text-xl">BY THE NUMBERS</span>
-				<h3 class="text-gray-700 text-4xl">The Migration Difference</h3>
-				<div class=" flex items-center justify-center">
-					<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 pt-8 max-w-5xl">
+		{stats && stats.length > 0 && (
+			<section class="py-12 border-b border-gray-800 bg-[#161b22]/50">
+				<div class="container-custom">	
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 						{stats.map((item) => (
-							<div>
-								<h2 class="text-4xl md:text-5xl font-bold text-primary-500">{item.percentage}</h2>
-								<p class="text-gray-800">{item.description}</p>
+							<div class="text-center p-6 rounded-xl bg-[#0d1117] border border-gray-800">
+								<h2 class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">{item.percentage}</h2>
+								<p class="text-gray-400 font-medium">{item.description}</p>
 							</div>
-						  ))}
-						
+						))}
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		)}
 	 	
 		<!-- testimonial -->
 		{
 			testimonial && 
-			<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
-				<div class="max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center">	
-					<blockquote class="italic text-gray-700">
-						<svg class="w-8 h-8 text-gray-300 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+			<section class="py-16 border-b border-gray-800">
+				<div class="container-custom">	
+					<blockquote class="text-center max-w-4xl mx-auto">
+						<svg class="w-12 h-12 text-gray-700 mb-6 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
 							<path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
 						</svg>
-						<p class="text-2xl tracking-wider">"{testimonial}"</p>
+						<p class="text-2xl md:text-3xl font-medium text-white mb-8 leading-relaxed">"{testimonial}"</p>
 						{
 							testimonialAuthor && 
-							<img src={testimonialAuthorImage} alt={testimonialAuthor} class="w-12 h-12 rounded-full mx-auto mt-4" />
-							<cite class="block mt-2 text-gray-700">{testimonialAuthor}</cite>
-							<cite class="block text-gray-700">{testimonialAuthorTitle}, {testimonialAuthorCompany} </cite>
+							<div class="flex items-center justify-center gap-4">
+								{testimonialAuthorImage && <img src={testimonialAuthorImage} alt={testimonialAuthor} class="w-12 h-12 rounded-full border border-gray-700" />}
+								<div class="text-left">
+									<cite class="block text-white font-bold not-italic">{testimonialAuthor}</cite>
+									<cite class="block text-gray-500 text-sm not-italic">{testimonialAuthorTitle}, {testimonialAuthorCompany}</cite>
+								</div>
+							</div>
 						}
 					</blockquote>
 				</div>
@@ -159,34 +193,35 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		}
 
 		<!-- case study details & TOC -->
-		<section class="bg-gray-100 px-5 md:px-0">
-			<div class="flex flex-col md:flex-row mx-auto max-w-6xl px-0 py-8">
-				<!-- Blog Content -->
-				<main class="w-full md:w-3/4 content-slot px-5">
-					<slot />
-				</main>		
-		
-				<!-- Table Of Content -->
-				<aside class="hidden md:block md:w-1/4 pl-6">
-					<div class="sticky top-4 p-4 bg-white shadow-lg rounded-lg">
-						<h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
-						<ul class="text-sm space-y-2">
-							{Astro.props.headings && Astro.props.headings.map(heading => (
-								<li class="p-0.5" style={`margin-left: ${heading.depth * 10}px;`}>
-									<a class="text-gray-500 hover:text-gray-800 transition toc" href={`#${heading.text.replace(/\s+/g, '-').toLowerCase()}`}>{heading.text}</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				</aside>				 		
+		<section class="py-16">
+			<div class="container-custom">
+				<div class="flex flex-col lg:flex-row gap-12">
+					<!-- Blog Content -->
+					<main class="w-full lg:w-3/4 content-slot">
+						<slot />
+					</main>		
+			
+					<!-- Table Of Content -->
+					<aside class="hidden lg:block lg:w-1/4">
+						<div class="sticky top-24 p-6 bg-[#161b22] border border-gray-800 rounded-xl">
+							<h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Table of Contents</h2>
+							<ul class="text-sm space-y-3">
+								{Astro.props.headings && Astro.props.headings.map(heading => (
+									<li class="" style={`margin-left: ${(heading.depth - 1) * 12}px;`}>
+										<a class="toc-link block hover:translate-x-1 transition-transform" href={`#${heading.text.replace(/\s+/g, '-').toLowerCase()}`}>{heading.text}</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					</aside>				 		
+				</div>
 			</div>
 		</section>
 
-		<!-- TODO: Read more case studies -->
-		<CommonCTA /> 
+		<!--<CommonCTA /> -->
 
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-		<Chatwoot />
+		<!-- <Chatwoot /> -->
 	</body>
 </html>
