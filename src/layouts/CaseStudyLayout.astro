@@ -23,83 +23,6 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 				background-color: #0d1117;
 				color: #c9d1d9;
 			}
-			.content-slot {
-				color: #c9d1d9;
-				font-size: 18px;
-				line-height: 1.8;
-			}
-			.content-slot h2 {
-				color: #ffffff !important;
-				margin-top: 40px;
-				margin-bottom: 16px;
-				font-size: 30px;
-				font-weight: 700;
-			}
-
-			.content-slot h3 {
-				color: #e6edf3 !important;
-				margin-top: 32px;
-				margin-bottom: 12px;
-				font-size: 24px;
-				font-weight: 600;
-			}
-
-			.content-slot h2 + h3 {
-				margin-top: 16px;
-			}
-
-			.content-slot h2:first-child {
-				margin-top: 0px;
-			}
-
-			.content-slot p {
-				color: #c9d1d9;
-				font-size: 18px;
-				margin-bottom: 24px;
-			}
-
-			.content-slot ul {
-				list-style-type: disc;
-				margin-left: 24px;
-				margin-bottom: 24px;
-				font-size: 18px;
-				color: #c9d1d9;
-			}
-
-			.content-slot li {
-				margin-bottom: 8px;
-			}
-
-			.content-slot ul li > ul {
-				list-style-type: circle;
-				margin-top: 8px;
-			}
-
-			.content-slot strong {
-				color: #ffffff;
-				font-weight: 600;
-			}
-
-			.content-slot a {
-				color: #58a6ff;
-				text-decoration: none;
-			}
-
-			.content-slot a:hover {
-				text-decoration: underline;
-			}
-
-			@media screen and (max-width: 768px) {
-				.content-slot h2 {
-					font-size: 24px;
-				}
-				.content-slot h3 {
-					font-size: 20px;
-				}
-				.content-slot p, .content-slot ul li {
-					font-size: 16px;
-				}
-			}
 			
 			/* TOC Styles */
 			.toc-link {
@@ -108,6 +31,20 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 			}
 			.toc-link:hover {
 				color: #58a6ff;
+			}
+
+			/* Fix SVG and Image Sizing in Prose */
+			.prose img {
+				height: auto !important;
+				width: 100%;
+				max-width: 100%;
+			}
+
+			/* SVG images get white background for visibility */
+			.prose img[src$=".svg"] {
+				background-color: white;
+				padding: 1rem;
+				border-radius: 0.5rem;
 			}
 		</style>
 	</head>
@@ -197,15 +134,15 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 			<div class="container-custom">
 				<div class="flex flex-col lg:flex-row gap-12">
 					<!-- Blog Content -->
-					<main class="w-full lg:w-3/4 content-slot">
+					<main class="w-full lg:w-3/4 prose prose-invert prose-lg prose-blue max-w-none">
 						<slot />
 					</main>		
 			
 					<!-- Table Of Content -->
 					<aside class="hidden lg:block lg:w-1/4">
-						<div class="sticky top-24 p-6 bg-[#161b22] border border-gray-800 rounded-xl">
-							<h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Table of Contents</h2>
-							<ul class="text-sm space-y-3">
+						<div class="sticky top-24 p-4 bg-[#161b22] border border-gray-800 rounded-xl">
+							<h2 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Table of Contents</h2>
+							<ul class="text-xs space-y-2">
 								{Astro.props.headings && Astro.props.headings.map(heading => (
 									<li class="" style={`margin-left: ${(heading.depth - 1) * 12}px;`}>
 										<a class="toc-link block hover:translate-x-1 transition-transform" href={`#${heading.text.replace(/\s+/g, '-').toLowerCase()}`}>{heading.text}</a>
@@ -222,6 +159,45 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+		
+		<!-- Mermaid Support -->
+		<script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
+			async function runMermaid() {
+				// Find all code blocks
+				const codeBlocks = document.querySelectorAll('pre > code');
+				
+				codeBlocks.forEach(block => {
+					// Check if it's explicitly mermaid or if the content looks like mermaid
+					const isMermaid = block.classList.contains('language-mermaid') || 
+									  block.textContent.trim().startsWith('graph') || 
+									  block.textContent.trim().startsWith('sequenceDiagram') ||
+									  block.textContent.trim().startsWith('classDiagram') ||
+									  block.textContent.trim().startsWith('stateDiagram') ||
+									  block.textContent.trim().startsWith('erDiagram') ||
+									  block.textContent.trim().startsWith('gantt') ||
+									  block.textContent.trim().startsWith('pie') ||
+									  block.textContent.trim().startsWith('flowchart');
+
+					if (isMermaid) {
+						const pre = block.parentElement;
+						const content = block.textContent;
+						const div = document.createElement('div');
+						div.className = 'mermaid';
+						div.textContent = content;
+						pre.replaceWith(div);
+					}
+				});
+
+				await mermaid.run({
+					nodes: document.querySelectorAll('.mermaid'),
+				});
+			}
+
+			document.addEventListener('DOMContentLoaded', runMermaid);
+		</script>
 		<!-- <Chatwoot /> -->
 	</body>
 </html>
