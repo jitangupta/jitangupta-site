@@ -10,14 +10,45 @@ import Chatwoot from '../components/chatwoot.astro';
 type Props = CollectionEntry<'caseStudies'>['data'];
 
 const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, heroImage, articleTag, stats,
-	testimonial, testimonialAuthor, testimonialAuthorTitle, testimonialAuthorCompany, testimonialAuthorImage
+	testimonial, testimonialAuthor, testimonialAuthorTitle, testimonialAuthorCompany, testimonialAuthorImage,
+	keywords, author, robots, ogType, canonicalUrl
  } = Astro.props;
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": seoTitle || title,
+  "description": description,
+  "author": {
+    "@type": "Person",
+    "name": author || "Jitan Gupta",
+    "url": "https://jitangupta.com"
+  },
+  "datePublished": pubDate,
+  "dateModified": updatedDate || pubDate,
+  "image": new URL(heroImage || '/jitan-bg.png', Astro.url),
+  "publisher": {
+    "@type": "Person",
+    "name": "Jitan Gupta"
+  },
+  "articleSection": articleTag || "Tech",
+  "keywords": keywords
+};
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={seoTitle} description={description} image={heroImage} />		
+		<BaseHead 
+			title={seoTitle || title} 
+			description={description} 
+			image={heroImage}
+			keywords={keywords}
+			author={author}
+			robots={robots}
+			ogType={ogType || 'article'}
+			canonicalUrl={canonicalUrl}
+		/>
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 		<style is:global>
 			body {
 				background-color: #0d1117;

@@ -51,6 +51,12 @@ const caseStudies = defineCollection({
             percentage: z.string(),
             description: z.string(),
         })).optional(),
+        // SEO Fields
+        keywords: z.string().optional(),
+        author: z.string().optional(),
+        robots: z.string().optional(),
+        ogType: z.string().optional(),
+        canonicalUrl: z.string().optional(),
     }),
 });
 

@@ -1,9 +1,9 @@
 ---
-title: "AI-Powered Deployment Orchestration"
-pageTitle: "RAG-Based Release Recommendation Engine"
-seoTitle: "AI-Powered Release Orchestration | Jitan Gupta"
-description: "How I built a RAG-based system to reduce release planning time from 2 hours to 10 minutes using Azure AI and Qdrant."
-pubDate: "2024-11-15"
+title: "AI-Powered Deployment Orchestration for Multi-Tenant SaaS: $17K Saved Annually | Jitan Gupta"
+pageTitle: "AI-Powered Release Orchestration for Multi-Tenant SaaS"
+seoTitle: "AI-Powered Deployment Orchestration for Multi-Tenant SaaS: $17K Saved Annually | Jitan Gupta"
+description: "Probabilistic deployment system using RAG + LLM to decide which tenants need upgrades. Stop force-upgrading 400 tenants—95% can skip. Real code, 8-week roadmap. Built with .NET + Azure AI + Qdrant."
+pubDate: "2025-11-29"
 heroImage: "/images/RAG Powered Recommendation Engine.png"
 articleTag: "AI & DevOps"
 stats:
@@ -13,6 +13,11 @@ stats:
     description: "Missed dependencies since launch"
   - percentage: "100%"
     description: "Automated impact analysis"
+keywords: "multi-tenant deployment, probabilistic deployment, release orchestration, gitops automation, kubernetes deployment, rag deployment, llm devops, intelligent release management, azure ai foundry, qdrant"
+author: "Jitan Gupta"
+robots: "index, follow"
+ogType: "article"
+canonicalUrl: "https://jitangupta.com/case-studies/ai-powered-deployment-orchestration/"
 ---
 
 ## The $50K Weekend: When Force Upgrades Go Wrong
