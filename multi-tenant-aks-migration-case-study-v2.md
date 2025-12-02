@@ -1,24 +1,4 @@
----
-title: "Multi-Tenant Kubernetes Migration: Solving the Version Lock-In Problem"
-pageTitle: "Zero-Downtime Migration to AKS for 400+ Tenants"
-seoTitle: "Multi-Tenant AKS: Independent Version Control at Scale"
-description: "How to support independent tenant versions in Kubernetes. Real AKS migration case study: 22% cost reduction, 30-min onboarding, zero-downtime upgrades with YARP routing."
-pubDate: "2024-10-01"
-heroImage: "/images/Multi-Tenant App Design.png"
-articleTag: "Cloud Infrastructure"
-stats:
-  - percentage: "22%"
-    description: "Infrastructure cost savings"
-  - percentage: "30m"
-    description: "Tenant onboarding time"
-  - percentage: "4"
-    description: "Simultaneous versions supported"
-keywords: "multi-tenant kubernetes, AKS migration, kubernetes version isolation, YARP routing, multi-version architecture, B2B SaaS kubernetes, kubernetes enterprise architecture, helm multi-version deployment, ArgoCD GitOps, tenant version control, Azure Kubernetes Service, how to support multiple versions in kubernetes, multi-tenant AKS architecture pattern, enterprise SaaS kubernetes migration, kubernetes phased rollout strategy"
-author: "Jitan Gupta"
-robots: "index, follow"
-ogType: "article"
-canonicalUrl: "https://jitangupta.com/case-studies/multi-tenant-aks-migration/"
----
+# Multi-Tenant Kubernetes Migration: Solving the Version Lock-In Problem
 
 ## Executive Summary
 
@@ -276,13 +256,22 @@ tenants:
 
 The architecture uses different routing strategies for tenant UI apps versus backend API services. This hybrid approach optimizes for each workload type.
 
-![Complete Multi-Version Architecture with YARP Routing](/images/Multi-Tenant App Design.png)
+**[See Architecture Diagram 1: Complete Multi-Version Architecture with YARP Routing]**
 
 ### Pattern 1: Tenant UI Apps (Direct Ingress Routing)
 
 Tenant UI apps are statically routed via ingress because each tenant has a dedicated UI deployment with tenant-specific branding and configuration.
 
-![Tenant UI Routing Flow](/images/tenant-ui-routing-flow.svg)
+**Request Flow:**
+```
+User: acme.qa.eastus.demodeck.xyz
+↓
+App Gateway (SSL termination)
+↓
+AGIC routes to: acme-ui-service (via tenant-specific ingress)
+↓
+acme-ui pod (running v3.2 image with tenant branding)
+```
 
 **Why Direct Routing for UI:**
 - Each tenant UI is a separate deployment with custom branding
@@ -379,7 +368,7 @@ spec:
 
 Backend API services use YARP for dynamic tenant-to-version routing because multiple tenants share the same versioned services for resource efficiency.
 
-![YARP Routing Logic Flow](/images/gitops-deployment-flow-argocd.png)
+**[See Architecture Diagram 2: YARP Routing Logic Flow]**
 
 **Request Flow:**
 ```
@@ -400,7 +389,7 @@ Kubernetes Service: product-api-v3-2-service
 Pod: product-api-v3-2 (one of 3 replicas)
 ```
 
-![YARP Service Discovery and Routing](/images/yarp-routing-logic.svg)
+**[See Architecture Diagram 3: YARP Service Discovery and Routing]**
 
 **Why YARP for APIs:**
 - Multiple tenants on same version share pods (resource efficiency)
