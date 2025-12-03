@@ -1836,7 +1836,7 @@ This case study was written in December 2025, documenting an ongoing AKS migrati
 - Database-driven tenant-to-version mapping
 - Phased rollout strategy (dummy → low-risk → general → enterprise)
 
-For questions about this architecture or to discuss similar challenges at your organization, reach out via [your contact method].
+Facing similar versioning challenges? **[Let's discuss your architecture](#contact)**.
 
 ---
 

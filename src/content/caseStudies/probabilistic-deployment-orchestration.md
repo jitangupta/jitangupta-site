@@ -719,4 +719,4 @@ var searchResults = await _qdrantClient.SearchAsync(
 - **Technical Documentation:** Full API reference and deployment guide
 - **Case Studies:** Real-world implementation examples (anonymous)
 
-**Questions?** Reach out via [jitangupta.com/contact](https://jitangupta.com/contact)
+Facing similar deployment challenges? **[Let's discuss your architecture](#contact)**.

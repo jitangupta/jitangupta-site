@@ -26,3 +26,5 @@ draft: true
 ---
 
 ## Journey of becoming a Solution Architect
+
+Facing similar challenges? **[Let's discuss your architecture](#contact)**.
