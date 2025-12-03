@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Chatwoot from '../components/chatwoot.astro';
+import Contact from '../components/Contact.astro';
+
 import "../styles/global.css";
 
 // const title = "Jitan Gupta";
@@ -19,6 +21,7 @@ const { title, description, pubDate, updatedDate, heroImage, pageTheme } = Astro
 
 		<slot />
 
+		<Contact />
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 	</body>
