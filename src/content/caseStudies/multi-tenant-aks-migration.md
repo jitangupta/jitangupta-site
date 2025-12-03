@@ -3,8 +3,8 @@ title: "Multi-Tenant Kubernetes Migration: Solving the Version Lock-In Problem"
 pageTitle: "Zero-Downtime Migration to AKS for 400+ Tenants"
 seoTitle: "Multi-Tenant AKS: Independent Version Control at Scale"
 description: "How to support independent tenant versions in Kubernetes. Real AKS migration case study: 22% cost reduction, 30-min onboarding, zero-downtime upgrades with YARP routing."
-pubDate: "2024-10-01"
-heroImage: "/images/Multi-Tenant App Design.png"
+pubDate: "2025-12-02"
+heroImage: "/images/multi-tenant-app-design.png"
 articleTag: "Cloud Infrastructure"
 stats:
   - percentage: "22%"
@@ -276,13 +276,22 @@ tenants:
 
 The architecture uses different routing strategies for tenant UI apps versus backend API services. This hybrid approach optimizes for each workload type.
 
-![Complete Multi-Version Architecture with YARP Routing](/images/Multi-Tenant App Design.png)
+![Multi-Version Architecture with YARP Routing](/images/multi-tenant-app-design.png)
 
 ### Pattern 1: Tenant UI Apps (Direct Ingress Routing)
 
 Tenant UI apps are statically routed via ingress because each tenant has a dedicated UI deployment with tenant-specific branding and configuration.
 
-![Tenant UI Routing Flow](/images/tenant-ui-routing-flow.svg)
+**Request Flow:**
+```
+User: acme.qa.eastus.demodeck.xyz
+↓
+App Gateway (SSL termination)
+↓
+AGIC routes to: acme-ui-service (via tenant-specific ingress)
+↓
+acme-ui pod (running v3.2 image with tenant branding)
+```
 
 **Why Direct Routing for UI:**
 - Each tenant UI is a separate deployment with custom branding

@@ -17,7 +17,7 @@ keywords: "multi-tenant deployment, probabilistic deployment, release orchestrat
 author: "Jitan Gupta"
 robots: "index, follow"
 ogType: "article"
-canonicalUrl: "https://jitangupta.com/case-studies/ai-powered-deployment-orchestration/"
+canonicalUrl: "https://jitangupta.com/case-studies/probabilistic-deployment-orchestration/"
 ---
 
 ## The $50K Weekend: When Force Upgrades Go Wrong

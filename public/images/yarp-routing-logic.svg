@@ -49,7 +49,7 @@
     api.demodeck.xyz/auth/*
   </text>
   <text x="170" y="222" font-family="Arial, sans-serif" font-size="11" fill="#DBEAFE" text-anchor="middle">
-    Authentication & authorization
+    Authentication &amp; authorization
   </text>
   
   <!-- Endpoint 3: Product API -->
@@ -58,7 +58,7 @@
     api.demodeck.xyz/product/*
   </text>
   <text x="170" y="297" font-family="Arial, sans-serif" font-size="11" fill="#F3E8FF" text-anchor="middle">
-    Product & contract services
+    Product &amp; contract services
   </text>
   
   <!-- Endpoint 4: Cloud API -->
@@ -67,7 +67,7 @@
     api.demodeck.xyz/cloud/*
   </text>
   <text x="170" y="372" font-family="Arial, sans-serif" font-size="11" fill="#FCE7F3" text-anchor="middle">
-    Cloud storage & document services
+    Cloud storage &amp; document services
   </text>
   
   <!-- Center: YARP Router -->
