@@ -1,7 +1,7 @@
 # jitangupta.com Portfolio Site
 
 ## Site Purpose
-Service offering + portfolio site for Kubernetes consulting practice targeting Series A-C SaaS companies needing AKS migrations.
+Senior Engineer portfolio showcasing Azure infrastructure, Kubernetes, and .NET expertise. Optimized for job search.
 
 ## Design Direction (Active Revamp)
 - **Dark mode with vibrant accent colors** - Like sedai.io, not muted GitHub-dark
