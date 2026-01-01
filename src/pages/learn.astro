@@ -1,0 +1,157 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Learn Cloud, Kubernetes & AI | Jitan Gupta" description="Free practical tutorials on Cloud, Kubernetes, and AI infrastructure. Learn from real-world experience." />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Hero Section -->
+		<section class="bg-gray-100 mx-2">
+			<div class="bg-white max-w-screen-xl px-6 py-12 mx-auto rounded-b-2xl text-center">
+				<h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Learn Cloud, Kubernetes & AI</h1>
+				<p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-6">
+					Free practical tutorials based on 10 years of real-world experience.
+					Videos in Hinglish 🇮🇳 (English dubs available)
+				</p>
+				<a href="https://www.youtube.com/@jitangupta" target="_blank" class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition">
+					Subscribe on YouTube
+				</a>
+			</div>
+		</section>
+
+		<!-- Learning Roadmap -->
+		<section class="bg-gray-100 py-12 px-6">
+			<div class="max-w-screen-xl mx-auto">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">Learning Roadmap</h2>
+
+				<div class="grid md:grid-cols-2 gap-8">
+					<!-- Module 1: Cloud + Azure Fundamentals -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg">
+						<div class="flex items-center mb-4">
+							<img src="/icons/cloud-computing.png" class="h-16 w-16 mr-4" alt="Cloud" />
+							<h3 class="text-2xl font-bold text-gray-900">Cloud + Azure Fundamentals</h3>
+						</div>
+						<p class="text-gray-700 mb-4">
+							The building blocks: Compute, Storage, Networking, Identity.
+							Understand the "why" before the "how."
+						</p>
+						<div class="mb-4">
+							<h4 class="font-semibold text-gray-900 mb-2">Topics Covered:</h4>
+							<ul class="list-disc list-inside text-gray-600 space-y-1">
+								<li>Azure Core Services</li>
+								<li>Virtual Networks & Security</li>
+								<li>Identity & Access Management</li>
+								<li>Cost Optimization Strategies</li>
+							</ul>
+						</div>
+						<a href="https://www.youtube.com/@jitangupta" target="_blank" class="text-secondary-600 hover:underline font-medium">
+							Coming Soon →
+						</a>
+					</div>
+
+					<!-- Module 2: Azure Kubernetes (AKS) -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg">
+						<div class="flex items-center mb-4">
+							<img src="/icons/kubernetes.png" class="h-16 w-16 mr-4" alt="Kubernetes" />
+							<h3 class="text-2xl font-bold text-gray-900">Azure Kubernetes (AKS)</h3>
+						</div>
+						<p class="text-gray-700 mb-4">
+							Real migration patterns from VMs to Kubernetes. Multi-tenant architecture,
+							YARP routing, GitOps with ArgoCD.
+						</p>
+						<div class="mb-4">
+							<h4 class="font-semibold text-gray-900 mb-2">Topics Covered:</h4>
+							<ul class="list-disc list-inside text-gray-600 space-y-1">
+								<li>Kubernetes Fundamentals</li>
+								<li>Multi-Tenant Architecture</li>
+								<li>YARP Reverse Proxy</li>
+								<li>GitOps with ArgoCD</li>
+								<li>Production Best Practices</li>
+							</ul>
+						</div>
+						<a href="https://www.youtube.com/@jitangupta" target="_blank" class="text-secondary-600 hover:underline font-medium">
+							Coming Soon →
+						</a>
+					</div>
+
+					<!-- Module 3: AI + RAG Systems -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg">
+						<div class="flex items-center mb-4">
+							<img src="/icons/ai-chip.png" class="h-16 w-16 mr-4" alt="AI" />
+							<h3 class="text-2xl font-bold text-gray-900">AI + RAG Systems</h3>
+						</div>
+						<p class="text-gray-700 mb-4">
+							Building intelligent applications with Azure AI Foundry, vector databases,
+							and retrieval-augmented generation.
+						</p>
+						<div class="mb-4">
+							<h4 class="font-semibold text-gray-900 mb-2">Topics Covered:</h4>
+							<ul class="list-disc list-inside text-gray-600 space-y-1">
+								<li>Azure AI Foundry Setup</li>
+								<li>Vector Databases (Qdrant, Pinecone)</li>
+								<li>RAG Architecture Patterns</li>
+								<li>Semantic Search</li>
+								<li>Production Deployment</li>
+							</ul>
+						</div>
+						<a href="https://www.youtube.com/@jitangupta" target="_blank" class="text-secondary-600 hover:underline font-medium">
+							Coming Soon →
+						</a>
+					</div>
+
+					<!-- Module 4: Agents & Multi-Agent Systems -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg">
+						<div class="flex items-center mb-4">
+							<img src="/icons/robot.png" class="h-16 w-16 mr-4" alt="Agents" />
+							<h3 class="text-2xl font-bold text-gray-900">Agents & Multi-Agent Systems</h3>
+						</div>
+						<p class="text-gray-700 mb-4">
+							The frontier: orchestrating AI agents for complex workflows.
+						</p>
+						<div class="mb-4">
+							<h4 class="font-semibold text-gray-900 mb-2">Topics Covered:</h4>
+							<ul class="list-disc list-inside text-gray-600 space-y-1">
+								<li>Agent Architecture</li>
+								<li>Tool Integration</li>
+								<li>Multi-Agent Orchestration</li>
+								<li>State Management</li>
+								<li>Real-World Applications</li>
+							</ul>
+						</div>
+						<a href="https://www.youtube.com/@jitangupta" target="_blank" class="text-secondary-600 hover:underline font-medium">
+							Coming Soon →
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="bg-gray-100 py-12 px-6">
+			<div class="max-w-screen-xl mx-auto bg-white rounded-2xl p-8 md:p-12 text-center">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ready to Start Learning?</h2>
+				<p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+					Subscribe to my YouTube channel for practical tutorials in Hinglish.
+					New videos releasing soon!
+				</p>
+				<a href="https://www.youtube.com/@jitangupta" target="_blank" class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition mr-3">
+					Subscribe on YouTube
+				</a>
+				<a href="/case-studies" class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-center text-gray-900 border-2 border-gray-300 rounded-lg hover:bg-gray-100 transition">
+					See Real Projects
+				</a>
+			</div>
+		</section>
+
+		<Footer />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+	</body>
+</html>
