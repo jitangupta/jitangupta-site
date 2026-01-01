@@ -1,0 +1,110 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="600" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#1a1a1a">
+    AI-Orchestrated Release Management Architecture
+  </text>
+  
+  <!-- Data Sources Layer -->
+  <rect x="50" y="80" width="200" height="80" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <text x="150" y="110" font-size="16" font-weight="bold" text-anchor="middle" fill="#1976d2">Jira Tickets</text>
+  <text x="150" y="135" font-size="12" text-anchor="middle" fill="#555">Features, Bugs,</text>
+  <text x="150" y="150" font-size="12" text-anchor="middle" fill="#555">Tech Debt</text>
+  
+  <rect x="300" y="80" width="200" height="80" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="400" y="110" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">Tenant Profiles</text>
+  <text x="400" y="135" font-size="12" text-anchor="middle" fill="#555">Usage, Features,</text>
+  <text x="400" y="150" font-size="12" text-anchor="middle" fill="#555">Risk Tolerance</text>
+  
+  <rect x="550" y="80" width="200" height="80" rx="10" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
+  <text x="650" y="110" font-size="16" font-weight="bold" text-anchor="middle" fill="#f57c00">Release Data</text>
+  <text x="650" y="135" font-size="12" text-anchor="middle" fill="#555">Metadata,</text>
+  <text x="650" y="150" font-size="12" text-anchor="middle" fill="#555">Complexity</text>
+  
+  <!-- Embedding Service -->
+  <rect x="250" y="200" width="300" height="60" rx="10" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="400" y="225" font-size="16" font-weight="bold" text-anchor="middle" fill="#7b1fa2">Embedding Service</text>
+  <text x="400" y="245" font-size="12" text-anchor="middle" fill="#555">text-embedding-3-small</text>
+  
+  <!-- Vector Database -->
+  <rect x="250" y="300" width="300" height="80" rx="10" fill="#fce4ec" stroke="#c2185b" stroke-width="2"/>
+  <text x="400" y="330" font-size="18" font-weight="bold" text-anchor="middle" fill="#c2185b">Qdrant Vector DB</text>
+  <text x="400" y="355" font-size="12" text-anchor="middle" fill="#555">Semantic Search</text>
+  <text x="400" y="370" font-size="12" text-anchor="middle" fill="#555">Ticket Embeddings</text>
+  
+  <!-- Recommendation Engine -->
+  <rect x="200" y="420" width="400" height="100" rx="10" fill="#e1f5fe" stroke="#0277bd" stroke-width="3"/>
+  <text x="400" y="450" font-size="18" font-weight="bold" text-anchor="middle" fill="#0277bd">Recommendation Engine (.NET)</text>
+  <text x="400" y="475" font-size="13" text-anchor="middle" fill="#555">Probabilistic Reasoning</text>
+  <text x="400" y="495" font-size="13" text-anchor="middle" fill="#555">Context Assembly + Prompt Engineering</text>
+  
+  <!-- Azure OpenAI -->
+  <rect x="850" y="420" width="280" height="100" rx="10" fill="#e8eaf6" stroke="#3f51b5" stroke-width="3"/>
+  <text x="990" y="450" font-size="18" font-weight="bold" text-anchor="middle" fill="#3f51b5">Azure OpenAI</text>
+  <text x="990" y="475" font-size="13" text-anchor="middle" fill="#555">GPT-4 (gpt-4o-mini)</text>
+  <text x="990" y="495" font-size="13" text-anchor="middle" fill="#555">Structured JSON Output</text>
+  
+  <!-- Decision Outputs -->
+  <rect x="50" y="580" width="180" height="70" rx="10" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+  <text x="140" y="605" font-size="16" font-weight="bold" text-anchor="middle" fill="#d32f2f">MUST</text>
+  <text x="140" y="625" font-size="12" text-anchor="middle" fill="#555">8 tenants (2%)</text>
+  <text x="140" y="640" font-size="11" text-anchor="middle" fill="#777">Prob > 70%</text>
+  
+  <rect x="260" y="580" width="180" height="70" rx="10" fill="#fff9c4" stroke="#f9a825" stroke-width="2"/>
+  <text x="350" y="605" font-size="16" font-weight="bold" text-anchor="middle" fill="#f9a825">SHOULD</text>
+  <text x="350" y="625" font-size="12" text-anchor="middle" fill="#555">12 tenants (3%)</text>
+  <text x="350" y="640" font-size="11" text-anchor="middle" fill="#777">Prob 30-70%</text>
+  
+  <rect x="470" y="580" width="180" height="70" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="560" y="605" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">SKIP</text>
+  <text x="560" y="625" font-size="12" text-anchor="middle" fill="#555">380 tenants (95%)</text>
+  <text x="560" y="640" font-size="11" text-anchor="middle" fill="#777">Prob &lt; 30%</text>
+  
+  <!-- GitOps Integration -->
+  <rect x="700" y="580" width="430" height="70" rx="10" fill="#f1f8e9" stroke="#689f38" stroke-width="2"/>
+  <text x="915" y="605" font-size="16" font-weight="bold" text-anchor="middle" fill="#689f38">GitOps Automation</text>
+  <text x="915" y="625" font-size="12" text-anchor="middle" fill="#555">Helm PRs → ArgoCD Sync</text>
+  <text x="915" y="640" font-size="11" text-anchor="middle" fill="#777">Progressive Rollout</text>
+  
+  <!-- Arrows -->
+  <!-- Data sources to embedding -->
+  <line x1="150" y1="160" x2="300" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="160" x2="400" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="650" y1="160" x2="500" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Embedding to vector DB -->
+  <line x1="400" y1="260" x2="400" y2="300" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Vector DB to Recommendation Engine -->
+  <line x1="400" y1="380" x2="400" y2="420" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Recommendation Engine to Azure OpenAI -->
+  <line x1="600" y1="470" x2="850" y2="470" stroke="#666" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="725" y="460" font-size="11" text-anchor="middle" fill="#0277bd">Context-Rich Prompt</text>
+  
+  <!-- Azure OpenAI back to Recommendation Engine -->
+  <line x1="850" y1="490" x2="600" y2="490" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <text x="725" y="510" font-size="11" text-anchor="middle" fill="#3f51b5">Structured JSON</text>
+  
+  <!-- Recommendation Engine to Outputs -->
+  <line x1="300" y1="520" x2="140" y2="580" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="520" x2="350" y2="580" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="500" y1="520" x2="560" y2="580" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Outputs to GitOps -->
+  <line x1="230" y1="615" x2="700" y2="615" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="615" x2="700" y2="615" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="650" y1="615" x2="700" y2="615" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Key Insight Box -->
+  <rect x="700" y="700" width="430" height="70" rx="10" fill="#fff8e1" stroke="#ffa000" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="915" y="725" font-size="14" font-weight="bold" text-anchor="middle" fill="#f57c00">Key Insight</text>
+  <text x="915" y="745" font-size="12" text-anchor="middle" fill="#555">Not "does tenant use feature X?"</text>
+  <text x="915" y="760" font-size="12" text-anchor="middle" fill="#555">But "will tenant HIT this bug?" → Probabilistic!</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+</svg>

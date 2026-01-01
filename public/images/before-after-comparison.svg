@@ -1,0 +1,75 @@
+<svg width="1400" height="600" viewBox="0 0 1400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="700" y="40" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a1a1a">
+    Multi-Tenant Release Management: Before vs After
+  </text>
+  
+  <!-- Divider Line -->
+  <line x1="700" y1="80" x2="700" y2="580" stroke="#999" stroke-width="3" stroke-dasharray="10,5"/>
+  
+  <!-- BEFORE Section -->
+  <text x="350" y="100" font-size="24" font-weight="bold" text-anchor="middle" fill="#d32f2f">
+    ❌ BEFORE (Manual Process)
+  </text>
+  
+  <!-- Before: Step 1 -->
+  <rect x="100" y="130" width="500" height="80" rx="10" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+  <text x="350" y="155" font-size="16" font-weight="bold" text-anchor="middle" fill="#d32f2f">Step 1: Manual Analysis (2 hours)</text>
+  <text x="350" y="178" font-size="13" text-anchor="middle" fill="#555">Product Manager reads 50+ Jira tickets</text>
+  <text x="350" y="198" font-size="13" text-anchor="middle" fill="#555">Cross-references tenant analytics dashboards</text>
+  
+  <!-- Before: Step 2 -->
+  <rect x="100" y="230" width="500" height="80" rx="10" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+  <text x="350" y="255" font-size="16" font-weight="bold" text-anchor="middle" fill="#d32f2f">Step 2: Guesswork Decision</text>
+  <text x="350" y="278" font-size="13" text-anchor="middle" fill="#555">Binary logic: "Does tenant use Feature X?"</text>
+  <text x="350" y="298" font-size="13" text-anchor="middle" fill="#555">Accuracy: ~60% (educated guess)</text>
+  
+  <!-- Before: Step 3 -->
+  <rect x="100" y="330" width="500" height="80" rx="10" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+  <text x="350" y="355" font-size="16" font-weight="bold" text-anchor="middle" fill="#d32f2f">Step 3: Force Upgrade All Tenants</text>
+  <text x="350" y="378" font-size="13" text-anchor="middle" fill="#555">400 tenants upgraded (region-based)</text>
+  <text x="350" y="398" font-size="13" text-anchor="middle" fill="#555">No tenant-specific intelligence</text>
+  
+  <!-- Before: Result -->
+  <rect x="100" y="430" width="500" height="120" rx="10" fill="#ffcdd2" stroke="#c62828" stroke-width="3"/>
+  <text x="350" y="460" font-size="18" font-weight="bold" text-anchor="middle" fill="#c62828">❌ RESULT: High Risk, Low Efficiency</text>
+  <text x="350" y="485" font-size="14" text-anchor="middle" fill="#555">• 10% incident rate (40 incidents/year)</text>
+  <text x="350" y="505" font-size="14" text-anchor="middle" fill="#555">• 70% of upgrades unnecessary</text>
+  <text x="350" y="525" font-size="14" text-anchor="middle" fill="#555">• 100+ hours wasted on planning annually</text>
+  
+  <!-- AFTER Section -->
+  <text x="1050" y="100" font-size="24" font-weight="bold" text-anchor="middle" fill="#2e7d32">
+    ✅ AFTER (AI-Orchestrated)
+  </text>
+  
+  <!-- After: Step 1 -->
+  <rect x="800" y="130" width="500" height="80" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="1050" y="155" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">Step 1: Automated Analysis (10 minutes)</text>
+  <text x="1050" y="178" font-size="13" text-anchor="middle" fill="#555">RAG system retrieves relevant tickets semantically</text>
+  <text x="1050" y="198" font-size="13" text-anchor="middle" fill="#555">Tenant profiles loaded automatically from SQL</text>
+  
+  <!-- After: Step 2 -->
+  <rect x="800" y="230" width="500" height="80" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="1050" y="255" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">Step 2: Probabilistic Reasoning</text>
+  <text x="1050" y="278" font-size="13" text-anchor="middle" fill="#555">GPT-4 calculates probability of impact per tenant</text>
+  <text x="1050" y="298" font-size="13" text-anchor="middle" fill="#555">MUST (>70%) / SHOULD (30-70%) / SKIP (&lt;30%)</text>
+  
+  <!-- After: Step 3 -->
+  <rect x="800" y="330" width="500" height="80" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="1050" y="355" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">Step 3: Targeted Deployment</text>
+  <text x="1050" y="378" font-size="13" text-anchor="middle" fill="#555">20 tenants upgraded (5% MUST/SHOULD)</text>
+  <text x="1050" y="398" font-size="13" text-anchor="middle" fill="#555">380 tenants skip (95% unaffected)</text>
+  
+  <!-- After: Result -->
+  <rect x="800" y="430" width="500" height="120" rx="10" fill="#c8e6c9" stroke="#1b5e20" stroke-width="3"/>
+  <text x="1050" y="460" font-size="18" font-weight="bold" text-anchor="middle" fill="#1b5e20">✅ RESULT: Low Risk, High Efficiency</text>
+  <text x="1050" y="485" font-size="14" text-anchor="middle" fill="#555">• 5% incident rate (20 incidents/year)</text>
+  <text x="1050" y="505" font-size="14" text-anchor="middle" fill="#555">• Only affected tenants upgraded</text>
+  <text x="1050" y="525" font-size="14" text-anchor="middle" fill="#555">• 8 hours planning time annually</text>
+  
+  <!-- Bottom ROI Summary -->
+  <rect x="100" y="560" width="1200" height="30" rx="5" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
+  <text x="700" y="582" font-size="16" font-weight="bold" text-anchor="middle" fill="#e65100">
+    💰 Annual Savings: $17,025 (92 hours saved + 20 incidents prevented) | 50% risk reduction
+  </text>
+</svg>
