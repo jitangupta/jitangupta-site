@@ -6,11 +6,15 @@ import CommonCTA from "../components/CommonCTA.astro";
 import Chatwoot from "../components/chatwoot.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
+import { featuredVideos } from "../data/videos";
+import { builds } from "../data/builds";
 
 import { getCollection } from "astro:content";
 const caseStudies = (await getCollection("caseStudies")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const featuredBuilds = builds.slice(0, 3);
 ---
 
 <!doctype html>
@@ -21,14 +25,10 @@ const caseStudies = (await getCollection("caseStudies")).sort(
 	<body>
 		<Header />
 
-		<!--Hero -->
-		<section class="bg-gray-100 mx-2">
-			<div
-				class="grid bg-white max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 rounded-b-2xl"
-			>
-				<div
-					class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex"
-				>
+		<!-- Hero -->
+		<section class="bg-[#F8FAFC] mx-2">
+			<div class="grid bg-white max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 rounded-b-2xl">
+				<div class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex">
 					<img
 						src="/jitan-bg.png"
 						class="w-72 sm:w-72 md:w-80 lg:w-96 h-auto px-4 mb-7"
@@ -36,169 +36,116 @@ const caseStudies = (await getCollection("caseStudies")).sort(
 					/>
 				</div>
 				<div class="mr-auto place-self-center lg:col-span-7">
-					<h3
-						class="max-w-2xl mb-1 text-4xl font-bold tracking-tight leading-tight xl:text-6xl"
-					>
-						Learn<br /> <span style="color: #0078D4;">Cloud</span>, <span style="color: #326CE5;">Kubernetes</span> & <span style="color: #7C3AED;">AI</span>
-					</h3>
-					<h4
-						class="max-w-2xl mb-3 text-2xl font-semibold text-gray-800 md:text-3xl"
-					>
-						From Someone Who's Built It
-					</h4>
-					<p
-						class="max-w-2xl font-light text-gray-700 md:text-xl lg:text-2xl"
-					>
-						I've spent 10 years building enterprise software and
-						cloud infrastructure — migrations, multi-tenant systems,
-						AI tools. Now I teach what I know — so you don't have to
-						figure it out alone.
+					<h1 class="max-w-2xl mb-4 text-4xl font-bold tracking-tight leading-tight xl:text-6xl">
+						I Build with AI.<br />I Teach What I Learn.
+					</h1>
+					<p class="max-w-2xl font-light text-gray-700 md:text-xl lg:text-2xl mb-6">
+						10+ years of enterprise engineering — migrations, multi-tenant systems, AI tools.
+						I build things, share what works, and help engineers level up.
 					</p>
-					<p
-						class="max-w-2xl mb-3 font-light text-gray-600 md:text-lg my-2"
-					>
-						✅ Real patterns from 400+ tenant migrations
-					</p>
-					<p
-						class="max-w-2xl mb-3 font-light text-gray-600 md:text-lg"
-					>
-						✅ Hinglish videos 🇮🇳 for Indian engineers (English dubs
-						available)
-					</p>
-					<a
-						href="https://www.youtube.com/@jitangupta"
-						target="_blank"
-						class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition m-3 ml-0"
-					>
-						Start Learning
-					</a>
-					<a
-						href="/case-studies"
-						class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 m-3 ml-0"
-					>
-						See What I've Built
-					</a>
-				</div>
-			</div>
-		</section>
-
-		<!-- USP -->
-		<section>
-			<div
-				class="bg-gray-100 flex justify-center items-center min-h-screen py-10"
-			>
-				<div class="max-w-4xl w-full">
-					<div class="container mx-auto p-6 mt-5">
-						<h1 class="text-6xl font-bold mb-6 text-left">
-							What You'll <br /><span class="text-7xl"
-								>Learn</span>
-						</h1>
-						<div
-							class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 auto-rows-auto"
+					<div class="flex flex-wrap gap-3">
+						<a
+							href="https://www.youtube.com/@jitangupta"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-2 justify-center px-5 py-3 text-base font-medium text-center bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition"
 						>
-							<div
-								class="p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow row-span-2 bg-white border border-gray-100"
-							>
-								<img
-									src="/icons/cloud-computing.png"
-									class="h-16 w-16 mb-4"
-									alt="Cloud"
-								/>
-								<h3 class="text-2xl font-bold text-gray-900 mb-3">
-									Cloud + Azure Fundamentals
-								</h3>
-								<p class="text-md text-gray-600 mb-4">
-									The building blocks: Compute, Storage,
-									Networking, Identity. Understand the "why"
-									before the "how."
-								</p>
-								<a
-									href="https://www.youtube.com/@jitangupta"
-									target="_blank"
-									class="text-orange-500 hover:text-orange-600 font-medium inline-block"
-									>Coming Soon →</a
-								>
-							</div>
-							<div
-								class="p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow row-span-2 bg-white border border-gray-100"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" viewBox="0 0 24 24" fill="none" stroke="#326CE5" stroke-width="1.5">
-									<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-								</svg>
-								<h3 class="text-2xl font-bold text-gray-900 mb-3">
-									Azure Kubernetes (AKS)
-								</h3>
-								<p class="text-md text-gray-600 mb-4">
-									Real migration patterns from VMs to
-									Kubernetes. Multi-tenant architecture, YARP
-									routing, GitOps with ArgoCD.
-								</p>
-								<a
-									href="https://www.youtube.com/@jitangupta"
-									target="_blank"
-									class="text-orange-500 hover:text-orange-600 font-medium inline-block"
-									>Coming Soon →</a
-								>
-							</div>
-							<div
-								class="p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow row-span-2 bg-white border border-gray-100"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5">
-									<path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/>
-									<path d="M12 6v6l4 2"/>
-									<circle cx="12" cy="12" r="1"/>
-								</svg>
-								<h3 class="text-2xl font-bold text-gray-900 mb-3">AI + RAG Systems</h3>
-								<p class="text-md text-gray-600 mb-4">
-									Building intelligent applications with Azure
-									AI Foundry, vector databases, and
-									retrieval-augmented generation.
-								</p>
-								<a
-									href="https://www.youtube.com/@jitangupta"
-									target="_blank"
-									class="text-orange-500 hover:text-orange-600 font-medium inline-block"
-									>Coming Soon →</a
-								>
-							</div>
-							<div
-								class="p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow row-span-2 bg-white border border-gray-100"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.5">
-									<rect x="3" y="11" width="18" height="10" rx="2"/>
-									<circle cx="12" cy="5" r="2"/>
-									<path d="M12 7v4"/>
-									<path d="M8 16h.01M12 16h.01M16 16h.01"/>
-								</svg>
-								<h3 class="text-2xl font-bold text-gray-900 mb-3">
-									Agents & Multi-Agent Systems
-								</h3>
-								<p class="text-md text-gray-600 mb-4">
-									The frontier: orchestrating AI agents for
-									complex workflows.
-								</p>
-								<a
-									href="https://www.youtube.com/@jitangupta"
-									target="_blank"
-									class="text-orange-500 hover:text-orange-600 font-medium inline-block"
-									>Coming Soon →</a
-								>
-							</div>
-						</div>
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+							Watch on YouTube
+						</a>
+						<a
+							href="/builds"
+							class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+						>
+							See What I've Built
+						</a>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Case Study -->
-		<section class="bg-gray-100 py-10 px-6 text-center">
+		<!-- Latest from YouTube -->
+		<section class="bg-[#F8FAFC] py-10 px-6">
+			<div class="max-w-screen-xl mx-auto">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Latest Videos</h2>
+				<div class="grid gap-6 md:grid-cols-3">
+					{featuredVideos.map((video) => (
+						<a
+							href={video.youtubeUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-accent-500 transition-colors group"
+						>
+							<div class="h-48 bg-gray-100 overflow-hidden">
+								<img
+									src={video.thumbnail}
+									alt={video.title}
+									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+								/>
+							</div>
+							<div class="p-5">
+								<h3 class="font-semibold text-gray-900 mb-2 group-hover:text-accent-600 transition-colors">{video.title}</h3>
+								<p class="text-sm text-gray-600 mb-3">{video.description}</p>
+								<span class="text-accent-500 font-medium text-sm">Watch →</span>
+							</div>
+						</a>
+					))}
+				</div>
+				<div class="mt-8 text-center">
+					<a
+						href="https://www.youtube.com/@jitangupta"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-primary-600 font-medium hover:underline"
+					>See all videos →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- What I'm Building -->
+		<section class="bg-white py-10 px-6">
+			<div class="max-w-screen-xl mx-auto">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">What I'm Building</h2>
+				<div class="grid gap-6 md:grid-cols-2">
+					{featuredBuilds.map((build) => (
+						<div class="border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+							<div class="flex items-start justify-between gap-3 mb-3">
+								<h3 class="text-lg font-bold text-gray-900">{build.title}</h3>
+								<span class={`shrink-0 text-xs font-semibold px-2 py-1 rounded-full ${
+									build.status === 'live'
+										? 'bg-primary-100 text-primary-700'
+										: build.status === 'in-progress'
+										? 'bg-accent-100 text-accent-700'
+										: 'bg-gray-100 text-gray-600'
+								}`}>
+									{build.status === 'live' ? 'Live' : build.status === 'in-progress' ? 'In Progress' : 'Planned'}
+								</span>
+							</div>
+							<p class="text-gray-600 text-sm mb-4">{build.description}</p>
+							<div class="flex flex-wrap gap-2">
+								{build.techStack.map((tech) => (
+									<span class="text-xs font-medium px-3 py-1 bg-[#F8FAFC] border border-gray-200 rounded-full text-gray-600">
+										{tech}
+									</span>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+				<div class="mt-8 text-center">
+					<a href="/builds" class="text-primary-600 font-medium hover:underline">See all projects →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Case Studies -->
+		<section class="bg-[#F8FAFC] py-10 px-6 text-center">
 			<div class="max-w-screen-xl mx-auto rounded-2xl">
 				<h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-3">
 					Real Projects I've Built
 				</h2>
 				<p class="text-lg text-gray-600 mb-10">
-					Every lesson I share comes from something I've actually
-					built. Here's the proof.
+					Every lesson I share comes from something I've actually built. Here's the proof.
 				</p>
 				<div class="grid md:grid-cols-3 gap-6">
 					{
@@ -215,7 +162,7 @@ const caseStudies = (await getCollection("caseStudies")).sort(
 											<h3 class="text-xl font-semibold text-gray-700">
 												{caseStudy.data.pageTitle}
 											</h3>
-											<span class="inline-block mt-4 text-primary-500 font-semibold hover:underline">
+											<span class="inline-block mt-4 text-accent-500 font-semibold hover:underline">
 												View Case Study →
 											</span>
 										</div>
@@ -228,7 +175,7 @@ const caseStudies = (await getCollection("caseStudies")).sort(
 			</div>
 		</section>
 
-		<!-- Contact -->
+		<!-- CommonCTA -->
 		<CommonCTA />
 
 		<Footer />
