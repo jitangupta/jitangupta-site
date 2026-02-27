@@ -41,13 +41,25 @@ canonicalUrl: "https://jitangupta.com/case-studies/{slug}/"
 - Include code blocks with language specifier
 - Add images with descriptive alt text
 
-### 4. Verify
+### 4. Voice & Tone
+- Warm, approachable — senior colleague energy
+- Lead with the problem, show the solution, prove with numbers
+- Avoid: "guru", "expert", "master", "consultant"
+- Use: "real patterns", "what actually worked", "production-tested"
+
+### 5. Color Classes (v2.0)
+- Buttons: `bg-primary-600 hover:bg-primary-700` (cerulean blue)
+- Accent links: `text-accent-500` (orange)
+- Page bg: `bg-[#F8FAFC]`
+- Do NOT use: `bg-secondary-*`, `text-secondary-*` (deleted)
+
+### 6. Verify
 ```bash
 npm run build
 # Check for TypeScript/content errors
 ```
 
-### 5. Test Locally
+### 7. Test Locally
 ```bash
 npm run dev
 # Visit http://localhost:4321/case-studies/{slug}

@@ -1,280 +1,268 @@
-# CLAUDE.md — Website Update Task for jitangupta.com
+# CLAUDE.md — jitangupta.com v2.0: Personal Brand Hub
 
 ## Context
 
-Jitan has discovered his authentic purpose: **He is a guide who transmits understanding so that others can build better careers and lives.**
+Jitan Gupta builds real things with AI and teaches engineers how to do the same.
 
-He's creating YouTube content (in Hinglish) to teach engineers about Cloud, Kubernetes, and AI — starting with his own team members and expanding from there.
+The site is a **personal brand hub** — YouTube content, open source projects, articles, and case studies. YouTube is central; the site supports and amplifies the channel.
 
-**The website needs to reflect this shift:**
-- From: "Enterprise Migration Expert" (consulting positioning)
-- To: "Cloud & AI Guide" (teacher/mentor positioning)
-
----
-
-## Current Site Structure (White Theme)
-
-Based on the current design:
-- **Nav:** Migration Approach | Case Studies | Get a Free Strategy Call
-- **Hero:** "Migrate Legacy Systems Without Downtime" + consulting CTA
-- **Section:** "How Can I Help You?" (consulting services)
-- **Section:** Case Studies (4 projects)
-- **Footer:** "Enterprise Migration Expert" + strategy call CTA
+**Positioning shift (complete):**
+- ~~"Enterprise Migration Expert" (consulting)~~ → DELETED
+- ~~"Cloud & AI Guide" (teacher-only)~~ → SUPERSEDED
+- **Current: "Builder & Teacher"** — someone who builds with AI and teaches what he learns
 
 ---
 
-## Target Transformation
+## Stack
 
-The site should communicate:
-> "I help engineers understand Cloud, Kubernetes, and AI through real-world experience. I teach what I've built."
-
----
-
-## Specific Changes
-
-### 1. Navigation
-
-**Current:** `Migration Approach | Case Studies | Get a Free Strategy Call`
-
-**Update to:** `Learn | Case Studies | About | Contact`
-
-- "Learn" → links to new learning section or /learn page (primary focus)
-- "Case Studies" → keep (builds credibility)
-- Remove "Migration Approach" from main nav (or move to footer)
-- "Get a Free Strategy Call" → change to simple "Contact"
+- **Framework:** Astro 5.3 + Tailwind CSS 4 + Flowbite + MDX
+- **Hosting:** GitHub Pages
+- **Repo:** https://github.com/jitangupta/jitangupta-site
+- **Typography:** Recoleta (headings), Elza (body), Inter (code/UI) — no changes needed
 
 ---
 
-### 2. Hero Section
+## Color System — Cerulean Blue + Claude Orange + Bright Snow
 
-**Current:**
+### Design Intent
+- **Blue (Cerulean `#0E7490`)** = primary action color — buttons, CTAs, nav highlights
+- **Orange (Claude Burnt Peach `#D97757`)** = accent color — links, highlights, hover hints, card accents
+- **Bright Snow (`#F8FAFC`)** = page background (replaces pure white/gray-100)
+- **Teal (`#0F766E` / `#115E59`)** = available for dark sections/contrast
+- **White (`#FFFFFF`)** = card surfaces (contrast against Bright Snow)
+
+### What Was Removed
+- All green secondary utilities (`bg-secondary-*`, `text-secondary-*`, `border-secondary-*`) — deleted
+- Old orange primary scale — replaced with cerulean blue as primary
+- Orange moved to `accent` utility class set
+
+### Implementation in `src/styles/global.css`
+All color classes defined in lines 1-71. Key find/replace rules:
+
+| Search | Replace | Notes |
+|--------|---------|-------|
+| `bg-secondary-600` | `bg-primary-600` | Green buttons → blue buttons |
+| `hover:bg-secondary-800` | `hover:bg-primary-700` | Button hover states |
+| `text-secondary-600` | `text-primary-600` | Green text → blue text |
+| `text-orange-500` | `text-accent-500` | Inline orange → accent token |
+| `text-orange-600` | `text-accent-600` | Inline orange → accent token |
+| `bg-gray-100` (page bg) | `bg-[#F8FAFC]` or `bg-page` | Page wrappers |
+| `text-primary-500` (old orange) | `text-accent-500` | Old orange refs → accent |
+
+---
+
+## Site Structure
+
+### Navigation (Header)
+
+`YouTube | Builds | About | [Contact button]`
+
+| Nav Item | Link | Notes |
+|----------|------|-------|
+| YouTube | `https://www.youtube.com/@jitangupta` (external) | Opens in new tab |
+| Builds | `/builds` | New page — open source projects |
+| About | `/about` | Full rewrite |
+| Contact | `/contact` | Keep, minor update |
+
+**Removed from nav:** Case Studies (accessible via homepage + footer + direct URL), Learn, Migration Approach
+
+### Full Page Map
+
+| Page | Status |
+|------|--------|
+| `/` | **Rework** — new hero, YouTube section, Builds section |
+| `/about` | **Full rewrite** — story + builder-teacher identity |
+| `/builds` | **New page** — open source projects showcase |
+| `/case-studies` | **Keep** — removed from main nav only |
+| `/case-studies/[slug]` | **Keep** |
+| `/article` | **Keep & grow** |
+| `/article/[slug]` | **Keep** |
+| `/contact` | **Minor copy update** — remove consulting language |
+| `/learn` | **Delete** — redundant |
+| `/migration-approach` | **Delete** — old consulting |
+| `/enterprise-migration-consultation` | **Delete** — old consulting |
+| `/self-notes` | **Remove from public nav** — keep files |
+| `/privacy-policy` | **Keep** |
+| `/terms-of-use` | **Keep** |
+
+### Footer
+
+**Links:** `YouTube 🇮🇳 · Builds · Case Studies · Articles · About · Contact`
+**Tagline:** "Building with AI. Teaching engineers."
+**Social:** YouTube, LinkedIn, GitHub (keep all)
+
+---
+
+## Page Specifications
+
+### Homepage (`/`) — Major Rework
+
+**Section order:** Hero → Latest from YouTube → What I'm Building → What You'll Learn → Case Studies → CommonCTA
+
+#### Hero
 ```
-Migrate Legacy Systems Without Downtime
-I help businesses move to scalable, cloud-native systems. This cuts costs, boosts performance, and eliminates technical debt.
-✓ 10+ years in software, specializing in enterprise migrations.
-[Get a Free Strategy Call] [See My Approach]
+I Build with AI.
+I Teach What I Learn.
+
+10+ years of enterprise engineering — migrations, multi-tenant systems, AI tools.
+I build things, share what works, and help engineers level up.
+
+[Watch on YouTube]  [See What I've Built]
 ```
+- Photo-left, text-right layout (keep)
+- Primary CTA → YouTube (orange filled button)
+- Secondary CTA → `/builds` (outlined button)
+- No checkmarks, no "Hinglish" mention in hero
 
-**Update to:**
-```
-Learn Cloud, Kubernetes & AI
-From Someone Who's Built It
+#### Latest from YouTube (NEW section)
+- Heading: "Latest Videos"
+- 2-3 video cards in responsive grid (md:grid-cols-3)
+- Each card: thumbnail, title, description, "Watch →" link
+- Bottom: "See all videos →" to YouTube channel
+- Data source: `src/data/videos.ts`
 
-I've spent 10 years building enterprise software and cloud infrastructure — migrations, multi-tenant systems, AI tools.
-Now I teach what I know — so you don't have to figure it out alone.
+#### What I'm Building (NEW section)
+- Heading: "What I'm Building"
+- 2-3 project cards with: name, description, tech stack tags, GitHub/demo links
+- Bottom: "See all projects →" to `/builds`
+- Data source: `src/data/builds.ts`
 
-✓ Real patterns from 400+ tenant migrations
-✓ Hinglish videos 🇮🇳 for Indian engineers (English dubs available)
+#### What You'll Learn (EXISTING — update)
+- Keep 4-card grid
+- Replace "Coming Soon →" with actual YouTube playlist links where content exists
+- Update color classes to new tokens
+- Consider renaming "Agents & Multi-Agent Systems" → "AI Tools for Engineers"
 
-[Start Learning] [See What I've Built]
-```
+#### Case Studies (EXISTING — minor)
+- Keep as-is, colors update automatically from global.css
 
-**CTAs:**
-- "Start Learning" → links to YouTube or /learn section
-- "See What I've Built" → links to Case Studies
+#### CommonCTA (EXISTING — update)
+- "10 years" → "10+ years"
+- Add mention of building with AI / open source
+- Button: orange (not green)
+
+### About Page (`/about`) — Full Rewrite
+
+**Title:** `About Jitan Gupta — From General Store to Platform Engineer to Teacher`
+**Meta:** `12 years running a store, 5 startups, 10+ years engineering. Now building with AI and teaching engineers through YouTube and open source.`
+
+**Sections:**
+1. **The Story** — general store background, 5 startups, realization about teaching
+2. **What I've Built** — proof checklist (AKS migration, RAG deployment, identity platform)
+3. **What I Do Now** — YouTube in Hinglish, open source, articles, real patterns
+4. **Connect** — YouTube, LinkedIn, GitHub CTAs (remove "Open to roles")
+
+### Builds Page (`/builds`) — New Page
+
+**File:** `src/pages/builds.astro`
+**Hero:** "Things I've Built" + building in public message
+**Content:** Project cards with image, title, description, tech stack tags, GitHub/demo/YouTube links, status badge
+**Data source:** `src/data/builds.ts`
+
+### Contact Page — Minor Update
+Remove any consulting-era language. Keep simple.
 
 ---
 
-### 3. "How Can I Help You?" Section → Rename to "What You'll Learn"
+## New Files to Create
 
-**Current cards (consulting focus):**
-- Cut Costs, Boost Performance
-- Cloud-Native Done Right
-- Secure & Future-Proof
-- End-to-End Migration Strategy
-- Business-First Tech Consulting
-
-**Replace with learning roadmap cards:**
-
-**Card 1: Cloud + Azure Fundamentals**
-> The building blocks: Compute, Storage, Networking, Identity. Understand the "why" before the "how."
-> [Coming Soon / Watch Now]
-
-**Card 2: Azure Kubernetes (AKS)**
-> Real migration patterns from VMs to Kubernetes. Multi-tenant architecture, YARP routing, GitOps with ArgoCD.
-> [Coming Soon / Watch Now]
-
-**Card 3: AI + RAG Systems**
-> Building intelligent applications with Azure AI Foundry, vector databases, and retrieval-augmented generation.
-> [Coming Soon / Watch Now]
-
-**Card 4: Agents & Multi-Agent Systems**
-> The frontier: orchestrating AI agents for complex workflows.
-> [Coming Soon / Watch Now]
-
-Use icons similar to current design (cloud, kubernetes wheel, AI chip, robot/agent).
+| File | Purpose |
+|------|---------|
+| `src/data/videos.ts` | Featured YouTube videos data |
+| `src/data/builds.ts` | Open source projects data |
+| `src/pages/builds.astro` | Builds showcase page |
 
 ---
 
-### 4. Case Studies Section
+## Components to Update
 
-**Keep as is** — these build credibility and show you've actually done the work.
-
-**Optional tweak to heading:**
-- Current: "Case Studies"
-- Update to: "Real Projects I've Built" or "What I Teach From"
-
-**Add subheading:**
-> "Every lesson I share comes from something I've actually built. Here's the proof."
+| Component | Changes |
+|-----------|---------|
+| `Header.astro` | Nav: YouTube (external), Builds, About, Contact button (orange) |
+| `Footer.astro` | Links update, tagline: "Building with AI. Teaching engineers." |
+| `CommonCTA.astro` | Bio: "10+" years, AI mention. Button: orange |
+| `BaseHead.astro` | Verify meta pulls from updated consts |
 
 ---
 
-### 5. About/Footer Section
+## Global File Updates
 
-**Current:**
+### `src/consts.ts`
+```typescript
+export const SITE_TITLE = 'Jitan Gupta — Builder & Teacher';
+export const SITE_DESCRIPTION = 'I build with AI and teach engineers what I learn. 10+ years of real production experience shared through YouTube, open source, and case studies.';
+export const SITE_URL = "https://jitangupta.com/";
 ```
-🚀 Jitan Gupta | Enterprise Migration Expert
-I help businesses update old systems. I move them to cloud-native architectures that can grow...
-[Schedule a Free Strategy Call] [See My Approach]
-```
-
-**Update to:**
-```
-👋 Hey, I'm Jitan
-
-Senior Engineer with 10 years building enterprise software and cloud infrastructure. I've architected multi-tenant Kubernetes migrations, built AI-powered deployment systems, and led identity platforms serving 50K+ daily authentications.
-
-Every engineer I've taught got into the industry. Now I'm sharing what I've learned through videos and case studies — real patterns from real systems.
-
-Based in Mumbai. Teaching globally.
-
-[Watch on YouTube] [Connect on LinkedIn]
-```
-
----
-
-### 6. Footer Links
-
-**Current "MORE" section:**
-- Get a Free Strategy Call
-- Migration Approach
-- Newsletter
-- Case Studies
-- Self Notes
-- Articles
-- About / Contact
-
-**Update to:**
-- Learn (YouTube)
-- Case Studies
-- Articles
-- About
-- Contact
-
-**Current "FOLLOW ME":**
-- YouTube ✓ (keep)
-- LinkedIn ✓ (keep)
-- GitHub ✓ (keep)
-
-**Add note near YouTube:** "Videos in Hinglish 🇮🇳"
-
-**Footer tagline:** "Building systems. Teaching engineers."
-
----
-
-### 7. Page Title & Meta
-
-**Current:** (likely something about migration/consulting)
-
-**Update to:** `Learn Cloud, Kubernetes & AI | Jitan Gupta`
-
-**Meta description:**
-```
-Jitan Gupta teaches Cloud, Kubernetes, and AI infrastructure through practical Hinglish videos. 10 years of real experience, shared freely.
-```
-
----
-
-## Pages to Update/Create
-
-### Homepage (/) — Primary changes above
-
-### /learn (New Page)
-Create a dedicated learning page with:
-- The 4-part roadmap (Cloud → Kubernetes → AI → Agents)
-- Embedded YouTube videos (once created)
-- Clear progression path
-- "Subscribe" CTA for YouTube
-
-### /case-studies/ — Minor updates
-- Update page intro to reference teaching angle
-- Add "Watch me explain this" links once videos exist
-
-### /about/ (if exists) — Update bio
-Use the same content as the About/Footer section:
-- 10 years building enterprise software and cloud infrastructure
-- Multi-tenant Kubernetes, AI systems, identity platforms
-- "Every engineer I've taught got into the industry"
-- Current focus on teaching through videos and case studies
-
----
-
-## Content Language
-
-**YouTube videos:** Hinglish (Hindi + English) — natural, conversational
-**Website:** English — but warm, approachable tone. Like explaining to a colleague.
-
-**Mention on site:** "Videos in Hinglish 🇮🇳 | English dubs available"
 
 ---
 
 ## Voice & Tone
 
 - Warm and approachable — senior colleague energy
-- Confident but humble — "I've learned this, let me share"
+- Confident but humble — "I've built this, let me share"
 - Practical — "patterns that work" not "best practices"
 - Lead with credibility — real projects, real numbers
-- Avoid: "guru", "expert", "master" — use "guide" instead
+- Avoid: "guru", "expert", "master", "consultant"
+- Identity: **builder who teaches**, not teacher-only or consultant
 
----
-
-## Key Phrases to Use
-
-- "I teach what I've lived, not what I've studied."
-- "Every engineer I've taught got into the industry."
-- "Building systems. Teaching engineers."
+### Key Phrases (use sparingly)
+- "Building with AI. Teaching engineers."
+- "Everything I teach comes from what I've built."
 - "Real patterns from real systems."
 
-Use sparingly. Let the work speak.
-
 ---
 
-## Design Notes
+## Content Language
 
-- Keep the clean white theme — it's professional and readable
-- Keep the orange accent color — works well for CTAs
-- The current card layout works — just change the content
-- Profile photo is good — friendly and approachable
-- Consider adding YouTube video thumbnails to /learn page once content exists
+- **Website:** English — warm, approachable, like explaining to a colleague
+- **YouTube videos:** Hinglish (Hindi + English) — mentioned on About page and near YouTube links
+- **Mention format:** "Videos in Hinglish 🇮🇳"
 
 ---
 
 ## What NOT to Change
 
-- Overall layout structure (it's clean)
+- Overall layout structure (clean, works well)
 - Case studies content (builds credibility)
-- Color scheme (orange + white works)
-- Profile photo
-- Footer structure (just update links/text)
+- Profile photo (friendly, approachable)
+- Typography (Recoleta + Elza + Inter)
+- Footer structure (just update links/text/tagline)
 
 ---
 
 ## Implementation Priority
 
-1. **Hero section** — First impression, most important
-2. **"How Can I Help You?" → "What You'll Learn"** — Core transformation
-3. **About/Footer section** — Credibility + teaching angle
-4. **Navigation** — Reflect new focus
-5. **Meta/SEO** — Title and description
-6. **Create /learn page** — Once YouTube content exists
-7. **Link case studies to videos** — Once videos exist
+### Phase 1 — Fix the Broken
+1. `global.css` — Replace color system, remove green secondary
+2. Find/replace `bg-secondary-*` → `bg-primary-*` across all files
+3. `about.astro` — Full rewrite
+4. `Header.astro` — Update nav
+5. `Footer.astro` — Update links + tagline
+6. Delete `migration-approach.astro`
+7. Delete `enterprise-migration-consultation.astro`
+8. `consts.ts` — New title + description
+
+### Phase 2 — Build the New
+9. Create `src/data/builds.ts`
+10. Create `src/data/videos.ts`
+11. Create `src/pages/builds.astro`
+12. `index.astro` — New hero, YouTube section, Builds section
+13. `CommonCTA.astro` — Update bio + buttons
+14. Delete `learn.astro`
+15. `contact.astro` — Minor copy update
+
+### Phase 3 — Polish
+16. Test responsive (mobile + desktop)
+17. Verify no broken links
+18. Check meta tags all pages
+19. Deploy + verify production
 
 ---
 
 ## Success Criteria
 
 When someone lands on jitangupta.com, they should think:
-> "This person has real experience AND wants to help me learn. I want to watch his videos."
+> "This person actually builds stuff AND teaches. I want to follow him."
 
 Not:
 > "This is a consultant trying to sell me a strategy call."
@@ -283,9 +271,22 @@ Not:
 
 ## Notes for Claude Code
 
-- Site is built with Astro
+- Site is built with Astro 5.3 + Tailwind CSS 4
 - Preserve existing styling and components where possible
-- The white theme is the correct base — don't revert to dark
+- Bright Snow (`#F8FAFC`) is the correct page background
 - Make incremental commits with clear messages
-- Test locally before deployment
+- Test locally before deployment (`npm run dev` / `npm run build`)
 - Images are in appropriate directories — reuse existing icons where possible
+- The spec file `jitangupta-site-update-spec.md` in repo root has full details including exact CSS, data types, and copy
+
+---
+
+## Future Additions (NOT in this update)
+
+| Feature | Add When |
+|---------|----------|
+| Events/Meetups section | After 2-3 meetups hosted |
+| Speaking/Guest Lectures | After 2-3 college talks |
+| Corporate Training page | After first corporate gig |
+| Testimonials | After real feedback collected |
+| Newsletter | When clear value prop exists |
