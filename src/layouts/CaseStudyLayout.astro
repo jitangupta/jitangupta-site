@@ -100,17 +100,17 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		<Header />
 
 		<!-- Hero -->
-		<section class="bg-gray-100 mx-2">
+		<section class="bg-[#F8FAFC] mx-2">
 			<div class="grid bg-white max-w-screen-xl px-4 py-4 md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 rounded-b-2xl">				
 				<div class="mr-auto place-self-center lg:col-span-7 p-5 md:p-10 md:pr-30">
 					<!-- Tags -->
-					<span class="text-primary-500 mb-2">Case Studies</span>
+					<span class="text-accent-500 mb-2">Case Studies</span>
 
 					<h1 class="max-w-2xl mb-1 text-3xl font-bold tracking-wide leading-tight">{pageTitle}</h1>
 					<p class="max-w-2xl font-light text-gray-800 md:text-xl my-3">{summary}</p>
-					<a href="/enterprise-migration-consultation" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center bg-secondary-600 hover:bg-secondary-800 text-white rounded-lg transition">
-						Get a Free Strategy Call
-					</a> 					
+					<a href="/contact" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition">
+						Get in Touch
+					</a>
 				</div>    
 				<div class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex">
 					{heroImage && <img src={heroImage} alt={seoTitle} class="rounded-xl shadow-xl w-full max-w-2xl md:w-2xl border-3 border-gray-300" />}
@@ -119,15 +119,15 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		</section>
 		
 		<!-- Stats -->
-		<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
-			<div class="bg-white max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center border-3 border-secondary-400">	
-				<span class="text-primary-500 mb-2 font-bold tracking-wide text-xl">BY THE NUMBERS</span>
+		<section class="bg-[#F8FAFC] py-5 mx-2 sm:mx-0">
+			<div class="bg-white max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center border-3 border-primary-400">	
+				<span class="text-accent-500 mb-2 font-bold tracking-wide text-xl">BY THE NUMBERS</span>
 				<h3 class="text-gray-700 text-4xl">The Migration Difference</h3>
 				<div class=" flex items-center justify-center">
 					<div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 pt-8 max-w-5xl">
 						{stats.map((item) => (
 							<div>
-								<h2 class="text-4xl md:text-5xl font-bold text-primary-500">{item.percentage}</h2>
+								<h2 class="text-4xl md:text-5xl font-bold text-accent-500">{item.percentage}</h2>
 								<p class="text-gray-800">{item.description}</p>
 							</div>
 						  ))}
@@ -140,7 +140,7 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		<!-- testimonial -->
 		{
 			testimonial && 
-			<section class="bg-gray-100 py-5 mx-2 sm:mx-0">
+			<section class="bg-[#F8FAFC] py-5 mx-2 sm:mx-0">
 				<div class="max-w-screen-xl mx-auto py-10 px-5 md:px-5 rounded-2xl text-center">	
 					<blockquote class="italic text-gray-700">
 						<svg class="w-8 h-8 text-gray-300 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
@@ -159,7 +159,7 @@ const { title, pageTitle, seoTitle, summary, description, pubDate, updatedDate, 
 		}
 
 		<!-- case study details & TOC -->
-		<section class="bg-gray-100 px-5 md:px-0">
+		<section class="bg-[#F8FAFC] px-5 md:px-0">
 			<div class="flex flex-col md:flex-row mx-auto max-w-6xl px-0 py-8">
 				<!-- Blog Content -->
 				<main class="w-full md:w-3/4 content-slot px-5">

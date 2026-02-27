@@ -1,79 +1,84 @@
 @import "tailwindcss";
 
-.text-primary-50 { color: #fde8dd; }
-.text-primary-100 { color: #fbd1bb; }
-.text-primary-200 { color: #f8b894; }
-.text-primary-300 { color: #f59f6c; }
-.text-primary-400 { color: #f28749; }
-.text-primary-500 { color: #eb7329; }
-.text-primary-600 { color: #d16522; }
-.text-primary-700 { color: #b5571d; }
-.text-primary-800 { color: #8f4217; }
-.text-primary-900 { color: #6a2f11; }
+/* Primary: Cerulean Blue — buttons, CTAs, nav active */
+.text-primary-50 { color: #ECFEFF; }
+.text-primary-100 { color: #CFFAFE; }
+.text-primary-200 { color: #A5F3FC; }
+.text-primary-300 { color: #67E8F9; }
+.text-primary-400 { color: #22D3EE; }
+.text-primary-500 { color: #06B6D4; }
+.text-primary-600 { color: #0E7490; }
+.text-primary-700 { color: #0C5E75; }
+.text-primary-800 { color: #0A4A5C; }
+.text-primary-900 { color: #083744; }
 
-.bg-primary-50 { background-color: #fde8dd; }
-.bg-primary-100 { background-color: #fbd1bb; }
-.bg-primary-200 { background-color: #f8b894; }
-.bg-primary-300 { background-color: #f59f6c; }
-.bg-primary-400 { background-color: #f28749; }
-.bg-primary-500 { background-color: #eb7329; }
-.bg-primary-500:hover { background-color: #b5571d; }
-.bg-primary-600 { background-color: #d16522; }
-.bg-primary-600:hover { background-color: #b5571d; }
-.bg-primary-700 { background-color: #b5571d; }
-.bg-primary-800 { background-color: #8f4217; }
-.bg-primary-900 { background-color: #6a2f11; }
-.bg-primary-light { background-color: #ffede2; }
+.bg-primary-50 { background-color: #ECFEFF; }
+.bg-primary-100 { background-color: #CFFAFE; }
+.bg-primary-200 { background-color: #A5F3FC; }
+.bg-primary-300 { background-color: #67E8F9; }
+.bg-primary-400 { background-color: #22D3EE; }
+.bg-primary-500 { background-color: #06B6D4; }
+.bg-primary-500:hover { background-color: #0C5E75; }
+.bg-primary-600 { background-color: #0E7490; }
+.bg-primary-600:hover { background-color: #0C5E75; }
+.bg-primary-700 { background-color: #0C5E75; }
+.bg-primary-800 { background-color: #0A4A5C; }
+.bg-primary-900 { background-color: #083744; }
+.bg-primary-light { background-color: #ECFEFF; }
 
-.border-primary-50 { border-color: #fde8dd; }
-.border-primary-100 { border-color: #fbd1bb; }
-.border-primary-200 { border-color: #f8b894; }
-.border-primary-300 { border-color: #f59f6c; }
-.border-primary-400 { border-color: #f28749; }
-.border-primary-500 { border-color: #eb7329; }
-.border-primary-600 { border-color: #d16522; }
-.border-primary-700 { border-color: #b5571d; }
-.border-primary-800 { border-color: #8f4217; }
-.border-primary-900 { border-color: #6a2f11; }
+.border-primary-50 { border-color: #ECFEFF; }
+.border-primary-100 { border-color: #CFFAFE; }
+.border-primary-200 { border-color: #A5F3FC; }
+.border-primary-300 { border-color: #67E8F9; }
+.border-primary-400 { border-color: #22D3EE; }
+.border-primary-500 { border-color: #06B6D4; }
+.border-primary-600 { border-color: #0E7490; }
+.border-primary-700 { border-color: #0C5E75; }
+.border-primary-800 { border-color: #0A4A5C; }
+.border-primary-900 { border-color: #083744; }
 
-.text-secondary-50 { color: #e3f3e0; }  /* Lightest green */
-.text-secondary-100 { color: #bde6b2; }
-.text-secondary-200 { color: #92d985; }
-.text-secondary-300 { color: #6acb5a; }
-.text-secondary-400 { color: #48b93a; }
-.text-secondary-500 { color: #058900; }  /* Primary green */
-.text-secondary-600 { color: #047a00; }
-.text-secondary-700 { color: #036a00; }
-.text-secondary-800 { color: #025100; }
-.text-secondary-900 { color: #003600; }  /* Darkest green */
+/* Accent: Claude Orange — links, highlights, warm touches */
+.text-accent-50 { color: #FDF0EB; }
+.text-accent-100 { color: #FAD9CA; }
+.text-accent-200 { color: #F5C4AD; }
+.text-accent-300 { color: #F0AD8E; }
+.text-accent-400 { color: #E89070; }
+.text-accent-500 { color: #D97757; }
+.text-accent-600 { color: #C15F3C; }
+.text-accent-700 { color: #A84E32; }
+.text-accent-800 { color: #8B3E28; }
+.text-accent-900 { color: #6B2E1E; }
 
-.bg-secondary-50 { background-color: #e3f3e0; }
-.bg-secondary-100 { background-color: #bde6b2; }
-.bg-secondary-200 { background-color: #92d985; }
-.bg-secondary-300 { background-color: #6acb5a; }
-.bg-secondary-400 { background-color: #48b93a; }
-.bg-secondary-500 { background-color: #058900; }
-.bg-secondary-600 { background-color: #047a00; }
-.bg-secondary-700 { background-color: #036a00; }
-.bg-secondary-800 { background-color: #025100; }
-.bg-secondary-900 { background-color: #003600; }
-.bg-secondary-600:hover { background-color: #025100; }
+.bg-accent-50 { background-color: #FDF0EB; }
+.bg-accent-100 { background-color: #FAD9CA; }
+.bg-accent-200 { background-color: #F5C4AD; }
+.bg-accent-300 { background-color: #F0AD8E; }
+.bg-accent-400 { background-color: #E89070; }
+.bg-accent-500 { background-color: #D97757; }
+.bg-accent-500:hover { background-color: #A84E32; }
+.bg-accent-600 { background-color: #C15F3C; }
+.bg-accent-600:hover { background-color: #A84E32; }
+.bg-accent-700 { background-color: #A84E32; }
+.bg-accent-800 { background-color: #8B3E28; }
+.bg-accent-900 { background-color: #6B2E1E; }
+.bg-accent-light { background-color: #FDF0EB; }
 
-.border-secondary-50 { border-color: #e3f3e0; }
-.border-secondary-100 { border-color: #bde6b2; }
-.border-secondary-200 { border-color: #92d985; }
-.border-secondary-300 { border-color: #6acb5a; }
-.border-secondary-400 { border-color: #48b93a; }
-.border-secondary-500 { border-color: #058900; }
-.border-secondary-600 { border-color: #047a00; }
-.border-secondary-700 { border-color: #036a00; }
-.border-secondary-800 { border-color: #025100; }
-.border-secondary-900 { border-color: #003600; }
+.border-accent-500 { border-color: #D97757; }
+.border-accent-600 { border-color: #C15F3C; }
+
+/* Dark: Teal — footer, dark sections */
+.bg-dark-600 { background-color: #0F766E; }
+.bg-dark-700 { background-color: #115E59; }
+.bg-dark-800 { background-color: #134E4A; }
+.text-dark-600 { color: #0F766E; }
+
+/* Page background */
+.bg-page { background-color: #F8FAFC; }
 
 :root {
-	--accent: #2e2e2e;
-	--gray-light: 229, 233, 240;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	--accent: #0E7490;
+	--gray-light: 248, 250, 252;
+	--gray-gradient: rgba(var(--gray-light), 50%), #F8FAFC;
 }
 
 @font-face {
