@@ -11,6 +11,13 @@ export interface Build {
 
 export const builds: Build[] = [
   {
+    title: "Cowork Boilerplate",
+    description: "A folder-based workflow automation system for Claude Cowork. Define repeatable AI workflows once — manual pipelines with approval gates, scheduled tasks, multi-stage projects. Includes a YouTube content pipeline and daily community scout out of the box.",
+    techStack: ["Claude Cowork", "Claude Code", "MCP"],
+    githubUrl: "https://github.com/jitangupta/cowork-boilerplate",
+    status: "live"
+  },
+  {
     title: "File Safety Guard",
     description: "A plugin for Claude Code and Cowork that prevents accidental file deletion and overwrites. Adds automatic backups, dry-run planning, and activity logging — a safety layer for AI-assisted development.",
     techStack: ["Claude Code", "Cowork", "Plugin"],
