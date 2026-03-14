@@ -103,7 +103,48 @@ Each case study card should get a ONE-LINE AI bridge sentence appended below its
 
 The point is that someone scanning tags doesn't see "Claude Claude Claude" — they see a mix of specific tools and general concepts.
 
-### 5. About Page — Full Rewrite
+### 5. Homepage — Add "Community & Events" Section
+
+This is a NEW section on the homepage. Place it AFTER the "What I'm Building" / "Open Source & Tools" section and BEFORE the case studies section.
+
+**Purpose:** This section bridges the homepage identity (broad AI adoption) to the meetup page (Claude-specific). Without it, the meetup is an orphan page that contradicts the homepage. With it, the meetup becomes proof that Jitan goes deep on the tools he recommends.
+
+**Section title:** "Community"
+
+**Section subtitle:** "I teach in-person, not just on screen. Hands-on sessions where people build real things with AI."
+
+**Content — single featured event card:**
+
+```
+Claude at Work — Mumbai Meetup
+A hands-on session where developers use Claude Code and non-technical 
+professionals use Claude Cowork to build an MVP together, live. 
+Currently looking for sponsors and venue partners.
+
+CTA: "Learn more →" (links to /meetup/)
+```
+
+**Below the card, add a one-line editorial note styled as small/muted text:**
+"I teach AI adoption broadly. Claude is where I go deepest — so that's where the first meetup starts."
+
+This single sentence is the bridge. It resolves the tension between the vendor-neutral homepage and the Claude-branded meetup. It tells the Anthropic reader "this guy is a Claude advocate" and tells everyone else "he's not locked into one vendor." Both readings are honest.
+
+**Implementation:** Create a simple card component or section. One event for now, but structure the data so future events can be added (e.g., an array of event objects with title, description, link, status). The status field should support values like "upcoming", "looking-for-venue", "past" for future use.
+
+**Data model for event:**
+```
+{
+  title: "Claude at Work — Mumbai Meetup",
+  description: "A hands-on session where developers use Claude Code and non-technical professionals use Claude Cowork to build an MVP together, live.",
+  status: "looking-for-venue",  // upcoming | looking-for-venue | past
+  link: "/meetup/",
+  statusLabel: "Accepting sponsors & venue partners"
+}
+```
+
+---
+
+### 6. About Page — Full Rewrite
 
 The About page is the most broken part of the site. It still says "Migration Specialist & Full-Stack Engineer" and links to stale pages ("/migration-approach", "/enterprise-migration-consultation").
 
@@ -149,6 +190,8 @@ I'm a guide who transmits understanding so others can build their lives.
 I build with AI tools daily — Claude, Cursor, Copilot, open-source models. 
 I publish what works on YouTube (in Hinglish), ship open-source tools, 
 and run hands-on meetups in Mumbai where people build real things with AI.
+Claude is the tool I go deepest on — which is why my first meetup series 
+starts there — but I teach across the AI tooling landscape.
 
 I don't sell hype. I teach from practice.
 
@@ -173,7 +216,7 @@ I don't sell hype. I teach from practice.
 - Use the same layout/template as the current About page but with this new content
 - The photo can stay as-is
 
-### 6. Case Studies Page — Reframe the Header
+### 7. Case Studies Page — Reframe the Header
 
 **Current:**
 ```
@@ -192,7 +235,7 @@ approach AI adoption the way I do.
 
 **Also:** The case studies page currently uses the OLD nav (Migration Approach, Case Studies, Get a Free Strategy Call). It needs to use the NEW nav (YouTube, Builds, About, Contact) — same as the homepage. This is likely a layout/template mismatch in Astro.
 
-### 7. Nav Consistency Fix
+### 8. Nav Consistency Fix
 
 Two different navs exist across the site:
 - **Homepage, Builds:** YouTube, Builds, About, Contact (correct — new identity)
@@ -200,7 +243,7 @@ Two different navs exist across the site:
 
 **Fix:** Ensure ALL pages use the new nav. Remove any references to the old nav layout.
 
-### 8. Footer Consistency Fix
+### 9. Footer Consistency Fix
 
 Same issue as nav. The old footer has links to:
 - "Get a Free Strategy Call"
@@ -212,7 +255,7 @@ Same issue as nav. The old footer has links to:
 
 Ensure all pages use the new footer template.
 
-### 9. Sitewide Meta/SEO Update
+### 10. Sitewide Meta/SEO Update
 
 **Current page title (About):** "Jitan Gupta | Migration Specialist & Full-Stack Engineer | Legacy to Cloud"
 
@@ -230,13 +273,14 @@ Update `<title>` and `<meta description>` for:
 
 This is the recommended order for Claude Code to work through these changes:
 
-1. **Nav + Footer consistency** (items 7, 8) — fixes the broken experience first
-2. **About page rewrite** (item 5) — establishes the new identity narrative  
+1. **Nav + Footer consistency** (items 8, 9) — fixes the broken experience first
+2. **About page rewrite** (item 6) — establishes the new identity narrative  
 3. **Homepage hero rewrite** (item 1) — first impression change
-4. **Case studies bridge** (items 2, 6) — connects the two worlds
-5. **Builds section reframe** (item 4) — tag and title adjustments
-6. **Video section structure** (item 3) — data model addition
-7. **SEO/meta updates** (item 9) — final polish
+4. **Case studies bridge** (items 2, 7) — connects the two worlds
+5. **Community & Events section** (item 5) — bridges homepage to meetup page
+6. **Builds section reframe** (item 4) — tag and title adjustments
+7. **Video section structure** (item 3) — data model addition
+8. **SEO/meta updates** (item 10) — final polish
 
 ---
 

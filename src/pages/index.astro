@@ -232,6 +232,28 @@ const featuredBuilds = builds.slice(0, 3);
 			is:inline
 			src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"
 		></script>
+		<script is:inline>
+			(function () {
+				var obs = new IntersectionObserver(function (entries) {
+					entries.forEach(function (e) {
+						if (e.isIntersecting) {
+							e.target.classList.add('visible');
+							obs.unobserve(e.target);
+						}
+					});
+				}, { threshold: 0.12 });
+				function init() {
+					document.querySelectorAll('.fade-up, .fade-up-group').forEach(function (el) {
+						obs.observe(el);
+					});
+				}
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', init);
+				} else {
+					init();
+				}
+			})();
+		</script>
 		<Chatwoot />
 		<!-- Yandex.Metrika counter -->
 		{import.meta.env.MODE === "production" &&
