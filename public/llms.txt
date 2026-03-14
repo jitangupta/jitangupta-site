@@ -1,0 +1,52 @@
+# Jitan Gupta — AI Adoption Practitioner
+
+## Who I Am
+
+Senior Platform Engineer with 10+ years of enterprise software experience. I help teams and individuals adopt AI tools responsibly — practically, without hype, and in ways that stick in daily work.
+
+Based in Mumbai. Teaching globally through YouTube, open source, and hands-on meetups.
+
+## What I Focus On
+
+- **AI-Assisted Development:** How engineering teams can use AI tools without losing code quality or architectural control
+- **AI for Non-Technical Professionals:** Document automation, workflow optimization, and task management using AI — no coding required
+- **Responsible Adoption:** When to use AI, when not to, and how to evaluate tools without getting locked into vendor hype
+
+## Background
+
+- 12 years running a general store before entering tech (operations mindset)
+- 9+ years as a .NET developer and platform engineer: multi-tenant SaaS, Kubernetes migrations (400+ tenants), identity platforms (50K+ daily authentications), Azure cloud infrastructure
+- 5 startup attempts (2018–2022), one scaled to 30K monthly active users
+- Now: full-time on AI adoption education and open source
+
+## Key Differentiator
+
+Not a prompt influencer. A decade of production engineering — systems where downtime costs real money, shortcuts create incidents. That's the lens on AI adoption: not everything needs AI, and the things that do need it done carefully.
+
+## Content & Platforms
+
+- YouTube (@jitangupta) — tutorials in Hinglish (Hindi + English) on AI tools, Kubernetes, cloud engineering
+- GitHub (github.com/jitangupta) — open source tools: Cowork Boilerplate, File Safety Guard, Content Board
+- jitangupta.com — case studies, articles, builds showcase
+- Meetups — hands-on AI adoption workshops in Mumbai
+
+## Case Studies (Enterprise Engineering)
+
+- Zero-Downtime Migration to AKS for 400+ Tenants (22% cost reduction)
+- AI-Powered Release Orchestration for Multi-Tenant SaaS ($17K saved annually)
+- Legacy University Credit System modernized to cloud-native (30% revenue increase)
+- User Management migration from Microsoft Membership to Azure (zero downtime)
+
+## Open Source Projects
+
+- **Cowork Boilerplate** — folder-based AI workflow automation for Claude Cowork
+- **File Safety Guard** — plugin preventing accidental file deletion in AI-assisted development
+- **Content Board** — YouTube content management PWA
+
+## Contact
+
+- Email: hi@jitangupta.com
+- Site: https://jitangupta.com
+- YouTube: https://www.youtube.com/@jitangupta
+- LinkedIn: https://www.linkedin.com/in/jitangupta/
+- GitHub: https://github.com/jitangupta

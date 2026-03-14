@@ -54,3 +54,32 @@ const isProd = import.meta.env.MODE === "production";
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<!-- JSON-LD: Person schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jitan Gupta",
+  "url": "https://jitangupta.com",
+  "image": "https://jitangupta.com/jitan-bg.png",
+  "jobTitle": "Senior Platform Engineer & AI Adoption Practitioner",
+  "description": "Senior engineer with 10+ years of enterprise experience helping teams and individuals adopt AI tools responsibly. Based in Mumbai, teaching globally through YouTube, open source, and hands-on meetups.",
+  "knowsAbout": [
+    "AI adoption for engineering teams",
+    "AI tools for non-technical professionals",
+    "Responsible AI adoption",
+    "Claude Code",
+    "Kubernetes",
+    "Azure cloud architecture",
+    "Multi-tenant SaaS",
+    "Platform engineering",
+    ".NET development"
+  ],
+  "sameAs": [
+    "https://www.youtube.com/@jitangupta",
+    "https://www.linkedin.com/in/jitangupta/",
+    "https://github.com/jitangupta"
+  ]
+}
+</script>
+
