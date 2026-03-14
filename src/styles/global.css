@@ -171,3 +171,40 @@ h1 li, h2 li, h3 li {
 .text-md {
     font-size: 1rem;
 }
+
+/* ── Animations ─────────────────────────────────────────── */
+
+/* Hero entrance — CSS only, fires on load */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-fade {
+  opacity: 0;
+  animation: heroFadeUp 0.55s ease forwards;
+}
+.hero-fade-1 { animation-delay: 0.05s; }
+.hero-fade-2 { animation-delay: 0.2s;  }
+.hero-fade-3 { animation-delay: 0.35s; }
+
+/* Scroll-triggered fade-up — JS adds .visible via IntersectionObserver */
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered card grids — parent gets .fade-up-group, children stagger */
+.fade-up-group > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-up-group.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s;    }
+.fade-up-group.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.1s;  }
+.fade-up-group.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.2s;  }
+.fade-up-group.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.3s;  }

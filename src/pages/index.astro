@@ -37,14 +37,14 @@ const featuredBuilds = builds.slice(0, 3);
 					/>
 				</div>
 				<div class="mr-auto place-self-center lg:col-span-7">
-					<h1 class="max-w-2xl mb-4 text-4xl font-bold tracking-tight leading-tight xl:text-6xl">
+					<h1 class="hero-fade hero-fade-1 max-w-2xl mb-4 text-4xl font-bold tracking-tight leading-tight xl:text-6xl">
 						I Help Teams Adopt AI —<br />Responsibly, Practically,<br />and Without the Hype.
 					</h1>
-					<p class="max-w-2xl font-light text-gray-700 md:text-xl lg:text-2xl mb-6">
+					<p class="hero-fade hero-fade-2 max-w-2xl font-light text-gray-700 md:text-xl lg:text-2xl mb-6">
 						10+ years building enterprise systems. Now I teach professionals how to use AI tools
 						in their actual work — not toy demos, not vibes, just what works.
 					</p>
-					<div class="flex flex-wrap gap-3">
+					<div class="hero-fade hero-fade-3 flex flex-wrap gap-3">
 						<a
 							href="https://www.youtube.com/@jitangupta"
 							target="_blank"
@@ -68,15 +68,17 @@ const featuredBuilds = builds.slice(0, 3);
 		<!-- Latest from YouTube -->
 		<section class="bg-[#F8FAFC] py-10 px-6">
 			<div class="max-w-screen-xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Latest from YouTube</h2>
-				<p class="text-gray-600 mb-8">AI tools, engineering workflows, and lessons from building in production.</p>
-				<div class="grid gap-6 md:grid-cols-3">
+				<div class="fade-up">
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Latest from YouTube</h2>
+					<p class="text-gray-600 mb-8">AI tools, engineering workflows, and lessons from building in production.</p>
+				</div>
+				<div class="grid gap-6 md:grid-cols-3 fade-up-group">
 					{featuredVideos.map((video) => (
 						<a
 							href={video.youtubeUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-accent-500 transition-colors group"
+							class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:border-accent-500 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
 						>
 							<div class="h-48 bg-gray-100 overflow-hidden">
 								<img
@@ -107,10 +109,10 @@ const featuredBuilds = builds.slice(0, 3);
 		<!-- What I'm Building -->
 		<section class="bg-white py-10 px-6">
 			<div class="max-w-screen-xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Open Source & Tools</h2>
-				<div class="grid gap-6 md:grid-cols-2">
+				<h2 class="fade-up text-3xl md:text-4xl font-bold text-gray-800 mb-8">Open Source & Tools</h2>
+				<div class="grid gap-6 md:grid-cols-2 fade-up-group">
 					{featuredBuilds.map((build) => (
-						<div class="border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+						<div class="border border-gray-200 shadow-sm rounded-2xl p-6 hover:border-accent-500 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
 							<div class="flex items-start justify-between gap-3 mb-3">
 								<h3 class="text-lg font-bold text-gray-900">{build.title}</h3>
 								<span class={`shrink-0 text-xs font-semibold px-2 py-1 rounded-full ${
@@ -150,11 +152,13 @@ const featuredBuilds = builds.slice(0, 3);
 		<!-- Community & Events -->
 		<section class="bg-[#F8FAFC] py-10 px-6">
 			<div class="max-w-screen-xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Community</h2>
-				<p class="text-gray-600 mb-8">I teach in-person, not just on screen. Hands-on sessions where people build real things with AI.</p>
-				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div class="fade-up">
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Community</h2>
+					<p class="text-gray-600 mb-8">I teach in-person, not just on screen. Hands-on sessions where people build real things with AI.</p>
+				</div>
+				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 fade-up-group">
 					{events.map((event) => (
-						<div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors flex flex-col">
+						<div class="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 hover:border-accent-500 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
 							<div class="flex items-center justify-between mb-3">
 								<span class={`text-xs font-semibold px-3 py-1 rounded-full ${
 									event.status === 'upcoming'
@@ -181,18 +185,20 @@ const featuredBuilds = builds.slice(0, 3);
 		<!-- Case Studies -->
 		<section class="bg-white py-10 px-6 text-center">
 			<div class="max-w-screen-xl mx-auto rounded-2xl">
-				<h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-3">
-					The Engineering Behind the Teaching
-				</h2>
-				<p class="text-lg text-gray-600 mb-10">
-					Before I taught AI adoption, I spent 10 years building enterprise systems — multi-tenant migrations, identity platforms, deployment orchestration. That background is why I know when AI helps and when it doesn't.
-				</p>
-				<div class="grid md:grid-cols-3 gap-6">
+				<div class="fade-up">
+					<h2 class="text-3xl md:text-5xl font-bold text-gray-700 mb-3">
+						The Engineering Behind the Teaching
+					</h2>
+					<p class="text-lg text-gray-600 mb-10">
+						Before I taught AI adoption, I spent 10 years building enterprise systems — multi-tenant migrations, identity platforms, deployment orchestration. That background is why I know when AI helps and when it doesn't.
+					</p>
+				</div>
+				<div class="grid md:grid-cols-3 gap-6 fade-up-group">
 					{
 						caseStudies.map((caseStudy) =>
 							caseStudy.data.draft == true ? null : (
 								<a href={`/case-studies/${caseStudy.id}`}>
-									<div class="bg-white rounded-2xl border-3 border-gray-300 overflow-hidden transition-transform transform hover:scale-105">
+									<div class="bg-white rounded-2xl border-3 border-gray-300 shadow-sm overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
 										<img
 											src={caseStudy.data.heroImage}
 											alt={caseStudy.data.title}
