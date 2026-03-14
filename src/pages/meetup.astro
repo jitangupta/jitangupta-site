@@ -2,10 +2,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = "Claude at Work — Meetup by Jitan Gupta";
-const description = "A hands-on meetup exploring Claude AI for tech and non-tech professionals. Build an MVP together.";
+const title = "Claude at Work — Hands-on AI Meetup in Mumbai | Jitan Gupta";
+const description = "A hands-on Claude AI meetup in Mumbai for developers and non-technical professionals. Build a real MVP live. Sponsors and venue partners welcome.";
 
-const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20—%20Venue%20Interest";
+const SPONSOR_MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Mumbai%20%E2%80%94%20Sponsorship%20Interest&body=Hi%20Jitan%2C%0A%0AI%27m%20interested%20in%20sponsoring%20%2F%20supporting%20the%20Claude%20at%20Work%20meetup.%0A%0AOrganization%3A%20%0ARole%3A%20%0AHow%20I%27d%20like%20to%20help%3A%20%0A%0ALooking%20forward%20to%20discussing.";
+const VENUE_MAILTO = "mailto:hi@jitangupta.com?subject=Venue%20Offer%20%E2%80%94%20Claude%20at%20Work%20Mumbai&body=Hi%20Jitan%2C%0A%0AI%20can%20offer%20a%20venue%20for%20the%20Claude%20at%20Work%20meetup.%0A%0AVenue%20name%3A%20%0ALocation%3A%20%0ACapacity%3A%20%0AAvailable%20dates%3A%20%0AWi-Fi%20%2F%20Projector%3A%20%0A%0ALet%20me%20know%20if%20you%20need%20more%20details.";
 ---
 
 <Layout title={title} description={description}>
@@ -14,27 +15,27 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
   <section class="bg-[#F8FAFC] mx-2">
     <div class="bg-white max-w-screen-xl mx-auto px-6 py-14 rounded-b-2xl text-center">
       <span class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-5 tracking-wide uppercase">
-        Meetup Proposal
+        Mumbai — Accepting Sponsors & Venue Partners
       </span>
       <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-5 leading-tight">
         Claude at Work
       </h1>
       <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-        A hands-on meetup for tech and non-tech professionals to explore Claude AI — and build an MVP together, live.
+        A hands-on session where professionals — technical and non-technical — use Claude to solve a real problem, live. Not a product demo. A build session.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a
-          href={MAILTO}
+          href={SPONSOR_MAILTO}
           class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-accent-600 hover:bg-accent-700 rounded-lg transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          Get in Touch
+          Become a Sponsor →
         </a>
         <a
-          href="#about"
+          href="#venue"
           class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
         >
-          Learn More
+          Offer a Venue
         </a>
       </div>
     </div>
@@ -53,7 +54,7 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-2">Claude Code</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
-            For developers: use Claude as a pair-programming partner directly from the terminal. Ship features faster, debug smarter, automate workflows.
+            For developers: use Claude as a pair-programming partner directly from the terminal. Live coding on real projects — not toy demos.
           </p>
         </div>
         <!-- Card 2 -->
@@ -63,7 +64,7 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-2">Claude Cowork</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
-            For everyone else: automate file management, create documents, spreadsheets, and presentations — no coding needed.
+            For non-developers: automate documents, spreadsheets, presentations, and file management from your desktop. No coding. No setup.
           </p>
         </div>
         <!-- Card 3 -->
@@ -80,8 +81,59 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
     </div>
   </section>
 
+  <!-- Venue Requirements -->
+  <section id="venue" class="bg-white py-12 px-6">
+    <div class="max-w-screen-xl mx-auto">
+      <p class="text-xs font-semibold text-primary-600 uppercase tracking-widest mb-2">What we need</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Venue Requirements</h2>
+      <p class="text-gray-600 mb-8 text-lg">People will be working on laptops, forming teams, and demoing what they built. The space needs to support that.</p>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Seats -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">20–50 seats</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Flexible seating — classroom, boardroom, or open floor. Teams of 3–5 need to cluster together.
+          </p>
+        </div>
+        <!-- Wi-Fi -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-accent-100 text-accent-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Reliable Wi-Fi</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Everyone will be running Claude live. Bandwidth matters more than speed.
+          </p>
+        </div>
+        <!-- Projector -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="3" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Projector / Screen</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            For live demos in Part 1 and team presentations in Part 2.
+          </p>
+        </div>
+        <!-- Power -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-accent-100 text-accent-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M12 2v4"/><path d="M9 6h6"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Power access</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Charging stations or extension boards. Laptops drain fast during AI-heavy sessions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Meetup Format -->
-  <section class="bg-white py-12 px-6">
+  <section class="bg-[#F8FAFC] py-12 px-6">
     <div class="max-w-screen-xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">How the Session Runs</h2>
       <div class="grid gap-6 md:grid-cols-2 mb-10">
@@ -139,21 +191,64 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
 
       <!-- Stats Row -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-[#F8FAFC] rounded-2xl p-5 text-center border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 text-center border border-gray-100">
           <p class="text-3xl font-bold text-primary-600 mb-1">1–2h</p>
           <p class="text-sm text-gray-600">Session length</p>
         </div>
-        <div class="bg-[#F8FAFC] rounded-2xl p-5 text-center border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 text-center border border-gray-100">
           <p class="text-3xl font-bold text-primary-600 mb-1">20–50</p>
           <p class="text-sm text-gray-600">Ideal attendees</p>
         </div>
-        <div class="bg-[#F8FAFC] rounded-2xl p-5 text-center border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 text-center border border-gray-100">
           <p class="text-3xl font-bold text-primary-600 mb-1">50/50</p>
           <p class="text-sm text-gray-600">Tech / non-tech mix</p>
         </div>
-        <div class="bg-[#F8FAFC] rounded-2xl p-5 text-center border border-gray-100">
+        <div class="bg-white rounded-2xl p-5 text-center border border-gray-100">
           <p class="text-3xl font-bold text-accent-500 mb-1">1 MVP</p>
           <p class="text-sm text-gray-600">Built live</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Support This -->
+  <section class="bg-white py-12 px-6">
+    <div class="max-w-screen-xl mx-auto">
+      <p class="text-xs font-semibold text-primary-600 uppercase tracking-widest mb-2">For partners & sponsors</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Why Support This</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <!-- AI Companies -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2v4h4"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">For AI Companies</h3>
+          <ul class="space-y-3 text-gray-600 text-sm leading-relaxed">
+            <li>Get your tools in the hands of 20–50 professionals who will use them at work the next day. This isn't a keynote audience — these are practitioners who build.</li>
+            <li class="pt-2 border-t border-gray-100">Attendees leave with real projects built on your platform. That's adoption, not awareness.</li>
+          </ul>
+        </div>
+        <!-- Corporates -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-accent-100 text-accent-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/><path d="M12 14h.01"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">For Corporates</h3>
+          <ul class="space-y-3 text-gray-600 text-sm leading-relaxed">
+            <li>Give your team hands-on AI skills in a structured, low-risk setting. Mixed skill levels welcome — developers and non-technical staff work side by side.</li>
+            <li class="pt-2 border-t border-gray-100">Your employees build something real in 2 hours. Better than any training slide deck.</li>
+          </ul>
+        </div>
+        <!-- Venue Partners -->
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:border-accent-500 transition-colors">
+          <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-xl flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">For Venue Partners</h3>
+          <ul class="space-y-3 text-gray-600 text-sm leading-relaxed">
+            <li>20–50 tech professionals in your space. The event gets documented and shared on YouTube and LinkedIn — your venue gets credited.</li>
+            <li class="pt-2 border-t border-gray-100">You provide the space. I handle everything else — promotion, logistics, content, follow-up. Zero cost to you.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -173,7 +268,7 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
           <h3 class="text-2xl font-bold text-gray-900 mb-1">Jitan Gupta</h3>
           <p class="text-primary-600 font-medium mb-4">AI Adoption Practitioner — helping teams and individuals use AI responsibly, practically, and without the hype</p>
           <p class="text-gray-700 leading-relaxed mb-6">
-            I've spent the last year embedding Claude into real workflows — mine and others'. Not as a party trick, but as a daily tool that changes how you work. I teach both developers and non-technical professionals how to adopt AI in a way that's thoughtful, sustainable, and actually useful on the job. Everything I share comes from hands-on experimentation — not theory.
+            10+ years building enterprise software — multi-tenant Kubernetes migrations, cloud infrastructure, identity platforms serving 50K+ daily authentications. The last year spent embedding Claude into real daily workflows and teaching others to do the same. I work with developers and non-technical professionals, and everything I teach comes from hands-on practice — not slides.
           </p>
           <div class="flex flex-wrap gap-3">
             <a href="https://jitangupta.com/" target="_blank" rel="noopener noreferrer"
@@ -214,6 +309,32 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
             <div class="w-px flex-1 bg-gray-200 mt-2"></div>
           </div>
           <div class="pb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Cloud & SaaS at Scale</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              10+ years modernizing legacy systems, designing Azure cloud architectures, and leading platform engineering for enterprise SaaS products.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-accent-500 shrink-0 mt-1.5"></div>
+            <div class="w-px flex-1 bg-gray-200 mt-2"></div>
+          </div>
+          <div class="pb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">YouTube — AI & Engineering Tutorials</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Teaching Claude workflows, cloud engineering, and AI-assisted development to a growing audience. Hinglish content for the Indian tech community.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="w-3 h-3 rounded-full bg-accent-500 shrink-0 mt-1.5"></div>
+            <div class="w-px flex-1 bg-gray-200 mt-2"></div>
+          </div>
+          <div class="pb-8">
             <h3 class="text-lg font-bold text-gray-900 mb-1">File Safety Guard — Claude Plugin</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
               Built and published a plugin for Claude Code and Cowork that prevents accidental file deletion and overwrites. Includes auto-backups, activity logging, and dry-run planning.
@@ -224,37 +345,11 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
         <div class="flex gap-5">
           <div class="flex flex-col items-center">
             <div class="w-3 h-3 rounded-full bg-accent-500 shrink-0 mt-1.5"></div>
-            <div class="w-px flex-1 bg-gray-200 mt-2"></div>
           </div>
-          <div class="pb-8">
+          <div>
             <h3 class="text-lg font-bold text-gray-900 mb-1">40+ Open Source Repositories</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
               Active GitHub contributor across JavaScript, TypeScript, Dart, and more. Projects span form validation libraries, calendar tools, architecture templates, and developer utilities.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center">
-            <div class="w-3 h-3 rounded-full bg-accent-500 shrink-0 mt-1.5"></div>
-            <div class="w-px flex-1 bg-gray-200 mt-2"></div>
-          </div>
-          <div class="pb-8">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">YouTube Content Creator</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Sharing technical knowledge and tutorials covering development workflows, cloud engineering, and AI tools.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center">
-            <div class="w-3 h-3 rounded-full bg-accent-500 shrink-0 mt-1.5"></div>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Cloud & SaaS at Scale</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Professional experience modernizing legacy systems, designing Azure cloud architectures, and building AI-powered tools for enterprise SaaS platforms.
             </p>
           </div>
         </div>
@@ -267,23 +362,30 @@ const MAILTO = "mailto:hi@jitangupta.com?subject=Claude%20at%20Work%20Meetup%20�
   <section class="bg-[#F8FAFC] py-12 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let's make this happen</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let's Make This Happen</h2>
         <p class="text-gray-600 text-lg max-w-xl mx-auto mb-8">
-          Looking for a venue that can host 20–50 people with Wi-Fi and a projector. Flexible on dates and format.
+          Looking for sponsors, venue partners, or companies who want to upskill their teams with hands-on AI training. Flexible on dates, format, and structure.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <a
-            href={MAILTO}
+            href={SPONSOR_MAILTO}
             class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-accent-600 hover:bg-accent-700 rounded-lg transition"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Become a Sponsor →
+          </a>
+          <a
+            href={VENUE_MAILTO}
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             Offer a Venue
           </a>
           <a
             href="https://www.linkedin.com/in/jitangupta/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 justify-center px-6 py-3 text-base font-medium text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+            class="inline-flex items-center gap-2 justify-center px-6 py-3 text-base font-medium text-gray-600 hover:text-gray-900 transition"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             Connect on LinkedIn
