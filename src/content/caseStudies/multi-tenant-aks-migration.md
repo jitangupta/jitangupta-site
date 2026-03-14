@@ -18,6 +18,7 @@ author: "Jitan Gupta"
 robots: "index, follow"
 ogType: "article"
 canonicalUrl: "https://jitangupta.com/case-studies/multi-tenant-aks-migration/"
+aiBridge: "Today I'd use AI to automate the tenant-by-tenant migration validation. Back then, we did it manually."
 ---
 
 ## Executive Summary

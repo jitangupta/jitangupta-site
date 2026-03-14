@@ -23,6 +23,7 @@ stats:
   - percentage: "30%"
     description: "Revenue increased. With ongoing promotional campaigns, revenue increased further."
 draft: false
+aiBridge: "Legacy modernization at its messiest. The kind of system complexity where AI-generated code breaks on day one if you don't understand the domain."
 ---
 [comment]:<> (Jitan’s leadership was instrumental in turning around our legacy system. His structured approach—starting with thorough documentation and ending with a fully modern cloud-native platform—helped us deliver better experiences for students, evaluators, and administrators.)
 

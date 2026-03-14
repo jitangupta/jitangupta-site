@@ -18,6 +18,7 @@ author: "Jitan Gupta"
 robots: "index, follow"
 ogType: "article"
 canonicalUrl: "https://jitangupta.com/case-studies/probabilistic-deployment-orchestration/"
+aiBridge: "This was AI in production before the hype cycle. Probabilistic models making real deployment decisions."
 ---
 
 ## The $50K Weekend: When Force Upgrades Go Wrong

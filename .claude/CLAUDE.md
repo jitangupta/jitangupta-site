@@ -9,7 +9,8 @@ The site is a **personal brand hub** — YouTube content, open source projects, 
 **Positioning shift (complete):**
 - ~~"Enterprise Migration Expert" (consulting)~~ → DELETED
 - ~~"Cloud & AI Guide" (teacher-only)~~ → SUPERSEDED
-- **Current: "Builder & Teacher"** — someone who builds with AI and teaches what he learns
+- ~~"Builder & Teacher"~~ → SUPERSEDED
+- **Current: "AI Adoption Practitioner"** — Senior engineer who helps teams and individuals adopt AI tools responsibly. The enterprise engineering background is the credibility; the AI practice is the proof; teaching is the channel.
 
 ---
 

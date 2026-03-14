@@ -51,6 +51,7 @@ const caseStudies = defineCollection({
             percentage: z.string(),
             description: z.string(),
         })).optional(),
+        aiBridge: z.string().optional(),
     }),
 });
 

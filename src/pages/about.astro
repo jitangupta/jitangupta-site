@@ -1,65 +1,88 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const title = "About Jitan Gupta — From General Store to Platform Engineer to Teacher";
-const description = "12 years running a store, 5 startups, 10+ years engineering. Now building with AI and teaching engineers through YouTube and open source.";
+const title = "About Jitan Gupta — Engineer, Builder, AI Adoption Teacher";
+const description = "Senior Platform Engineer with 10+ years in enterprise software. I teach teams and individuals how to adopt AI tools — practically, responsibly, and in ways that actually stick.";
 ---
 <Layout title={title} description={description}>
 	<section class="bg-[#F8FAFC] mx-2">
 		<div class="bg-white max-w-screen-xl mx-auto px-6 py-12 rounded-b-2xl">
 
-			<!-- The Story -->
+			<!-- The Short Version -->
 			<div class="flex flex-col md:flex-row items-center md:space-x-8">
 				<img src="/jitan-bg.png" alt="Jitan Gupta" class="h-[280px] md:h-[380px]">
 				<div class="mt-6 mb-6 md:mt-0">
 					<h1 class="text-3xl font-bold text-gray-900">Hey, I'm Jitan 👋</h1>
 					<p class="mt-4 text-gray-700">
-						I ran a general store for 12 years before entering tech. Tried 5 startups between 2018–2022 — each one taught me something, none of them worked out.
+						I'm a Senior Platform Engineer with 10+ years in enterprise software. I now teach teams and individuals how to adopt AI tools — practically, responsibly, and in ways that actually stick in daily work.
 					</p>
 					<p class="mt-4 text-gray-700">
-						Then I realised: I wasn't meant to build startups. I was meant to help others build.
-					</p>
-					<p class="mt-4 text-gray-700">
-						Now I'm a Senior Platform Engineer with 10+ years of experience, and I spend my time building with AI and teaching what I learn.
+						Based in Mumbai. Teaching globally through YouTube, meetups, and open source.
 					</p>
 				</div>
 			</div>
 
 			<div class="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent my-8"></div>
 
-			<!-- What I've Built -->
+			<!-- The Long Version -->
 			<div class="max-w-4xl mx-auto p-6">
-				<h2 class="text-2xl font-bold text-gray-900 mb-4">What I've Built</h2>
-				<ul class="space-y-3 text-lg text-gray-700">
-					<li class="flex items-start">
-						<span class="text-accent-500 mr-3 text-xl font-bold">→</span>
-						<span>Architected a <span class="font-semibold">14-microservice AKS migration</span> for 400+ tenants with zero-downtime strategy</span>
-					</li>
-					<li class="flex items-start">
-						<span class="text-accent-500 mr-3 text-xl font-bold">→</span>
-						<span>Built <span class="font-semibold">AI-powered deployment orchestration</span> using RAG, Azure AI Foundry, and vector databases</span>
-					</li>
-					<li class="flex items-start">
-						<span class="text-accent-500 mr-3 text-xl font-bold">→</span>
-						<span>Led <span class="font-semibold">identity platform migration</span> serving 50K+ daily authentications with 30% latency improvement</span>
-					</li>
-					<li class="flex items-start">
-						<span class="text-accent-500 mr-3 text-xl font-bold">→</span>
-						<span>Delivered <span class="font-semibold">monolith-to-microservices</span> transformations improving deployment frequency by 300%</span>
-					</li>
-				</ul>
+				<h2 class="text-2xl font-bold text-gray-900 mb-6">The Long Version</h2>
+
+				<div class="space-y-8">
+					<div>
+						<h3 class="text-xl font-semibold text-gray-800 mb-2">The General Store (12 years before tech)</h3>
+						<p class="text-gray-700">
+							Before I wrote a line of code, I ran a general store for 12 years. That's where I learned operations, customer problems, and the difference between what people say they need and what actually helps them.
+						</p>
+					</div>
+
+					<div>
+						<h3 class="text-xl font-semibold text-gray-800 mb-2">The Engineering Years (2015–2024)</h3>
+						<p class="text-gray-700">
+							I spent 9+ years as a .NET developer and then platform engineer — building multi-tenant SaaS, leading Kubernetes migrations for 400+ tenants, designing identity platforms handling 50K daily authentications, and architecting cloud infrastructure on Azure.
+						</p>
+						<p class="mt-3 text-gray-700">
+							I worked on the kind of systems where downtime costs real money and shortcuts create production incidents. That's the lens I bring to AI adoption — not everything needs AI, and the things that do need it done carefully.
+						</p>
+					</div>
+
+					<div>
+						<h3 class="text-xl font-semibold text-gray-800 mb-2">The Startup Attempts (2018–2022)</h3>
+						<p class="text-gray-700">
+							I tried to build 5 startups in parallel with my engineering career. One scaled a SaaS product to 30K monthly active users before shutting down. The others taught me what most AI hype skips over — distribution, sustainability, and knowing when to stop.
+						</p>
+					</div>
+
+					<div>
+						<h3 class="text-xl font-semibold text-gray-800 mb-2">Now: Teaching AI Adoption</h3>
+						<p class="text-gray-700">
+							I build with AI tools daily — Claude, Cursor, Copilot, open-source models. I publish what works on YouTube (in Hinglish 🇮🇳), ship open-source tools, and run hands-on meetups in Mumbai where people build real things with AI.
+						</p>
+						<p class="mt-3 text-gray-700 font-medium">
+							I don't sell hype. I teach from practice.
+						</p>
+					</div>
+				</div>
 			</div>
 
 			<div class="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent my-8"></div>
 
-			<!-- What I Do Now -->
+			<!-- What I Focus On -->
 			<div class="max-w-4xl mx-auto p-6">
-				<h2 class="text-2xl font-bold text-gray-900 mb-4">What I Do Now</h2>
-				<p class="text-lg text-gray-700 mb-4">
-					I create YouTube tutorials in Hinglish 🇮🇳 for Indian engineers, build open source tools, write technical articles, and share real patterns from real production systems.
-				</p>
-				<p class="text-lg text-gray-700">
-					Everything I teach comes from what I've built — not from what I've read.
-				</p>
+				<h2 class="text-2xl font-bold text-gray-900 mb-4">What I Focus On</h2>
+				<ul class="space-y-4 text-gray-700">
+					<li class="flex items-start">
+						<span class="text-accent-500 mr-3 text-xl font-bold shrink-0">→</span>
+						<span><span class="font-semibold">AI-Assisted Development:</span> How engineering teams can use AI tools without losing code quality or architectural control</span>
+					</li>
+					<li class="flex items-start">
+						<span class="text-accent-500 mr-3 text-xl font-bold shrink-0">→</span>
+						<span><span class="font-semibold">AI for Non-Technical Professionals:</span> Document automation, workflow optimization, and task management using AI — no coding required</span>
+					</li>
+					<li class="flex items-start">
+						<span class="text-accent-500 mr-3 text-xl font-bold shrink-0">→</span>
+						<span><span class="font-semibold">Responsible Adoption:</span> When to use AI, when not to, and how to evaluate tools without getting locked into vendor hype</span>
+					</li>
+				</ul>
 			</div>
 
 			<div class="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent my-8"></div>

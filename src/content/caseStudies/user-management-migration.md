@@ -23,6 +23,7 @@ stats:
   - percentage: "24/7"
     description: "Flexible architecture supporting future growth"
 draft: false
+aiBridge: "Identity systems have zero margin for error. AI accelerates the boring parts — but a human must own the critical path."
 ---
 ## Seamless User Management Migration: Future-Proofing with Azure
 ### Executive Summary

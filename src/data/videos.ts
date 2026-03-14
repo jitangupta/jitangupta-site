@@ -4,6 +4,7 @@ export interface Video {
   youtubeUrl: string;
   thumbnail: string;
   publishedDate: string;
+  category?: 'claude-code' | 'ai-tools' | 'engineering' | 'career';
 }
 
 export const featuredVideos: Video[] = [
@@ -12,21 +13,24 @@ export const featuredVideos: Video[] = [
     description: "Stop one-shot prompting. I engineered Claude Code with CLAUDE.md, custom commands, skills, and task phases — then let it build a full React + Firebase app from structured context.",
     youtubeUrl: "https://youtu.be/7JVA1LjRNAw",
     thumbnail: "https://i.ytimg.com/vi/7JVA1LjRNAw/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBcIfNYVZ6gRu3EJd69pGUTtKu6bw",
-    publishedDate: "2026-02-27"
+    publishedDate: "2026-02-27",
+    category: "claude-code"
   },
   {
     title: "Claude Cowork: This AI Works On Your Computer — Not Just Chat",
     description: "Live demo: Claude Cowork running 4 real tasks on my laptop — browser automation, PPT creation, YouTube data analysis, and parallel multi-tasking. Not a simulation.",
     youtubeUrl: "https://youtu.be/xRHJZLep6tY",
     thumbnail: "https://i.ytimg.com/vi/xRHJZLep6tY/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCZmSW67uK1XFWv2pmNKCqVASVOAQ",
-    publishedDate: "2026-02-19"
+    publishedDate: "2026-02-19",
+    category: "claude-code"
   },
   {
     title: "3 Powerful Claude Code Features Every Developer Should Use (Hindi)",
     description: "3 features professionals use daily: /init for persistent memory, Plan Mode for think-before-code, and --add-dir for multi-project context. Live demo: 53 unit tests written automatically on a real .NET SaaS app.",
     youtubeUrl: "https://youtu.be/hkYEk-JqafQ",
     thumbnail: "https://i.ytimg.com/vi/hkYEk-JqafQ/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBWxJDJzQhpyEDuz9YLpiZ4LtLkYg",
-    publishedDate: "2026-02-12"
+    publishedDate: "2026-02-12",
+    category: "claude-code"
   },
   // {
   //   title: "Fluent Bit Failed on Half My AKS Cluster — Here's What I Did",
