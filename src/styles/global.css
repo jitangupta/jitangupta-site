@@ -1,82 +1,83 @@
 @import "tailwindcss";
 
-/* Primary: Cerulean Blue — buttons, CTAs, nav active */
-.text-primary-50 { color: #ECFEFF; }
-.text-primary-100 { color: #CFFAFE; }
-.text-primary-200 { color: #A5F3FC; }
-.text-primary-300 { color: #67E8F9; }
-.text-primary-400 { color: #22D3EE; }
-.text-primary-500 { color: #06B6D4; }
-.text-primary-600 { color: #0E7490; }
-.text-primary-700 { color: #0C5E75; }
-.text-primary-800 { color: #0A4A5C; }
-.text-primary-900 { color: #083744; }
+/* Primary: Sage Green — buttons, CTAs, nav active */
+.text-primary-50 { color: #f0f5f1; }
+.text-primary-100 { color: #d9e6dc; }
+.text-primary-200 { color: #b3ccb9; }
+.text-primary-300 { color: #8db396; }
+.text-primary-400 { color: #6b9e76; }
+.text-primary-500 { color: #588B67; }
+.text-primary-600 { color: #477056; }
+.text-primary-700 { color: #365544; }
+.text-primary-800 { color: #253A33; }
+.text-primary-900 { color: #141F22; }
 
-.bg-primary-50 { background-color: #ECFEFF; }
-.bg-primary-100 { background-color: #CFFAFE; }
-.bg-primary-200 { background-color: #A5F3FC; }
-.bg-primary-300 { background-color: #67E8F9; }
-.bg-primary-400 { background-color: #22D3EE; }
-.bg-primary-500 { background-color: #06B6D4; }
-.bg-primary-500:hover { background-color: #0C5E75; }
-.bg-primary-600 { background-color: #0E7490; }
-.bg-primary-600:hover { background-color: #0C5E75; }
-.bg-primary-700 { background-color: #0C5E75; }
-.bg-primary-800 { background-color: #0A4A5C; }
-.bg-primary-900 { background-color: #083744; }
-.bg-primary-light { background-color: #ECFEFF; }
+.bg-primary-50 { background-color: #f0f5f1; }
+.bg-primary-100 { background-color: #d9e6dc; }
+.bg-primary-200 { background-color: #b3ccb9; }
+.bg-primary-300 { background-color: #8db396; }
+.bg-primary-400 { background-color: #6b9e76; }
+.bg-primary-500 { background-color: #588B67; }
+.bg-primary-500:hover { background-color: #365544; }
+.bg-primary-600 { background-color: #477056; }
+.bg-primary-600:hover { background-color: #365544; }
+.bg-primary-700 { background-color: #365544; }
+.bg-primary-800 { background-color: #253A33; }
+.bg-primary-900 { background-color: #141F22; }
+.bg-primary-light { background-color: #f0f5f1; }
 
-.border-primary-50 { border-color: #ECFEFF; }
-.border-primary-100 { border-color: #CFFAFE; }
-.border-primary-200 { border-color: #A5F3FC; }
-.border-primary-300 { border-color: #67E8F9; }
-.border-primary-400 { border-color: #22D3EE; }
-.border-primary-500 { border-color: #06B6D4; }
-.border-primary-600 { border-color: #0E7490; }
-.border-primary-700 { border-color: #0C5E75; }
-.border-primary-800 { border-color: #0A4A5C; }
-.border-primary-900 { border-color: #083744; }
+.border-primary-50 { border-color: #f0f5f1; }
+.border-primary-100 { border-color: #d9e6dc; }
+.border-primary-200 { border-color: #b3ccb9; }
+.border-primary-300 { border-color: #8db396; }
+.border-primary-400 { border-color: #6b9e76; }
+.border-primary-500 { border-color: #588B67; }
+.border-primary-600 { border-color: #477056; }
+.border-primary-700 { border-color: #365544; }
+.border-primary-800 { border-color: #253A33; }
+.border-primary-900 { border-color: #141F22; }
 
-/* Accent: Claude Orange — links, highlights, warm touches */
-.text-accent-50 { color: #FDF0EB; }
-.text-accent-100 { color: #FAD9CA; }
-.text-accent-200 { color: #F5C4AD; }
-.text-accent-300 { color: #F0AD8E; }
-.text-accent-400 { color: #E89070; }
-.text-accent-500 { color: #D97757; }
-.text-accent-600 { color: #C15F3C; }
-.text-accent-700 { color: #A84E32; }
-.text-accent-800 { color: #8B3E28; }
-.text-accent-900 { color: #6B2E1E; }
+/* Accent: mapped to Sage Green — same palette, no orange */
+.text-accent-50 { color: #f0f5f1; }
+.text-accent-100 { color: #d9e6dc; }
+.text-accent-200 { color: #b3ccb9; }
+.text-accent-300 { color: #8db396; }
+.text-accent-400 { color: #6b9e76; }
+.text-accent-500 { color: #588B67; }
+.text-accent-600 { color: #477056; }
+.text-accent-700 { color: #365544; }
+.text-accent-800 { color: #253A33; }
+.text-accent-900 { color: #141F22; }
 
-.bg-accent-50 { background-color: #FDF0EB; }
-.bg-accent-100 { background-color: #FAD9CA; }
-.bg-accent-200 { background-color: #F5C4AD; }
-.bg-accent-300 { background-color: #F0AD8E; }
-.bg-accent-400 { background-color: #E89070; }
-.bg-accent-500 { background-color: #D97757; }
-.bg-accent-500:hover { background-color: #A84E32; }
-.bg-accent-600 { background-color: #C15F3C; }
-.bg-accent-600:hover { background-color: #A84E32; }
-.bg-accent-700 { background-color: #A84E32; }
-.bg-accent-800 { background-color: #8B3E28; }
-.bg-accent-900 { background-color: #6B2E1E; }
-.bg-accent-light { background-color: #FDF0EB; }
+.bg-accent-50 { background-color: #f0f5f1; }
+.bg-accent-100 { background-color: #d9e6dc; }
+.bg-accent-200 { background-color: #b3ccb9; }
+.bg-accent-300 { background-color: #8db396; }
+.bg-accent-400 { background-color: #6b9e76; }
+.bg-accent-500 { background-color: #588B67; }
+.bg-accent-500:hover { background-color: #365544; }
+.bg-accent-600 { background-color: #477056; }
+.bg-accent-600:hover { background-color: #365544; }
+.bg-accent-700 { background-color: #365544; }
+.bg-accent-800 { background-color: #253A33; }
+.bg-accent-900 { background-color: #141F22; }
+.bg-accent-light { background-color: #f0f5f1; }
 
-.border-accent-500 { border-color: #D97757; }
-.border-accent-600 { border-color: #C15F3C; }
+.border-accent-400 { border-color: #6b9e76; }
+.border-accent-500 { border-color: #588B67; }
+.border-accent-600 { border-color: #477056; }
 
-/* Dark: Teal — footer, dark sections */
-.bg-dark-600 { background-color: #0F766E; }
-.bg-dark-700 { background-color: #115E59; }
-.bg-dark-800 { background-color: #134E4A; }
-.text-dark-600 { color: #0F766E; }
+/* Dark: deep sage — footer, dark sections */
+.bg-dark-600 { background-color: #365544; }
+.bg-dark-700 { background-color: #253A33; }
+.bg-dark-800 { background-color: #141F22; }
+.text-dark-600 { color: #365544; }
 
 /* Page background */
 .bg-page { background-color: #F8FAFC; }
 
 :root {
-	--accent: #0E7490;
+	--accent: #477056;
 	--gray-light: 248, 250, 252;
 	--gray-gradient: rgba(var(--gray-light), 50%), #F8FAFC;
 }
