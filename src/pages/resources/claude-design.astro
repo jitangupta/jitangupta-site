@@ -1,0 +1,241 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Build a Landing Page in 20 Minutes with Claude Design — Jitan Gupta";
+const description = "No CSS, no Tailwind, no designer. The exact 3-step process to ship a landing page using Claude Design, motionside.ai, and Google Labs. As seen on YouTube Shorts.";
+
+const steps = [
+  {
+    number: "01",
+    label: "Step 1",
+    heading: "Pick a reference template",
+    body: "Go to motionside.ai — a library of templates built specifically to be recreated with AI. Browse the free options, find a style that matches your project's vibe (dark minimal, clean SaaS, etc.), and copy the full prompt that comes with it. That prompt is the blueprint Claude Design uses to build your site.",
+    items: [
+      "Browse motionside.ai — both free and paid templates available",
+      "Pick a style that matches the vibe you want",
+      "Copy the full prompt — this is what you paste into Claude Design",
+    ],
+    ctaLabel: "Open motionside.ai",
+    ctaUrl: "https://motionside.ai",
+  },
+  {
+    number: "02",
+    label: "Step 2",
+    heading: "Build the site in Claude Design",
+    body: "Open claude.ai/design and create a new project. Paste the template prompt, then replace every placeholder with your real content — headlines, feature descriptions, CTA copy. The more specific you are, the better the output. Claude renders a complete, clickable HTML page in one shot. Not a mockup.",
+    items: [
+      "Open claude.ai/design → new project",
+      "Paste the template prompt from motionside.ai",
+      "Replace all placeholders with your real product content",
+      "Claude renders a full clickable page — not a static image",
+    ],
+    ctaLabel: "Open Claude Design",
+    ctaUrl: "https://claude.ai/design",
+  },
+  {
+    number: "03",
+    label: "Step 3",
+    heading: "Animate the hero and ship",
+    body: "Go to Google Labs (ImageFX or Nano) and generate 2 reference images that match your hero's look. Animate them using the tool, download the video. Back in Claude Design, replace the hero background with your video and prompt Claude to finish the rest of the page in the same style. Export the code, deploy with Claude Code.",
+    items: [
+      "Google Labs → generate 2 hero reference images",
+      "Animate and download the video",
+      "Back in Claude Design — replace hero background with your video",
+      "Prompt: 'Finish the rest of the page maintaining this style'",
+      "Export code → deploy with Claude Code",
+    ],
+    ctaLabel: "Open Google Labs",
+    ctaUrl: "https://labs.google",
+  },
+];
+
+const tools = [
+  {
+    name: "Claude Design",
+    description: "Builds the full site from a prompt",
+    url: "https://claude.ai/design",
+  },
+  {
+    name: "motionside.ai",
+    description: "Free template prompts to start from",
+    url: "https://motionside.ai",
+  },
+  {
+    name: "Google Labs / ImageFX",
+    description: "Generate and animate hero images",
+    url: "https://labs.google",
+  },
+  {
+    name: "Claude Code",
+    description: "Deploy to production in minutes",
+    url: "https://claude.ai/code",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+
+  <!-- Hero -->
+  <section class="bg-[#F8FAFC] mx-2">
+    <div class="bg-white max-w-screen-xl mx-auto px-8 py-14 rounded-b-2xl relative overflow-hidden">
+      <div class="dot-grid" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-2xl">
+        <p class="section-label mb-4 hero-fade hero-fade-1">As seen on YouTube Shorts</p>
+        <h1 class="hero-fade hero-fade-2 text-4xl md:text-5xl xl:text-6xl font-bold mb-5">
+          Build a Landing Page<br />in 20 Minutes
+        </h1>
+        <p class="hero-fade hero-fade-3 text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+          No CSS. No Tailwind. No designer.<br />
+          The exact 3-step process I used to ship a real page from scratch — as a backend engineer with zero frontend experience.
+        </p>
+        <div class="hero-fade hero-fade-3 flex flex-wrap gap-3">
+          <a
+            href="https://www.youtube.com/@jitangupta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+            Watch the Short
+          </a>
+          <a
+            href="https://claude.ai/design"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition"
+          >
+            Try Claude Design
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you need -->
+  <section class="bg-[#F8FAFC] py-12 px-6">
+    <div class="max-w-screen-xl mx-auto fade-up">
+      <div class="bg-primary-50 border border-primary-100 rounded-xl p-6 md:p-8 max-w-2xl">
+        <p class="section-label mb-4">Before you start</p>
+        <h2 class="text-lg font-bold text-gray-900 mb-5">What you need</h2>
+        <ul class="space-y-3">
+          {[
+            "Claude Pro, Max, or Team subscription (Claude Design is in research preview)",
+            "Your product content ready — headline, 3–4 features, one CTA",
+            "20 minutes",
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 shrink-0 text-primary-600" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-gray-700 text-sm leading-relaxed">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="bg-white py-12 px-6">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="fade-up mb-10">
+        <p class="section-label mb-3">The process</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">3 steps to a live page</h2>
+      </div>
+
+      <div class="space-y-5 fade-up-group">
+        {steps.map((step) => (
+          <div class="bg-white border border-gray-200 rounded-xl p-7 md:p-8 hover:border-primary-300 hover:shadow-md transition-all duration-200 border-l-4 border-l-primary-500 relative">
+            <!-- Decorative step number -->
+            <span class="absolute top-6 right-7 text-5xl font-bold text-primary-100 leading-none select-none" aria-hidden="true">{step.number}</span>
+
+            <p class="section-label mb-3">{step.label}</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 max-w-lg">{step.heading}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5 max-w-xl">{step.body}</p>
+
+            <ul class="space-y-2 mb-6">
+              {step.items.map((item) => (
+                <li class="flex items-start gap-2.5 text-sm text-gray-600">
+                  <svg class="mt-0.5 shrink-0 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={step.ctaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
+            >
+              {step.ctaLabel}
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools recap -->
+  <section class="bg-[#F8FAFC] py-12 px-6">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="fade-up mb-8">
+        <p class="section-label mb-3">Tools used</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Everything in the stack</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl fade-up-group">
+        {tools.map((tool) => (
+          <a
+            href={tool.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-white border border-gray-200 rounded-xl p-5 hover:border-primary-300 hover:shadow-md transition-all duration-200 group flex items-start justify-between gap-3"
+          >
+            <div>
+              <p class="font-bold text-gray-900 mb-1 group-hover:text-primary-700 transition-colors">{tool.name}</p>
+              <p class="text-sm text-gray-500">{tool.description}</p>
+            </div>
+            <svg class="shrink-0 mt-0.5 text-gray-400 group-hover:text-primary-500 transition-colors" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark CTA -->
+  <section class="bg-[#F8FAFC] py-8 px-6 pb-16">
+    <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-12 sm:px-14 sm:py-16 relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(88,139,103,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-xl">
+        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Ready to build?</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+          Pick a template. Paste your content. Ship in 20 minutes.
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8 text-sm">
+          That's exactly what I did. My Content Board landing page — the one I'd been putting off for months — went live in one evening. No frontend skills required.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="https://www.youtube.com/@jitangupta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg bg-primary-600 hover:bg-primary-500 transition text-sm font-medium"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+            Watch on YouTube
+          </a>
+          <a
+            href="https://claude.ai/design"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-primary-400 hover:text-primary-300 transition text-sm font-medium"
+          >
+            Try Claude Design
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
