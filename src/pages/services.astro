@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { services } from '../data/services';
 
 const title = "Services — Work With Jitan Gupta";
-const description = "From a quick 15-minute call to a full-day team workshop — practical AI adoption sessions for engineers and teams. Based in India, available on-site or remote.";
+const description = "From a quick 15-minute call to a full-day team session — practical AI adoption sessions for engineers and teams. Based in India, available on-site or remote.";
 
 const individualServices = services.filter(s => s.tier === 'individual');
 const teamServices = services.filter(s => s.tier === 'team');
@@ -14,12 +14,19 @@ const teamServices = services.filter(s => s.tier === 'team');
     <div class="bg-white max-w-screen-xl mx-auto px-5 py-5 md:px-15 md:py-10 rounded-b-2xl">
 
       <!-- Hero -->
-      <div class="fade-up mt-5 md:mt-8 mb-10 md:mb-14">
+      <div class="fade-up mt-5 md:mt-8 mb-6 md:mb-8">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style="line-height: 1.2;">
           Work With Me
         </h1>
         <p class="text-lg md:text-xl text-gray-600 max-w-2xl">
-          From a quick call to a full-day team workshop — pick what fits.
+          From a 15-minute call to a full-day team session — pick what fits your situation.
+        </p>
+      </div>
+
+      <!-- Credibility paragraph -->
+      <div class="fade-up mb-10 md:mb-14">
+        <p class="text-sm text-gray-500 max-w-2xl leading-relaxed">
+          I'm a Senior Platform Engineer with 10 years in tech — 9 years building .NET systems and cloud infrastructure (Kubernetes, AKS, Azure), plus a year in platform engineering. I build with AI tools daily in production work, not just demos. My YouTube channel documents real AI workflows, MCP integrations, and Claude Code projects as I build them. What I teach comes from what I ship.
         </p>
       </div>
 
@@ -49,27 +56,64 @@ const teamServices = services.filter(s => s.tier === 'team');
                 </svg>
                 {service.duration}
               </span>
+              {service.format && (
+                <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
+                  {service.format}
+                </span>
+              )}
             </div>
 
             <h3 class="text-xl font-bold text-gray-900 mb-1">{service.title}</h3>
-            <p class={`text-2xl font-bold mb-4 ${service.isFree ? 'text-primary-600' : 'text-primary-600'}`}>
-              {service.price}
-            </p>
+            <p class="text-2xl font-bold text-primary-600 mb-4">{service.price}</p>
 
-            <p class="text-gray-700 leading-relaxed flex-1 mb-6">{service.description}</p>
+            <p class="text-gray-700 leading-relaxed mb-5">{service.description}</p>
 
-            <a
-              href={service.ctaLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={`inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg transition self-start ${
-                service.isFree
-                  ? 'bg-primary-600 hover:bg-primary-700'
-                  : 'bg-primary-600 hover:bg-primary-700'
-              }`}
-            >
-              Book Now →
-            </a>
+            {service.whoFor && (
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Who this is for</p>
+                <ul class="space-y-1">
+                  {service.whoFor.map((item) => (
+                    <li class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                      <span class="mt-1.5 w-1 h-1 rounded-full bg-primary-400 shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.whatYouGet && (
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">What you walk away with</p>
+                <ul class="space-y-1">
+                  {service.whatYouGet.map((item) => (
+                    <li class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                      <span class="mt-1.5 w-1 h-1 rounded-full bg-primary-400 shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.note && (
+              <p class="text-xs text-gray-400 leading-relaxed mb-5 italic">{service.note}</p>
+            )}
+
+            <div class="mt-auto pt-2">
+              <a
+                href={service.ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg transition ${
+                  service.isFree
+                    ? 'bg-primary-600 hover:bg-primary-700'
+                    : 'bg-primary-600 hover:bg-primary-700'
+                }`}
+              >
+                Book Now →
+              </a>
+            </div>
           </div>
         ))}
       </div>
@@ -116,27 +160,87 @@ const teamServices = services.filter(s => s.tier === 'team');
             <h3 class="text-xl font-bold text-gray-900 mb-1">{service.title}</h3>
             <p class="text-2xl font-bold text-primary-600 mb-4">{service.price}</p>
 
-            <p class="text-gray-700 leading-relaxed flex-1 mb-6">{service.description}</p>
+            <p class="text-gray-700 leading-relaxed mb-5">{service.description}</p>
 
-            <a
-              href={service.ctaLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition self-start"
-            >
-              Book Now →
-            </a>
+            {service.covers && service.coversHeading && (
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{service.coversHeading}</p>
+                <ul class="space-y-1">
+                  {service.covers.map((item) => (
+                    <li class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                      <span class="mt-1.5 w-1 h-1 rounded-full bg-primary-400 shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.whoFor && (
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Who this is for</p>
+                <ul class="space-y-1">
+                  {service.whoFor.map((item) => (
+                    <li class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                      <span class="mt-1.5 w-1 h-1 rounded-full bg-primary-400 shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.whatYouGet && (
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">What your team walks away with</p>
+                <ul class="space-y-1">
+                  {service.whatYouGet.map((item) => (
+                    <li class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                      <span class="mt-1.5 w-1 h-1 rounded-full bg-primary-400 shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.note && (
+              <p class="text-xs text-gray-400 leading-relaxed mb-5 italic">{service.note}</p>
+            )}
+
+            <div class="mt-auto pt-2">
+              <a
+                href={service.ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
+              >
+                Book Now →
+              </a>
+            </div>
           </div>
         ))}
       </div>
 
-      <!-- Bottom note -->
+      <!-- Closing section -->
       <div class="fade-up border-t border-gray-100 pt-8 pb-4">
-        <p class="text-gray-500 text-sm">
-          Not sure where to start?{' '}
-          <a href="/contact" class="text-primary-600 hover:underline">Send me a message</a>
-          {' '}or book the free discovery call — no commitment, just a conversation.
+        <h2 class="text-lg font-semibold text-gray-900 mb-3">Not sure which one fits?</h2>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4 max-w-2xl">
+          Most people start with the free discovery call. In 15 minutes I can usually tell you exactly which session (if any) would actually help. If your situation doesn't fit any of these, I'll tell you that too.
         </p>
+        <ul class="space-y-1.5 text-sm text-gray-600 mb-5">
+          <li><span class="text-gray-400">If you're a team lead exploring AI for your team</span> — start with Team Training.</li>
+          <li><span class="text-gray-400">If you have a specific tool you want to build</span> — start with Build-Along.</li>
+          <li><span class="text-gray-400">If you're an individual figuring things out</span> — start with 1:1 Mentorship or the Discovery Call.</li>
+        </ul>
+        <a
+          href="https://topmate.io/jitangupta"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center text-sm text-primary-600 hover:underline font-medium"
+        >
+          Book a free discovery call →
+        </a>
       </div>
 
     </div>

@@ -2,26 +2,37 @@
 
 ---
 
-<section class="bg-[#F8FAFC] py-8 px-6 sm:py-15">
-    <div class="max-w-screen-xl mx-auto bg-white rounded-2xl p-5 sm:p-10">
-      <div class="flex justify-center sm:w-full sm:mt-4 lg:mt-0 lg:col-span-5 lg:flex">
-        <img src="/jitan-bg.png" class="w-40 px-4 mb-7" alt="jitan-gupta">
-      </div>
-      <div class="max-w-2xl mx-auto text-left">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">👋 Hey, I'm Jitan</h2>
-        <p class="text-gray-700 mt-4">Senior Platform Engineer with 10+ years building enterprise software and cloud infrastructure. I've architected multi-tenant Kubernetes migrations, built AI-powered deployment systems, and led identity platforms serving 50K+ daily authentications.</p>
-        <p class="text-gray-700 mt-4">Now I build with AI in the open and teach engineers what I learn — through YouTube, open source, and real case studies.</p>
-        <p class="text-sm text-gray-500 mt-4 mb-4">Based in Mumbai. Building and teaching globally.</p>
-      </div>
-      <div class="text-center">
-        <a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 transition text-sm sm:text-base m-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-          Watch on YouTube
-        </a>
-        <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-sm sm:text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          Connect on LinkedIn
-        </a>
+<section class="bg-[#F8FAFC] py-8 px-6 sm:py-16">
+    <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-12 sm:px-14 sm:py-16 relative overflow-hidden">
+      <!-- Subtle radial glow -->
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(88,139,103,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:gap-16">
+        <!-- Photo -->
+        <div class="flex justify-center lg:justify-start mb-8 lg:mb-0 flex-shrink-0">
+          <img src="/jitan-bg.png" class="w-36 h-36 object-cover rounded-full ring-4 ring-primary-600 ring-offset-4 ring-offset-dark-700" alt="Jitan Gupta">
+        </div>
+
+        <!-- Text -->
+        <div class="flex-1">
+          <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">About Jitan</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Hey, I'm Jitan</h2>
+          <p class="text-gray-300 leading-relaxed mb-3">Senior Platform Engineer with 10+ years building enterprise software and cloud infrastructure. I've architected multi-tenant Kubernetes migrations, built AI-powered deployment systems, and led identity platforms serving 50K+ daily authentications.</p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-8">Now I build with AI in the open and teach engineers what I learn — through YouTube, open source, and real case studies. Based in Mumbai.</p>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg bg-primary-600 hover:bg-primary-500 transition text-sm font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+              Watch on YouTube
+            </a>
+            <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-primary-400 hover:text-primary-300 transition text-sm font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 </section>

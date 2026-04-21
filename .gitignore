@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code — local/personal settings (machine-specific)
+.claude/settings.local.json
+
+# Claude Cowork — generated agents mirror (source of truth is .claude/skills/)
+.agents/
+
+# Screenshots dumped in project root
+Screenshot*.png

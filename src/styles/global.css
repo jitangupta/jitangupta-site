@@ -119,12 +119,19 @@ body {
 
 h1, h2, h3 {
     font-family: "Recoleta", serif !important;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
 }
 h1 p, h2 p, h3 p {
     font-family: 'Elza', sans-serif !important;
 }
 h1 li, h2 li, h3 li {
     font-family: 'Elza', sans-serif !important;
+}
+
+p {
+    text-wrap: pretty;
 }
 .has-double-underline {
 	position: relative;
@@ -209,3 +216,69 @@ h1 li, h2 li, h3 li {
 .fade-up-group.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.1s;  }
 .fade-up-group.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.2s;  }
 .fade-up-group.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.3s;  }
+
+/* ── Focus & interaction polish ──────────────────────────── */
+
+*:focus-visible {
+    outline: 2px solid #477056;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+a[class*="bg-primary"], button[class*="bg-primary"] {
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+a[class*="bg-primary"]:active, button[class*="bg-primary"]:active {
+    transform: scale(0.97) translateY(1px);
+}
+
+/* Section heading overline label */
+.section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #477056;
+}
+
+/* ── Hero layout ─────────────────────────────────────────── */
+
+/* Desktop: 12-col grid; mobile: single column, text before photo */
+.hero-grid {
+    display: grid;
+}
+@media (min-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 3rem;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+}
+
+/* Dot-grid watermark in hero */
+.dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #b3ccb9 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* Ensure heading line-height on .line-clamp-3 */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card image scale duration override */
+.duration-400 {
+    transition-duration: 400ms;
+}
+.duration-250 {
+    transition-duration: 250ms;
+}
