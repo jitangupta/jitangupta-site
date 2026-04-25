@@ -1,118 +1,70 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const title = "PromptMate — How to Build a Personal Prompt Library for ChatGPT and Claude";
-const description = "A step-by-step guide to installing PromptMate and building a prompt library that saves time. Covers installation, tone settings, and formatting tips.";
+const title = "PromptMate — Personal prompt library for ChatGPT and Claude";
+const description = "A Chrome extension that adds a personal prompt library sidebar to ChatGPT and Claude. Save, organize, and insert prompts in one click. Built because I was tired of retyping the same instructions every session.";
 
-const installSteps = [
+const features = [
   {
-    number: "01",
-    label: "Step 1",
-    heading: "Install from Chrome Web Store",
-    body: "Open the Chrome Web Store listing and click 'Add to Chrome'. The extension is free and takes under 30 seconds to install. Works on Chrome, Brave, and any Chromium-based browser.",
-    items: [
-      "Click 'Add to Chrome' on the listing page",
-      "Accept the permissions prompt — only accesses ChatGPT and Claude tabs",
-      "You'll see the PromptMate icon appear in your extensions bar",
-    ],
-    ctaLabel: "Open Chrome Web Store",
-    ctaUrl: "https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai",
+    heading: "Sidebar inside ChatGPT and Claude",
+    body: "No tab switching. Your prompts live where you work — in a sidebar that opens on both interfaces.",
   },
   {
-    number: "02",
-    label: "Step 2",
-    heading: "Pin it and sign in",
-    body: "Pin the extension so it's always one click away. Then sign in with your Google account to enable cross-device sync. Your prompts are stored in an isolated folder in your personal Google Drive — no backend server involved.",
-    items: [
-      "Click the puzzle icon in Chrome → pin PromptMate",
-      "Open ChatGPT or Claude — the sidebar appears automatically",
-      "Click 'Sign in with Google' to enable sync",
-      "Your prompt library is now backed up and available on any device",
-    ],
-    ctaLabel: "View GitHub source",
-    ctaUrl: "https://github.com/jitangupta/PromptMate",
+    heading: "Save with tone and format settings",
+    body: "Each prompt stores a tone (formal, casual, technical) and output format (bullets, steps, prose, code). One click inserts both.",
   },
   {
-    number: "03",
-    label: "Step 3",
-    heading: "Save your first prompt",
-    body: "Click 'New Prompt' in the sidebar, give it a clear name, paste your prompt text, and choose the tone and output format. Hit save. That prompt is now available with a single click inside ChatGPT or Claude — on any device where you're signed in.",
-    items: [
-      "Click 'New Prompt' in the sidebar",
-      "Give it a name you can find in 2 seconds — be specific (e.g. 'Email reply — formal')",
-      "Paste the prompt text",
-      "Set tone and output format (more on this below)",
-      "Click save — it syncs to your Drive instantly",
-    ],
-    ctaLabel: "Open Chrome Web Store",
-    ctaUrl: "https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai",
+    heading: "Cross-device sync via Google Drive",
+    body: "Your library syncs to a private folder in your own Google Drive. No backend server. No data on my infrastructure.",
+  },
+  {
+    heading: "Edit on demand",
+    body: "Prompts aren't locked. Open any saved prompt, tweak it mid-session, save back. The edit is yours.",
+  },
+  {
+    heading: "Local usage analytics",
+    body: "Tracks how often you create, apply, copy, and delete prompts. Stored locally so you can see what's actually useful.",
   },
 ];
 
-const toneTips = [
+const roadmap = [
   {
-    label: "Formal",
-    when: "Client emails, documentation, reports",
-    example: "Write in a professional tone. Use complete sentences. Avoid contractions.",
+    status: "Next release",
+    statusColor: "accent",
+    title: "Logo on chrome://extensions and Web Store",
+    body: "Manifest is missing the top-level icons field — the extension shows a 'P' placeholder everywhere outside the toolbar. Fix ships in v0.4.6.",
   },
   {
-    label: "Casual",
-    when: "Slack messages, social posts, community replies",
-    example: "Keep it conversational. Short sentences. Friendly but not sloppy.",
+    status: "Next release",
+    statusColor: "accent",
+    title: "Cross-browser auth (Brave, Edge, Vivaldi)",
+    body: "Sign-in currently fails on non-Chrome Chromium browsers. Switching from chrome.identity.getAuthToken to launchWebAuthFlow + PKCE fixes this across all Chromium-based browsers.",
   },
   {
-    label: "Technical",
-    when: "Code reviews, architecture docs, engineering RFCs",
-    example: "Be precise. Use correct terminology. Assume the reader is an engineer.",
+    status: "Planned",
+    statusColor: "primary",
+    title: "Prompt versioning",
+    body: "Every edit creates a version. Browse history, diff before/after, restore any prior version. Drive handles the revisions natively — the architecture already supports it.",
   },
   {
-    label: "Plain English",
-    when: "Explaining to non-technical stakeholders, onboarding docs",
-    example: "No jargon. Explain like I'm talking to someone who doesn't code.",
-  },
-];
-
-const formatTips = [
-  {
-    label: "Bullet points",
-    when: "Summaries, feature lists, action items",
-    example: "Respond in bullet points. Maximum 5 bullets. Each under 15 words.",
+    status: "Planned",
+    statusColor: "primary",
+    title: "Shareable prompts",
+    body: "Publish a prompt to anyone-with-link. The receiver gets their own copy — no ongoing sync, no collaborative editing. Private by default, shareable on demand.",
   },
   {
-    label: "Step-by-step",
-    when: "How-to guides, runbooks, tutorials",
-    example: "Format as numbered steps. Start each step with a verb. Include a brief explanation.",
-  },
-  {
-    label: "Prose",
-    when: "Articles, emails, narratives",
-    example: "Write in flowing paragraphs. No bullet points. 2–3 sentences per paragraph.",
-  },
-  {
-    label: "Code + explanation",
-    when: "Dev tasks, debugging, code generation",
-    example: "Show the code first, then explain what it does and why. Use code blocks.",
+    status: "Future",
+    statusColor: "gray",
+    title: "BYOK prompt enhancer",
+    body: "Add an Enhance button to the prompt composer. Paste your own Anthropic or OpenAI key — PromptMate rewrites your draft into a sharper prompt. No backend, no proxying, your key stays in your browser.",
   },
 ];
 
-const promptTips = [
-  {
-    heading: "Save prompts you use more than twice",
-    body: "If you've typed the same instruction three times, it belongs in your library. The rule of two: repeat it once, save it the second time.",
-  },
-  {
-    heading: "Include the output format in the prompt itself",
-    body: "Don't rely on the tone/format dropdowns alone. Write the format into your prompt text — 'Respond in bullet points, max 5 bullets' — so the intent is always explicit.",
-  },
-  {
-    heading: "Name prompts for what they do, not what they are",
-    body: "'Email reply — apologetic tone' finds itself in 2 seconds. 'Prompt 4' does not. Be specific in names.",
-  },
-  {
-    heading: "Version your prompts when you improve them",
-    body: "If a prompt stops working well, don't overwrite it — save a new version with a v2 suffix. Keep both until you're sure the new one is better.",
-  },
-];
+const statusStyles: Record<string, string> = {
+  accent: "text-accent-700 bg-accent-50 border-accent-200",
+  primary: "text-primary-700 bg-primary-50 border-primary-200",
+  gray: "text-gray-600 bg-gray-50 border-gray-200",
+};
 ---
 
 <Layout title={title} description={description}>
@@ -122,14 +74,14 @@ const promptTips = [
     <div class="bg-white max-w-screen-xl mx-auto px-8 py-14 rounded-b-2xl relative overflow-hidden">
       <div class="dot-grid" aria-hidden="true"></div>
       <div class="relative z-10 max-w-2xl">
-        <p class="section-label mb-4 hero-fade hero-fade-1">Free Chrome Extension</p>
+        <p class="section-label mb-4 hero-fade hero-fade-1">Chrome Extension — Free &amp; Open Source</p>
         <h1 class="hero-fade hero-fade-2 text-4xl md:text-5xl xl:text-6xl font-bold mb-5">
-          Your prompts.<br />One click away.
+          Your saved prompts,<br />one click away.
         </h1>
-        <p class="hero-fade hero-fade-3 text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
-          PromptMate adds a personal prompt library sidebar to ChatGPT and Claude.<br />
-          Stop retyping the same instructions. Build a library once, use it everywhere.
+        <p class="hero-fade hero-fade-3 text-lg md:text-xl text-gray-600 leading-relaxed mb-2">
+          A personal prompt library that lives inside ChatGPT and Claude — for engineers and AI power users who are tired of retyping the same instructions every session.
         </p>
+        <p class="hero-fade hero-fade-3 text-sm text-gray-400 mb-8">Works on Chrome, Brave, Edge, and all Chromium-based browsers.</p>
         <div class="hero-fade hero-fade-3 flex flex-wrap gap-3">
           <a
             href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
@@ -154,126 +106,88 @@ const promptTips = [
     </div>
   </section>
 
-  <!-- What you need -->
-  <section class="bg-[#F8FAFC] py-12 px-6">
+  <!-- Why I built it -->
+  <section class="bg-white py-14 px-6">
     <div class="max-w-screen-xl mx-auto fade-up">
-      <div class="bg-primary-50 border border-primary-100 rounded-xl p-6 md:p-8 max-w-2xl">
-        <p class="section-label mb-4">Before you start</p>
-        <h2 class="text-lg font-bold text-gray-900 mb-5">What you need</h2>
-        <ul class="space-y-3">
-          {[
-            "Chrome, Brave, or any Chromium-based browser",
-            "A ChatGPT or Claude account (free tier works)",
-            "A Google account — for cross-device sync via Google Drive",
-            "5 minutes to install and save your first 3 prompts",
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <svg class="mt-0.5 shrink-0 text-primary-600" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span class="text-gray-700 text-sm leading-relaxed">{item}</span>
-            </li>
-          ))}
-        </ul>
+      <div class="max-w-2xl">
+        <p class="section-label mb-4">Why I built it</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">The friction was real</h2>
+        <div class="space-y-4 text-gray-600 leading-relaxed">
+          <p>
+            I use Claude and ChatGPT for almost everything now — code reviews, draft emails, explaining concepts to teammates, writing scripts for YouTube. And I kept typing the same instructions over and over.
+          </p>
+          <p>
+            Not the prompts themselves — I had those saved in Notion, in a text file, scattered in browser tabs. The problem was the ritual: open a new chat, remember which prompt, find the file, copy, paste, adjust the tone manually. Every. Single. Session.
+          </p>
+          <p>
+            I wanted the prompts where the work happens. Not in a tab I have to switch to — <em>in the sidebar</em>, with one click to insert. So I built it.
+          </p>
+          <p>
+            v0.4.5 is out on the Chrome Web Store. It does the thing I needed. Everything else in the roadmap is real usage driving the next decisions, not a feature list I wrote to look complete.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Installation steps -->
-  <section class="bg-white py-12 px-6">
-    <div class="max-w-screen-xl mx-auto">
-      <div class="fade-up mb-10">
-        <p class="section-label mb-3">Getting started</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Install in 3 steps</h2>
-      </div>
-      <div class="space-y-5 fade-up-group">
-        {installSteps.map((step) => (
-          <div class="bg-white border border-gray-200 rounded-xl p-7 md:p-8 hover:border-primary-300 hover:shadow-md transition-all duration-200 border-l-4 border-l-primary-500 relative">
-            <span class="absolute top-6 right-7 text-5xl font-bold text-primary-100 leading-none select-none" aria-hidden="true">{step.number}</span>
-            <p class="section-label mb-3">{step.label}</p>
-            <h3 class="text-xl font-bold text-gray-900 mb-3 max-w-lg">{step.heading}</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-5 max-w-xl">{step.body}</p>
-            <ul class="space-y-2 mb-6">
-              {step.items.map((item) => (
-                <li class="flex items-start gap-2.5 text-sm text-gray-600">
-                  <svg class="mt-0.5 shrink-0 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={step.ctaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
-            >
-              {step.ctaLabel}
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Tone guide -->
+  <!-- Current features -->
   <section class="bg-[#F8FAFC] py-12 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="fade-up mb-10">
-        <p class="section-label mb-3">Tone settings</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Pick the right tone</h2>
-        <p class="mt-3 text-gray-600 max-w-xl">PromptMate lets you set a tone for each saved prompt. Here's how to think about each option and what to put in the prompt text to reinforce it.</p>
+        <p class="section-label mb-3">What it does now — v0.4.5</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Current state, honestly scoped</h2>
+        <p class="mt-3 text-gray-500 text-sm max-w-xl">This is what's shipped. Not what's planned — that's the roadmap below.</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up-group">
-        {toneTips.map((tip) => (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl fade-up-group">
+        {features.map((f) => (
           <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md transition-all duration-200">
-            <span class="inline-block text-xs font-bold text-primary-700 bg-primary-50 border border-primary-200 rounded-md px-2.5 py-1 mb-4">{tip.label}</span>
-            <p class="text-sm font-semibold text-gray-700 mb-2">Best for: <span class="font-normal text-gray-500">{tip.when}</span></p>
-            <p class="text-xs text-gray-500 font-mono bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 leading-relaxed">"{tip.example}"</p>
+            <h3 class="text-base font-bold text-gray-900 mb-2">{f.heading}</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">{f.body}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Format guide -->
-  <section class="bg-white py-12 px-6">
+  <!-- Roadmap -->
+  <section class="bg-white py-14 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="fade-up mb-10">
-        <p class="section-label mb-3">Output formatting</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Control the output format</h2>
-        <p class="mt-3 text-gray-600 max-w-xl">The format setting tells the model how to structure its response. Pair it with explicit format instructions in the prompt text for the most consistent results.</p>
+        <p class="section-label mb-3">Roadmap</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What's next</h2>
+        <p class="mt-3 text-gray-500 text-sm max-w-xl">Actively building. These are the real tasks, not a polished feature wish list. If something here matters to you — open an issue or contribute.</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up-group">
-        {formatTips.map((tip) => (
-          <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md transition-all duration-200">
-            <span class="inline-block text-xs font-bold text-accent-700 bg-accent-50 border border-accent-200 rounded-md px-2.5 py-1 mb-4">{tip.label}</span>
-            <p class="text-sm font-semibold text-gray-700 mb-2">Best for: <span class="font-normal text-gray-500">{tip.when}</span></p>
-            <p class="text-xs text-gray-500 font-mono bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 leading-relaxed">"{tip.example}"</p>
+      <div class="space-y-4 max-w-3xl fade-up-group">
+        {roadmap.map((item) => (
+          <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:shadow-sm transition-all duration-200 flex gap-5">
+            <div class="shrink-0 pt-0.5">
+              <span class={`inline-block text-xs font-bold border rounded-md px-2.5 py-1 whitespace-nowrap ${statusStyles[item.statusColor]}`}>
+                {item.status}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-gray-900 mb-1.5">{item.title}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+            </div>
           </div>
         ))}
       </div>
-    </div>
-  </section>
-
-  <!-- Prompt library tips -->
-  <section class="bg-[#F8FAFC] py-12 px-6">
-    <div class="max-w-screen-xl mx-auto">
-      <div class="fade-up mb-10">
-        <p class="section-label mb-3">Building your library</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Tips for a library that actually gets used</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl fade-up-group">
-        {promptTips.map((tip) => (
-          <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md transition-all duration-200">
-            <h3 class="text-base font-bold text-gray-900 mb-2">{tip.heading}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{tip.body}</p>
-          </div>
-        ))}
+      <div class="mt-8 fade-up">
+        <a
+          href="https://github.com/jitangupta/PromptMate/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
+        >
+          Open an issue or suggest a feature
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Video coming soon -->
-  <section class="bg-white py-12 px-6">
+  <section class="bg-[#F8FAFC] py-12 px-6">
     <div class="max-w-screen-xl mx-auto fade-up">
       <div class="border-2 border-dashed border-gray-200 rounded-2xl p-10 md:p-14 max-w-2xl flex flex-col items-start gap-5">
         <div class="flex items-center gap-3">
@@ -284,7 +198,7 @@ const promptTips = [
         </div>
         <div>
           <h2 class="text-2xl font-bold text-gray-900 mb-2">Full walkthrough video</h2>
-          <p class="text-gray-500 text-sm leading-relaxed">A complete video walkthrough of PromptMate — install, setup, building your first prompt library, and real examples from my workflow. Coming to YouTube soon.</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Install, setup, and a real session showing how I use PromptMate in my daily AI workflow. Coming to YouTube in Hinglish 🇮🇳</p>
         </div>
         <a
           href="https://www.youtube.com/@jitangupta"
@@ -305,12 +219,12 @@ const promptTips = [
     <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-12 sm:px-14 sm:py-16 relative overflow-hidden">
       <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(14,116,144,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
       <div class="relative z-10 max-w-xl">
-        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Ready to save time?</p>
+        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Free. Open source. No backend.</p>
         <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
-          Stop retyping the same prompts.
+          Stop retyping. Build your library once.
         </h2>
         <p class="text-gray-400 leading-relaxed mb-8 text-sm">
-          Install PromptMate, save the 5 prompts you use every day, and get them back with one click — in ChatGPT or Claude, on any device.
+          Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT or Claude, on any device.
         </p>
         <div class="flex flex-wrap gap-3">
           <a
