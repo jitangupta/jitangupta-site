@@ -11,6 +11,14 @@ export interface Build {
 
 export const builds: Build[] = [
   {
+    title: "PromptMate",
+    description: "Chrome extension that adds a personal prompt library sidebar to ChatGPT and Claude. Save prompts with tone and format settings, insert them in one click, and sync across devices via Google Drive — no backend server.",
+    techStack: ["Chrome Extension", "JavaScript", "Google Drive API", "ChatGPT", "Claude"],
+    githubUrl: "https://github.com/jitangupta/PromptMate",
+    liveUrl: "https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai",
+    status: "live"
+  },
+  {
     title: "Cowork Boilerplate",
     description: "A folder-based workflow automation system for Claude Cowork. Define repeatable AI workflows once — manual pipelines with approval gates, scheduled tasks, multi-stage projects. Includes a YouTube content pipeline and daily community scout out of the box.",
     techStack: ["Claude Cowork", "Claude Code", "MCP", "AI Workflow"],
@@ -29,7 +37,7 @@ export const builds: Build[] = [
     description: "YouTube content management PWA for tracking ideas, scripts, feedback, and publishing workflow. Built to solve my own problem of managing 20+ video ideas at once.",
     techStack: ["React", "Firebase", "PWA", "Workflow Automation"],
     githubUrl: "https://github.com/jitangupta/content-board",
-    status: "in-progress"
+    status: "live"
   },
   {
     title: "jitangupta.com",
