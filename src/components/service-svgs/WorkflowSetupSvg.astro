@@ -1,0 +1,227 @@
+---
+// Hero animation for /services/ai-workflow-setup.
+// Shape of the engagement: input -> tool -> working output, with a single
+// pulse showing the workflow active. Runs once on scroll into view.
+// prefers-reduced-motion: end state, no animation.
+---
+
+<div class="ws" aria-hidden="true">
+	<svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" class="ws-svg">
+		<!-- Connecting lines (drawn left to right) -->
+		<line class="ws-line ws-line-1" x1="135" y1="90" x2="245" y2="90" />
+		<line class="ws-line ws-line-2" x1="355" y1="90" x2="465" y2="90" />
+
+		<!-- Pulse dot wrapper (translates left to right) -->
+		<g class="ws-pulse-wrap">
+			<circle class="ws-pulse" cx="135" cy="90" r="5" />
+		</g>
+
+		<!-- Node 1: file -->
+		<g class="ws-node ws-node-1">
+			<g transform="translate(75, 60)">
+				<path class="ws-stroke" d="M5 5 H32 L42 15 V55 H5 Z" />
+				<line class="ws-stroke" x1="13" y1="22" x2="34" y2="22" />
+				<line class="ws-stroke" x1="13" y1="32" x2="34" y2="32" />
+				<line class="ws-stroke" x1="13" y1="42" x2="28" y2="42" />
+			</g>
+			<text class="ws-label" x="98" y="155" text-anchor="middle">Your file or task</text>
+		</g>
+
+		<!-- Node 2: Claude / Cowork -->
+		<g class="ws-node ws-node-2">
+			<rect class="ws-tool-bg" x="263" y="58" width="74" height="64" rx="14" />
+			<path class="ws-tool-mark" d="M300 70 L308 86 L324 90 L308 94 L300 110 L292 94 L276 90 L292 86 Z" />
+			<text class="ws-label" x="300" y="155" text-anchor="middle">Claude / Cowork / MCP</text>
+		</g>
+
+		<!-- Node 3: working output -->
+		<g class="ws-node ws-node-3">
+			<rect class="ws-stroke ws-output-bg" x="475" y="60" width="60" height="60" rx="10" />
+			<path class="ws-stroke ws-check" d="M488 92 L500 104 L522 78" />
+			<text class="ws-label" x="505" y="155" text-anchor="middle">Working in your day</text>
+		</g>
+	</svg>
+</div>
+
+<style>
+	.ws {
+		--ws-stroke: #477056;
+		--ws-tool-fill: #f0f5f1;
+		--ws-text: #475569;
+		--ws-pulse: #477056;
+		width: 100%;
+		max-width: 560px;
+		margin: 0 auto;
+	}
+
+	.ws-svg {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Static styling */
+	.ws-stroke {
+		stroke: var(--ws-stroke);
+		fill: none;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.ws-line {
+		stroke: var(--ws-stroke);
+		fill: none;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-dasharray: 110;
+		stroke-dashoffset: 110;
+	}
+
+	.ws-tool-bg {
+		stroke: var(--ws-stroke);
+		fill: var(--ws-tool-fill);
+		stroke-width: 2;
+	}
+
+	.ws-tool-mark {
+		fill: var(--ws-stroke);
+	}
+
+	.ws-output-bg {
+		fill: #ffffff;
+	}
+
+	.ws-label {
+		fill: var(--ws-text);
+		font-size: 13px;
+		font-weight: 500;
+		font-family: inherit;
+		letter-spacing: 0.01em;
+	}
+
+	/* Initial: nodes hidden, lines undrawn, pulse hidden */
+	.ws-node {
+		opacity: 0;
+		transform: scale(0.92);
+		transform-box: fill-box;
+		transform-origin: center;
+		transition:
+			opacity 0.45s ease-out,
+			transform 0.45s ease-out;
+	}
+
+	.ws-pulse-wrap {
+		opacity: 0;
+	}
+
+	/* Active: stagger in */
+	.ws.is-active .ws-node-1 {
+		opacity: 1;
+		transform: scale(1);
+		transition-delay: 0.1s;
+	}
+
+	.ws.is-active .ws-line-1 {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.55s ease-out 0.5s;
+	}
+
+	.ws.is-active .ws-node-2 {
+		opacity: 1;
+		transform: scale(1);
+		transition-delay: 1s;
+	}
+
+	.ws.is-active .ws-line-2 {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.55s ease-out 1.4s;
+	}
+
+	.ws.is-active .ws-node-3 {
+		opacity: 1;
+		transform: scale(1);
+		transition-delay: 1.9s;
+	}
+
+	.ws.is-active .ws-pulse-wrap {
+		animation: ws-pulse-travel 5s ease-in-out 2.5s infinite;
+	}
+
+	/* 0–30% (1.5s): pulse appears, travels left to right, fades out.
+	   30–100% (3.5s): invisible, parked at start, waiting for next cycle. */
+	@keyframes ws-pulse-travel {
+		0% {
+			opacity: 0;
+			transform: translateX(0);
+		}
+		5% {
+			opacity: 1;
+		}
+		25% {
+			opacity: 1;
+			transform: translateX(330px);
+		}
+		30% {
+			opacity: 0;
+			transform: translateX(330px);
+		}
+		31% {
+			opacity: 0;
+			transform: translateX(0);
+		}
+		100% {
+			opacity: 0;
+			transform: translateX(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ws-node,
+		.ws-line {
+			transition: none !important;
+			animation: none !important;
+		}
+		.ws-node {
+			opacity: 1 !important;
+			transform: none !important;
+		}
+		.ws-line {
+			stroke-dashoffset: 0 !important;
+		}
+		.ws-pulse-wrap {
+			animation: none !important;
+			opacity: 0 !important;
+		}
+	}
+</style>
+
+<script>
+	const init = () => {
+		const el = document.querySelector<HTMLElement>('.ws');
+		if (!el) return;
+
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduced) {
+			el.classList.add('is-active');
+			return;
+		}
+
+		const obs = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-active');
+					obs.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.4 });
+
+		obs.observe(el);
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+</script>
