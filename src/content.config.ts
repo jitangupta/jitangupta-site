@@ -1,8 +1,8 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
-const article = defineCollection({
-    loader: glob({ base: './src/content/articles', pattern: '**/*.{md,mdx}' }),
+const learn = defineCollection({
+    loader: glob({ base: './src/content/learn', pattern: '**/*.{md,mdx}' }),
     // Type-check frontmatter using a schema
     schema: z.object({
         title: z.string(),
@@ -19,6 +19,17 @@ const article = defineCollection({
             text: z.string(),
         })).optional(),
         draft: z.boolean().optional(),
+        targetQuery: z.string().optional(),
+        faq: z.array(z.object({
+            question: z.string(),
+            answer: z.string(),
+        })).optional(),
+        videos: z.array(z.object({
+            youtubeId: z.string(),
+            name: z.string(),
+            description: z.string().optional(),
+            uploadDate: z.string().optional(),
+        })).optional(),
     }),
 });
 
@@ -66,4 +77,4 @@ const notes = defineCollection({
     }),
 });
 
-export const collections = { article, caseStudies, notes };
+export const collections = { learn, caseStudies, notes };

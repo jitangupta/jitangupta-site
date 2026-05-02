@@ -22,6 +22,9 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 					<a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer" class="block py-1 px-3 text-gray-800 rounded-sm hover:text-primary-600 transition-colors">YouTube</a>
 				</li>
 				<li>
+					<a href="/learn" class={`block py-1 px-3 rounded-sm transition-colors ${isActive('/learn') ? 'text-primary-600 font-semibold' : 'text-gray-800 hover:text-primary-600'}`}>Learn</a>
+				</li>
+				<li>
 					<a href="/builds" class={`block py-1 px-3 rounded-sm transition-colors ${isActive('/builds') ? 'text-primary-600 font-semibold' : 'text-gray-800 hover:text-primary-600'}`}>Builds</a>
 				</li>
 				<li>

@@ -9,7 +9,7 @@ export interface Video {
 
 export const featuredVideos: Video[] = [
   {
-    title: "OpenClaw Tutorial — Build Your Own AI Agent (Setup to Security Explained)",
+    title: "OpenClaw Tutorial: Build Your Own AI Agent (Setup to Security Explained)",
     description: "How OpenClaw actually works internally, why it burns 10,000 tokens before your first message, and what makes it fundamentally different from Claude Code or Cowork. Real use cases, honest security risks, and whether you should try it today.",
     youtubeUrl: "https://youtu.be/TCdpb3vLy-Q",
     thumbnail: "https://i.ytimg.com/vi/TCdpb3vLy-Q/hqdefault.jpg",
@@ -17,15 +17,15 @@ export const featuredVideos: Video[] = [
     category: "ai-tools"
   },
   {
-    title: "I Built an AI Website Monitor in Minutes — Claude Cowork Tutorial (No Code)",
-    description: "How Claude Cowork automates the entire workflow — reading websites, analyzing content, and delivering summaries directly to Slack — without a single line of code. The Brain, Eyes, Mouth mental model for AI automation.",
+    title: "I Built an AI Website Monitor in Minutes: Claude Cowork Tutorial (No Code)",
+    description: "How Claude Cowork automates the entire workflow (reading websites, analyzing content, and delivering summaries directly to Slack) without a single line of code. The Brain, Eyes, Mouth mental model for AI automation.",
     youtubeUrl: "https://youtu.be/rKV2hparq14",
     thumbnail: "https://i.ytimg.com/vi/rKV2hparq14/hqdefault.jpg",
     publishedDate: "2026-03-19",
     category: "ai-tools"
   },
   {
-    title: "Git Worktree + Claude Code — Run 3 AI Agents on One Repo",
+    title: "Git Worktree + Claude Code: Run 3 AI Agents on One Repo",
     description: "One terminal, one agent, 15-minute wait per task. What if you ran 3 AI agents in parallel on the same codebase? Production-grade workflow for 3-4x development speed without sacrificing code quality or safety.",
     youtubeUrl: "https://youtu.be/yJWw4HAEqG0",
     thumbnail: "https://i.ytimg.com/vi/yJWw4HAEqG0/hqdefault.jpg",

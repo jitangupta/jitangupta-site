@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import { services } from '../../data/services';
+
+export async function getStaticPaths() {
+  return services.map((service) => ({
+    params: { id: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const canonical = new URL(`/services/${service.id}/`, Astro.site ?? Astro.url).toString();
+
+const title = `${service.title} · Jitan Gupta`;
+const description = `${service.title} (${service.duration}, ${service.price}). ${service.description.split('. ').slice(0, 2).join('. ')}.`;
+---
+
+<Layout title={title} description={description}>
+  <ServiceSchema
+    serviceName={service.title}
+    description={service.description}
+    url={canonical}
+    price={service.priceAmount ? String(service.priceAmount) : undefined}
+    priceCurrency={service.priceCurrency}
+  />
+
+  <section class="bg-[#F8FAFC] mx-2">
+    <div class="bg-white max-w-screen-xl mx-auto px-5 py-8 md:px-15 md:py-12 rounded-b-2xl">
+
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-gray-500 mb-6">
+        <a href="/services" class="hover:text-primary-600">Services</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-700">{service.title}</span>
+      </nav>
+
+      <!-- Hero -->
+      <div class="max-w-3xl">
+        <span class="inline-block text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">
+          {service.tier === 'individual' ? 'Individual session' : 'Team session'} · Mumbai-based, on-site or remote
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4" style="line-height: 1.2;">
+          {service.title}
+        </h1>
+        <div class="flex flex-wrap gap-3 text-sm text-gray-600 mb-6">
+          <span class="px-3 py-1 bg-gray-100 rounded-full">{service.duration}</span>
+          {service.format && <span class="px-3 py-1 bg-gray-100 rounded-full">{service.format}</span>}
+          {service.teamSize && <span class="px-3 py-1 bg-gray-100 rounded-full">{service.teamSize}</span>}
+          <span class="px-3 py-1 bg-primary-50 text-primary-700 font-semibold rounded-full">{service.price}</span>
+        </div>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">{service.description}</p>
+
+        <a
+          href={service.ctaLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
+        >
+          Book this session →
+        </a>
+      </div>
+
+      <!-- Two-column body -->
+      <div class="grid md:grid-cols-2 gap-10 mt-12">
+        {service.whoFor && service.whoFor.length > 0 && (
+          <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Who this is for</h2>
+            <ul class="space-y-2">
+              {service.whoFor.map((item) => (
+                <li class="flex items-start gap-3 text-gray-700">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {service.whatYouGet && service.whatYouGet.length > 0 && (
+          <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">What you walk away with</h2>
+            <ul class="space-y-2">
+              {service.whatYouGet.map((item) => (
+                <li class="flex items-start gap-3 text-gray-700">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {service.covers && service.covers.length > 0 && service.coversHeading && (
+        <div class="mt-12">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">{service.coversHeading}</h2>
+          <ul class="space-y-2">
+            {service.covers.map((item) => (
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="mt-2 w-1.5 h-1.5 rounded-full bg-accent-500 shrink-0"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {service.exampleOutcomes && service.exampleOutcomes.length > 0 && (
+        <div class="mt-12">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">Example outcomes</h2>
+          <p class="text-sm text-gray-500 mb-4">Composite examples drawn from real sessions, anonymized.</p>
+          <ul class="space-y-3">
+            {service.exampleOutcomes.map((item) => (
+              <li class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4 text-gray-700 leading-relaxed">{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Format & logistics -->
+      <div class="mt-12 grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4">
+          <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Duration</p>
+          <p class="font-semibold text-gray-900">{service.duration}</p>
+        </div>
+        {service.format && (
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4">
+            <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Format</p>
+            <p class="font-semibold text-gray-900">{service.format}</p>
+          </div>
+        )}
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4">
+          <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Price</p>
+          <p class="font-semibold text-gray-900">{service.price}</p>
+        </div>
+      </div>
+
+      {service.note && (
+        <p class="mt-8 text-sm text-gray-500 italic max-w-2xl">{service.note}</p>
+      )}
+
+      <!-- Bottom CTA -->
+      <div class="mt-12 border-t border-gray-100 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <p class="text-base font-semibold text-gray-900">Ready when you are.</p>
+          <p class="text-sm text-gray-500">Book through Topmate or reach out via the contact page.</p>
+        </div>
+        <div class="flex gap-3">
+          <a
+            href={service.ctaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
+          >
+            Book this session
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-gray-800 border border-gray-300 hover:bg-gray-50 rounded-lg transition"
+          >
+            Contact instead
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

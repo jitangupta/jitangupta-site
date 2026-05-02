@@ -1,0 +1,18 @@
+---
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SITE_TITLE,
+  "url": SITE_URL,
+  "description": SITE_DESCRIPTION,
+  "author": {
+    "@type": "Person",
+    "name": "Jitan Gupta",
+    "url": SITE_URL
+  },
+  "inLanguage": "en"
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

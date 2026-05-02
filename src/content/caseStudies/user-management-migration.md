@@ -10,7 +10,7 @@ articleTag: 'Software Migration'
 previousArticle: ''
 nextArticle: 'university-credit-system-migration'
 serviceUsed: 'Refactoring & Rebuilding Strategy'
-testimonial: 'As part of our modernization efforts, Jitan led the assessment and execution of our User Management System migration to Azure App Services. His structured approach—including a proof of concept, risk assessment, and fallback mechanisms—ensured a smooth transition with minimal disruption. Thanks to this migration, we improved scalability, reduced technical debt, and aligned our system with cloud best practices.'
+testimonial: 'As part of our modernization efforts, Jitan led the assessment and execution of our User Management System migration to Azure App Services. His structured approach (proof of concept, risk assessment, fallback mechanisms) ensured a smooth transition with minimal disruption. Thanks to this migration, we improved scalability, reduced technical debt, and aligned our system with cloud best practices.'
 testimonialAuthor: 'R██████ ███████'
 testimonialAuthorTitle: 'Senior Director of Engineering'
 testimonialAuthorCompany: '████████████'
@@ -23,7 +23,7 @@ stats:
   - percentage: "24/7"
     description: "Flexible architecture supporting future growth"
 draft: false
-aiBridge: "Identity systems have zero margin for error. AI accelerates the boring parts — but a human must own the critical path."
+aiBridge: "Identity systems have zero margin for error. AI accelerates the boring parts, but a human must own the critical path."
 ---
 ## Seamless User Management Migration: Future-Proofing with Azure
 ### Executive Summary

@@ -1,22 +1,45 @@
 ---
 import '../styles/global.css';
-import type { CollectionEntry  } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import CommonCTA from '../components/CommonCTA.astro';
-import Chatwoot from '../components/chatwoot.astro';	
+import Chatwoot from '../components/chatwoot.astro';
+import ArticleSchema from '../components/schema/ArticleSchema.astro';
+import FAQPageSchema from '../components/schema/FAQPageSchema.astro';
+import VideoObjectSchema from '../components/schema/VideoObjectSchema.astro';
 
-type Props = CollectionEntry<'article'>['data'];
+type Props = CollectionEntry<'learn'>['data'];
 
-const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTag } = Astro.props;
+const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTag, faq, videos } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={heroImage} />		
+		<BaseHead title={title} description={description} image={heroImage} />
+		<ArticleSchema
+			title={title}
+			description={description}
+			pubDate={pubDate}
+			updatedDate={updatedDate}
+			url={canonical}
+			image={heroImage}
+		/>
+		{faq && faq.length > 0 && <FAQPageSchema faq={faq} />}
+		{videos && videos.map((v) => (
+			<VideoObjectSchema
+				name={v.name}
+				description={v.description ?? title}
+				thumbnailUrl={`https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`}
+				uploadDate={v.uploadDate ?? pubDate.toISOString()}
+				contentUrl={`https://www.youtube.com/watch?v=${v.youtubeId}`}
+				embedUrl={`https://www.youtube.com/embed/${v.youtubeId}`}
+			/>
+		))}
 		<style is:global>
 			.content-slot {
 				color: #364153;
@@ -100,8 +123,8 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 		<section class="bg-[#F8FAFC] mx-2">
 			<div class="bg-white max-w-screen-xl mx-auto px-5 md:px-15 py-10 rounded-b-2xl">
 				<!-- Tags -->
-				<span class="px-5 inline-block rounded-3xl cursor-pointer m-1 bg-sky-300 hover:bg-gray-800 hover:text-white transition">Articles</span>
-				<span class="px-5 inline-block rounded-3xl cursor-pointer bg-yellow-300 hover:bg-gray-800 hover:text-white transition">🛠️ {articleTag}</span>
+				<a href="/learn/" class="px-5 inline-block rounded-3xl cursor-pointer m-1 bg-sky-300 hover:bg-gray-800 hover:text-white transition">Learn</a>
+				{articleTag && <span class="px-5 inline-block rounded-3xl cursor-pointer bg-yellow-300 hover:bg-gray-800 hover:text-white transition">🛠️ {articleTag}</span>}
 
 				<!-- Title -->
 				<h1 class="text-3xl md:text-5xl lg:text-6xl mt-8 font-bold" style="line-height: 1.2;">{title}</h1>
@@ -163,8 +186,46 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 				<!-- Blog Content -->
 				<main class="w-full md:w-3/4 content-slot">
 					<slot />
-				</main>		
-		
+
+					{videos && videos.length > 0 && (
+						<section class="mt-12">
+							<h2>Watch on YouTube</h2>
+							<div class="space-y-6">
+								{videos.map((v) => (
+									<div>
+										<div class="aspect-video w-full max-w-3xl rounded-xl overflow-hidden border border-gray-200">
+											<iframe
+												src={`https://www.youtube.com/embed/${v.youtubeId}`}
+												title={v.name}
+												loading="lazy"
+												class="w-full h-full"
+												frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+												allowfullscreen
+											></iframe>
+										</div>
+										<p class="mt-2 text-sm text-gray-600">{v.name}</p>
+									</div>
+								))}
+							</div>
+						</section>
+					)}
+
+					{faq && faq.length > 0 && (
+						<section class="mt-12">
+							<h2>Frequently Asked Questions</h2>
+							<div class="space-y-3">
+								{faq.map((item) => (
+									<details class="bg-white border border-gray-200 rounded-xl p-4 open:shadow-sm">
+										<summary class="font-semibold text-gray-900 cursor-pointer">{item.question}</summary>
+										<div class="mt-3 text-gray-700 leading-relaxed" set:html={item.answer} />
+									</details>
+								))}
+							</div>
+						</section>
+					)}
+				</main>
+
 				<!-- Table Of Content -->
 				<aside class="hidden md:block md:w-1/4 pl-6">
 					<div class="sticky top-4 p-4 bg-white shadow-lg rounded-lg">
@@ -177,12 +238,11 @@ const { title, titleTag, description, pubDate, updatedDate, heroImage, articleTa
 							))}
 						</ul>
 					</div>
-				</aside>				 		
+				</aside>
 			</div>
 		</section>
 
-		<!-- TODO: Read more case studies -->
-		<CommonCTA /> 
+		<CommonCTA />
 		
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

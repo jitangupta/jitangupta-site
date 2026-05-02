@@ -3,7 +3,7 @@ title: 'University Credit System Modernization'
 pageTitle: 'How We Rebuilt a University’s Legacy Credit System with Cloud-Native Architecture – and Boosted Revenue by 30%'
 seoTitle: 'Legacy to Cloud: How We Rebuilt a University Credit System and Boosted Revenue by 30%'
 summary: 'We helped a leading North American university modernize its outdated credit evaluation system by rebuilding it as a scalable, mobile-friendly, cloud-native platform using .NET Core, Angular, and Azure.'
-description: 'Case study: Discover how we replaced three monolithic WebForms applications with a unified .NET Core and Angular platform hosted on Azure—boosting usability, scalability, and performance for a university’s mission-critical credit system.'
+description: 'Case study: Discover how we replaced three monolithic WebForms applications with a unified .NET Core and Angular platform hosted on Azure, boosting usability, scalability, and performance for a university’s mission-critical credit system.'
 pubDate: '24 Apr 2025'
 heroImage: '/case-study/credit-management/Credit Management System banner.png'
 articleTag: 'Legacy Modernization'
@@ -25,10 +25,10 @@ stats:
 draft: false
 aiBridge: "Legacy modernization at its messiest. The kind of system complexity where AI-generated code breaks on day one if you don't understand the domain."
 ---
-[comment]:<> (Jitan’s leadership was instrumental in turning around our legacy system. His structured approach—starting with thorough documentation and ending with a fully modern cloud-native platform—helped us deliver better experiences for students, evaluators, and administrators.)
+[comment]:<> (Jitan’s leadership was instrumental in turning around our legacy system. His structured approach (starting with thorough documentation and ending with a fully modern cloud-native platform) helped us deliver better experiences for students, evaluators, and administrators.)
 
 ## Client Context
-A mid-sized North American university was running a fragmented credit evaluation system—three disconnected apps, manual workflows, and no mobile support. Stakeholders were aware the system needed modernization to improve scale and student experience but needed support translating that vision into a clear execution plan.
+A mid-sized North American university was running a fragmented credit evaluation system: three disconnected apps, manual workflows, and no mobile support. Stakeholders were aware the system needed modernization to improve scale and student experience but needed support translating that vision into a clear execution plan.
 
 ## The Fire Drill: Taking Over Mid-Crisis
 I was part of another project when some lead engineers left the organization, and the project hung in between. Some senior members (Director of Engineering, Product Managers, aka stakeholders) with whom I had already worked. They assigned me the backend of the project to lead. 
@@ -59,7 +59,7 @@ And I started with documenting the first module and proposed plans of execution 
 </div>
 
 <blockquote class="p-4 my-4 border-s-4 border-primary-300 bg-primary-50">
-<p class="text-xl italic font-medium leading-relaxed text-gray-900">“This was before the AI boom. Every doc, plan, and migration step was manual—proof that disciplined execution and stakeholder alignment can outperform even the best tools.”</p>
+<p class="text-xl italic font-medium leading-relaxed text-gray-900">“This was before the AI boom. Every doc, plan, and migration step was manual. Proof that disciplined execution and stakeholder alignment can outperform even the best tools.”</p>
 </blockquote>
 
 ## From VM Chaos to Cloud-Native Confidence
@@ -94,7 +94,7 @@ This migration was a huge jump in tech stack, system usability and revenue.
 
 ### 2. System Usability
 - The legacy system wasn’t responsive, so reaching out to mobile, and tablet devices was a significant improvement.
-- With migration, we leveraged UX considerations to enhance system usability even further.
+- With migration, we used UX research to push system usability even further.
 
 ### 3. Revenue
 - With migration and system usability, more students were able to access the application, which helped with revenue jump by 30%. 
