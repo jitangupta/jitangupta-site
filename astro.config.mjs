@@ -12,6 +12,11 @@ export default defineConfig({
   site: 'https://jitangupta.com',
   integrations: [mdx(), sitemap()],
 
+  redirects: {
+    '/article': '/learn',
+    '/article/[...slug]': '/learn/[...slug]',
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

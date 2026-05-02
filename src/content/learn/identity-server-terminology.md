@@ -6,7 +6,7 @@ pubDate: '20 Feb 2025'
 heroImage: '/articles/identity-server-terminology2.jpg'
 articleTag: 'Software Architecture'
 previousArticle: ''
-nextArticle: '/article/building-auth-service'
+nextArticle: '/learn/building-auth-service'
 ---
 
 ## Why do people often confuse Identity Server with IdentityServer4?

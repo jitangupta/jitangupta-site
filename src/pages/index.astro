@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import CommonCTA from "../components/CommonCTA.astro";
 import Chatwoot from "../components/chatwoot.astro";
+import WebSiteSchema from "../components/schema/WebSiteSchema.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
 import { featuredVideos } from "../data/videos";
@@ -22,6 +23,7 @@ const featuredBuilds = builds.slice(0, 3);
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<WebSiteSchema />
 	</head>
 	<body>
 		<Header />
@@ -32,7 +34,7 @@ const featuredBuilds = builds.slice(0, 3);
 				<!-- Subtle dot-grid watermark -->
 				<div class="dot-grid" aria-hidden="true"></div>
 
-				<!-- Photo — first in DOM: top on mobile, left col on desktop (natural grid order) -->
+				<!-- Photo: first in DOM. Top on mobile, left col on desktop (natural grid order). -->
 				<div class="flex items-end justify-center lg:col-span-5 relative z-10 mb-4 lg:mb-0">
 					<img
 						src="/jitan-bg.png"
@@ -41,14 +43,14 @@ const featuredBuilds = builds.slice(0, 3);
 					/>
 				</div>
 
-				<!-- Text — second in DOM: below photo on mobile, right col on desktop -->
+				<!-- Text: second in DOM. Below photo on mobile, right col on desktop. -->
 				<div class="mr-auto place-self-center lg:col-span-7 relative z-10">
 					<p class="section-label mb-4 hero-fade hero-fade-1">AI Adoption Practitioner · Mumbai</p>
 					<h1 class="hero-fade hero-fade-2 max-w-2xl mb-5 text-4xl font-bold xl:text-6xl">
-						I Build with AI.<br />I Teach What I Learn.
+						AI adoption that sticks.<br />Built around Claude Code, MCP, and agents.
 					</h1>
 					<p class="hero-fade hero-fade-3 max-w-xl font-light text-gray-600 md:text-xl lg:text-2xl mb-8 leading-relaxed">
-						10+ years of enterprise engineering — migrations, multi-tenant systems, AI tools. I build things, share what works, and help engineers level up.
+						I'm a Mumbai-based AI adoption practitioner. I help engineering teams and non-technical professionals put AI into real daily work, with deep specialization in Claude Code, the Model Context Protocol, and agentic workflows.
 					</p>
 					<div class="hero-fade hero-fade-3 flex flex-wrap gap-3 mb-10">
 						<a
@@ -215,7 +217,7 @@ const featuredBuilds = builds.slice(0, 3);
 						</div>
 					))}
 				</div>
-				<p class="mt-8 text-xs text-gray-400 text-center">I teach AI adoption broadly. Claude is where I go deepest — so that's where the first meetup starts.</p>
+				<p class="mt-8 text-xs text-gray-400 text-center">I teach AI adoption broadly. Claude is where I go deepest, so that's where the first meetup starts.</p>
 			</div>
 		</section>
 

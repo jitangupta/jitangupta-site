@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { services } from '../data/services';
 
-const title = "Services — Work With Jitan Gupta";
-const description = "From a quick 15-minute call to a full-day team session — practical AI adoption sessions for engineers and teams. Based in India, available on-site or remote.";
+const title = "Services · Work With Jitan Gupta";
+const description = "Practical AI adoption sessions for engineers and teams: discovery calls, 1:1 mentorship, AI workflow setup, full-day Team Training, and Build-Along sessions. Mumbai-based, on-site or remote.";
 
 const individualServices = services.filter(s => s.tier === 'individual');
 const teamServices = services.filter(s => s.tier === 'team');
@@ -19,14 +19,14 @@ const teamServices = services.filter(s => s.tier === 'team');
           Work With Me
         </h1>
         <p class="text-lg md:text-xl text-gray-600 max-w-2xl">
-          From a 15-minute call to a full-day team session — pick what fits your situation.
+          From a 15-minute call to a full-day team session. Pick what fits your situation.
         </p>
       </div>
 
       <!-- Credibility paragraph -->
       <div class="fade-up mb-10 md:mb-14">
         <p class="text-sm text-gray-500 max-w-2xl leading-relaxed">
-          I'm a Senior Platform Engineer with 10 years in tech — 9 years building .NET systems and cloud infrastructure (Kubernetes, AKS, Azure), plus a year in platform engineering. I build with AI tools daily in production work, not just demos. My YouTube channel documents real AI workflows, MCP integrations, and Claude Code projects as I build them. What I teach comes from what I ship.
+          I'm a Mumbai-based AI adoption practitioner with 10 years in tech: 9 years building .NET systems and cloud infrastructure (Kubernetes, AKS, Azure), plus a year in platform engineering. I build with AI tools daily in production work, not just demos. My YouTube channel documents real AI workflows, MCP integrations, and Claude Code projects as I build them. What I teach comes from what I ship.
         </p>
       </div>
 
@@ -100,19 +100,23 @@ const teamServices = services.filter(s => s.tier === 'team');
               <p class="text-xs text-gray-400 leading-relaxed mb-5 italic">{service.note}</p>
             )}
 
-            <div class="mt-auto pt-2">
+            <div class="mt-auto pt-2 flex flex-wrap gap-3">
               <a
-                href={service.ctaLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg transition ${
-                  service.isFree
-                    ? 'bg-primary-600 hover:bg-primary-700'
-                    : 'bg-primary-600 hover:bg-primary-700'
-                }`}
+                href={`/services/${service.id}`}
+                class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
               >
-                Book Now →
+                See details →
               </a>
+              {service.isFree && (
+                <a
+                  href={service.ctaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-primary-700 border border-primary-300 hover:bg-primary-50 rounded-lg transition"
+                >
+                  Book on Topmate
+                </a>
+              )}
             </div>
           </div>
         ))}
@@ -210,12 +214,10 @@ const teamServices = services.filter(s => s.tier === 'team');
 
             <div class="mt-auto pt-2">
               <a
-                href={service.ctaLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/services/${service.id}`}
                 class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
               >
-                Book Now →
+                See details →
               </a>
             </div>
           </div>
@@ -229,9 +231,9 @@ const teamServices = services.filter(s => s.tier === 'team');
           Most people start with the free discovery call. In 15 minutes I can usually tell you exactly which session (if any) would actually help. If your situation doesn't fit any of these, I'll tell you that too.
         </p>
         <ul class="space-y-1.5 text-sm text-gray-600 mb-5">
-          <li><span class="text-gray-400">If you're a team lead exploring AI for your team</span> — start with Team Training.</li>
-          <li><span class="text-gray-400">If you have a specific tool you want to build</span> — start with Build-Along.</li>
-          <li><span class="text-gray-400">If you're an individual figuring things out</span> — start with 1:1 Mentorship or the Discovery Call.</li>
+          <li><span class="text-gray-400">If you're a team lead exploring AI for your team:</span> start with Team Training.</li>
+          <li><span class="text-gray-400">If you have a specific tool you want to build:</span> start with Build-Along.</li>
+          <li><span class="text-gray-400">If you're an individual figuring things out:</span> start with 1:1 Mentorship or the Discovery Call.</li>
         </ul>
         <a
           href="https://topmate.io/jitangupta"

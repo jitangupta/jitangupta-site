@@ -23,9 +23,9 @@ aiBridge: "Today I'd use AI to automate the tenant-by-tenant migration validatio
 
 ## Executive Summary
 
-When your biggest enterprise customer refuses to upgrade because the new release doesn't benefit them, but your infrastructure forces all tenants onto the same version—you're stuck. This is the multi-version multi-tenant problem that every B2B SaaS company with enterprise customers eventually faces.
+When your biggest enterprise customer refuses to upgrade because the new release doesn't benefit them, but your infrastructure forces all tenants onto the same version, you're stuck. This is the multi-version multi-tenant problem that every B2B SaaS company with enterprise customers eventually faces.
 
-This case study documents an ongoing Azure Kubernetes Service (AKS) migration that solves this exact problem. The architecture enables independent tenant versioning, reduces infrastructure costs by 22%, and cuts tenant onboarding time from weeks to 30 minutes—while maintaining the stability and compliance requirements that enterprise customers demand.
+This case study documents an ongoing Azure Kubernetes Service (AKS) migration that solves this exact problem. The architecture enables independent tenant versioning, reduces infrastructure costs by 22%, and cuts tenant onboarding time from weeks to 30 minutes, while maintaining the stability and compliance requirements that enterprise customers demand.
 
 **Key Outcomes:**
 - **Cost Reduction:** 22% infrastructure cost savings through elastic scaling
@@ -117,7 +117,7 @@ When one service consumes excessive CPU or memory (due to a bug, unexpected load
 
 **Example:** A background job service starts consuming 90% CPU due to a bug. Now your API services are slow, your database queries timeout, and your monitoring system can't even alert you because it's also starved for resources.
 
-On VMs, your only option is to over-provision resources "just in case"—which brings you back to the cost problem.
+On VMs, your only option is to over-provision resources "just in case," which brings you back to the cost problem.
 
 ---
 
@@ -129,7 +129,7 @@ When traditional approaches fail, you need to rethink the fundamentals. Here's h
 
 **The Core Question:** Why not stick with VMs and try harder?
 
-**The Answer:** Because the problem isn't about trying harder—it's about having the wrong primitives.
+**The Answer:** Because the problem isn't about trying harder. It's about having the wrong primitives.
 
 Kubernetes provides four capabilities that VMs fundamentally can't:
 
@@ -138,7 +138,7 @@ Kubernetes provides four capabilities that VMs fundamentally can't:
 3. **Auto-Healing:** Pod crashes? K8s restarts it. Node fails? K8s reschedules pods elsewhere.
 4. **Elastic Scaling:** Scale individual services based on demand, not entire VM instances.
 
-**Why This Matters for Multi-Version:** You can run v3.0, v3.1, v3.2, and v3.3 of the same service simultaneously, each in isolated pods with their own resource guarantees. When v3.2 has a bug and crashes, only tenants on v3.2 are affected—everyone else keeps running.
+**Why This Matters for Multi-Version:** You can run v3.0, v3.1, v3.2, and v3.3 of the same service simultaneously, each in isolated pods with their own resource guarantees. When v3.2 has a bug and crashes, only tenants on v3.2 are affected. Everyone else keeps running.
 
 ### Decision 2: Why YARP Over Istio/Envoy?
 
@@ -497,7 +497,7 @@ public class TenantConfigService : ITenantConfigService
 
 ## Implementation Reality: Where We Are Now
 
-This isn't a post-mortem case study. The migration is happening right now, and we're documenting the journey as we go.
+This isn't a post-mortem case study. The migration is happening right now, and we're documenting it as we go.
 
 ### Current Phase: Lower Environment Live
 
@@ -1638,7 +1638,7 @@ This migration is ongoing. Here's what's ahead.
 
 ## Lessons Learned So Far
 
-This migration is a work in progress, but we've already learned valuable lessons that might help others considering a similar journey.
+This migration is a work in progress, but we've already learned valuable lessons that might help others considering a similar move.
 
 ### 1. Start with Observability, Not Deployment
 
@@ -1648,7 +1648,7 @@ This migration is a work in progress, but we've already learned valuable lessons
 
 **The Right Approach:** Build observability infrastructure first, validate it in lower environments, *then* migrate workloads.
 
-### 2. Kubernetes Adds Complexity—Accept It
+### 2. Kubernetes Adds Complexity (Accept It)
 
 **The Reality:** VMs are simpler. Kubernetes is more powerful, but with more moving parts.
 
@@ -1661,7 +1661,7 @@ This migration is a work in progress, but we've already learned valuable lessons
 
 **Decision Filter:** If your business model requires independent tenant versioning, Kubernetes is the right choice. If not, stick with simpler solutions.
 
-### 3. Helm Charts Are Infrastructure-as-Code—Treat Them That Way
+### 3. Helm Charts Are Infrastructure-as-Code, Treat Them That Way
 
 **The Mistake:** Hand-editing Helm values and losing track of changes.
 
@@ -1676,7 +1676,7 @@ This migration is a work in progress, but we've already learned valuable lessons
 **What We Like:**
 - Tenant routing logic is plain C# (easy to test, easy to debug)
 - No sidecar overhead (unlike Istio)
-- Fast iteration (change code, redeploy, test—no mesh configuration needed)
+- Fast iteration (change code, redeploy, test, no mesh configuration needed)
 - In-memory caching keeps latency low
 
 **Trade-Offs We Accept:**
@@ -1693,10 +1693,10 @@ This migration is a work in progress, but we've already learned valuable lessons
 **The Implementation:**
 ```yaml
 resources:
-  limits:    # Enforced by kernel—pod can't exceed
+  limits:    # Enforced by kernel; pod can't exceed
     cpu: "2000m"
     memory: "2Gi"
-  requests:  # Used by scheduler—guarantees minimum
+  requests:  # Used by scheduler; guarantees minimum
     cpu: "1000m"
     memory: "1Gi"
 ```
@@ -1719,7 +1719,7 @@ resources:
 
 **Time Investment:** Plan for 2-4 weeks of gradual knowledge transfer, not a 2-day training bootcamp.
 
-### 7. Don't Optimize Prematurely—Ship First, Tune Later
+### 7. Don't Optimize Prematurely. Ship First, Tune Later.
 
 **The Temptation:** Spend weeks tuning pod resource requests, HPA configurations, and node sizing before going live.
 
@@ -1795,7 +1795,7 @@ This case study documents a real, ongoing Kubernetes migration solving a real bu
 
 **The Business Impact:**
 
-This isn't just a technical migration—it's enabling a business model that supports enterprise customers with strict compliance requirements while maintaining the agility to innovate for new customers.
+This isn't just a technical migration. It's enabling a business model that supports enterprise customers with strict compliance requirements while maintaining the agility to innovate for new customers.
 
 **Key Business Outcomes:**
 - Enterprise customers upgrade on their schedule (compliance-friendly)

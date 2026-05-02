@@ -6,7 +6,7 @@ pubDate: '26 June 2025'
 heroImage: '/articles/cluade-code-installation/claude-article-banner.jpg'
 articleTag: 'AI coding assistant'
 previousArticle: ''
-nextArticle: '/article/building-auth-service'
+nextArticle: '/learn/building-auth-service'
 ---
 
 > **🚨 CRITICAL**: Claude Code does **NOT** run natively on Windows. This guide shows you how to install it properly using Windows Subsystem for Linux (WSL).

@@ -1,0 +1,56 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Chatwoot from '../../components/chatwoot.astro';
+import '../../styles/global.css';
+
+const learnPages = (await getCollection('learn')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const seoTitle = "Learn · Claude Code, MCP & Agentic Workflow Tutorials";
+const seoDescription = "Practical, Mumbai-tested tutorials on Claude Code, the Model Context Protocol (MCP), and agentic workflows. Each piece is grounded in real shipped work.";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={seoTitle} description={seoDescription} />
+	</head>
+	<body>
+		<Header />
+		<section class="bg-[#F8FAFC] mx-2">
+			<div class="bg-white max-w-screen-xl mx-auto px-6 md:px-15 py-10 rounded-b-2xl">
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold" style="line-height: 1.2;">Learn</h1>
+				<p class="mt-4 text-gray-700 max-w-2xl text-lg">Practical tutorials on Claude Code, MCP, and agentic workflows. Each piece is grounded in something I've shipped, not a survey of the field.</p>
+			</div>
+		</section>
+
+		<section class="bg-[#F8FAFC] py-5 px-6">
+			<div class="max-w-screen-xl mx-auto rounded-2xl">
+			<div class="grid md:grid-cols-3 gap-6">
+				{learnPages.map((entry) => (
+					entry.data.draft == true ? null :
+					<a href={`/learn/${entry.id}`}>
+						<div class="bg-white rounded-2xl border-2 border-gray-400 overflow-hidden transition-transform transform hover:scale-105">
+							<img src={entry.data.heroImage} alt={entry.data.title} class="w-full h-48 object-cover" />
+							<div class="p-6">
+								<h3 class="text-xl font-semibold text-gray-700">{entry.data.title}</h3>
+								<p class="text-sm text-gray-500 mt-1">Published on <FormattedDate date={entry.data.pubDate} /></p>
+								<p class="text-gray-700 mt-3">{entry.data.description}</p>
+								<span class="inline-block mt-4 text-primary-500 font-semibold hover:underline">Read →</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+			</div>
+		</section>
+		<Footer />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+		<Chatwoot />
+	</body>
+</html>

@@ -1,0 +1,55 @@
+---
+import { SITE_URL } from '../../consts';
+
+interface Props {
+  serviceName: string;
+  description: string;
+  serviceType?: string;
+  price?: string;
+  priceCurrency?: string;
+  url: string;
+}
+
+const {
+  serviceName,
+  description,
+  serviceType = "AI training and adoption services",
+  price,
+  priceCurrency = "INR",
+  url
+} = Astro.props;
+
+const schema: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": serviceName,
+  "description": description,
+  "serviceType": serviceType,
+  "url": url,
+  "provider": {
+    "@type": "Person",
+    "name": "Jitan Gupta",
+    "url": SITE_URL,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "India" },
+    { "@type": "Place", "name": "Remote / Global" }
+  ]
+};
+
+if (price) {
+  schema.offers = {
+    "@type": "Offer",
+    "price": price,
+    "priceCurrency": priceCurrency,
+    "url": url
+  };
+}
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
