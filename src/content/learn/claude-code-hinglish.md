@@ -4,7 +4,7 @@ titleTag: 'For Indian engineers who want to actually use Claude Code in producti
 description: 'A practical, Hinglish-friendly guide to Claude Code for Indian engineering teams. Installation, daily workflows, Plan Mode, CLAUDE.md, multi-project setups, and Git Worktree, all from production use.'
 pubDate: '2026-04-15'
 updatedDate: '2026-05-02'
-heroImage: '/articles/cluade-code-installation/claude-article-banner.jpg'
+heroImage: '/learn/master-claude-code.jpg'
 articleTag: 'Claude Code'
 targetQuery: 'claude code training india'
 videos:

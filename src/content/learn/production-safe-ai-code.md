@@ -4,7 +4,7 @@ titleTag: 'Five guardrails to keep AI-generated code from quietly breaking produ
 description: 'A practical framework for engineering teams shipping AI-generated code. Five checks (correctness, scope, security, performance, observability) before a single AI-written line reaches main.'
 pubDate: '2026-04-22'
 updatedDate: '2026-05-02'
-heroImage: '/articles/cluade-code-installation/claude-article-banner.jpg'
+heroImage: '/learn/guard-rails.jpg'
 articleTag: 'AI engineering'
 targetQuery: 'production-safe ai code framework'
 videos:
