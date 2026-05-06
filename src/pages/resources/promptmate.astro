@@ -6,22 +6,27 @@ const description = "A Chrome extension that adds a personal prompt library side
 
 const features = [
   {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg>`,
     heading: "Sidebar inside ChatGPT and Claude",
-    body: "No tab switching. Your prompts live where you work, in a sidebar that opens on both interfaces.",
+    body: "No tab switching. Your prompts live where you work — a sidebar that opens on both interfaces with one click.",
   },
   {
-    heading: "Save with tone and format settings",
-    body: "Each prompt stores a tone (formal, casual, technical) and output format (bullets, steps, prose, code). One click inserts both.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
+    heading: "Save with tone and format",
+    body: "Each prompt stores a tone (formal, casual, technical) and output format (bullets, steps, prose, code). Inserted together, in one click.",
   },
   {
-    heading: "Cross-device sync via Google Drive",
-    body: "Your library syncs to a private folder in your own Google Drive. No backend server. No data on my infrastructure.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
+    heading: "Open source, no backend",
+    body: "Syncs to your own private Google Drive folder. No data on my infrastructure. You own your library.",
   },
   {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
     heading: "Edit on demand",
     body: "Prompts aren't locked. Open any saved prompt, tweak it mid-session, save back. The edit is yours.",
   },
   {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>`,
     heading: "Local usage analytics",
     body: "Tracks how often you create, apply, copy, and delete prompts. Stored locally so you can see what's actually useful.",
   },
@@ -29,41 +34,21 @@ const features = [
 
 const roadmap = [
   {
-    status: "Next release",
-    statusColor: "accent",
-    title: "Logo on chrome://extensions and Web Store",
-    body: "Manifest is missing the top-level icons field, so the extension shows a 'P' placeholder everywhere outside the toolbar. Fix ships in v0.4.6.",
-  },
-  {
-    status: "Next release",
-    statusColor: "accent",
-    title: "Cross-browser auth (Brave, Edge, Vivaldi)",
-    body: "Sign-in currently fails on non-Chrome Chromium browsers. Switching from chrome.identity.getAuthToken to launchWebAuthFlow + PKCE fixes this across all Chromium-based browsers.",
-  },
-  {
-    status: "Planned",
+    status: "Pending",
     statusColor: "primary",
     title: "Prompt versioning",
     body: "Every edit creates a version. Browse history, diff before/after, restore any prior version. Drive handles the revisions natively, so the architecture already supports it.",
   },
   {
-    status: "Planned",
+    status: "Pending",
     statusColor: "primary",
     title: "Shareable prompts",
     body: "Publish a prompt to anyone-with-link. The receiver gets their own copy. No ongoing sync, no collaborative editing. Private by default, shareable on demand.",
   },
-  {
-    status: "Future",
-    statusColor: "gray",
-    title: "BYOK prompt enhancer",
-    body: "Add an Enhance button to the prompt composer. Paste your own Anthropic or OpenAI key, and PromptMate rewrites your draft into a sharper prompt. No backend, no proxying, your key stays in your browser.",
-  },
 ];
 
 const statusStyles: Record<string, string> = {
-  accent: "text-accent-700 bg-accent-50 border-accent-200",
   primary: "text-primary-700 bg-primary-50 border-primary-200",
-  gray: "text-gray-600 bg-gray-50 border-gray-200",
 };
 ---
 
@@ -73,6 +58,31 @@ const statusStyles: Record<string, string> = {
   <section class="bg-[#F8FAFC] mx-2">
     <div class="bg-white max-w-screen-xl mx-auto px-8 py-14 rounded-b-2xl relative overflow-hidden">
       <div class="dot-grid" aria-hidden="true"></div>
+
+      <!-- Decorative SVG: floating prompt cards -->
+      <div class="absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none hidden lg:flex items-center justify-end pr-8 opacity-[0.06]" aria-hidden="true">
+        <svg width="480" height="380" viewBox="0 0 480 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="30" width="200" height="56" rx="10" fill="#0E7490"/>
+          <rect x="52" y="46" width="120" height="8" rx="4" fill="#0E7490"/>
+          <rect x="52" y="62" width="80" height="6" rx="3" fill="#0E7490"/>
+          <rect x="260" y="80" width="180" height="56" rx="10" fill="#D97757"/>
+          <rect x="272" y="96" width="100" height="8" rx="4" fill="#D97757"/>
+          <rect x="272" y="112" width="60" height="6" rx="3" fill="#D97757"/>
+          <rect x="20" y="140" width="200" height="56" rx="10" fill="#0E7490"/>
+          <rect x="32" y="156" width="140" height="8" rx="4" fill="#0E7490"/>
+          <rect x="32" y="172" width="90" height="6" rx="3" fill="#0E7490"/>
+          <rect x="240" y="200" width="200" height="56" rx="10" fill="#D97757"/>
+          <rect x="252" y="216" width="120" height="8" rx="4" fill="#D97757"/>
+          <rect x="252" y="232" width="70" height="6" rx="3" fill="#D97757"/>
+          <rect x="60" y="260" width="180" height="56" rx="10" fill="#0E7490"/>
+          <rect x="72" y="276" width="110" height="8" rx="4" fill="#0E7490"/>
+          <rect x="72" y="292" width="65" height="6" rx="3" fill="#0E7490"/>
+          <rect x="280" y="310" width="160" height="48" rx="10" fill="#D97757"/>
+          <rect x="292" y="324" width="90" height="7" rx="3" fill="#D97757"/>
+          <rect x="292" y="339" width="55" height="5" rx="2.5" fill="#D97757"/>
+        </svg>
+      </div>
+
       <div class="relative z-10 max-w-2xl">
         <p class="section-label mb-4 hero-fade hero-fade-1">Chrome Extension · Free &amp; Open Source</p>
         <h1 class="hero-fade hero-fade-2 text-4xl md:text-5xl xl:text-6xl font-bold mb-5">
@@ -101,37 +111,155 @@ const statusStyles: Record<string, string> = {
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             View on GitHub
           </a>
+          <a
+            href="/builds"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-accent-700 border border-accent-300 bg-accent-50 rounded-lg hover:bg-accent-100 transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            See all builds
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Launch video -->
+  <section class="bg-[#F8FAFC] py-14 px-6">
+    <div class="max-w-screen-xl mx-auto fade-up">
+      <div class="mb-8 max-w-2xl">
+        <p class="section-label mb-3">Launch walkthrough</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">See it in action</h2>
+        <p class="mt-3 text-gray-500 text-sm">Install, setup, and a real session showing how PromptMate fits into a daily AI workflow.</p>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden border border-gray-200 shadow-xl max-w-4xl bg-gray-950">
+        <!-- Browser chrome decoration -->
+        <div class="flex items-center gap-1.5 px-4 py-3 bg-gray-900 border-b border-gray-800">
+          <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+          <div class="ml-3 flex-1 bg-gray-800 rounded-md px-3 py-1 text-xs text-gray-400 max-w-xs">chrome://extensions</div>
+        </div>
+        <video
+          src="/images/promptmate/launch.mp4"
+          controls
+          preload="metadata"
+          class="w-full block"
+          poster="/images/promptmate/banner-claude.jpg"
+        >
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="bg-white py-14 px-6">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="fade-up mb-10">
+        <p class="section-label mb-3">In the wild</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Works where you work</h2>
+        <p class="mt-3 text-gray-500 text-sm max-w-xl">Opens as a sidebar on both ChatGPT and Claude. No context switching, no separate tab.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-up-group">
+        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200">
+          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+            <div class="flex gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+            </div>
+            <span class="text-xs text-gray-500 font-mono ml-1">chatgpt.com</span>
+          </div>
+          <img src="/images/promptmate/banner-chatgpt.jpg" alt="PromptMate button on ChatGPT" class="w-full block" loading="lazy" />
+          <div class="px-5 py-4 bg-white">
+            <p class="text-sm font-semibold text-gray-800">One-click open on ChatGPT</p>
+            <p class="text-xs text-gray-500 mt-1">The PromptMate button appears in the bottom-right corner.</p>
+          </div>
+        </div>
+        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200">
+          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+            <div class="flex gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+            </div>
+            <span class="text-xs text-gray-500 font-mono ml-1">chatgpt.com</span>
+          </div>
+          <img src="/images/promptmate/banner-chatgpt-open.jpg" alt="PromptMate sidebar open on ChatGPT" class="w-full block" loading="lazy" />
+          <div class="px-5 py-4 bg-white">
+            <p class="text-sm font-semibold text-gray-800">Sidebar with tone &amp; format</p>
+            <p class="text-xs text-gray-500 mt-1">Search, pick tone, pick format, click Use. Done.</p>
+          </div>
+        </div>
+        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-accent-300 hover:shadow-lg transition-all duration-200">
+          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+            <div class="flex gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+            </div>
+            <span class="text-xs text-gray-500 font-mono ml-1">claude.ai</span>
+          </div>
+          <img src="/images/promptmate/banner-claude.jpg" alt="PromptMate button on Claude" class="w-full block" loading="lazy" />
+          <div class="px-5 py-4 bg-white">
+            <p class="text-sm font-semibold text-gray-800">Same experience on Claude</p>
+            <p class="text-xs text-gray-500 mt-1">Same sidebar, same library, both interfaces.</p>
+          </div>
+        </div>
+        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-accent-300 hover:shadow-lg transition-all duration-200">
+          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+            <div class="flex gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+            </div>
+            <span class="text-xs text-gray-500 font-mono ml-1">claude.ai</span>
+          </div>
+          <img src="/images/promptmate/banner-claude-open.jpg" alt="PromptMate sidebar open on Claude" class="w-full block" loading="lazy" />
+          <div class="px-5 py-4 bg-white">
+            <p class="text-sm font-semibold text-gray-800">Insert with full context</p>
+            <p class="text-xs text-gray-500 mt-1">Tone and format instructions are appended automatically.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Why I built it -->
-  <section class="bg-white py-14 px-6">
+  <section class="bg-[#F8FAFC] py-14 px-6">
     <div class="max-w-screen-xl mx-auto fade-up">
-      <div class="max-w-2xl">
+      <div class="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 max-w-3xl">
+        <!-- Quote icon -->
+        <svg class="text-primary-200 mb-5" width="40" height="40" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20C0 8.954 8.954 0 20 0h20v20c0 11.046-8.954 20-20 20S0 31.046 0 20Z"/>
+          <path fill="white" d="M14 12h-4v8h4V12Zm8 0h-4v8h4V12Z"/>
+        </svg>
         <p class="section-label mb-4">Why I built it</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">The friction was real</h2>
-        <div class="space-y-4 text-gray-600 leading-relaxed">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-5">The friction was real</h2>
+        <div class="space-y-4 text-gray-600 leading-relaxed text-[15px]">
           <p>
             I use Claude and ChatGPT for almost everything now: code reviews, draft emails, explaining concepts to teammates, writing scripts for YouTube. And I kept typing the same instructions over and over.
           </p>
           <p>
-            Not the prompts themselves. I had those saved in Notion, in a text file, scattered in browser tabs. The problem was the ritual: open a new chat, remember which prompt, find the file, copy, paste, adjust the tone manually. Every. Single. Session.
+            Not the prompts themselves — I had those saved in Notion, in a text file, scattered in browser tabs. The problem was the ritual: open a new chat, remember which prompt, find the file, copy, paste, adjust the tone manually. Every. Single. Session.
           </p>
           <p>
             I wanted the prompts where the work happens. Not in a tab I have to switch to. <em>In the sidebar</em>, with one click to insert. So I built it.
           </p>
-          <p>
-            v0.4.5 is out on the Chrome Web Store. It does the thing I needed. Everything else in the roadmap is real usage driving the next decisions, not a feature list I wrote to look complete.
-          </p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-gray-100 flex items-center gap-3">
+          <img src="/images/Profile Image.png" alt="Jitan Gupta" class="w-9 h-9 rounded-full object-cover" />
+          <div>
+            <p class="text-sm font-semibold text-gray-900">Jitan Gupta</p>
+            <p class="text-xs text-gray-400">Built in Mumbai · <a href="/builds" class="text-primary-600 hover:underline">See all builds →</a></p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Current features -->
-  <section class="bg-[#F8FAFC] py-12 px-6">
+  <section class="bg-white py-14 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="fade-up mb-10">
         <p class="section-label mb-3">What it does now · v0.4.5</p>
@@ -140,7 +268,8 @@ const statusStyles: Record<string, string> = {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl fade-up-group">
         {features.map((f) => (
-          <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md transition-all duration-200">
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md hover:bg-white transition-all duration-200">
+            <div class="w-9 h-9 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center text-primary-600 mb-4" set:html={f.icon} />
             <h3 class="text-base font-bold text-gray-900 mb-2">{f.heading}</h3>
             <p class="text-sm text-gray-500 leading-relaxed">{f.body}</p>
           </div>
@@ -150,25 +279,23 @@ const statusStyles: Record<string, string> = {
   </section>
 
   <!-- Roadmap -->
-  <section class="bg-white py-14 px-6">
+  <section class="bg-[#F8FAFC] py-14 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="fade-up mb-10">
         <p class="section-label mb-3">Roadmap</p>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What's next</h2>
-        <p class="mt-3 text-gray-500 text-sm max-w-xl">Actively building. These are the real tasks, not a polished feature wish list. If something here matters to you, open an issue or contribute.</p>
+        <p class="mt-3 text-gray-500 text-sm max-w-xl">Two features in active design. If either matters to you, open an issue or contribute.</p>
       </div>
-      <div class="space-y-4 max-w-3xl fade-up-group">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl fade-up-group">
         {roadmap.map((item) => (
-          <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:shadow-sm transition-all duration-200 flex gap-5">
-            <div class="shrink-0 pt-0.5">
-              <span class={`inline-block text-xs font-bold border rounded-md px-2.5 py-1 whitespace-nowrap ${statusStyles[item.statusColor]}`}>
-                {item.status}
-              </span>
-            </div>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 mb-1.5">{item.title}</h3>
-              <p class="text-sm text-gray-500 leading-relaxed">{item.body}</p>
-            </div>
+          <div class="bg-white border border-gray-200 rounded-2xl p-7 hover:border-primary-300 hover:shadow-md transition-all duration-200 relative overflow-hidden">
+            <!-- Subtle top accent -->
+            <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-400 to-primary-200 rounded-t-2xl"></div>
+            <span class={`inline-block text-xs font-bold border rounded-md px-2.5 py-1 mb-4 ${statusStyles[item.statusColor]}`}>
+              {item.status}
+            </span>
+            <h3 class="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">{item.body}</p>
           </div>
         ))}
       </div>
@@ -186,45 +313,32 @@ const statusStyles: Record<string, string> = {
     </div>
   </section>
 
-  <!-- Video coming soon -->
-  <section class="bg-[#F8FAFC] py-12 px-6">
-    <div class="max-w-screen-xl mx-auto fade-up">
-      <div class="border-2 border-dashed border-gray-200 rounded-2xl p-10 md:p-14 max-w-2xl flex flex-col items-start gap-5">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-primary-50 border border-primary-200 flex items-center justify-center shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-          </div>
-          <span class="text-xs font-bold text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-3 py-1">Coming soon</span>
-        </div>
-        <div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Full walkthrough video</h2>
-          <p class="text-gray-500 text-sm leading-relaxed">Install, setup, and a real session showing how I use PromptMate in my daily AI workflow. Coming to YouTube in Hinglish 🇮🇳</p>
-        </div>
-        <a
-          href="https://www.youtube.com/@jitangupta"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-          Subscribe for updates
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- Dark CTA -->
   <section class="bg-[#F8FAFC] py-8 px-6 pb-16">
     <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-12 sm:px-14 sm:py-16 relative overflow-hidden">
       <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(14,116,144,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
+      <!-- Decorative SVG pattern -->
+      <svg class="absolute right-8 bottom-0 opacity-[0.04] pointer-events-none" width="280" height="200" viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="10" width="120" height="36" rx="8" fill="white"/>
+        <rect x="22" y="22" width="70" height="6" rx="3" fill="white"/>
+        <rect x="22" y="32" width="45" height="5" rx="2.5" fill="white"/>
+        <rect x="150" y="50" width="110" height="36" rx="8" fill="white"/>
+        <rect x="162" y="62" width="60" height="6" rx="3" fill="white"/>
+        <rect x="162" y="72" width="40" height="5" rx="2.5" fill="white"/>
+        <rect x="0" y="100" width="120" height="36" rx="8" fill="white"/>
+        <rect x="12" y="112" width="80" height="6" rx="3" fill="white"/>
+        <rect x="12" y="122" width="50" height="5" rx="2.5" fill="white"/>
+        <rect x="140" y="140" width="120" height="36" rx="8" fill="white"/>
+        <rect x="152" y="152" width="75" height="6" rx="3" fill="white"/>
+        <rect x="152" y="162" width="48" height="5" rx="2.5" fill="white"/>
+      </svg>
       <div class="relative z-10 max-w-xl">
-        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Free. Open source. No backend.</p>
+        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Free · Open source · No backend</p>
         <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
           Stop retyping. Build your library once.
         </h2>
         <p class="text-gray-400 leading-relaxed mb-8 text-sm">
-          Install PromptMate, save the prompts you actually use, and get them back in one click. In ChatGPT or Claude, on any device.
+          Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT or Claude, on any device.
         </p>
         <div class="flex flex-wrap gap-3">
           <a
@@ -243,6 +357,13 @@ const statusStyles: Record<string, string> = {
             class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-primary-400 hover:text-primary-300 transition text-sm font-medium"
           >
             View source on GitHub
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+          <a
+            href="/builds"
+            class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-accent-400 hover:text-accent-300 transition text-sm font-medium"
+          >
+            More builds
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
           </a>
         </div>

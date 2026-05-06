@@ -5,6 +5,7 @@ export interface Build {
   githubUrl?: string;
   liveUrl?: string;
   youtubeUrl?: string;
+  resourceUrl?: string;
   image?: string;
   status: 'live' | 'in-progress' | 'planned';
 }
@@ -23,6 +24,7 @@ export const builds: Build[] = [
     techStack: ["Chrome Extension", "JavaScript", "Google Drive API", "ChatGPT", "Claude"],
     githubUrl: "https://github.com/jitangupta/PromptMate",
     liveUrl: "https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai",
+    resourceUrl: "/resources/promptmate/",
     status: "live"
   },
   {
