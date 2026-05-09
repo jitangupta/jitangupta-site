@@ -63,6 +63,8 @@
 .bg-accent-900 { background-color: #141F22; }
 .bg-accent-light { background-color: #f0f5f1; }
 
+.border-accent-200 { border-color: #b3ccb9; }
+.border-accent-300 { border-color: #8db396; }
 .border-accent-400 { border-color: #6b9e76; }
 .border-accent-500 { border-color: #588B67; }
 .border-accent-600 { border-color: #477056; }
