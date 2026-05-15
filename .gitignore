@@ -26,8 +26,16 @@ pnpm-debug.log*
 # Claude Code — local/personal settings (machine-specific)
 .claude/settings.local.json
 
+# Codex local/project agent config
+.codex/
+
 # Claude Cowork — generated agents mirror (source of truth is .claude/skills/)
-.agents/
+.agents/*
+!.agents/README.md
+!.agents/shared/
+!.agents/shared/**
 
 # Screenshots dumped in project root
 Screenshot*.png
+social
+tasks/*

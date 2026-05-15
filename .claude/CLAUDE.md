@@ -1,5 +1,11 @@
 # CLAUDE.md — jitangupta.com v2.0: Personal Brand Hub
 
+## Shared Agent Source Of Truth
+
+`AGENTS.md` is the canonical repo instruction file. Shared context for Claude, Codex, and future agents belongs in `.agents/shared/`.
+
+Keep this `.claude` folder for Claude-specific runtime behavior, skills, rules, and local settings. If guidance should apply to both Claude and Codex, update `AGENTS.md` or `.agents/shared/` first.
+
 ## Context
 
 Jitan Gupta builds real things with AI and teaches engineers how to do the same.
