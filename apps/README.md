@@ -6,7 +6,7 @@ The site remains the brand/content hub. Apps in this folder should be treated as
 
 ## Current Apps
 
-- `jitan-ai-engineering-guide` - ChatGPT app/MCP concept for applying Jitan's public AI engineering workflows inside ChatGPT or Codex.
+- `jitangupta-ai-engineering-guide` - ChatGPT app/MCP concept for applying JitanGupta's public AI engineering workflows inside ChatGPT or Codex.
 
 ## App Boundary
 

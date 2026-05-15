@@ -3,7 +3,7 @@
 This folder is intentionally portable. If the app becomes its own repo, this folder can be moved out with minimal reshaping.
 
 ```text
-apps/jitan-ai-engineering-guide/
+apps/jitangupta-ai-engineering-guide/
   README.md
   STRUCTURE.md
   docs/
@@ -51,7 +51,7 @@ End-to-end prompts and expected behavior across the four tools.
 
 When this becomes a separate repo:
 
-1. Move `apps/jitan-ai-engineering-guide` to the new repository root.
+1. Move `apps/jitangupta-ai-engineering-guide` to the new repository root.
 2. Keep generated JSON export tasks in `jitangupta-site`.
 3. Point the app repo at published JSON from `https://jitangupta.com/app-data/`.
 4. Keep `AGENTS.md`/`.agents/shared` in both repos aligned only where needed.

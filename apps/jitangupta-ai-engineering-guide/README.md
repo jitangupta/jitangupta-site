@@ -1,6 +1,6 @@
-# Jitan AI Engineering Guide
+# JitanGupta AI Engineering Guide
 
-ChatGPT app/MCP concept for applying Jitan Gupta's public AI engineering workflows inside ChatGPT or Codex.
+ChatGPT app/MCP concept for applying JitanGupta's public AI engineering workflows inside ChatGPT or Codex.
 
 Working definition:
 
@@ -12,7 +12,7 @@ Purpose:
 
 Best first use case:
 
-> I have a legacy Node repo. Give me a safe Codex workflow like Jitan would recommend.
+> I have a legacy Node repo. Give me a safe Codex workflow like JitanGupta would recommend.
 
 ## Tool Surface
 

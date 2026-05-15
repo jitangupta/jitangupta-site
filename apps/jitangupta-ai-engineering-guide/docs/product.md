@@ -2,7 +2,7 @@
 
 ## What This Is
 
-An AI engineering workflow guide powered by Jitan Gupta's public content and project experience.
+An AI engineering workflow guide powered by JitanGupta's public content and project experience.
 
 It is not a general chatbot, lead-generation widget, or website search box.
 

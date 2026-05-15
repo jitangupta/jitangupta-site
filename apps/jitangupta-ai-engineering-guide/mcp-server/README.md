@@ -1,6 +1,6 @@
 # MCP Server
 
-This folder will contain the read-only MCP server for the Jitan AI Engineering Guide.
+This folder will contain the read-only MCP server for the JitanGupta AI Engineering Guide.
 
 Initial tools:
 
