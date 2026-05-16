@@ -30,25 +30,43 @@ const features = [
     heading: "Local usage analytics",
     body: "Tracks how often you create, apply, copy, and delete prompts. Stored locally so you can see what's actually useful.",
   },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>`,
+    heading: "Prompt history",
+    body: "Every prompt you use is logged. Go back to any previous prompt from your session history — nothing gets lost between chats.",
+  },
 ];
 
 const roadmap = [
   {
-    status: "Pending",
+    status: "Planned",
     statusColor: "primary",
-    title: "Prompt versioning",
-    body: "Every edit creates a version. Browse history, diff before/after, restore any prior version. Drive handles the revisions natively, so the architecture already supports it.",
+    title: "Group Prompts",
+    body: "Organize your library into named groups — by project, by use case, or by workflow. Find what you need without scrolling through everything.",
   },
   {
-    status: "Pending",
+    status: "Planned",
     statusColor: "primary",
-    title: "Shareable prompts",
-    body: "Publish a prompt to anyone-with-link. The receiver gets their own copy. No ongoing sync, no collaborative editing. Private by default, shareable on demand.",
+    title: "Share Prompts",
+    body: "Publish a prompt to anyone-with-link. The receiver gets their own copy. Private by default, shareable on demand.",
+  },
+  {
+    status: "Planned",
+    statusColor: "primary",
+    title: "Codex & Claude Code desktop",
+    body: "Bring your prompt library into Codex and the Claude Code desktop app — the same one-click insert experience, now for coding workflows too.",
+  },
+  {
+    status: "Built · v0.6.0",
+    statusColor: "accent",
+    title: "Prompt version history",
+    body: "Every edit to a saved prompt creates a version. Browse the history, see what changed, and restore any prior version. Built — shipping in the next release.",
   },
 ];
 
 const statusStyles: Record<string, string> = {
   primary: "text-primary-700 bg-primary-50 border-primary-200",
+  accent: "text-accent-700 bg-accent-50 border-accent-200",
 };
 ---
 
@@ -262,7 +280,7 @@ const statusStyles: Record<string, string> = {
   <section class="bg-white py-14 px-6">
     <div class="max-w-screen-xl mx-auto">
       <div class="fade-up mb-10">
-        <p class="section-label mb-3">What it does now · v0.4.5</p>
+        <p class="section-label mb-3">What it does now · v0.5.0</p>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Current state, honestly scoped</h2>
         <p class="mt-3 text-gray-500 text-sm max-w-xl">This is what's shipped. Not what's planned. That's the roadmap below.</p>
       </div>
@@ -284,9 +302,9 @@ const statusStyles: Record<string, string> = {
       <div class="fade-up mb-10">
         <p class="section-label mb-3">Roadmap</p>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What's next</h2>
-        <p class="mt-3 text-gray-500 text-sm max-w-xl">Two features in active design. If either matters to you, open an issue or contribute.</p>
+        <p class="mt-3 text-gray-500 text-sm max-w-xl">Three features in active design. If any of these matter to you, raise an issue or vote via the feature request form.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl fade-up-group">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl fade-up-group">
         {roadmap.map((item) => (
           <div class="bg-white border border-gray-200 rounded-2xl p-7 hover:border-primary-300 hover:shadow-md transition-all duration-200 relative overflow-hidden">
             <!-- Subtle top accent -->
@@ -299,14 +317,23 @@ const statusStyles: Record<string, string> = {
           </div>
         ))}
       </div>
-      <div class="mt-8 fade-up">
+      <div class="mt-8 fade-up flex flex-wrap gap-3">
         <a
           href="https://github.com/jitangupta/PromptMate/issues"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
         >
-          Open an issue or suggest a feature
+          Raise an issue on GitHub
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </a>
+        <a
+          href="https://forms.gle/ripbRre2nCFcJ4hz6"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 border border-accent-300 bg-accent-50 hover:bg-accent-100 px-4 py-2 rounded-lg transition"
+        >
+          Request a feature
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
       </div>

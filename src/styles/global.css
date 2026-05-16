@@ -218,6 +218,8 @@ p {
 .fade-up-group.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.1s;  }
 .fade-up-group.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.2s;  }
 .fade-up-group.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.3s;  }
+.fade-up-group.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.4s;  }
+.fade-up-group.visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.5s;  }
 
 /* ── Focus & interaction polish ──────────────────────────── */
 
