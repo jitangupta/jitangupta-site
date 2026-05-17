@@ -20,6 +20,30 @@ const homeDescription = "I'm a Mumbai-based platform engineer. I publish what I 
 const aiSummaryPrompt = encodeURIComponent(
 	"I want to understand what Jitan Gupta does at jitangupta.com. He is a Mumbai-based platform engineer who builds with AI tools in public, breaks down Claude Code, MCP servers, and agent frameworks for other engineers, and shares honest lessons on YouTube, including the parts that broke. Summarize what he builds, what he teaches, and why technical peers or event organizers might follow his work: https://jitangupta.com/",
 );
+const workingMethod = [
+	{
+		number: "01",
+		title: "Test tools against real engineering work",
+		description: "I use Claude Code, MCP servers, and agent workflows on concrete software problems before turning them into lessons.",
+	},
+	{
+		number: "02",
+		title: "Publish what worked and what broke",
+		description: "The useful parts usually sit next to the failures, wrong turns, and missing context. I show both.",
+	},
+	{
+		number: "03",
+		title: "Turn patterns into tools and frameworks",
+		description: "When something repeats, I shape it into a build, checklist, video, or framework other engineers can reuse.",
+	},
+];
+const fiveChecks = [
+	"Intent check",
+	"Integration check",
+	"Failure-mode check",
+	"Security check",
+	"Maintainability check",
+];
 ---
 
 <!doctype html>
@@ -32,8 +56,8 @@ const aiSummaryPrompt = encodeURIComponent(
 		<Header />
 
 		<!-- Hero -->
-		<section class="bg-[#F8FAFC] mx-2">
-			<div class="hero-grid bg-white max-w-screen-xl px-6 py-8 mx-auto lg:gap-10 lg:py-12 lg:grid-cols-12 rounded-b-2xl relative overflow-hidden">
+		<section class="bg-canvas mx-2">
+			<div class="hero-grid bg-white border border-t-0 border-slate-200 max-w-screen-xl px-6 py-8 mx-auto lg:gap-10 lg:py-12 lg:grid-cols-12 rounded-b-2xl relative overflow-hidden">
 				<!-- Subtle dot-grid watermark -->
 				<div class="dot-grid" aria-hidden="true"></div>
 
@@ -73,7 +97,7 @@ const aiSummaryPrompt = encodeURIComponent(
 						</a>
 					</div>
 					<!-- Credential stats -->
-					<div class="hero-fade hero-fade-3 grid grid-cols-3 gap-5 pt-6 border-t border-gray-100">
+					<div class="hero-fade hero-fade-3 grid grid-cols-3 gap-5 pt-6 border-t border-slate-200">
 						<div>
 							<p class="text-xl font-bold text-gray-900">10+</p>
 							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Years shipping production software</p>
@@ -161,11 +185,37 @@ const aiSummaryPrompt = encodeURIComponent(
 				</div>
 		</section>
 
+		<!-- Working Method -->
+		<section class="bg-canvas py-14 px-6">
+			<div class="max-w-screen-xl mx-auto">
+				<div class="grid gap-10 lg:grid-cols-[0.85fr_1.4fr] lg:items-start">
+					<div class="fade-up">
+						<p class="section-label mb-3">How I work</p>
+						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+							Real experiments, then reusable patterns.
+						</h2>
+						<p class="text-gray-600 leading-relaxed max-w-xl">
+							I put AI tools into normal engineering workflows, watch where they help, and document the judgment needed around them.
+						</p>
+					</div>
+					<div class="grid gap-0 md:grid-cols-3 fade-up-group border-y border-slate-200">
+						{workingMethod.map((item) => (
+							<div class="py-6 md:px-6 md:first:pl-0 md:last:pr-0 md:border-l md:first:border-l-0 border-slate-200">
+								<p class="text-sm font-semibold text-primary-600 mb-5">{item.number}</p>
+								<h3 class="text-xl font-semibold text-gray-900 mb-3 leading-snug">{item.title}</h3>
+								<p class="text-sm text-gray-500 leading-relaxed">{item.description}</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<!-- Latest from YouTube -->
-		<section class="bg-[#F8FAFC] py-16 px-6">
+		<section class="bg-canvas-soft py-16 px-6">
 			<div class="max-w-screen-xl mx-auto">
 				<div class="fade-up mb-10">
-					<p class="section-label mb-3">Content</p>
+					<p class="section-label mb-3">Latest videos</p>
 					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Latest from YouTube</h2>
 					<p class="text-gray-500 max-w-lg">AI tools, engineering workflows, and lessons from building in production. Videos in Hinglish.</p>
 				</div>
@@ -175,7 +225,7 @@ const aiSummaryPrompt = encodeURIComponent(
 							href={video.youtubeUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-primary-400 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-250 group flex flex-col"
+							class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-primary-300 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-250 group flex flex-col"
 						>
 							<div class="h-52 bg-gray-100 overflow-hidden flex-shrink-0">
 								<img
@@ -213,18 +263,18 @@ const aiSummaryPrompt = encodeURIComponent(
 		<section class="bg-white py-16 px-6">
 			<div class="max-w-screen-xl mx-auto">
 				<div class="fade-up mb-10">
-					<p class="section-label mb-3">Open Source</p>
+					<p class="section-label mb-3">Open source</p>
 					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">What I'm Building</h2>
 					<p class="text-gray-500 max-w-lg">Tools I built to solve real problems. All open source, built in public.</p>
 				</div>
 				<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 fade-up-group">
 					{featuredBuilds.map((build) => (
-						<div class="bg-primary-50 border border-primary-100 rounded-xl p-6 hover:border-primary-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+						<div class="bg-white border border-slate-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
 							<div class="flex items-start justify-between gap-3 mb-3">
 								<h3 class="text-base font-bold text-gray-900">{build.title}</h3>
 								<span class={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${
 									build.status === 'live'
-										? 'bg-primary-600 text-white'
+										? 'bg-primary-50 text-primary-700 border border-primary-200'
 										: build.status === 'in-progress'
 										? 'bg-primary-200 text-primary-800'
 										: 'bg-gray-100 text-gray-600'
@@ -259,16 +309,59 @@ const aiSummaryPrompt = encodeURIComponent(
 			</div>
 		</section>
 
+		<!-- Frameworks -->
+		<section class="bg-canvas-soft py-16 px-6">
+			<div class="max-w-screen-xl mx-auto">
+				<div class="grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-center">
+					<div class="fade-up">
+						<p class="section-label mb-3">Frameworks</p>
+						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+							The checks I use before AI-generated code gets close to production.
+						</h2>
+						<p class="text-gray-600 leading-relaxed max-w-xl mb-6">
+							The videos show the experiments. The frameworks capture the repeatable parts: what to inspect, what to question, and where AI tools tend to look more certain than they are.
+						</p>
+						<a href="/frameworks" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
+							Explore frameworks
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+						</a>
+					</div>
+					<a href="/frameworks" class="group bg-white border border-slate-200 rounded-xl p-6 md:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg">
+						<div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8">
+							<div>
+								<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">First framework</p>
+								<h3 class="text-2xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
+									5-Check Framework
+								</h3>
+								<p class="text-gray-500 mt-2">Shipping AI-generated code safely</p>
+							</div>
+							<span class="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
+								Current focus
+							</span>
+						</div>
+						<ol class="grid gap-3 sm:grid-cols-2">
+							{fiveChecks.map((check, index) => (
+								<li class="flex items-center gap-3 rounded-lg border border-slate-200 bg-canvas-soft px-4 py-3">
+									<span class="text-xs font-semibold text-primary-600 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+									<span class="text-sm font-medium text-gray-800">{check}</span>
+								</li>
+							))}
+						</ol>
+					</a>
+				</div>
+			</div>
+		</section>
+
 		<!-- Case Studies -->
-		<section class="bg-white py-16 px-6">
+		<section class="bg-canvas py-16 px-6">
 			<div class="max-w-screen-xl mx-auto">
 				<div class="fade-up mb-10 text-center">
-					<p class="section-label mb-3 flex justify-center">Engineering Background</p>
+					<p class="section-label mb-3 flex justify-center">Engineering background</p>
 					<h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
 						The Engineering Behind the Teaching
 					</h2>
 					<p class="text-lg text-gray-500 max-w-2xl mx-auto">
-						Before I taught AI adoption, I spent 10 years building enterprise systems. That background is why I know when AI helps and when it doesn't.
+						Before I started publishing AI workflows, I spent 10 years building enterprise systems. That background is why I know when AI helps and when it does not.
 					</p>
 				</div>
 				<div class="grid md:grid-cols-3 gap-6 fade-up-group">

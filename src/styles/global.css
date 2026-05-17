@@ -1,87 +1,90 @@
 @import "tailwindcss";
 
-/* Primary: Sage Green — buttons, CTAs, nav active */
-.text-primary-50 { color: #f0f5f1; }
-.text-primary-100 { color: #d9e6dc; }
-.text-primary-200 { color: #b3ccb9; }
-.text-primary-300 { color: #8db396; }
-.text-primary-400 { color: #6b9e76; }
-.text-primary-500 { color: #588B67; }
-.text-primary-600 { color: #477056; }
-.text-primary-700 { color: #365544; }
-.text-primary-800 { color: #253A33; }
-.text-primary-900 { color: #141F22; }
+/* Primary: deep cyan/blue for engineering clarity, buttons, CTAs, nav active */
+.text-primary-50 { color: #ecfeff; }
+.text-primary-100 { color: #cffafe; }
+.text-primary-200 { color: #a5f3fc; }
+.text-primary-300 { color: #67e8f9; }
+.text-primary-400 { color: #22d3ee; }
+.text-primary-500 { color: #0891b2; }
+.text-primary-600 { color: #0E7490; }
+.text-primary-700 { color: #155e75; }
+.text-primary-800 { color: #164e63; }
+.text-primary-900 { color: #083344; }
 
-.bg-primary-50 { background-color: #f0f5f1; }
-.bg-primary-100 { background-color: #d9e6dc; }
-.bg-primary-200 { background-color: #b3ccb9; }
-.bg-primary-300 { background-color: #8db396; }
-.bg-primary-400 { background-color: #6b9e76; }
-.bg-primary-500 { background-color: #588B67; }
-.bg-primary-500:hover { background-color: #365544; }
-.bg-primary-600 { background-color: #477056; }
-.bg-primary-600:hover { background-color: #365544; }
-.bg-primary-700 { background-color: #365544; }
-.bg-primary-800 { background-color: #253A33; }
-.bg-primary-900 { background-color: #141F22; }
-.bg-primary-light { background-color: #f0f5f1; }
+.bg-primary-50 { background-color: #ecfeff; }
+.bg-primary-100 { background-color: #cffafe; }
+.bg-primary-200 { background-color: #a5f3fc; }
+.bg-primary-300 { background-color: #67e8f9; }
+.bg-primary-400 { background-color: #22d3ee; }
+.bg-primary-500 { background-color: #0891b2; }
+.bg-primary-500:hover { background-color: #155e75; }
+.bg-primary-600 { background-color: #0E7490; }
+.bg-primary-600:hover { background-color: #155e75; }
+.bg-primary-700 { background-color: #155e75; }
+.bg-primary-800 { background-color: #164e63; }
+.bg-primary-900 { background-color: #083344; }
+.bg-primary-light { background-color: #ecfeff; }
 
-.border-primary-50 { border-color: #f0f5f1; }
-.border-primary-100 { border-color: #d9e6dc; }
-.border-primary-200 { border-color: #b3ccb9; }
-.border-primary-300 { border-color: #8db396; }
-.border-primary-400 { border-color: #6b9e76; }
-.border-primary-500 { border-color: #588B67; }
-.border-primary-600 { border-color: #477056; }
-.border-primary-700 { border-color: #365544; }
-.border-primary-800 { border-color: #253A33; }
-.border-primary-900 { border-color: #141F22; }
+.border-primary-50 { border-color: #ecfeff; }
+.border-primary-100 { border-color: #cffafe; }
+.border-primary-200 { border-color: #a5f3fc; }
+.border-primary-300 { border-color: #67e8f9; }
+.border-primary-400 { border-color: #22d3ee; }
+.border-primary-500 { border-color: #0891b2; }
+.border-primary-600 { border-color: #0E7490; }
+.border-primary-700 { border-color: #155e75; }
+.border-primary-800 { border-color: #164e63; }
+.border-primary-900 { border-color: #083344; }
 
-/* Accent: mapped to Sage Green — same palette, no orange */
-.text-accent-50 { color: #f0f5f1; }
-.text-accent-100 { color: #d9e6dc; }
-.text-accent-200 { color: #b3ccb9; }
-.text-accent-300 { color: #8db396; }
-.text-accent-400 { color: #6b9e76; }
-.text-accent-500 { color: #588B67; }
-.text-accent-600 { color: #477056; }
-.text-accent-700 { color: #365544; }
-.text-accent-800 { color: #253A33; }
-.text-accent-900 { color: #141F22; }
+/* Accent: muted orange for occasional warmth and teaching highlights */
+.text-accent-50 { color: #fff7ed; }
+.text-accent-100 { color: #ffedd5; }
+.text-accent-200 { color: #fed7aa; }
+.text-accent-300 { color: #fdba74; }
+.text-accent-400 { color: #fb923c; }
+.text-accent-500 { color: #D97757; }
+.text-accent-600 { color: #c46344; }
+.text-accent-700 { color: #9f4d35; }
+.text-accent-800 { color: #7c3b2a; }
+.text-accent-900 { color: #57291e; }
 
-.bg-accent-50 { background-color: #f0f5f1; }
-.bg-accent-100 { background-color: #d9e6dc; }
-.bg-accent-200 { background-color: #b3ccb9; }
-.bg-accent-300 { background-color: #8db396; }
-.bg-accent-400 { background-color: #6b9e76; }
-.bg-accent-500 { background-color: #588B67; }
-.bg-accent-500:hover { background-color: #365544; }
-.bg-accent-600 { background-color: #477056; }
-.bg-accent-600:hover { background-color: #365544; }
-.bg-accent-700 { background-color: #365544; }
-.bg-accent-800 { background-color: #253A33; }
-.bg-accent-900 { background-color: #141F22; }
-.bg-accent-light { background-color: #f0f5f1; }
+.bg-accent-50 { background-color: #fff7ed; }
+.bg-accent-100 { background-color: #ffedd5; }
+.bg-accent-200 { background-color: #fed7aa; }
+.bg-accent-300 { background-color: #fdba74; }
+.bg-accent-400 { background-color: #fb923c; }
+.bg-accent-500 { background-color: #D97757; }
+.bg-accent-500:hover { background-color: #c46344; }
+.bg-accent-600 { background-color: #c46344; }
+.bg-accent-600:hover { background-color: #9f4d35; }
+.bg-accent-700 { background-color: #9f4d35; }
+.bg-accent-800 { background-color: #7c3b2a; }
+.bg-accent-900 { background-color: #57291e; }
+.bg-accent-light { background-color: #fff7ed; }
 
-.border-accent-200 { border-color: #b3ccb9; }
-.border-accent-300 { border-color: #8db396; }
-.border-accent-400 { border-color: #6b9e76; }
-.border-accent-500 { border-color: #588B67; }
-.border-accent-600 { border-color: #477056; }
+.border-accent-200 { border-color: #fed7aa; }
+.border-accent-300 { border-color: #fdba74; }
+.border-accent-400 { border-color: #fb923c; }
+.border-accent-500 { border-color: #D97757; }
+.border-accent-600 { border-color: #c46344; }
 
-/* Dark: deep sage — footer, dark sections */
-.bg-dark-600 { background-color: #365544; }
-.bg-dark-700 { background-color: #253A33; }
-.bg-dark-800 { background-color: #141F22; }
-.text-dark-600 { color: #365544; }
+/* Dark: deep teal for footer and durable identity moments */
+.bg-dark-600 { background-color: #115E59; }
+.bg-dark-700 { background-color: #0F3F3C; }
+.bg-dark-800 { background-color: #0B2526; }
+.text-dark-600 { color: #115E59; }
 
 /* Page background */
-.bg-page { background-color: #F8FAFC; }
+.bg-page { background-color: #F4F7F9; }
+.bg-canvas { background-color: #F4F7F9; }
+.bg-canvas-soft { background-color: #F8FAFC; }
 
 :root {
-	--accent: #477056;
-	--gray-light: 248, 250, 252;
-	--gray-gradient: rgba(var(--gray-light), 50%), #F8FAFC;
+	--accent: #0E7490;
+	--field-accent: #D97757;
+	--gray-light: 244, 247, 249;
+	--gray-gradient: rgba(var(--gray-light), 88%), #F4F7F9;
 }
 
 @font-face {
@@ -113,7 +116,10 @@ html {
 
 body {
 	font-family: 'Elza', sans-serif;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	background:
+        radial-gradient(circle at 12% 0%, rgba(14, 116, 144, 0.05), transparent 24rem),
+        radial-gradient(circle at 88% 10%, rgba(217, 119, 87, 0.035), transparent 18rem),
+        linear-gradient(var(--gray-gradient)) no-repeat;
 	background-size: 100% 600px;
 	font-size: 20px;
 	line-height: 1.7;
@@ -224,7 +230,7 @@ p {
 /* ── Focus & interaction polish ──────────────────────────── */
 
 *:focus-visible {
-    outline: 2px solid #477056;
+    outline: 2px solid #0E7490;
     outline-offset: 3px;
     border-radius: 4px;
 }
@@ -243,7 +249,7 @@ a[class*="bg-primary"]:active, button[class*="bg-primary"]:active {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #477056;
+    color: #155e75;
 }
 
 /* ── Hero layout ─────────────────────────────────────────── */
@@ -265,7 +271,7 @@ a[class*="bg-primary"]:active, button[class*="bg-primary"]:active {
 .dot-grid {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, #b3ccb9 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(14, 116, 144, 0.18) 1px, transparent 1px);
     background-size: 28px 28px;
     opacity: 0.35;
     pointer-events: none;
