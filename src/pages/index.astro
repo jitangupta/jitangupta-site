@@ -5,11 +5,9 @@ import Header from "../components/Header.astro";
 import CommonCTA from "../components/CommonCTA.astro";
 import Chatwoot from "../components/chatwoot.astro";
 import WebSiteSchema from "../components/schema/WebSiteSchema.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "../styles/global.css";
 import { featuredVideos } from "../data/videos";
 import { builds } from "../data/builds";
-import { events } from "../data/events";
 
 import { getCollection } from "astro:content";
 const caseStudies = (await getCollection("caseStudies")).sort(
@@ -17,12 +15,17 @@ const caseStudies = (await getCollection("caseStudies")).sort(
 );
 
 const featuredBuilds = builds.slice(0, 3);
+const homeTitle = "Jitan Gupta - Platform engineer figuring out Claude Code, MCP, and agents";
+const homeDescription = "I'm a Mumbai-based platform engineer. I publish what I learn about Claude Code, MCP servers, and agent frameworks on YouTube, including the parts that broke.";
+const aiSummaryPrompt = encodeURIComponent(
+	"I want to understand what Jitan Gupta does at jitangupta.com. He is a Mumbai-based platform engineer who builds with AI tools in public, breaks down Claude Code, MCP servers, and agent frameworks for other engineers, and shares honest lessons on YouTube, including the parts that broke. Summarize what he builds, what he teaches, and why technical peers or event organizers might follow his work: https://jitangupta.com/",
+);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={homeTitle} description={homeDescription} />
 		<WebSiteSchema />
 	</head>
 	<body>
@@ -30,29 +33,29 @@ const featuredBuilds = builds.slice(0, 3);
 
 		<!-- Hero -->
 		<section class="bg-[#F8FAFC] mx-2">
-			<div class="hero-grid bg-white max-w-screen-xl px-6 py-10 mx-auto lg:gap-12 lg:py-20 lg:grid-cols-12 rounded-b-2xl relative overflow-hidden">
+			<div class="hero-grid bg-white max-w-screen-xl px-6 py-8 mx-auto lg:gap-10 lg:py-12 lg:grid-cols-12 rounded-b-2xl relative overflow-hidden">
 				<!-- Subtle dot-grid watermark -->
 				<div class="dot-grid" aria-hidden="true"></div>
 
 				<!-- Photo: first in DOM. Top on mobile, left col on desktop (natural grid order). -->
-				<div class="flex items-end justify-center lg:col-span-5 relative z-10 mb-4 lg:mb-0">
+				<div class="flex items-center justify-center lg:col-span-5 relative z-10 mb-4 lg:mb-0">
 					<img
 						src="/jitan-bg.png"
-						class="w-56 sm:w-72 lg:w-full lg:max-w-[460px] h-auto object-contain"
+						class="w-52 sm:w-64 lg:w-full lg:max-w-[340px] h-auto object-contain"
 						alt="Jitan Gupta"
 					/>
 				</div>
 
 				<!-- Text: second in DOM. Below photo on mobile, right col on desktop. -->
 				<div class="mr-auto place-self-center lg:col-span-7 relative z-10">
-					<p class="section-label mb-4 hero-fade hero-fade-1">AI Adoption Practitioner · Mumbai</p>
-					<h1 class="hero-fade hero-fade-2 max-w-2xl mb-5 text-4xl font-bold xl:text-6xl">
-						AI adoption that sticks.<br />Built around Claude Code, MCP, and agents.
+					<p class="section-label mb-3 hero-fade hero-fade-1">Mumbai, India</p>
+					<h1 class="hero-fade hero-fade-2 max-w-2xl mb-4 text-3xl md:text-4xl xl:text-5xl font-bold">
+						I'm Jitan, a platform engineer figuring out how AI tools actually work.
 					</h1>
-					<p class="hero-fade hero-fade-3 max-w-xl font-light text-gray-600 md:text-xl lg:text-2xl mb-8 leading-relaxed">
-						I'm a Mumbai-based AI adoption practitioner. I help engineering teams and non-technical professionals put AI into real daily work, with deep specialization in Claude Code, the Model Context Protocol, and agentic workflows.
+					<p class="hero-fade hero-fade-3 max-w-xl font-light text-gray-600 md:text-base mb-6 leading-relaxed">
+						For ten years, I've shipped software in production. For the last two, I've been pulling apart Claude Code, MCP, and agent frameworks to understand what's underneath the demos. I share the working pieces on YouTube, including the parts that broke, which is usually more useful.
 					</p>
-					<div class="hero-fade hero-fade-3 flex flex-wrap gap-3 mb-10">
+					<div class="hero-fade hero-fade-3 flex flex-wrap gap-3 mb-7">
 						<a
 							href="https://www.youtube.com/@jitangupta"
 							target="_blank"
@@ -66,35 +69,35 @@ const featuredBuilds = builds.slice(0, 3);
 							href="/builds"
 							class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition"
 						>
-							See What I've Built
+							See what I've built
 						</a>
 					</div>
 					<!-- Credential stats -->
-					<div class="hero-fade hero-fade-3 flex flex-wrap gap-8 pt-8 border-t border-gray-100">
+					<div class="hero-fade hero-fade-3 grid grid-cols-3 gap-5 pt-6 border-t border-gray-100">
 						<div>
-							<p class="text-2xl font-bold text-gray-900">10+</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Years engineering</p>
+							<p class="text-xl font-bold text-gray-900">10+</p>
+							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Years shipping production software</p>
 						</div>
 						<div>
-							<p class="text-2xl font-bold text-gray-900">100+</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Enterprise tenants migrated</p>
+							<p class="text-xl font-bold text-gray-900">PromptMate</p>
+							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Live on the Chrome Web Store</p>
 						</div>
 						<div>
-							<p class="text-2xl font-bold text-gray-900">5</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Products built from scratch</p>
+							<p class="text-xl font-bold text-gray-900">5-Check</p>
+							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Framework for AI-generated code</p>
 						</div>
 					</div>
 				</div>
 				
 			</div>
 
-			<!-- Ask AI to summarize — full-width bottom row inside hero card -->
+			<!-- Ask AI to summarize - full-width bottom row inside hero card -->
 				<div class="col-span-12 relative z-10 border-gray-100 pt-4 pb-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
 					<p class="text-xs text-gray-400 tracking-widest uppercase">Summarize what I do with AI</p>
 					<div class="flex items-center gap-5">
 	
 						<a
-							href="https://claude.ai/new?q=I%20want%20to%20understand%20what%20Jitan%20Gupta%20offers%20at%20jitangupta.com.%20He%20is%20an%20AI%20Adoption%20Practitioner%20who%20helps%20engineering%20teams%20and%20professionals%20adopt%20AI%20tools%20responsibly%20and%20practically.%20Summarize%20what%20he%20does%2C%20who%20he%20helps%2C%20and%20what%20his%20key%20offerings%20are%20based%20on%20his%20website%3A%20https%3A%2F%2Fjitangupta.com%2F"
+							href={`https://claude.ai/new?q=${aiSummaryPrompt}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Summarize Jitan's work using Claude"
@@ -110,7 +113,7 @@ const featuredBuilds = builds.slice(0, 3);
 						</a>
 	
 						<a
-							href="https://chatgpt.com/?prompt=I%20want%20to%20understand%20what%20Jitan%20Gupta%20offers%20at%20jitangupta.com.%20He%20is%20an%20AI%20Adoption%20Practitioner%20who%20helps%20engineering%20teams%20and%20professionals%20adopt%20AI%20tools%20responsibly%20and%20practically.%20Summarize%20what%20he%20does%2C%20who%20he%20helps%2C%20and%20what%20his%20key%20offerings%20are%20based%20on%20his%20website%3A%20https%3A%2F%2Fjitangupta.com%2F"
+							href={`https://chatgpt.com/?prompt=${aiSummaryPrompt}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Summarize Jitan's work using ChatGPT"
@@ -126,7 +129,7 @@ const featuredBuilds = builds.slice(0, 3);
 						</a>
 	
 						<a
-							href="https://www.google.com/search?udm=50&q=I%20want%20to%20understand%20what%20Jitan%20Gupta%20offers%20at%20jitangupta.com.%20He%20is%20an%20AI%20Adoption%20Practitioner%20who%20helps%20engineering%20teams%20and%20professionals%20adopt%20AI%20tools%20responsibly%20and%20practically.%20Summarize%20what%20he%20does%2C%20who%20he%20helps%2C%20and%20what%20his%20key%20offerings%20are%20based%20on%20his%20website%3A%20https%3A%2F%2Fjitangupta.com%2F"
+							href={`https://www.google.com/search?udm=50&q=${aiSummaryPrompt}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Summarize Jitan's work using Gemini"
@@ -142,7 +145,7 @@ const featuredBuilds = builds.slice(0, 3);
 						</a>
 	
 						<a
-							href="https://www.perplexity.ai/?q=I%20want%20to%20understand%20what%20Jitan%20Gupta%20offers%20at%20jitangupta.com.%20He%20is%20an%20AI%20Adoption%20Practitioner%20who%20helps%20engineering%20teams%20and%20professionals%20adopt%20AI%20tools%20responsibly%20and%20practically.%20Summarize%20what%20he%20does%2C%20who%20he%20helps%2C%20and%20what%20his%20key%20offerings%20are%20based%20on%20his%20website%3A%20https%3A%2F%2Fjitangupta.com%2F"
+							href={`https://www.perplexity.ai/?q=${aiSummaryPrompt}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Summarize Jitan's work using Perplexity"
@@ -164,7 +167,7 @@ const featuredBuilds = builds.slice(0, 3);
 				<div class="fade-up mb-10">
 					<p class="section-label mb-3">Content</p>
 					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Latest from YouTube</h2>
-					<p class="text-gray-500 max-w-lg">AI tools, engineering workflows, and lessons from building in production. Videos in Hinglish 🇮🇳</p>
+					<p class="text-gray-500 max-w-lg">AI tools, engineering workflows, and lessons from building in production. Videos in Hinglish.</p>
 				</div>
 				<div class="grid gap-6 md:grid-cols-3 fade-up-group">
 					{featuredVideos.map((video) => (
@@ -253,41 +256,6 @@ const featuredBuilds = builds.slice(0, 3);
 						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
 					</a>
 				</div>
-			</div>
-		</section>
-
-		<!-- Community & Events -->
-		<section class="bg-[#F8FAFC] py-16 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="fade-up mb-10">
-					<p class="section-label mb-3">In Person</p>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Community</h2>
-					<p class="text-gray-500 max-w-lg">I teach in-person, not just on screen. Hands-on sessions where people build real things with AI.</p>
-				</div>
-				<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 fade-up-group">
-					{events.map((event) => (
-						<div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-							<div class="mb-4">
-								<span class={`text-xs font-semibold px-3 py-1 rounded-full ${
-									event.status === 'upcoming'
-										? 'bg-primary-600 text-white'
-										: event.status === 'looking-for-venue'
-										? 'bg-primary-100 text-primary-700'
-										: 'bg-gray-100 text-gray-600'
-								}`}>
-									{event.statusLabel}
-								</span>
-							</div>
-							<h3 class="text-base font-bold text-gray-900 mb-2">{event.title}</h3>
-							<p class="text-gray-500 text-sm mb-5 flex-1 leading-relaxed">{event.description}</p>
-							<a href={event.link} class="inline-flex items-center gap-1 text-primary-600 font-semibold text-sm hover:gap-2 transition-all">
-								Learn more
-								<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-							</a>
-						</div>
-					))}
-				</div>
-				<p class="mt-8 text-xs text-gray-400 text-center">I teach AI adoption broadly. Claude is where I go deepest, so that's where the first meetup starts.</p>
 			</div>
 		</section>
 

@@ -256,8 +256,8 @@ a[class*="bg-primary"]:active, button[class*="bg-primary"]:active {
     .hero-grid {
         grid-template-columns: repeat(12, minmax(0, 1fr));
         gap: 3rem;
-        padding-top: 5rem;
-        padding-bottom: 5rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 }
 
