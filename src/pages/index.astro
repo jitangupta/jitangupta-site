@@ -37,12 +37,12 @@ const workingMethod = [
 		description: "When something repeats, I shape it into a build, checklist, video, or framework other engineers can reuse.",
 	},
 ];
-const fiveChecks = [
-	"Intent check",
-	"Integration check",
-	"Failure-mode check",
+const frameworkPreview = [
+	"Task list",
+	"Review commands",
 	"Security check",
-	"Maintainability check",
+	"Manual testing",
+	"PR + CI review",
 ];
 ---
 
@@ -316,10 +316,10 @@ const fiveChecks = [
 					<div class="fade-up">
 						<p class="section-label mb-3">Frameworks</p>
 						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-							The checks I use before AI-generated code gets close to production.
+							The loop I use before AI-generated code reaches a branch.
 						</h2>
 						<p class="text-gray-600 leading-relaxed max-w-xl mb-6">
-							The videos show the experiments. The frameworks capture the repeatable parts: what to inspect, what to question, and where AI tools tend to look more certain than they are.
+							The videos show the experiments. The frameworks capture the repeatable parts: task boundaries, review commands, security checks, manual testing, changeset review, and human judgment.
 						</p>
 						<a href="/frameworks" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
 							Explore frameworks
@@ -329,18 +329,18 @@ const fiveChecks = [
 					<a href="/frameworks" class="group bg-white border border-slate-200 rounded-xl p-6 md:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg">
 						<div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8">
 							<div>
-								<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">First framework</p>
+								<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">Current framework</p>
 								<h3 class="text-2xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
-									5-Check Framework
+									AI-Assisted Development Loop
 								</h3>
-								<p class="text-gray-500 mt-2">Shipping AI-generated code safely</p>
+								<p class="text-gray-500 mt-2">Trust, verify, override before merge</p>
 							</div>
 							<span class="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
-								Current focus
+								Includes 5-Check
 							</span>
 						</div>
 						<ol class="grid gap-3 sm:grid-cols-2">
-							{fiveChecks.map((check, index) => (
+							{frameworkPreview.map((check, index) => (
 								<li class="flex items-center gap-3 rounded-lg border border-slate-200 bg-canvas-soft px-4 py-3">
 									<span class="text-xs font-semibold text-primary-600 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
 									<span class="text-sm font-medium text-gray-800">{check}</span>

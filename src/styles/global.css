@@ -292,3 +292,104 @@ a[class*="bg-primary"]:active, button[class*="bg-primary"]:active {
 .duration-250 {
     transition-duration: 250ms;
 }
+
+/* AI-Assisted Development Loop diagram */
+.ai-loop-diagram {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ai-loop-diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.loop-node,
+.loop-callout {
+    fill: #ffffff;
+    stroke: #cbd5e1;
+    stroke-width: 1.5;
+}
+
+.loop-node-primary {
+    fill: #155e75;
+    stroke: #155e75;
+}
+
+.loop-node-command {
+    fill: #7c3b2a;
+    stroke: #9f4d35;
+}
+
+.loop-node-success {
+    fill: #166534;
+    stroke: #166534;
+}
+
+.loop-callout {
+    fill: #fff7ed;
+    stroke: #D97757;
+}
+
+.loop-node-title,
+.loop-callout-title {
+    font-family: 'Elza', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    fill: #0f172a;
+}
+
+.loop-node-subtitle,
+.loop-callout-copy {
+    font-family: 'Elza', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    fill: #475569;
+}
+
+.loop-node-title-invert {
+    fill: #ffffff;
+}
+
+.loop-terminal {
+    font-family: 'Inter', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    fill: #155e75;
+}
+
+.loop-path {
+    fill: none;
+    stroke: #155e75;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: loopDraw 1.1s ease forwards;
+}
+
+.path-2 { animation-delay: 0.12s; }
+.path-3 { animation-delay: 0.24s; }
+.path-4 { animation-delay: 0.36s; }
+.path-5 { animation-delay: 0.48s; }
+.path-6 { animation-delay: 0.6s; }
+.path-7 { animation-delay: 0.72s; }
+.path-8,
+.path-9 {
+    stroke: #D97757;
+    animation-delay: 0.84s;
+}
+.path-9 { animation-delay: 0.96s; }
+
+@keyframes loopDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .loop-path {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}
