@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Frameworks - Jitan Gupta";
+const description = "Practical frameworks from building with AI tools in real engineering work.";
+const checks = [
+	"Intent check",
+	"Integration check",
+	"Failure-mode check",
+	"Security check",
+	"Maintainability check",
+];
+
+// Temporary until the 5-Check Framework video URL is published.
+const fiveCheckVideoUrl = "#";
+---
+
+<Layout title={title} description={description}>
+	<section class="bg-[#F8FAFC] mx-2">
+		<div class="bg-white max-w-screen-xl mx-auto px-5 py-8 md:px-15 md:py-14 rounded-b-2xl">
+			<div class="max-w-3xl">
+				<p class="section-label mb-3">Practical patterns</p>
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-5" style="line-height: 1.15;">
+					Frameworks
+				</h1>
+				<p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+					These are practical patterns from building with AI tools in real engineering work. They are meant to help engineers review, adapt, and ship AI-assisted work with more context than a demo can show.
+				</p>
+			</div>
+
+			<section class="mt-12 max-w-4xl bg-[#F8FAFC] border border-gray-200 rounded-xl p-6 md:p-8">
+				<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-wider text-primary-600 mb-3">AI-generated code</p>
+						<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+							5-Check Framework - Shipping AI-Generated Code Safely
+						</h2>
+						<p class="text-gray-600 leading-relaxed max-w-2xl">
+							The 5-Check Framework is my practical checklist for reviewing AI-generated code before it reaches production. It is based on the places AI coding tools tend to look confident while missing important engineering context.
+						</p>
+					</div>
+					<a
+						href={fiveCheckVideoUrl}
+						data-temporary-video-url="true"
+						class="inline-flex shrink-0 items-center justify-center px-5 py-3 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
+					>
+						Watch the video
+					</a>
+				</div>
+
+				<ol class="mt-8 grid gap-3 md:grid-cols-2">
+					{checks.map((check, index) => (
+						<li class="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-4 text-gray-800">
+							<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700 font-semibold text-sm">
+								{index + 1}
+							</span>
+							<span class="font-medium">{check}</span>
+						</li>
+					))}
+				</ol>
+			</section>
+		</div>
+	</section>
+</Layout>
