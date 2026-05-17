@@ -1,38 +1,60 @@
 ---
-
+const paths = [
+  {
+    label: "Videos",
+    href: "https://www.youtube.com/@jitangupta",
+    external: true,
+    title: "Start with the experiments",
+    description: "Claude Code, MCP servers, and agent workflows tested in real engineering contexts.",
+  },
+  {
+    label: "Builds",
+    href: "/builds",
+    title: "Inspect the tools",
+    description: "Open source projects that came from solving actual workflow problems.",
+  },
+  {
+    label: "Frameworks",
+    href: "/frameworks",
+    title: "Reuse the checks",
+    description: "Practical checklists and mental models shaped from repeated AI tool work.",
+  },
+];
 ---
 
-<section class="bg-[#F8FAFC] py-8 px-6 sm:py-14">
-    <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-10 sm:px-14 sm:py-12 relative overflow-hidden">
-      <!-- Subtle radial glow -->
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(88,139,103,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
+<section class="bg-canvas px-6 py-16">
+  <div class="mx-auto max-w-screen-xl border-t border-slate-200 pt-12">
+    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:items-start">
+      <div>
+        <p class="section-label mb-3">Follow the work</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          The useful parts live across videos, builds, and frameworks.
+        </h2>
+        <p class="text-gray-600 leading-relaxed max-w-xl">
+          Start wherever you think best: watch the experiments, inspect the artifacts, or reuse the checks in your own workflow.
+        </p>
+      </div>
 
-      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:gap-14">
-        <!-- Photo -->
-        <div class="flex justify-center lg:justify-start mb-8 lg:mb-0 flex-shrink-0">
-          <img src="/jitan-bg.png" class="w-32 h-32 object-cover rounded-full ring-4 ring-primary-600 ring-offset-4 ring-offset-dark-700" alt="Jitan Gupta">
-        </div>
-
-        <!-- Text -->
-        <div class="flex-1">
-          <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Building with AI. Teaching engineers.</p>
-          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Follow the experiments that survive real engineering work.</h2>
-          <p class="text-gray-300 leading-relaxed mb-3">I pull apart Claude Code, MCP servers, and agent frameworks to understand what actually helps engineers ship better software.</p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-8">The useful parts become YouTube videos, open source builds, and practical frameworks you can try in your own workflow.</p>
-
-          <div class="flex flex-wrap gap-3">
-            <a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg bg-primary-600 hover:bg-primary-500 transition text-sm font-medium">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-              Watch on YouTube
-            </a>
-            <a href="/frameworks"
-              class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-primary-400 hover:text-primary-300 transition text-sm font-medium">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><path d="M9 9h6v6H9z"/></svg>
-              See frameworks
-            </a>
-          </div>
-        </div>
+      <div class="grid gap-3 md:grid-cols-3">
+        {paths.map((path) => (
+          <a
+            href={path.href}
+            target={path.external ? "_blank" : undefined}
+            rel={path.external ? "noopener noreferrer" : undefined}
+            class="group rounded-lg border border-slate-200 bg-white p-5 transition duration-200 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg"
+          >
+            <p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-4">{path.label}</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+              {path.title}
+            </h3>
+            <p class="text-sm text-gray-500 leading-relaxed mb-5">{path.description}</p>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 group-hover:gap-2 transition-all">
+              Open
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </a>
+        ))}
       </div>
     </div>
+  </div>
 </section>

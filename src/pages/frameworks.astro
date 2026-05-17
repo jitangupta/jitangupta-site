@@ -1,63 +1,154 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import AiDevelopmentLoopDiagram from "../components/AiDevelopmentLoopDiagram.astro";
 
 const title = "Frameworks - Jitan Gupta";
 const description = "Practical frameworks from building with AI tools in real engineering work.";
-const checks = [
-	"Intent check",
-	"Integration check",
-	"Failure-mode check",
-	"Security check",
-	"Maintainability check",
+
+const loopPrinciples = [
+	{
+		title: "Start from a task list",
+		description: "I write the work down first, then point Claude Code at one task. This keeps the agent away from vague, sprawling changes.",
+	},
+	{
+		title: "Let the agent produce a first pass",
+		description: "Claude Code can move fast through implementation, but that output is treated as a draft until the review loop finishes.",
+	},
+	{
+		title: "Force review gates before trust",
+		description: "The work goes through review commands, security checks, manual testing, and changeset review before it reaches a pull request.",
+	},
+	{
+		title: "Keep human judgment in control",
+		description: "I trust useful output, verify behavior, and override the agent when the code misses context.",
+	},
 ];
 
-// Temporary until the 5-Check Framework video URL is published.
-const fiveCheckVideoUrl = "#";
+const loopSteps = [
+	"Open Claude Code in the terminal with a clear task list.",
+	"Point it at one task and let it execute the first pass.",
+	"Run /review to catch implementation, integration, and context issues.",
+	"Run /security-check to look for risky code paths and unsafe assumptions.",
+	"Manually test the developed feature like a user and like an engineer.",
+	"Review the changeset before committing or opening a pull request.",
+	"Let PR review, CI, and teammates stay in the loop before merge.",
+];
+
+const checks = [
+	{
+		title: "Intent check",
+		description: "Does the change solve the actual task, or did the agent add extra behavior that was never requested?",
+	},
+	{
+		title: "Integration check",
+		description: "Does the code fit the existing architecture, naming, data flow, and project conventions?",
+	},
+	{
+		title: "Failure-mode check",
+		description: "What happens when data is missing, APIs fail, permissions change, or the happy path breaks?",
+	},
+	{
+		title: "Security check",
+		description: "Did the agent touch auth, secrets, validation, access control, storage, or external calls in a risky way?",
+	},
+	{
+		title: "Maintainability check",
+		description: "Will another engineer understand, test, debug, and safely extend this code later?",
+	},
+];
 ---
 
 <Layout title={title} description={description}>
-	<section class="bg-[#F8FAFC] mx-2">
-		<div class="bg-white max-w-screen-xl mx-auto px-5 py-8 md:px-15 md:py-14 rounded-b-2xl">
-			<div class="max-w-3xl">
-				<p class="section-label mb-3">Practical patterns</p>
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-5" style="line-height: 1.15;">
-					Frameworks
-				</h1>
-				<p class="text-lg md:text-xl text-gray-600 leading-relaxed">
-					These are practical patterns from building with AI tools in real engineering work. They are meant to help engineers review, adapt, and ship AI-assisted work with more context than a demo can show.
-				</p>
-			</div>
-
-			<section class="mt-12 max-w-4xl bg-[#F8FAFC] border border-gray-200 rounded-xl p-6 md:p-8">
-				<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-wider text-primary-600 mb-3">AI-generated code</p>
-						<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-							5-Check Framework - Shipping AI-Generated Code Safely
-						</h2>
-						<p class="text-gray-600 leading-relaxed max-w-2xl">
-							The 5-Check Framework is my practical checklist for reviewing AI-generated code before it reaches production. It is based on the places AI coding tools tend to look confident while missing important engineering context.
-						</p>
-					</div>
-					<a
-						href={fiveCheckVideoUrl}
-						data-temporary-video-url="true"
-						class="inline-flex shrink-0 items-center justify-center px-5 py-3 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
-					>
-						Watch the video
-					</a>
+	<section class="bg-canvas mx-2">
+		<div class="bg-white border border-slate-200 max-w-screen-xl mx-auto px-5 py-8 md:px-15 md:py-14 rounded-b-2xl">
+			<div class="grid gap-10 lg:grid-cols-[0.85fr_1.2fr] lg:items-center">
+				<div>
+					<p class="section-label mb-3">Practical patterns</p>
+					<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-5" style="line-height: 1.15;">
+						Frameworks
+					</h1>
+					<p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+						These are working patterns from building with AI tools in real engineering work. They are not rules for trusting AI. They are ways to keep human judgment, testing, and review inside the loop.
+					</p>
 				</div>
 
-				<ol class="mt-8 grid gap-3 md:grid-cols-2">
-					{checks.map((check, index) => (
-						<li class="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-4 text-gray-800">
-							<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700 font-semibold text-sm">
-								{index + 1}
-							</span>
-							<span class="font-medium">{check}</span>
-						</li>
+				<div class="rounded-xl border border-slate-200 bg-canvas-soft p-5 md:p-7">
+					<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">Current framework</p>
+					<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+						AI-Assisted Development Loop
+					</h2>
+					<p class="text-gray-600 leading-relaxed">
+						My practical workflow for using Claude Code without handing over engineering responsibility.
+					</p>
+				</div>
+			</div>
+
+			<section class="mt-12 rounded-xl border border-slate-200 bg-white p-5 md:p-8 overflow-hidden">
+				<div class="max-w-3xl">
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">AI-assisted development</p>
+						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+							The loop I use before AI-written code reaches a branch.
+						</h2>
+						<p class="text-gray-600 leading-relaxed mb-6">
+							The point is not to make Claude Code perfect. The point is to make the workflow honest: the agent can draft, review commands can help, but manual testing and human judgment still decide what ships.
+						</p>
+						<ol class="space-y-3">
+							{loopSteps.map((step, index) => (
+								<li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+									<span class="mt-0.5 text-xs font-semibold text-primary-600 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+									<span>{step}</span>
+								</li>
+							))}
+						</ol>
+					</div>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-slate-200 bg-canvas-soft p-3 md:p-6">
+					<AiDevelopmentLoopDiagram />
+				</div>
+
+				<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+					{loopPrinciples.map((principle) => (
+						<div class="border-t border-slate-200 pt-5">
+							<h3 class="text-lg font-semibold text-gray-900 mb-2">{principle.title}</h3>
+							<p class="text-sm text-gray-500 leading-relaxed">{principle.description}</p>
+						</div>
 					))}
-				</ol>
+				</div>
+			</section>
+
+			<section class="mt-8 rounded-xl border border-slate-200 bg-canvas-soft p-5 md:p-8">
+				<div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">Review checklist</p>
+						<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+							5-Check Framework
+						</h2>
+						<p class="text-gray-600 leading-relaxed mb-4">
+							5-Check is the checklist inside the loop. I use it when the agent has already written code and I need to decide whether that code deserves to move forward.
+						</p>
+						<p class="text-sm text-gray-500 leading-relaxed">
+							There is no YouTube video for this yet. For now, this page is the source of truth.
+						</p>
+					</div>
+
+					<ol class="grid gap-3">
+						{checks.map((check, index) => (
+							<li class="rounded-lg border border-slate-200 bg-white p-4">
+								<div class="flex gap-4">
+									<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700 font-semibold text-sm">
+										{index + 1}
+									</span>
+									<div>
+										<h3 class="font-semibold text-gray-900 mb-1">{check.title}</h3>
+										<p class="text-sm text-gray-500 leading-relaxed">{check.description}</p>
+									</div>
+								</div>
+							</li>
+						))}
+					</ol>
+				</div>
 			</section>
 		</div>
 	</section>
