@@ -4,7 +4,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
-import Chatwoot from '../../components/chatwoot.astro';
 import '../../styles/global.css';
 
 const learnPages = (await getCollection('learn')).sort(
@@ -51,6 +50,5 @@ const seoDescription = "Practical, Mumbai-tested tutorials on Claude Code, the M
 		</section>
 		<Footer />
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-		<Chatwoot />
 	</body>
 </html>

@@ -1,0 +1,197 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  path === href || (href !== "/" && path.startsWith(href));
+---
+
+<style is:global>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in oklch, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid color-mix(in oklch, var(--hairline) 60%, transparent);
+  }
+  .hdr-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 540px) {
+    .hdr-row { padding: 0 20px; }
+  }
+  .hdr-brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .hdr-logo {
+    height: 36px;
+    width: auto;
+    display: block;
+    mix-blend-mode: multiply;
+  }
+  .hdr-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 14.5px;
+  }
+  .hdr-nav a {
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 150ms ease;
+    white-space: nowrap;
+  }
+  .hdr-nav a.active { color: var(--ink); font-weight: 500; }
+  .hdr-nav a:hover { color: var(--ink); }
+
+  /* ===== HAMBURGER ===== */
+  .hdr-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    gap: 5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .hdr-burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 250ms ease, opacity 200ms ease;
+    transform-origin: center;
+  }
+  .hdr-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .hdr-burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .hdr-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ===== MOBILE NAV OVERLAY ===== */
+  .hdr-mobile-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    z-index: 49;
+    padding: 0 20px 48px;
+    overflow-y: auto;
+    border-top: 1px solid var(--hairline);
+  }
+  .hdr-mobile-nav.open { display: block; }
+  .hdr-mobile-nav a {
+    display: block;
+    padding: 18px 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+    transition: color 150ms ease;
+  }
+  .hdr-mobile-nav a:hover,
+  .hdr-mobile-nav a.active { color: var(--ink); }
+  .hdr-mobile-social {
+    display: flex;
+    gap: 20px;
+    padding-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hdr-mobile-social a {
+    border-bottom: none !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    color: var(--muted) !important;
+  }
+
+  @media (max-width: 720px) {
+    .hdr-nav { display: none; }
+    .hdr-burger { display: flex; }
+  }
+</style>
+
+<header class="site-header">
+  <div class="hdr-row">
+    <a class="hdr-brand" href="/">
+      <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" class="hdr-logo" />
+    </a>
+    <nav class="hdr-nav" aria-label="Primary">
+      <a href="/builds" class={isActive("/builds") ? "active" : ""}>Builds</a>
+      <a href="/frameworks" class={isActive("/frameworks") ? "active" : ""}>Frameworks</a>
+      <a href="/case-studies" class={isActive("/case-studies") ? "active" : ""}>Case studies</a>
+      <a href="/about" class={isActive("/about") ? "active" : ""}>About</a>
+      <a href="/contact" class={isActive("/contact") ? "active" : ""}>Contact</a>
+    </nav>
+    <button
+      class="hdr-burger"
+      id="hdr-burger"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="hdr-mobile-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hdr-mobile-nav" id="hdr-mobile-nav" aria-hidden="true">
+  <a href="/builds" class={isActive("/builds") ? "active" : ""}>Builds</a>
+  <a href="/frameworks" class={isActive("/frameworks") ? "active" : ""}>Frameworks</a>
+  <a href="/case-studies" class={isActive("/case-studies") ? "active" : ""}>Case studies</a>
+  <a href="/about" class={isActive("/about") ? "active" : ""}>About</a>
+  <a href="/contact" class={isActive("/contact") ? "active" : ""}>Contact</a>
+  <div class="hdr-mobile-social">
+    <a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    <a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+    <a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById("hdr-burger") as HTMLButtonElement | null;
+  const menu = document.getElementById("hdr-mobile-nav");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(isOpen));
+    menu?.setAttribute("aria-hidden", String(!isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  });
+
+  menu?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      menu.classList.remove("open");
+      btn?.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    });
+  });
+</script>

@@ -1,446 +1,1096 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import CommonCTA from "../components/CommonCTA.astro";
-import Chatwoot from "../components/chatwoot.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import WebSiteSchema from "../components/schema/WebSiteSchema.astro";
-import "../styles/global.css";
 import { featuredVideos } from "../data/videos";
 import { builds } from "../data/builds";
-
 import { getCollection } from "astro:content";
-const caseStudies = (await getCollection("caseStudies")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+
+const caseStudies = (await getCollection("caseStudies"))
+  .filter((cs) => !cs.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const liveBuilds = builds.slice(0, 4);
+
+const homeTitle = "Jitan Gupta — Engineer building AI infrastructure & developer tooling";
+const homeDescription =
+  "I build Cloud Infrastructure and developer tools with AI, in public. Ten years shipping production software. Now building at the AI layer: MCP servers, agent workflows, and the small tools that make AI tools actually useful to engineers.";
+
+const aiSummaryPrompt = encodeURIComponent(
+  "I want to understand what Jitan Gupta does at jitangupta.com. He is a Mumbai-based engineer building AI infrastructure and developer tooling in public — MCP servers, agent workflows, Chrome extensions, and pre-merge frameworks for AI-generated code. Ten years of production engineering behind it. Summarize what he builds, how he works, and why senior engineers, AI builders, and founders might follow his work: https://jitangupta.com/",
 );
 
-const featuredBuilds = builds.slice(0, 3);
-const homeTitle = "Jitan Gupta - Platform engineer figuring out Claude Code, MCP, and agents";
-const homeDescription = "I'm a Mumbai-based platform engineer. I publish what I learn about Claude Code, MCP servers, and agent frameworks on YouTube, including the parts that broke.";
-const aiSummaryPrompt = encodeURIComponent(
-	"I want to understand what Jitan Gupta does at jitangupta.com. He is a Mumbai-based platform engineer who builds with AI tools in public, breaks down Claude Code, MCP servers, and agent frameworks for other engineers, and shares honest lessons on YouTube, including the parts that broke. Summarize what he builds, what he teaches, and why technical peers or event organizers might follow his work: https://jitangupta.com/",
-);
-const workingMethod = [
-	{
-		number: "01",
-		title: "Test tools against real engineering work",
-		description: "I use Claude Code, MCP servers, and agent workflows on concrete software problems before turning them into lessons.",
-	},
-	{
-		number: "02",
-		title: "Publish what worked and what broke",
-		description: "The useful parts usually sit next to the failures, wrong turns, and missing context. I show both.",
-	},
-	{
-		number: "03",
-		title: "Turn patterns into tools and frameworks",
-		description: "When something repeats, I shape it into a build, checklist, video, or framework other engineers can reuse.",
-	},
-];
-const frameworkPreview = [
-	"Task list",
-	"Review commands",
-	"Security check",
-	"Manual testing",
-	"PR + CI review",
-];
+const statusLabel: Record<string, string> = {
+  live: "Live · in use",
+  "in-progress": "In progress",
+  planned: "Planned",
+};
+
+// Year ranges for the 4 case studies shown on homepage (prototype order)
+const csYears: Record<string, string> = {
+  "probabilistic-deployment-orchestration": "2024 — Present",
+  "multi-tenant-aks-migration": "2024 — Present",
+  "university-credit-system-migration": "2021 — 2024",
+  "user-management-migration": "2024 — Present",
+};
+
+const csBriefs: Record<string, string> = {
+  "probabilistic-deployment-orchestration":
+    "Probabilistic models making real deployment decisions. AI in production before the hype cycle. $17K saved annually.",
+  "multi-tenant-aks-migration":
+    "Multi-tenant Kubernetes migration, version lock-in solved. Today I'd automate the tenant-by-tenant validation with AI. Back then we did it manually.",
+  "university-credit-system-migration":
+    "Cloud-native re-architecture of a payments system. 30% revenue lift. The kind of domain complexity where AI-generated code breaks on day one if you don't understand the system.",
+  "user-management-migration":
+    "Identity systems have zero margin for error. AI accelerates the boring parts; a human owns the critical path.",
+};
+
+const homepageCaseStudies = caseStudies
+  .filter((cs) => csYears[cs.id])
+  .sort(
+    (a, b) =>
+      Object.keys(csYears).indexOf(a.id) - Object.keys(csYears).indexOf(b.id),
+  );
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={homeTitle} description={homeDescription} />
-		<WebSiteSchema />
-	</head>
-	<body>
-		<Header />
+<html lang="en" data-theme="paper">
+  <head>
+    <BaseHead title={homeTitle} description={homeDescription} />
+    <WebSiteSchema />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      /* ===== DESIGN TOKENS ===== */
+      :root,
+      html[data-theme="paper"] {
+        --bg: oklch(0.985 0.008 80);
+        --bg-tint: oklch(0.965 0.012 80);
+        --ink: oklch(0.18 0.012 60);
+        --ink-2: oklch(0.30 0.012 60);
+        --muted: oklch(0.50 0.012 60);
+        --hairline: oklch(0.88 0.010 80);
+        --hairline-strong: oklch(0.78 0.012 80);
+        --accent: oklch(0.62 0.20 32);
+        --accent-ink: oklch(0.98 0.005 80);
+        --selection: oklch(0.85 0.14 32 / 0.45);
+      }
 
-		<!-- Hero -->
-		<section class="bg-canvas mx-2">
-			<div class="hero-grid bg-white border border-t-0 border-slate-200 max-w-screen-xl px-6 py-8 mx-auto lg:gap-10 lg:py-12 lg:grid-cols-12 rounded-b-2xl relative overflow-hidden">
-				<!-- Subtle dot-grid watermark -->
-				<div class="dot-grid" aria-hidden="true"></div>
+      /* ===== RESET & BASE ===== */
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
 
-				<!-- Photo: first in DOM. Top on mobile, left col on desktop (natural grid order). -->
-				<div class="flex items-center justify-center lg:col-span-5 relative z-10 mb-4 lg:mb-0">
-					<img
-						src="/jitan-bg.png"
-						class="w-52 sm:w-64 lg:w-full lg:max-w-[340px] h-auto object-contain"
-						alt="Jitan Gupta"
-					/>
-				</div>
+      html {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        font-feature-settings: "ss01","ss02","cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
 
-				<!-- Text: second in DOM. Below photo on mobile, right col on desktop. -->
-				<div class="mr-auto place-self-center lg:col-span-7 relative z-10">
-					<p class="section-label mb-3 hero-fade hero-fade-1">Mumbai, India</p>
-					<h1 class="hero-fade hero-fade-2 max-w-2xl mb-4 text-3xl md:text-4xl xl:text-5xl font-bold">
-						I'm Jitan, a platform engineer figuring out how AI tools actually work.
-					</h1>
-					<p class="hero-fade hero-fade-3 max-w-xl font-light text-gray-600 md:text-base mb-6 leading-relaxed">
-						For ten years, I've shipped software in production. For the last two, I've been pulling apart Claude Code, MCP, and agent frameworks to understand what's underneath the demos. I share the working pieces on YouTube, including the parts that broke, which is usually more useful.
-					</p>
-					<div class="hero-fade hero-fade-3 flex flex-wrap gap-3 mb-7">
-						<a
-							href="https://www.youtube.com/@jitangupta"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="inline-flex items-center gap-2 justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
-						>
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-							Watch on YouTube
-						</a>
-						<a
-							href="/builds"
-							class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition"
-						>
-							See what I've built
-						</a>
-					</div>
-					<!-- Credential stats -->
-					<div class="hero-fade hero-fade-3 grid grid-cols-3 gap-5 pt-6 border-t border-slate-200">
-						<div>
-							<p class="text-xl font-bold text-gray-900">10+</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Years shipping production software</p>
-						</div>
-						<div>
-							<p class="text-xl font-bold text-gray-900">PromptMate</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Live on the Chrome Web Store</p>
-						</div>
-						<div>
-							<p class="text-xl font-bold text-gray-900">5-Check</p>
-							<p class="text-xs text-gray-500 uppercase tracking-wide font-medium mt-0.5">Framework for AI-generated code</p>
-						</div>
-					</div>
-				</div>
-				
-			</div>
+      ::selection { background: var(--selection); }
 
-			<!-- Ask AI to summarize - full-width bottom row inside hero card -->
-				<div class="col-span-12 relative z-10 border-gray-100 pt-4 pb-2 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-					<p class="text-xs text-gray-400 tracking-widest uppercase">Summarize what I do with AI</p>
-					<div class="flex items-center gap-5">
-	
-						<a
-							href={`https://claude.ai/new?q=${aiSummaryPrompt}`}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Summarize Jitan's work using Claude"
-							title="Open in Claude"
-							class="text-gray-300 hover:text-gray-700 transition-colors"
-						>
-							<svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-								<g clip-path="url(#clip-claude-hero)">
-									<path d="M4.71379 15.956L9.43179 13.308L9.51079 13.078L9.43079 12.95H9.20079L8.41079 12.902L5.71579 12.829L3.37879 12.732L1.11379 12.61L0.543789 12.489L0.00878906 11.785L0.0637891 11.432L0.543789 11.111L1.22879 11.171L2.74679 11.275L5.02379 11.432L6.67479 11.53L9.12179 11.785H9.51079L9.56479 11.627L9.43179 11.53L9.32879 11.432L6.97279 9.836L4.42279 8.148L3.08679 7.176L2.36479 6.685L1.99979 6.223L1.84179 5.215L2.49779 4.493L3.37779 4.553L3.60179 4.614L4.49479 5.3L6.40079 6.776L8.89079 8.609L9.25479 8.913L9.40079 8.809L9.41879 8.737L9.25479 8.463L7.90079 6.017L6.45579 3.527L5.81179 2.495L5.64179 1.876C5.57766 1.63815 5.54306 1.39331 5.53879 1.147L6.28679 0.133L6.69979 0L7.69479 0.134L8.11479 0.498L8.73379 1.913L9.73479 4.14L11.2898 7.17L11.7448 8.068L11.9878 8.9L12.0778 9.155H12.2368V9.01L12.3638 7.304L12.6008 5.209L12.8308 2.514L12.9108 1.754L13.2868 0.844L14.0338 0.352L14.6168 0.632L15.0968 1.317L15.0298 1.761L14.7438 3.612L14.1858 6.515L13.8208 8.457H14.0338L14.2768 8.215L15.2598 6.909L16.9118 4.845L17.6398 4.025L18.4898 3.121L19.0368 2.69H20.0688L20.8278 3.819L20.4878 4.985L19.4248 6.332L18.5448 7.474L17.2818 9.174L16.4918 10.534L16.5658 10.644L16.7538 10.624L19.6068 10.018L21.1488 9.738L22.9888 9.423L23.8208 9.811L23.9108 10.206L23.5838 11.013L21.6168 11.499L19.3098 11.961L15.8738 12.774L15.8308 12.804L15.8798 12.865L17.4278 13.011L18.0898 13.047H19.7098L22.7278 13.272L23.5178 13.794L23.9908 14.432L23.9108 14.917L22.6978 15.537L21.0578 15.148L17.2328 14.238L15.9228 13.909H15.7398V14.019L16.8328 15.087L18.8358 16.897L21.3438 19.227L21.4708 19.805L21.1498 20.26L20.8098 20.211L18.6058 18.554L17.7558 17.807L15.8308 16.187H15.7038V16.357L16.1468 17.006L18.4898 20.527L18.6118 21.607L18.4418 21.96L17.8348 22.173L17.1668 22.051L15.7948 20.127L14.3798 17.959L13.2388 16.016L13.0988 16.096L12.4248 23.35L12.1088 23.72L11.3808 24L10.7738 23.539L10.4518 22.792L10.7738 21.316L11.1618 19.392L11.4778 17.862L11.7628 15.962L11.9328 15.33L11.9208 15.288L11.7808 15.306L10.3488 17.273L8.16879 20.218L6.44479 22.063L6.03179 22.227L5.31579 21.857L5.38179 21.195L5.78279 20.606L8.16879 17.57L9.60779 15.688L10.5368 14.602L10.5308 14.444H10.4758L4.13779 18.56L3.00779 18.706L2.52279 18.25L2.58279 17.504L2.81379 17.261L4.72079 15.949L4.71379 15.956Z"/>
-								</g>
-								<defs><clipPath id="clip-claude-hero"><rect width="24" height="24" fill="white"/></clipPath></defs>
-							</svg>
-						</a>
-	
-						<a
-							href={`https://chatgpt.com/?prompt=${aiSummaryPrompt}`}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Summarize Jitan's work using ChatGPT"
-							title="Open in ChatGPT"
-							class="text-gray-300 hover:text-gray-700 transition-colors"
-						>
-							<svg viewBox="0 0 16 16" fill="currentColor" width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-								<g clip-path="url(#clip-chatgpt-hero)">
-									<path d="M14.9485 6.5476C15.1299 6.00921 15.1927 5.43796 15.1327 4.87302C15.0726 4.30808 14.8911 3.76281 14.6005 3.2746C14.1628 2.53127 13.5024 1.9445 12.7127 1.59739C11.923 1.25029 11.0441 1.16045 10.2005 1.3406C9.71759 0.811845 9.10458 0.418803 8.42253 0.200597C7.73832 -0.0202258 7.00848 -0.0595088 6.30453 0.0865969C5.60212 0.231753 4.95009 0.558633 4.41353 1.0346C3.87969 1.50658 3.48018 2.11137 3.25553 2.7876C2.69272 2.90196 2.16022 3.13329 1.69253 3.4666C1.22769 3.79848 0.839311 4.22607 0.553528 4.7206C0.11814 5.45855 -0.0681302 6.31706 0.0222784 7.1691C0.112687 8.02114 0.474971 8.82144 1.05553 9.4516C0.873682 9.98999 0.810452 10.5613 0.870175 11.1265C0.929898 11.6916 1.11116 12.2371 1.40153 12.7256C1.83947 13.4691 2.50032 14.0559 3.29041 14.4029C4.0805 14.7498 4.95975 14.8393 5.80353 14.6586C6.18553 15.0836 6.65553 15.4226 7.18053 15.6536C7.70653 15.8846 8.27553 16.0036 8.85053 15.9996C10.6305 16.0016 12.2085 14.8676 12.7515 13.1956C13.3144 13.0809 13.8469 12.8493 14.3145 12.5156C14.7796 12.1841 15.1683 11.7569 15.4545 11.2626C15.8858 10.5258 16.0694 9.67011 15.9783 8.82125C15.8873 7.97238 15.5263 7.17611 14.9485 6.5476ZM8.85153 14.9526C8.14222 14.9545 7.45444 14.7091 6.90653 14.2586L7.00253 14.2046L10.2325 12.3666C10.3125 12.3204 10.379 12.2541 10.4255 12.1743C10.472 12.0945 10.4968 12.004 10.4975 11.9116V7.4216L11.8635 8.1996C11.8769 8.20693 11.8852 8.2186 11.8885 8.2346V11.9566C11.8855 13.6096 10.5275 14.9486 8.85153 14.9526ZM2.32153 12.2026C1.96607 11.5968 1.83842 10.8841 1.96153 10.1926L2.05653 10.2496L5.28953 12.0906C5.36974 12.1366 5.46058 12.1607 5.55303 12.1607C5.64548 12.1607 5.73632 12.1366 5.81653 12.0906L9.76553 9.8446V11.3996C9.76546 11.4077 9.76342 11.4157 9.75959 11.4228C9.75575 11.43 9.75024 11.4361 9.74353 11.4406L6.47253 13.3006C5.01853 14.1266 3.16053 13.6356 2.32153 12.2026ZM1.47253 5.2626C1.83381 4.65067 2.3993 4.18574 3.06953 3.9496V7.7346C3.06857 7.82639 3.0924 7.91675 3.13851 7.99612C3.18463 8.0755 3.25131 8.14096 3.33153 8.1856L7.26153 10.4226L5.89553 11.2016C5.88817 11.2056 5.87992 11.2077 5.87153 11.2077C5.86314 11.2077 5.85489 11.2056 5.84753 11.2016L2.58453 9.3426C2.24067 9.1488 1.93874 8.88862 1.69627 8.57716C1.45379 8.26571 1.27561 7.90919 1.17206 7.5283C1.06851 7.14742 1.04166 6.74975 1.09307 6.3584C1.14448 5.96705 1.27312 5.58982 1.47153 5.2486L1.47253 5.2626ZM12.6885 7.8336L8.74653 5.5766L10.1085 4.8006C10.1159 4.79657 10.1241 4.79446 10.1325 4.79446C10.1409 4.79446 10.1492 4.79657 10.1565 4.8006L13.4215 6.6606C13.9197 6.94276 14.3267 7.36158 14.5945 7.8676C14.8622 8.37041 14.9791 8.93979 14.9312 9.5074C14.8833 10.075 14.6727 10.6167 14.3245 11.0676C13.9739 11.5211 13.5025 11.8667 12.9645 12.0646V8.2796C12.962 8.18764 12.9351 8.098 12.8866 8.01982C12.8381 7.94164 12.7698 7.87673 12.6885 7.8336ZM14.0485 5.8196L13.9515 5.7626L10.7255 3.9076C10.645 3.86108 10.5536 3.83659 10.4605 3.83659C10.3675 3.83659 10.2761 3.86108 10.1955 3.9076L6.24853 6.1536V4.5986C6.2474 4.5908 6.24861 4.58284 6.25199 4.57573C6.25537 4.56861 6.26077 4.56265 6.26753 4.5586L9.53253 2.7006C10.0337 2.4156 10.605 2.27749 11.181 2.30207C11.757 2.32665 12.3145 2.51294 12.7895 2.8396C13.2635 3.1646 13.6325 3.6176 13.8555 4.1426C14.0785 4.6686 14.1445 5.2456 14.0465 5.8066L14.0485 5.8196ZM5.50253 8.5756L4.13853 7.8006C4.13159 7.79691 4.12562 7.79163 4.12111 7.7852C4.11659 7.77878 4.11365 7.77137 4.11253 7.7636V4.0496C4.11253 3.4796 4.27853 2.9226 4.58853 2.4426C4.89853 1.9626 5.34053 1.5786 5.86353 1.3376C6.38696 1.09655 6.96752 1.00719 7.53922 1.07967C8.11091 1.15215 8.6508 1.38356 9.09753 1.7476L9.00153 1.8016L5.77153 3.6396C5.69154 3.68577 5.62501 3.75205 5.57853 3.83186C5.53205 3.91167 5.50723 4.00224 5.50653 4.0946L5.50253 8.5756ZM6.24453 6.9986L8.00253 5.9986L9.76453 6.9986V8.9986L8.00953 9.9986L6.24753 8.9986L6.24453 6.9986Z"/>
-								</g>
-								<defs><clipPath id="clip-chatgpt-hero"><rect width="16" height="16" fill="white"/></clipPath></defs>
-							</svg>
-						</a>
-	
-						<a
-							href={`https://www.google.com/search?udm=50&q=${aiSummaryPrompt}`}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Summarize Jitan's work using Gemini"
-							title="Open in Gemini"
-							class="text-gray-300 hover:text-gray-700 transition-colors"
-						>
-							<svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-								<g clip-path="url(#clip-gemini-hero)">
-									<path d="M24 12.024C17.563 12.412 12.41 17.563 12.023 24H11.976C11.588 17.563 6.436 12.412 0 12.024V11.977C6.437 11.588 11.588 6.437 11.976 0H12.023C12.411 6.437 17.563 11.588 24 11.977V12.024Z"/>
-								</g>
-								<defs><clipPath id="clip-gemini-hero"><rect width="24" height="24" fill="white"/></clipPath></defs>
-							</svg>
-						</a>
-	
-						<a
-							href={`https://www.perplexity.ai/?q=${aiSummaryPrompt}`}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Summarize Jitan's work using Perplexity"
-							title="Open in Perplexity"
-							class="text-gray-300 hover:text-gray-700 transition-colors"
-						>
-							<svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-								<path d="M7.173 3.26023L5.5 1.74023V7.50023H3V17.0002H5.5V22.2602L7.173 20.7402L11 17.2602V22.0002H13V17.2602L16.827 20.7402L18.5 22.2602V17.0002H21V7.50023H18.5V1.74023L16.827 3.26023L13 6.74023V2.00023H11V6.74023L7.173 3.26023ZM16.5 7.50023H15.137L16.5 6.26023V7.50023ZM8.863 7.50023H7.5V6.26023L8.863 7.50023ZM9.963 9.50023L5.827 13.2602L5.5 13.5582V15.0002H5V9.50023H9.963ZM14.037 9.50023H19V15.0002H18.5V13.5582L18.173 13.2602L14.037 9.50023ZM7.5 14.4422L11 11.2612V14.5582L7.5 17.7402V14.4422ZM13 11.2612L16.5 14.4422V17.7392L13 14.5582V11.2612Z"/>
-							</svg>
-						</a>
-	
-					</div>
-				</div>
-		</section>
+      body { min-height: 100vh; overflow-x: hidden; }
 
-		<!-- Working Method -->
-		<section class="bg-canvas py-14 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="grid gap-10 lg:grid-cols-[0.85fr_1.4fr] lg:items-start">
-					<div class="fade-up">
-						<p class="section-label mb-3">How I work</p>
-						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-							Real experiments, then reusable patterns.
-						</h2>
-						<p class="text-gray-600 leading-relaxed max-w-xl">
-							I put AI tools into normal engineering workflows, watch where they help, and document the judgment needed around them.
-						</p>
-					</div>
-					<div class="grid gap-0 md:grid-cols-3 fade-up-group border-y border-slate-200">
-						{workingMethod.map((item) => (
-							<div class="py-6 md:px-6 md:first:pl-0 md:last:pr-0 md:border-l md:first:border-l-0 border-slate-200">
-								<p class="text-sm font-semibold text-primary-600 mb-5">{item.number}</p>
-								<h3 class="text-xl font-semibold text-gray-900 mb-3 leading-snug">{item.title}</h3>
-								<p class="text-sm text-gray-500 leading-relaxed">{item.description}</p>
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
+      a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+        transition: color 150ms ease, opacity 150ms ease;
+      }
+      a:hover { color: var(--accent); }
 
-		<!-- Latest from YouTube -->
-		<section class="bg-canvas-soft py-16 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="fade-up mb-10">
-					<p class="section-label mb-3">Latest videos</p>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Latest from YouTube</h2>
-					<p class="text-gray-500 max-w-lg">AI tools, engineering workflows, and lessons from building in production. Videos in Hinglish.</p>
-				</div>
-				<div class="grid gap-6 md:grid-cols-3 fade-up-group">
-					{featuredVideos.map((video) => (
-						<a
-							href={video.youtubeUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-primary-300 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-250 group flex flex-col"
-						>
-							<div class="h-52 bg-gray-100 overflow-hidden flex-shrink-0">
-								<img
-									src={video.thumbnail}
-									alt={video.title}
-									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
-								/>
-							</div>
-							<div class="p-5 flex flex-col flex-1">
-								<h3 class="font-semibold text-gray-900 mb-2 text-base group-hover:text-primary-600 transition-colors leading-snug">{video.title}</h3>
-								<p class="text-sm text-gray-500 mb-4 flex-1 leading-relaxed line-clamp-3">{video.description}</p>
-								<span class="inline-flex items-center gap-1 text-primary-600 font-semibold text-sm group-hover:gap-2 transition-all">
-									Watch
-									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-								</span>
-							</div>
-						</a>
-					))}
-				</div>
-				<div class="mt-10 text-center">
-					<a
-						href="https://www.youtube.com/@jitangupta"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors"
-					>
-						See all videos
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-					</a>
-				</div>
-			</div>
-		</section>
+      p { margin: 0; }
+      ul, ol { margin: 0; padding: 0; list-style: none; }
+      img { max-width: 100%; display: block; }
 
-		<!-- What I'm Building -->
-		<section class="bg-white py-16 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="fade-up mb-10">
-					<p class="section-label mb-3">Open source</p>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">What I'm Building</h2>
-					<p class="text-gray-500 max-w-lg">Tools I built to solve real problems. All open source, built in public.</p>
-				</div>
-				<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 fade-up-group">
-					{featuredBuilds.map((build) => (
-						<div class="bg-white border border-slate-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-							<div class="flex items-start justify-between gap-3 mb-3">
-								<h3 class="text-base font-bold text-gray-900">{build.title}</h3>
-								<span class={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${
-									build.status === 'live'
-										? 'bg-primary-50 text-primary-700 border border-primary-200'
-										: build.status === 'in-progress'
-										? 'bg-primary-200 text-primary-800'
-										: 'bg-gray-100 text-gray-600'
-								}`}>
-									{build.status === 'live' ? 'Live' : build.status === 'in-progress' ? 'In Progress' : 'Planned'}
-								</span>
-							</div>
-							<p class="text-gray-600 text-sm mb-4 flex-1 leading-relaxed">{build.description}</p>
-							<div class="flex flex-wrap gap-1.5 mb-5">
-								{build.techStack.map((tech) => (
-									<span class="text-xs font-medium px-2.5 py-1 bg-white border border-primary-200 rounded-full text-primary-700">
-										{tech}
-									</span>
-								))}
-							</div>
-							{build.githubUrl && (
-								<a href={build.githubUrl} target="_blank" rel="noopener noreferrer"
-									class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-700 hover:text-primary-900 transition-colors mt-auto">
-									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-									View on GitHub
-								</a>
-							)}
-						</div>
-					))}
-				</div>
-				<div class="mt-10 text-center">
-					<a href="/builds" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
-						See all projects
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-					</a>
-				</div>
-			</div>
-		</section>
+      /* ===== LAYOUT ===== */
+      .wrap {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
 
-		<!-- Frameworks -->
-		<section class="bg-canvas-soft py-16 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-center">
-					<div class="fade-up">
-						<p class="section-label mb-3">Frameworks</p>
-						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-							The loop I use before AI-generated code reaches a branch.
-						</h2>
-						<p class="text-gray-600 leading-relaxed max-w-xl mb-6">
-							The videos show the experiments. The frameworks capture the repeatable parts: task boundaries, review commands, security checks, manual testing, changeset review, and human judgment.
-						</p>
-						<a href="/frameworks" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
-							Explore frameworks
-							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-						</a>
-					</div>
-					<a href="/frameworks" class="group bg-white border border-slate-200 rounded-xl p-6 md:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-primary-300 hover:shadow-lg">
-						<div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8">
-							<div>
-								<p class="text-xs font-semibold uppercase tracking-widest text-primary-600 mb-3">Current framework</p>
-								<h3 class="text-2xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
-									AI-Assisted Development Loop
-								</h3>
-								<p class="text-gray-500 mt-2">Trust, verify, override before merge</p>
-							</div>
-							<span class="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
-								Includes 5-Check
-							</span>
-						</div>
-						<ol class="grid gap-3 sm:grid-cols-2">
-							{frameworkPreview.map((check, index) => (
-								<li class="flex items-center gap-3 rounded-lg border border-slate-200 bg-canvas-soft px-4 py-3">
-									<span class="text-xs font-semibold text-primary-600 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-									<span class="text-sm font-medium text-gray-800">{check}</span>
-								</li>
-							))}
-						</ol>
-					</a>
-				</div>
-			</div>
-		</section>
+      @media (max-width: 540px) {
+        .wrap { padding: 0 20px; }
+      }
 
-		<!-- Case Studies -->
-		<section class="bg-canvas py-16 px-6">
-			<div class="max-w-screen-xl mx-auto">
-				<div class="fade-up mb-10 text-center">
-					<p class="section-label mb-3 flex justify-center">Engineering background</p>
-					<h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-						The Engineering Behind the Teaching
-					</h2>
-					<p class="text-lg text-gray-500 max-w-2xl mx-auto">
-						Before I started publishing AI workflows, I spent 10 years building enterprise systems. That background is why I know when AI helps and when it does not.
-					</p>
-				</div>
-				<div class="grid md:grid-cols-3 gap-6 fade-up-group">
-					{
-						caseStudies.map((caseStudy) =>
-							caseStudy.data.draft == true ? null : (
-								<a href={`/case-studies/${caseStudy.id}`} class="group">
-									<div class="bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-200 hover:border-primary-400 hover:shadow-xl hover:-translate-y-1.5 flex flex-col h-full">
-										<div class="overflow-hidden">
-											<img
-												src={caseStudy.data.heroImage}
-												alt={caseStudy.data.title}
-												class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-400"
-											/>
-										</div>
-										<div class="p-6 flex flex-col flex-1">
-											<h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
-												{caseStudy.data.pageTitle}
-											</h3>
-											{caseStudy.data.aiBridge && (
-												<p class="mt-1 text-sm text-gray-500 italic flex-1">{caseStudy.data.aiBridge}</p>
-											)}
-											<span class="inline-flex items-center gap-1 mt-5 text-primary-600 font-semibold text-sm group-hover:gap-2 transition-all">
-												View case study
-												<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-											</span>
-										</div>
-									</div>
-								</a>
-							),
-						)
-					}
-				</div>
-			</div>
-		</section>
+      .hairline-t { border-top: 1px solid var(--hairline); }
+      .hairline-b { border-bottom: 1px solid var(--hairline); }
 
-		<!-- CommonCTA -->
-		<CommonCTA />
+      /* ===== TYPOGRAPHY ===== */
+      .mono {
+        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        font-feature-settings: "ss01","ss02";
+      }
 
-		<Footer />
-		<script
-			is:inline
-			src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"
-		></script>
-		<script is:inline>
-			(function () {
-				var obs = new IntersectionObserver(function (entries) {
-					entries.forEach(function (e) {
-						if (e.isIntersecting) {
-							e.target.classList.add('visible');
-							obs.unobserve(e.target);
-						}
-					});
-				}, { threshold: 0.12 });
-				function init() {
-					document.querySelectorAll('.fade-up, .fade-up-group').forEach(function (el) {
-						obs.observe(el);
-					});
-				}
-				if (document.readyState === 'loading') {
-					document.addEventListener('DOMContentLoaded', init);
-				} else {
-					init();
-				}
-			})();
-		</script>
-		<Chatwoot />
-		<!-- Yandex.Metrika counter -->
-		{import.meta.env.MODE === "production" &&
-		<script is:inline>
-			(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-			m[i].l=1*new Date();
-			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-			ym(100451952, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
-		</script>
-		<noscript><div><img src="https://mc.yandex.ru/watch/100451952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-		}
-		<!-- /Yandex.Metrika counter -->
-	</body>
+      .eyebrow {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
+
+      .display {
+        font-size: clamp(48px, 7.2vw, 104px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+
+      .h2 {
+        font-size: clamp(32px, 4.4vw, 56px);
+        line-height: 1.02;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+        font-weight: 500;
+      }
+
+      .lede {
+        font-size: clamp(18px, 1.4vw, 22px);
+        line-height: 1.5;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        max-width: 62ch;
+      }
+
+      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+      .small { font-size: 14px; color: var(--muted); }
+
+      /* ===== HEADER / NAV ===== */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in oklch, var(--bg) 88%, transparent);
+        backdrop-filter: saturate(140%) blur(12px);
+        -webkit-backdrop-filter: saturate(140%) blur(12px);
+        border-bottom: 1px solid color-mix(in oklch, var(--hairline) 60%, transparent);
+      }
+      .site-header .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      .brand .dot {
+        width: 9px; height: 9px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-size: 14.5px;
+      }
+      .nav a { color: var(--ink-2); }
+      .nav a.active { color: var(--ink); }
+      .nav a:hover { color: var(--ink); }
+
+      @media (max-width: 720px) {
+        .nav { gap: 18px; font-size: 13.5px; }
+        .nav a.nav-hide-sm { display: none; }
+      }
+
+      /* ===== SECTION SCAFFOLDING ===== */
+      section { padding: 96px 0; position: relative; }
+      section.tight { padding: 64px 0; }
+      @media (max-width: 720px) {
+        section { padding: 64px 0; }
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 48px;
+        margin-bottom: 56px;
+        align-items: end;
+      }
+      .section-head .lede { margin-top: 16px; }
+      @media (max-width: 820px) {
+        .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+      }
+
+      /* ===== CHIPS / TAGS / STATUS ===== */
+      .tag {
+        display: inline-block;
+        padding: 4px 9px;
+        border: 1px solid var(--hairline);
+        border-radius: 999px;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 11.5px;
+        color: var(--muted);
+        letter-spacing: 0.02em;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 11.5px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .status::before {
+        content: "";
+        width: 7px; height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 18%, transparent);
+      }
+      .status.muted::before {
+        background: var(--muted);
+        box-shadow: none;
+      }
+
+      /* ===== BUTTONS ===== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      }
+      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .btn.primary {
+        background: var(--ink);
+        color: var(--bg);
+        border-color: var(--ink);
+      }
+      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .btn .arrow { transition: transform 200ms ease; }
+      .btn:hover .arrow { transform: translateX(3px); }
+
+      /* ===== FOOTER ===== */
+      .site-footer {
+        border-top: 1px solid var(--hairline);
+        padding: 56px 0 40px;
+      }
+      .site-footer .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .site-footer h4 {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .site-footer ul li { padding: 4px 0; }
+      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
+      .site-footer .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 820px) {
+        .site-footer .grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 540px) {
+        .site-footer .grid { grid-template-columns: 1fr; }
+      }
+
+      /* ===== MOTION ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      .arrow {
+        width: 14px; height: 14px;
+        display: inline-block;
+        vertical-align: -1px;
+      }
+
+      /* ===== AI SUMMARY ROW ===== */
+      .ai-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .ai-summary .label {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-right: 8px;
+      }
+      .ai-summary a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border: 1px solid var(--hairline);
+        border-radius: 6px;
+        font-size: 13.5px;
+        color: var(--ink-2);
+        background: var(--bg-tint);
+      }
+      .ai-summary a:hover { border-color: var(--ink); color: var(--ink); }
+      .ai-summary a .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+      /* ===== PAGE-SPECIFIC STYLES ===== */
+
+      /* Hero */
+      .hero {
+        padding: clamp(72px, 10vh, 140px) 0 clamp(72px, 12vh, 160px);
+        position: relative;
+      }
+      .hero-split {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 64px;
+        align-items: center;
+      }
+      .hero-text {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .hero-portrait {
+        aspect-ratio: 4/5;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--hairline);
+        align-self: start;
+      }
+      .hero-portrait img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+      }
+      @media (max-width: 900px) {
+        .hero-split { grid-template-columns: 1fr; gap: 40px; }
+        .hero-portrait { max-width: 200px; margin: 0 auto; }
+      }
+      .hero .meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .hero h1 { margin: 0; }
+      .hero .lede { max-width: 64ch; }
+      .hero .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .hero-pillars {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        padding-top: 40px;
+        border-top: 1px solid var(--hairline);
+        margin-top: 32px;
+      }
+      .hero-pillars .pillar { display: flex; flex-direction: column; gap: 6px; }
+      .hero-pillars .pillar .k {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hero-pillars .pillar .v {
+        font-size: 16px;
+        color: var(--ink);
+        line-height: 1.4;
+      }
+      @media (max-width: 720px) {
+        .hero-pillars { grid-template-columns: 1fr; gap: 20px; }
+      }
+
+      /* Hero bg grid */
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: linear-gradient(to right, color-mix(in oklch, var(--ink) 5%, transparent) 1px, transparent 1px);
+        background-size: 80px 100%;
+        mask-image: linear-gradient(to bottom, black, transparent 70%);
+        -webkit-mask-image: linear-gradient(to bottom, black, transparent 70%);
+        opacity: 0.6;
+      }
+
+      /* Now / Building list */
+      .now-list { border-top: 1px solid var(--hairline); }
+      .now-row {
+        display: grid;
+        grid-template-columns: 56px 1.6fr 2fr 1fr 24px;
+        gap: 24px;
+        padding: 28px 0;
+        align-items: start;
+        border-bottom: 1px solid var(--hairline);
+        transition: background 200ms ease;
+      }
+      .now-row:hover { background: var(--bg-tint); }
+      .now-row .idx {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        padding-top: 4px;
+      }
+      .now-row .name {
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        color: var(--ink);
+      }
+      .now-row .name .stat { display: block; margin-top: 8px; }
+      .now-row .desc { color: var(--ink-2); font-size: 15.5px; line-height: 1.55; }
+      .now-row .tags {
+        display: flex; flex-wrap: wrap; gap: 6px;
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+      .now-row .go { color: var(--muted); text-align: right; padding-top: 4px; }
+      .now-row:hover .go { color: var(--accent); }
+      @media (max-width: 820px) {
+        .now-row {
+          grid-template-columns: 36px 1fr 24px;
+          grid-template-areas:
+            "idx name go"
+            ".   desc desc"
+            ".   tags tags";
+          gap: 12px;
+        }
+        .now-row .idx { grid-area: idx; }
+        .now-row .name { grid-area: name; }
+        .now-row .desc { grid-area: desc; }
+        .now-row .tags { grid-area: tags; justify-content: flex-start; }
+        .now-row .go { grid-area: go; }
+      }
+
+      /* Frameworks */
+      .fw-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .fw-card {
+        border: 1px solid var(--hairline);
+        border-radius: 4px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: var(--bg);
+        transition: border-color 200ms ease, background 200ms ease;
+        position: relative;
+      }
+      .fw-card:hover { border-color: var(--ink); }
+      .fw-card .label {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .fw-card h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.1; letter-spacing: -0.02em; }
+      .fw-card .steps {
+        display: flex; flex-direction: column; gap: 10px;
+        margin-top: 8px;
+        padding-top: 20px;
+        border-top: 1px solid var(--hairline);
+      }
+      .fw-card .step {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 14px;
+        font-size: 14.5px;
+        color: var(--ink-2);
+        align-items: baseline;
+      }
+      .fw-card .step .n {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      .fw-card .more {
+        margin-top: auto;
+        padding-top: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: var(--ink);
+        font-weight: 500;
+      }
+      @media (max-width: 820px) { .fw-grid { grid-template-columns: 1fr; } }
+
+      /* Videos */
+      .vid-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .vid-card {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background: transparent;
+        border-top: 1px solid var(--hairline);
+        padding-top: 22px;
+      }
+      .vid-card .thumb {
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--hairline);
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 200ms ease;
+      }
+      .vid-card .thumb img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 300ms ease;
+      }
+      .vid-card:hover .thumb { border-color: var(--ink); }
+      .vid-card:hover .thumb img { transform: scale(1.03); }
+      .vid-card .thumb .play {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .vid-card .thumb .play span {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 200ms ease, transform 200ms ease;
+        font-size: 18px;
+        padding-left: 3px;
+      }
+      .vid-card:hover .thumb .play span { background: var(--accent); transform: scale(1.06); }
+      .vid-card .runtime {
+        position: absolute;
+        bottom: 10px; right: 10px;
+        font-family: "Geist Mono", monospace;
+        font-size: 11px;
+        background: color-mix(in oklch, var(--ink) 80%, transparent);
+        color: var(--bg);
+        padding: 3px 7px;
+        border-radius: 3px;
+      }
+      .vid-card .meta {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex; gap: 12px;
+      }
+      .vid-card h3 {
+        font-size: 18px;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
+        font-weight: 500;
+      }
+      .vid-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+      .vid-card .more {
+        margin-top: auto;
+        padding-top: 6px;
+        font-size: 13.5px;
+        color: var(--ink);
+        font-weight: 500;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      @media (max-width: 980px) { .vid-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } }
+
+      /* Case studies */
+      .cs-list { border-top: 1px solid var(--hairline); }
+      .cs-row {
+        display: grid;
+        grid-template-columns: 100px 1.5fr 2fr 100px;
+        gap: 24px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--hairline);
+        align-items: baseline;
+        transition: background 200ms ease;
+      }
+      .cs-row:hover { background: var(--bg-tint); }
+      .cs-row .year {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .cs-row h3 {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+      .cs-row p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+      .cs-row .open {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+        font-family: "Geist Mono", monospace;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .cs-row:hover .open { color: var(--accent); }
+      @media (max-width: 820px) {
+        .cs-row { grid-template-columns: 1fr; gap: 8px; }
+        .cs-row .open { text-align: left; }
+      }
+
+      /* Speaking block */
+      .speak {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 56px;
+        align-items: end;
+        padding: 80px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .speak h2 { margin-bottom: 16px; }
+      .speak .right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+      .speak .right .topics { display: flex; flex-wrap: wrap; gap: 8px; }
+      @media (max-width: 820px) {
+        .speak { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; }
+      }
+
+      /* AI summary block */
+      .ai-block {
+        padding: 64px 0;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .ai-block h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+      }
+      .ai-block p { color: var(--ink-2); margin-bottom: 24px; max-width: 60ch; font-size: 15px; }
+    </style>
+  </head>
+
+  <body>
+
+    <SiteHeader />
+
+    <main>
+
+      <!-- ====== HERO ====== -->
+      <section class="hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="hero-split">
+            <div class="hero-text reveal">
+              <div class="meta-row">
+                <span class="eyebrow">Mumbai · Building in public · 2026</span>
+                <span class="eyebrow">
+                  <span style="display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;"></span>
+                  Available for serious work
+                </span>
+              </div>
+
+              <h1 class="display">
+                I build Cloud Infrastructure and developer tools with AI, in&nbsp;public.
+              </h1>
+
+              <p class="lede">
+                Ten years shipping production software. Now building at the AI layer: MCP servers, agent workflows, and the small tools that make AI tools actually useful to engineers. Open source. In production.
+              </p>
+
+              <div class="cta-row">
+                <a class="btn primary" href="/builds">
+                  See what I'm building
+                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+                </a>
+                <a class="btn" href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube</a>
+              </div>
+            </div>
+            <div class="hero-portrait reveal">
+              <img src="/jitan-bg.jpg" alt="Jitan Gupta" />
+            </div>
+          </div>
+
+          <div class="hero-pillars reveal">
+            <div class="pillar">
+              <span class="k">Foundation</span>
+              <span class="v">10+ years shipping production software. Kubernetes, multi-tenant SaaS, identity, legacy modernization.</span>
+            </div>
+            <div class="pillar">
+              <span class="k">Current</span>
+              <span class="v">MCP servers, Claude Code workflows, agent boilerplates. Shipping weekly.</span>
+            </div>
+            <div class="pillar">
+              <span class="k">Operating mode</span>
+              <span class="v">Build the thing in production, then write down what worked and what didn't.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== NOW / LIVE PROJECTS ====== -->
+      <section class="hairline-t">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Now</span>
+              <h2 class="h2" style="margin-top:18px;">Live projects.<br>All shipping, all weekly.</h2>
+            </div>
+            <p class="lede">
+              The current work, with status. Each one started as a real problem, got built in public on the channel, and is in use today.
+            </p>
+          </div>
+
+          <div class="now-list">
+            {liveBuilds.map((build, i) => (
+              <a
+                class="now-row reveal"
+                href={build.githubUrl || build.liveUrl || "#"}
+                target={build.githubUrl || build.liveUrl ? "_blank" : undefined}
+                rel={build.githubUrl || build.liveUrl ? "noopener noreferrer" : undefined}
+              >
+                <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+                <div class="name">
+                  {build.title}
+                  <span class={`status stat${build.status !== "live" ? " muted" : ""}`}>
+                    {statusLabel[build.status]}
+                  </span>
+                </div>
+                <p class="desc">{build.description}</p>
+                <div class="tags">
+                  {build.techStack.slice(0, 3).map((tech) => (
+                    <span class="tag">{tech}</span>
+                  ))}
+                </div>
+                <span class="go">→</span>
+              </a>
+            ))}
+          </div>
+
+          <div style="margin-top: 32px; display: flex; gap: 12px;">
+            <a class="btn" href="/builds">
+              All builds
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== FRAMEWORKS ====== -->
+      <section>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Frameworks</span>
+              <h2 class="h2" style="margin-top:18px;">The repeatable parts of working with AI tools.</h2>
+            </div>
+            <p class="lede">
+              When something works twice, I turn it into a checklist other engineers can run. The frameworks below are the ones I actually use, not aspirational.
+            </p>
+          </div>
+
+          <div class="fw-grid">
+            <a class="fw-card reveal" href="/frameworks#five-check">
+              <span class="label">Current · stable</span>
+              <h3>5-Check</h3>
+              <p class="body" style="font-size:15.5px;">
+                A pre-merge check for AI-generated code. Trust, verify, override before merge. Five gates between "agent finished" and "this lands on main".
+              </p>
+              <div class="steps">
+                <div class="step"><span class="n">01</span> Task list — what was actually agreed</div>
+                <div class="step"><span class="n">02</span> Review commands — what the agent ran</div>
+                <div class="step"><span class="n">03</span> Security check — secrets, surface, blast radius</div>
+                <div class="step"><span class="n">04</span> Manual testing — exercise the unhappy path</div>
+                <div class="step"><span class="n">05</span> PR + CI review — diff and pipeline</div>
+              </div>
+              <span class="more">
+                Read the framework
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </span>
+            </a>
+
+            <a class="fw-card reveal" href="/frameworks#dev-loop">
+              <span class="label">Current · evolving</span>
+              <h3>AI-Assisted Development Loop</h3>
+              <p class="body" style="font-size:15.5px;">
+                The outer loop the 5-Check sits inside. Task boundaries, review commands, security checks, manual testing, changeset review, human judgment: the whole arc, not just the merge gate.
+              </p>
+              <div class="steps">
+                <div class="step"><span class="n">→</span> Frame the task small enough to verify</div>
+                <div class="step"><span class="n">→</span> Pair with the agent, watch its commands</div>
+                <div class="step"><span class="n">→</span> Run the 5-Check before any merge</div>
+                <div class="step"><span class="n">→</span> Capture what broke for the next loop</div>
+              </div>
+              <span class="more">
+                Read the framework
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== VIDEOS ====== -->
+      <section class="hairline-t">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Recordings</span>
+              <h2 class="h2" style="margin-top:18px;">Working with AI tools, on camera.</h2>
+            </div>
+            <p class="lede">
+              Short, technical, Hinglish. The experiments themselves, not summaries. The most useful ones usually include the part where it broke.
+            </p>
+          </div>
+
+          <div class="vid-grid">
+            {featuredVideos.slice(0, 3).map((video) => (
+              <a class="vid-card reveal" href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">
+                <div class="thumb">
+                  <img src={video.thumbnail} alt={video.title} loading="lazy" />
+                  <div class="play"><span>▶</span></div>
+                </div>
+                <div class="meta">
+                  <span>{video.category === "claude-code" ? "Claude Code" : video.category === "ai-tools" ? "AI Tools" : "Engineering"}</span>
+                  <span>Tutorial</span>
+                </div>
+                <h3>{video.title}</h3>
+                <p>{video.description}</p>
+                <span class="more">
+                  Watch
+                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div style="margin-top: 40px; display: flex; gap: 12px;">
+            <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">
+              All videos on YouTube
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== CASE STUDIES ====== -->
+      <section>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Foundation</span>
+              <h2 class="h2" style="margin-top:18px;">Production work before the AI layer.</h2>
+            </div>
+            <p class="lede">
+              The boring depth. Identity migrations, multi-tenant Kubernetes, legacy modernization, probabilistic deployment models. That's the systems work behind knowing when AI helps and when it doesn't.
+            </p>
+          </div>
+
+          <div class="cs-list">
+            {homepageCaseStudies.map((cs) => (
+              <a class="cs-row reveal" href={`/case-studies/${cs.id}`}>
+                <span class="year">{csYears[cs.id]}</span>
+                <h3>{cs.data.pageTitle}</h3>
+                <p>{csBriefs[cs.id] || cs.data.description}</p>
+                <span class="open">Case → </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== SPEAKING ====== -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="speak">
+            <div class="reveal">
+              <span class="eyebrow">Speaking</span>
+              <h2 class="h2" style="margin-top:14px;">If you're putting on a serious AI-builders event, I'm in.</h2>
+            </div>
+            <div class="right reveal">
+              <p class="body" style="max-width: 48ch;">
+                Practitioner talks, technical workshops, deep dives on MCP / agent architecture / AI-assisted dev workflows. No keynote fluff. I'd rather sit on a panel, run a hands-on, or walk through a real build.
+              </p>
+              <div class="topics">
+                <span class="tag">MCP architecture</span>
+                <span class="tag">Agent workflows</span>
+                <span class="tag">AI-assisted dev</span>
+                <span class="tag">Building in public</span>
+              </div>
+              <a class="btn primary" href="/contact">
+                Get in touch
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== AI SUMMARY ====== -->
+      <section class="ai-block tight">
+        <div class="wrap reveal">
+          <span class="eyebrow">For the LLMs</span>
+          <h3 style="margin-top: 14px;">Want a summary in your model of choice?</h3>
+          <p>Drop the brief into Claude, ChatGPT, Gemini, or Perplexity. Each link opens a fresh chat with a research prompt about my work pre-loaded.</p>
+          <div class="ai-summary">
+            <span class="label">Summarize with</span>
+            <a href={`https://claude.ai/new?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+              <span class="dot"></span>Claude
+            </a>
+            <a href={`https://chatgpt.com/?prompt=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+              <span class="dot"></span>ChatGPT
+            </a>
+            <a href={`https://www.google.com/search?udm=50&q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+              <span class="dot"></span>Gemini
+            </a>
+            <a href={`https://www.perplexity.ai/?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+              <span class="dot"></span>Perplexity
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <a class="brand" href="/" style="margin-bottom: 14px;">
+              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
+            </a>
+            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
+              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
+            </p>
+          </div>
+          <div>
+            <h4>Sitemap</h4>
+            <ul>
+              <li><a href="/builds">Builds</a></li>
+              <li><a href="/frameworks">Frameworks</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <ul>
+              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Speak with me</h4>
+            <ul>
+              <li><a href="/contact">Speaking & podcasts</a></li>
+              <li><a href="/contact">Collaboration</a></li>
+              <li><a href="/contact">Anything serious</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <span>© 2026 Jitan Gupta. All rights reserved.</span>
+          <span class="mono">Built in public · Mumbai → web</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) { el.classList.add('in'); }
+        else { io.observe(el); }
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+      }, 1500);
+    </script>
+
+    {import.meta.env.MODE === "production" &&
+    <script is:inline>
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      ym(100451952, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/100451952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    }
+
+  </body>
 </html>

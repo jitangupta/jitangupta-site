@@ -11,7 +11,7 @@ interface Props {
 
 const canonicalURL = new URL(SITE_URL);
 
-const { title, description, image = '/jitan-bg.png' } = Astro.props;
+const { title, description, image = '/jitan-bg.jpg' } = Astro.props;
 const isProd = import.meta.env.MODE === "production";
 ---
 
@@ -30,7 +30,7 @@ const isProd = import.meta.env.MODE === "production";
 <link rel="preload" href="/fonts/recoleta-semibold.woff2" as="font" type="font/woff2" crossorigin />
 
 <!-- Hero image preload -->
-<link rel="preload" href="/jitan-bg.png" as="image" />
+<link rel="preload" href="/jitan-bg.jpg" as="image" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -61,7 +61,7 @@ const isProd = import.meta.env.MODE === "production";
   "@type": "Person",
   "name": "Jitan Gupta",
   "url": "https://jitangupta.com",
-  "image": "https://jitangupta.com/jitan-bg.png",
+  "image": "https://jitangupta.com/jitan-bg.jpg",
   "jobTitle": "Platform engineer",
   "description": "Mumbai-based platform engineer who builds with AI tools in public and teaches engineers what he learns about Claude Code, MCP servers, and agent frameworks.",
   "address": {
