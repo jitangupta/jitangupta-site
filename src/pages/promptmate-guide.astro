@@ -13,16 +13,21 @@ const steps = [
   },
   {
     number: "02",
+    heading: "Connect Google Drive",
+    body: "When you open the sidebar for the first time, PromptMate asks to connect your Google Drive. Your library syncs to your own private folder — nothing stored on any external server.",
+  },
+  {
+    number: "03",
     heading: "Open any supported AI",
     body: "Navigate to ChatGPT, Claude, DeepSeek, or Kimi. Look for the PromptMate button in the bottom-right corner and click it to open your sidebar.",
   },
   {
-    number: "03",
+    number: "04",
     heading: "Save your first prompt",
     body: 'Click "New Prompt", write your instruction, choose a tone and output format, then save it to your library.',
   },
   {
-    number: "04",
+    number: "05",
     heading: "Use it in any chat",
     body: 'Find your prompt in the sidebar, click "Use" — it inserts into the chat with your tone and format applied.',
   },
@@ -52,7 +57,7 @@ const guideSections = [
   {
     heading: "History and restore",
     body: "If you edited a prompt and want an older version back, learn how version history and restore work.",
-    href: "#tips",
+    href: "#edit-history",
   },
 ];
 
@@ -375,7 +380,7 @@ const tips = [
       /* Quick start steps */
       .steps-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 0;
         border-top: 1px solid var(--hairline);
         margin-top: 48px;
@@ -768,7 +773,7 @@ const tips = [
         <div class="wrap">
           <div class="reveal">
             <span class="eyebrow">Quick start</span>
-            <h2 class="h2" style="margin-top: 16px;">Up and running in 4 steps.</h2>
+            <h2 class="h2" style="margin-top: 16px;">Up and running in 5 steps.</h2>
             <p class="lede" style="margin-top: 12px;">No account. No backend. Just install, save, and use.</p>
           </div>
           <div class="steps-grid">
@@ -785,7 +790,7 @@ const tips = [
 
       <!-- WALKTHROUGHS -->
       {walkthroughs.map((wt, index) => (
-        <section id={index === 0 ? "walkthroughs" : undefined} class="tight">
+        <section id={index === 0 ? "walkthroughs" : index === 1 ? "edit-history" : undefined} class="tight">
           <div class="wrap">
             <div class="walkthrough">
               <div class="inner reveal">

@@ -1,37 +1,32 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BaseHead from '../../components/BaseHead.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
 
-const title = "PromptMate · Personal prompt library for ChatGPT and Claude";
-const description = "A Chrome extension that adds a personal prompt library sidebar to ChatGPT and Claude. Save, organize, and insert prompts in one click. Built in Mumbai, open source, no backend.";
+const title = "PromptMate · Personal prompt library for ChatGPT, Claude, DeepSeek, and Kimi";
+const description = "A Chrome extension that adds a personal prompt library sidebar to ChatGPT, Claude, DeepSeek, and Kimi. Save, organize, and insert prompts in one click. Built in Mumbai, open source, no backend.";
 
 const features = [
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg>`,
-    heading: "Sidebar inside ChatGPT and Claude",
-    body: "No tab switching. Your prompts live where you work — a sidebar that opens on both interfaces with one click.",
+    heading: "Sidebar inside ChatGPT, Claude, DeepSeek, and Kimi",
+    body: "No tab switching. Your prompts live where you work — a sidebar that opens on ChatGPT, Claude, DeepSeek, and Kimi with one click.",
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
     heading: "Save with tone and format",
     body: "Each prompt stores a tone (formal, casual, technical) and output format (bullets, steps, prose, code). Inserted together, in one click.",
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
     heading: "Open source, no backend",
     body: "Syncs to your own private Google Drive folder. No data on my infrastructure. You own your library.",
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
     heading: "Edit on demand",
     body: "Prompts aren't locked. Open any saved prompt, tweak it mid-session, save back. The edit is yours.",
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>`,
     heading: "Local usage analytics",
     body: "Tracks how often you create, apply, copy, and delete prompts. Stored locally so you can see what's actually useful.",
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>`,
     heading: "Prompt history",
     body: "Every prompt you use is logged. Go back to any previous prompt from your session history — nothing gets lost between chats.",
   },
@@ -39,363 +34,748 @@ const features = [
 
 const roadmap = [
   {
+    live: false,
     status: "Planned",
-    statusColor: "primary",
     title: "Group Prompts",
     body: "Organize your library into named groups — by project, by use case, or by workflow. Find what you need without scrolling through everything.",
   },
   {
+    live: false,
     status: "Planned",
-    statusColor: "primary",
     title: "Share Prompts",
     body: "Publish a prompt to anyone-with-link. The receiver gets their own copy. Private by default, shareable on demand.",
   },
   {
+    live: false,
     status: "Planned",
-    statusColor: "primary",
     title: "Codex & Claude Code desktop",
     body: "Bring your prompt library into Codex and the Claude Code desktop app — the same one-click insert experience, now for coding workflows too.",
   },
   {
-    status: "Built · v0.6.0",
-    statusColor: "accent",
+    live: true,
+    status: "Live · v0.6.0",
     title: "Prompt version history",
-    body: "Every edit to a saved prompt creates a version. Browse the history, see what changed, and restore any prior version. Built — shipping in the next release.",
+    body: "Every edit to a saved prompt creates a version. Browse the history, see what changed, and restore any prior version without losing work.",
   },
 ];
 
-const statusStyles: Record<string, string> = {
-  primary: "text-primary-700 bg-primary-50 border-primary-200",
-  accent: "text-accent-700 bg-accent-50 border-accent-200",
-};
+const screenshots = [
+  {
+    url: "chatgpt.com",
+    src: "/images/promptmate/banner-chatgpt.jpg",
+    alt: "PromptMate button on ChatGPT",
+    caption: "One-click open on ChatGPT",
+    sub: "The PromptMate button appears in the bottom-right corner.",
+  },
+  {
+    url: "chatgpt.com",
+    src: "/images/promptmate/banner-chatgpt-open.jpg",
+    alt: "PromptMate sidebar open on ChatGPT",
+    caption: "Sidebar with tone & format",
+    sub: "Search, pick tone, pick format, click Use. Done.",
+  },
+  {
+    url: "claude.ai",
+    src: "/images/promptmate/banner-claude.jpg",
+    alt: "PromptMate button on Claude",
+    caption: "Same experience on Claude",
+    sub: "Same sidebar, same library, both interfaces.",
+  },
+  {
+    url: "claude.ai",
+    src: "/images/promptmate/banner-claude-open.jpg",
+    alt: "PromptMate sidebar open on Claude",
+    caption: "Insert with full context",
+    sub: "Tone and format instructions are appended automatically.",
+  },
+];
 ---
 
-<Layout title={title} description={description}>
+<!doctype html>
+<html lang="en" data-theme="paper">
+  <head>
+    <BaseHead title={title} description={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root,
+      html[data-theme="paper"] {
+        --bg: oklch(0.985 0.008 80);
+        --bg-tint: oklch(0.965 0.012 80);
+        --ink: oklch(0.18 0.012 60);
+        --ink-2: oklch(0.30 0.012 60);
+        --muted: oklch(0.50 0.012 60);
+        --hairline: oklch(0.88 0.010 80);
+        --hairline-strong: oklch(0.78 0.012 80);
+        --accent: oklch(0.62 0.20 32);
+        --accent-ink: oklch(0.98 0.005 80);
+        --selection: oklch(0.85 0.14 32 / 0.45);
+      }
 
-  <!-- Hero -->
-  <section class="bg-[#F8FAFC] mx-2">
-    <div class="bg-white max-w-screen-xl mx-auto px-8 py-14 rounded-b-2xl relative overflow-hidden">
-      <div class="dot-grid" aria-hidden="true"></div>
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
 
-      <!-- Decorative SVG: floating prompt cards -->
-      <div class="absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none hidden lg:flex items-center justify-end pr-8 opacity-[0.06]" aria-hidden="true">
-        <svg width="480" height="380" viewBox="0 0 480 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="40" y="30" width="200" height="56" rx="10" fill="#0E7490"/>
-          <rect x="52" y="46" width="120" height="8" rx="4" fill="#0E7490"/>
-          <rect x="52" y="62" width="80" height="6" rx="3" fill="#0E7490"/>
-          <rect x="260" y="80" width="180" height="56" rx="10" fill="#D97757"/>
-          <rect x="272" y="96" width="100" height="8" rx="4" fill="#D97757"/>
-          <rect x="272" y="112" width="60" height="6" rx="3" fill="#D97757"/>
-          <rect x="20" y="140" width="200" height="56" rx="10" fill="#0E7490"/>
-          <rect x="32" y="156" width="140" height="8" rx="4" fill="#0E7490"/>
-          <rect x="32" y="172" width="90" height="6" rx="3" fill="#0E7490"/>
-          <rect x="240" y="200" width="200" height="56" rx="10" fill="#D97757"/>
-          <rect x="252" y="216" width="120" height="8" rx="4" fill="#D97757"/>
-          <rect x="252" y="232" width="70" height="6" rx="3" fill="#D97757"/>
-          <rect x="60" y="260" width="180" height="56" rx="10" fill="#0E7490"/>
-          <rect x="72" y="276" width="110" height="8" rx="4" fill="#0E7490"/>
-          <rect x="72" y="292" width="65" height="6" rx="3" fill="#0E7490"/>
-          <rect x="280" y="310" width="160" height="48" rx="10" fill="#D97757"/>
-          <rect x="292" y="324" width="90" height="7" rx="3" fill="#D97757"/>
-          <rect x="292" y="339" width="55" height="5" rx="2.5" fill="#D97757"/>
-        </svg>
-      </div>
+      html {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        font-feature-settings: "ss01","ss02","cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
 
-      <div class="relative z-10 max-w-2xl">
-        <p class="section-label mb-4 hero-fade hero-fade-1">Chrome Extension · Free &amp; Open Source</p>
-        <h1 class="hero-fade hero-fade-2 text-4xl md:text-5xl xl:text-6xl font-bold mb-5">
-          Your saved prompts,<br />one click away.
-        </h1>
-        <p class="hero-fade hero-fade-3 text-lg md:text-xl text-gray-600 leading-relaxed mb-2">
-          A personal prompt library that lives inside ChatGPT and Claude. Built for engineers and AI power users who are tired of retyping the same instructions every session.
-        </p>
-        <p class="hero-fade hero-fade-3 text-sm text-gray-400 mb-8">Works on Chrome, Brave, Edge, and all Chromium-based browsers.</p>
-        <div class="hero-fade hero-fade-3 flex flex-wrap gap-3">
-          <a
-            href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-            Install Free
-          </a>
-          <a
-            href="https://github.com/jitangupta/PromptMate"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-          <a
-            href="/builds"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-accent-700 border border-accent-300 bg-accent-50 rounded-lg hover:bg-accent-100 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            See all builds
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+      ::selection { background: var(--selection); }
+      body { min-height: 100vh; overflow-x: hidden; }
 
-  <!-- Launch video -->
-  <section class="bg-[#F8FAFC] py-14 px-6">
-    <div class="max-w-screen-xl mx-auto fade-up">
-      <div class="mb-8 max-w-2xl">
-        <p class="section-label mb-3">Launch walkthrough</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">See it in action</h2>
-        <p class="mt-3 text-gray-500 text-sm">Install, setup, and a real session showing how PromptMate fits into a daily AI workflow.</p>
-      </div>
-      <div class="relative rounded-2xl overflow-hidden border border-gray-200 shadow-xl max-w-4xl bg-gray-950">
-        <!-- Browser chrome decoration -->
-        <div class="flex items-center gap-1.5 px-4 py-3 bg-gray-900 border-b border-gray-800">
-          <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
-          <div class="ml-3 flex-1 bg-gray-800 rounded-md px-3 py-1 text-xs text-gray-400 max-w-xs">chrome://extensions</div>
-        </div>
-        <video
-          src="/images/promptmate/launch.mp4"
-          controls
-          preload="metadata"
-          class="w-full block"
-          poster="/images/promptmate/banner-claude.jpg"
-        >
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  </section>
+      a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+        transition: color 150ms ease, opacity 150ms ease;
+      }
+      a:hover { color: var(--accent); }
 
-  <!-- Screenshots -->
-  <section class="bg-white py-14 px-6">
-    <div class="max-w-screen-xl mx-auto">
-      <div class="fade-up mb-10">
-        <p class="section-label mb-3">In the wild</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Works where you work</h2>
-        <p class="mt-3 text-gray-500 text-sm max-w-xl">Opens as a sidebar on both ChatGPT and Claude. No context switching, no separate tab.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-up-group">
-        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200">
-          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
-            <div class="flex gap-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-            </div>
-            <span class="text-xs text-gray-500 font-mono ml-1">chatgpt.com</span>
-          </div>
-          <img src="/images/promptmate/banner-chatgpt.jpg" alt="PromptMate button on ChatGPT" class="w-full block" loading="lazy" />
-          <div class="px-5 py-4 bg-white">
-            <p class="text-sm font-semibold text-gray-800">One-click open on ChatGPT</p>
-            <p class="text-xs text-gray-500 mt-1">The PromptMate button appears in the bottom-right corner.</p>
-          </div>
-        </div>
-        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-200">
-          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
-            <div class="flex gap-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-            </div>
-            <span class="text-xs text-gray-500 font-mono ml-1">chatgpt.com</span>
-          </div>
-          <img src="/images/promptmate/banner-chatgpt-open.jpg" alt="PromptMate sidebar open on ChatGPT" class="w-full block" loading="lazy" />
-          <div class="px-5 py-4 bg-white">
-            <p class="text-sm font-semibold text-gray-800">Sidebar with tone &amp; format</p>
-            <p class="text-xs text-gray-500 mt-1">Search, pick tone, pick format, click Use. Done.</p>
-          </div>
-        </div>
-        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-accent-300 hover:shadow-lg transition-all duration-200">
-          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
-            <div class="flex gap-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-            </div>
-            <span class="text-xs text-gray-500 font-mono ml-1">claude.ai</span>
-          </div>
-          <img src="/images/promptmate/banner-claude.jpg" alt="PromptMate button on Claude" class="w-full block" loading="lazy" />
-          <div class="px-5 py-4 bg-white">
-            <p class="text-sm font-semibold text-gray-800">Same experience on Claude</p>
-            <p class="text-xs text-gray-500 mt-1">Same sidebar, same library, both interfaces.</p>
-          </div>
-        </div>
-        <div class="group rounded-2xl overflow-hidden border border-gray-200 hover:border-accent-300 hover:shadow-lg transition-all duration-200">
-          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
-            <div class="flex gap-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-            </div>
-            <span class="text-xs text-gray-500 font-mono ml-1">claude.ai</span>
-          </div>
-          <img src="/images/promptmate/banner-claude-open.jpg" alt="PromptMate sidebar open on Claude" class="w-full block" loading="lazy" />
-          <div class="px-5 py-4 bg-white">
-            <p class="text-sm font-semibold text-gray-800">Insert with full context</p>
-            <p class="text-xs text-gray-500 mt-1">Tone and format instructions are appended automatically.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      p { margin: 0; }
+      ul, ol { margin: 0; padding: 0; list-style: none; }
+      img { max-width: 100%; display: block; }
 
-  <!-- Why I built it -->
-  <section class="bg-[#F8FAFC] py-14 px-6">
-    <div class="max-w-screen-xl mx-auto fade-up">
-      <div class="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 max-w-3xl">
-        <!-- Quote icon -->
-        <svg class="text-primary-200 mb-5" width="40" height="40" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 20C0 8.954 8.954 0 20 0h20v20c0 11.046-8.954 20-20 20S0 31.046 0 20Z"/>
-          <path fill="white" d="M14 12h-4v8h4V12Zm8 0h-4v8h4V12Z"/>
-        </svg>
-        <p class="section-label mb-4">Why I built it</p>
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-5">The friction was real</h2>
-        <div class="space-y-4 text-gray-600 leading-relaxed text-[15px]">
-          <p>
-            I use Claude and ChatGPT for almost everything now: code reviews, draft emails, explaining concepts to teammates, writing scripts for YouTube. And I kept typing the same instructions over and over.
+      .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+      @media (max-width: 540px) { .wrap { padding: 0 20px; } }
+
+      .hairline-t { border-top: 1px solid var(--hairline); }
+
+      .mono {
+        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        font-feature-settings: "ss01","ss02";
+      }
+
+      .eyebrow {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
+
+      .display {
+        font-size: clamp(40px, 5.4vw, 76px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+
+      .h2 {
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: 1.04;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+        font-weight: 500;
+      }
+
+      .lede {
+        font-size: clamp(17px, 1.3vw, 20px);
+        line-height: 1.5;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        max-width: 62ch;
+      }
+
+      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+      .small { font-size: 14px; color: var(--muted); }
+
+      section { padding: 88px 0; position: relative; }
+      section.tight { padding: 64px 0; }
+      @media (max-width: 720px) { section { padding: 64px 0; } }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      }
+      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .btn .arrow { transition: transform 200ms ease; }
+      .btn:hover .arrow { transform: translateX(3px); }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 11.5px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .status::before {
+        content: "";
+        width: 7px; height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 18%, transparent);
+      }
+      .status.muted::before { background: var(--muted); box-shadow: none; }
+
+      .site-footer { border-top: 1px solid var(--hairline); padding: 56px 0 40px; }
+      .site-footer .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .site-footer h4 {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .site-footer ul li { padding: 4px 0; }
+      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
+      .site-footer .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 820px) { .site-footer .grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 540px) { .site-footer .grid { grid-template-columns: 1fr; } }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
+
+      /* ===== PAGE-SPECIFIC ===== */
+
+      .page-hero { padding: clamp(64px, 9vh, 120px) 0 64px; }
+
+      .meta-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .meta-row b { color: var(--ink); font-weight: 500; }
+
+      /* Video / browser chrome */
+      .video-frame {
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .video-chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 14px;
+        background: color-mix(in oklch, var(--ink) 95%, var(--bg));
+        border-bottom: 1px solid color-mix(in oklch, var(--bg) 12%, transparent);
+      }
+      .video-chrome .dot { width: 10px; height: 10px; border-radius: 50%; }
+      .video-chrome .dot.r { background: oklch(0.60 0.18 24 / 0.7); }
+      .video-chrome .dot.y { background: oklch(0.75 0.16 90 / 0.7); }
+      .video-chrome .dot.g { background: oklch(0.68 0.18 150 / 0.7); }
+      .video-chrome .url {
+        margin-left: 10px;
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        color: color-mix(in oklch, var(--bg) 45%, transparent);
+        letter-spacing: 0.01em;
+      }
+      .video-frame video { display: block; width: 100%; }
+
+      /* Screenshots */
+      .screenshot-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .screenshot-item {
+        background: var(--bg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .screenshot-chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 14px;
+        background: var(--bg-tint);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .screenshot-chrome .dot { width: 8px; height: 8px; border-radius: 50%; }
+      .screenshot-chrome .dot.r { background: oklch(0.65 0.16 24 / 0.6); }
+      .screenshot-chrome .dot.y { background: oklch(0.78 0.14 90 / 0.6); }
+      .screenshot-chrome .dot.g { background: oklch(0.70 0.16 150 / 0.6); }
+      .screenshot-chrome .url {
+        margin-left: 8px;
+        font-family: "Geist Mono", monospace;
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.01em;
+      }
+      .screenshot-item img { display: block; width: 100%; }
+      .screenshot-caption {
+        padding: 16px 20px;
+        border-top: 1px solid var(--hairline);
+      }
+      .screenshot-caption h4 { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+      .screenshot-caption p { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+      @media (max-width: 720px) { .screenshot-grid { grid-template-columns: 1fr; } }
+
+      /* Origin/story block */
+      .origin-block {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+        gap: 64px;
+        align-items: start;
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .origin-sticky {
+        position: sticky;
+        top: 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .origin-prose {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .origin-prose p { font-size: 16px; line-height: 1.7; color: var(--ink-2); }
+      .origin-prose em { color: var(--ink); font-style: italic; }
+      .origin-attribution {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+        margin-top: 8px;
+      }
+      .origin-attribution img {
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .origin-attribution .name { font-size: 14px; font-weight: 500; }
+      .origin-attribution .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+      .origin-attribution .sub a { color: var(--accent); }
+      @media (max-width: 860px) {
+        .origin-block { grid-template-columns: 1fr; gap: 32px; }
+        .origin-sticky { position: static; }
+      }
+
+      /* Features grid */
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .feature-item {
+        background: var(--bg);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: background 150ms ease;
+      }
+      .feature-item:hover { background: var(--bg-tint); }
+      .feature-item h3 { font-size: 16px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; }
+      .feature-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+      @media (max-width: 820px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 540px) { .feature-grid { grid-template-columns: 1fr; } }
+
+      /* Roadmap grid */
+      .roadmap-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .roadmap-item {
+        background: var(--bg);
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: background 150ms ease;
+      }
+      .roadmap-item:hover { background: var(--bg-tint); }
+      .roadmap-item h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.018em; line-height: 1.3; }
+      .roadmap-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+      @media (max-width: 640px) { .roadmap-grid { grid-template-columns: 1fr; } }
+
+      /* CTA block */
+      .cta-block {
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: end;
+      }
+      .cta-block .btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      @media (max-width: 720px) { .cta-block { grid-template-columns: 1fr; gap: 24px; } }
+    </style>
+  </head>
+
+  <body>
+
+    <SiteHeader />
+
+    <main>
+
+      <!-- HERO -->
+      <section class="page-hero">
+        <div class="wrap reveal">
+          <span class="eyebrow">Chrome Extension · Free &amp; Open Source</span>
+          <h1 class="display" style="margin-top: 16px;">
+            Your saved prompts,<br />one click away.
+          </h1>
+          <p class="lede" style="margin-top: 24px;">
+            A personal prompt library that lives inside ChatGPT, Claude, DeepSeek, and Kimi. Built for engineers and AI power users who are tired of retyping the same instructions every session.
           </p>
-          <p>
-            Not the prompts themselves — I had those saved in Notion, in a text file, scattered in browser tabs. The problem was the ritual: open a new chat, remember which prompt, find the file, copy, paste, adjust the tone manually. Every. Single. Session.
-          </p>
-          <p>
-            I wanted the prompts where the work happens. Not in a tab I have to switch to. <em>In the sidebar</em>, with one click to insert. So I built it.
-          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
+            <a
+              class="btn primary"
+              href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install Free
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a
+              class="btn"
+              href="https://github.com/jitangupta/PromptMate"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/promptmate-guide">
+              Getting started guide
+            </a>
+          </div>
+          <div class="meta-row">
+            <span><b>v0.6.0</b> Current</span>
+            <span><b>4</b> Platforms</span>
+            <span><b>Free</b> No account</span>
+            <span>Works on Chrome, Brave, Edge, and all Chromium-based browsers</span>
+          </div>
         </div>
-        <div class="mt-6 pt-6 border-t border-gray-100 flex items-center gap-3">
-          <img src="/images/Profile Image.png" alt="Jitan Gupta" class="w-9 h-9 rounded-full object-cover" />
+      </section>
+
+      <!-- LAUNCH VIDEO -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal" style="margin-bottom: 32px;">
+            <span class="eyebrow">Launch walkthrough</span>
+            <h2 class="h2" style="margin-top: 16px;">See it in action.</h2>
+            <p class="lede" style="margin-top: 12px;">Install, setup, and a real session showing how PromptMate fits into a daily AI workflow.</p>
+          </div>
+          <div class="video-frame reveal" style="max-width: 880px;">
+            <div class="video-chrome">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+              <span class="url">chrome://extensions</span>
+            </div>
+            <video
+              src="/images/promptmate/launch.mp4"
+              controls
+              preload="metadata"
+              poster="/images/promptmate/banner-claude.jpg"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREENSHOTS -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">In the wild</span>
+            <h2 class="h2" style="margin-top: 16px;">Works where you work.</h2>
+            <p class="lede" style="margin-top: 12px;">Opens as a sidebar on ChatGPT, Claude, DeepSeek, and Kimi. No context switching, no separate tab.</p>
+          </div>
+          <div class="screenshot-grid">
+            {screenshots.map((s) => (
+              <div class="screenshot-item reveal">
+                <div class="screenshot-chrome">
+                  <span class="dot r"></span>
+                  <span class="dot y"></span>
+                  <span class="dot g"></span>
+                  <span class="url">{s.url}</span>
+                </div>
+                <img src={s.src} alt={s.alt} loading="lazy" />
+                <div class="screenshot-caption">
+                  <h4>{s.caption}</h4>
+                  <p>{s.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ORIGIN -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="origin-block reveal">
+            <div class="origin-sticky">
+              <span class="eyebrow">Why I built it</span>
+              <h2 class="h2">The friction was real.</h2>
+            </div>
+            <div class="origin-prose">
+              <p>
+                I use Claude and ChatGPT for almost everything now: code reviews, draft emails, explaining concepts to teammates, writing scripts for YouTube. And I kept typing the same instructions over and over.
+              </p>
+              <p>
+                Not the prompts themselves — I had those saved in Notion, in a text file, scattered in browser tabs. The problem was the ritual: open a new chat, remember which prompt, find the file, copy, paste, adjust the tone manually. Every. Single. Session.
+              </p>
+              <p>
+                I wanted the prompts where the work happens. Not in a tab I have to switch to. <em>In the sidebar</em>, with one click to insert. So I built it.
+              </p>
+              <div class="origin-attribution">
+                <img src="/images/Profile Image.png" alt="Jitan Gupta" />
+                <div>
+                  <p class="name">Jitan Gupta</p>
+                  <p class="sub">Built in Mumbai · <a href="/builds">See all builds →</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">What it does now · v0.6.0</span>
+            <h2 class="h2" style="margin-top: 16px;">Current state, honestly scoped.</h2>
+            <p class="lede" style="margin-top: 12px;">This is what's shipped. Not what's planned — that's the roadmap below.</p>
+          </div>
+          <div class="feature-grid">
+            {features.map((f) => (
+              <div class="feature-item reveal">
+                <h3>{f.heading}</h3>
+                <p>{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Roadmap</span>
+            <h2 class="h2" style="margin-top: 16px;">What's next.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              Three features in active design. If any of these matter to you, raise an issue or vote via the feature request form.
+            </p>
+          </div>
+          <div class="roadmap-grid">
+            {roadmap.map((item) => (
+              <div class="roadmap-item reveal">
+                <span class={`status${item.live ? '' : ' muted'}`}>{item.status}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
+            <a
+              class="btn"
+              href="https://github.com/jitangupta/PromptMate/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Raise an issue on GitHub
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a
+              class="btn"
+              href="https://forms.gle/ripbRre2nCFcJ4hz6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Request a feature
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="cta-block reveal">
+            <div>
+              <span class="eyebrow">Free · Open source · No backend</span>
+              <h2 class="h2" style="margin-top: 14px;">Stop retyping. Build your library once.</h2>
+              <p class="body" style="margin-top: 12px; max-width: 52ch;">
+                Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT, Claude, DeepSeek, or Kimi, on any device.
+              </p>
+            </div>
+            <div class="btns">
+              <a
+                class="btn primary"
+                href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Install Free
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </a>
+              <a
+                class="btn"
+                href="https://github.com/jitangupta/PromptMate"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View source
+              </a>
+              <a class="btn" href="/builds">More builds</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid">
           <div>
-            <p class="text-sm font-semibold text-gray-900">Jitan Gupta</p>
-            <p class="text-xs text-gray-400">Built in Mumbai · <a href="/builds" class="text-primary-600 hover:underline">See all builds →</a></p>
+            <a href="/" style="display:inline-block; margin-bottom: 14px;">
+              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
+            </a>
+            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
+              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
+            </p>
+          </div>
+          <div>
+            <h4>Sitemap</h4>
+            <ul>
+              <li><a href="/builds">Builds</a></li>
+              <li><a href="/frameworks">Frameworks</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <ul>
+              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Speak with me</h4>
+            <ul>
+              <li><a href="/contact">Speaking &amp; podcasts</a></li>
+              <li><a href="/contact">Collaboration</a></li>
+              <li><a href="/contact">Anything serious</a></li>
+            </ul>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Current features -->
-  <section class="bg-white py-14 px-6">
-    <div class="max-w-screen-xl mx-auto">
-      <div class="fade-up mb-10">
-        <p class="section-label mb-3">What it does now · v0.5.0</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Current state, honestly scoped</h2>
-        <p class="mt-3 text-gray-500 text-sm max-w-xl">This is what's shipped. Not what's planned. That's the roadmap below.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl fade-up-group">
-        {features.map((f) => (
-          <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md hover:bg-white transition-all duration-200">
-            <div class="w-9 h-9 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center text-primary-600 mb-4" set:html={f.icon} />
-            <h3 class="text-base font-bold text-gray-900 mb-2">{f.heading}</h3>
-            <p class="text-sm text-gray-500 leading-relaxed">{f.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section class="bg-[#F8FAFC] py-14 px-6">
-    <div class="max-w-screen-xl mx-auto">
-      <div class="fade-up mb-10">
-        <p class="section-label mb-3">Roadmap</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What's next</h2>
-        <p class="mt-3 text-gray-500 text-sm max-w-xl">Three features in active design. If any of these matter to you, raise an issue or vote via the feature request form.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl fade-up-group">
-        {roadmap.map((item) => (
-          <div class="bg-white border border-gray-200 rounded-2xl p-7 hover:border-primary-300 hover:shadow-md transition-all duration-200 relative overflow-hidden">
-            <!-- Subtle top accent -->
-            <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-400 to-primary-200 rounded-t-2xl"></div>
-            <span class={`inline-block text-xs font-bold border rounded-md px-2.5 py-1 mb-4 ${statusStyles[item.statusColor]}`}>
-              {item.status}
-            </span>
-            <h3 class="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
-            <p class="text-sm text-gray-500 leading-relaxed">{item.body}</p>
-          </div>
-        ))}
-      </div>
-      <div class="mt-8 fade-up flex flex-wrap gap-3">
-        <a
-          href="https://github.com/jitangupta/PromptMate/issues"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 border border-primary-300 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-lg transition"
-        >
-          Raise an issue on GitHub
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a
-          href="https://forms.gle/ripbRre2nCFcJ4hz6"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 border border-accent-300 bg-accent-50 hover:bg-accent-100 px-4 py-2 rounded-lg transition"
-        >
-          Request a feature
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dark CTA -->
-  <section class="bg-[#F8FAFC] py-8 px-6 pb-16">
-    <div class="max-w-screen-xl mx-auto bg-dark-700 rounded-2xl px-8 py-12 sm:px-14 sm:py-16 relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(14,116,144,0.15) 0%, transparent 70%);" aria-hidden="true"></div>
-      <!-- Decorative SVG pattern -->
-      <svg class="absolute right-8 bottom-0 opacity-[0.04] pointer-events-none" width="280" height="200" viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="10" y="10" width="120" height="36" rx="8" fill="white"/>
-        <rect x="22" y="22" width="70" height="6" rx="3" fill="white"/>
-        <rect x="22" y="32" width="45" height="5" rx="2.5" fill="white"/>
-        <rect x="150" y="50" width="110" height="36" rx="8" fill="white"/>
-        <rect x="162" y="62" width="60" height="6" rx="3" fill="white"/>
-        <rect x="162" y="72" width="40" height="5" rx="2.5" fill="white"/>
-        <rect x="0" y="100" width="120" height="36" rx="8" fill="white"/>
-        <rect x="12" y="112" width="80" height="6" rx="3" fill="white"/>
-        <rect x="12" y="122" width="50" height="5" rx="2.5" fill="white"/>
-        <rect x="140" y="140" width="120" height="36" rx="8" fill="white"/>
-        <rect x="152" y="152" width="75" height="6" rx="3" fill="white"/>
-        <rect x="152" y="162" width="48" height="5" rx="2.5" fill="white"/>
-      </svg>
-      <div class="relative z-10 max-w-xl">
-        <p class="text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">Free · Open source · No backend</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
-          Stop retyping. Build your library once.
-        </h2>
-        <p class="text-gray-400 leading-relaxed mb-8 text-sm">
-          Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT or Claude, on any device.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg bg-primary-600 hover:bg-primary-500 transition text-sm font-medium"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-            Install Free
-          </a>
-          <a
-            href="https://github.com/jitangupta/PromptMate"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-primary-400 hover:text-primary-300 transition text-sm font-medium"
-          >
-            View source on GitHub
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-          </a>
-          <a
-            href="/builds"
-            class="inline-flex items-center gap-2 text-gray-300 px-5 py-2.5 rounded-lg border border-gray-600 hover:border-accent-400 hover:text-accent-300 transition text-sm font-medium"
-          >
-            More builds
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-          </a>
+        <div class="meta">
+          <span>© 2026 Jitan Gupta. All rights reserved.</span>
+          <span class="mono">Built in public · Mumbai → web</span>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
 
-</Layout>
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) { el.classList.add('in'); }
+        else { io.observe(el); }
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+      }, 1500);
+    </script>
+
+  </body>
+</html>
