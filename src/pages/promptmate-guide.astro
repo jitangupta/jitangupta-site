@@ -1,0 +1,988 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const title = "PromptMate Guide — Save, organize, and use prompts in one click";
+const description = "Step-by-step guide for PromptMate: how to save prompts, use tone and format, browse history, and build your personal AI prompt library inside ChatGPT, Claude, DeepSeek, and Kimi.";
+
+const steps = [
+  {
+    number: "01",
+    heading: "Install the extension",
+    body: "Add PromptMate from the Chrome Web Store. Works on Chrome, Brave, Edge, and all Chromium-based browsers.",
+  },
+  {
+    number: "02",
+    heading: "Open any supported AI",
+    body: "Navigate to ChatGPT, Claude, DeepSeek, or Kimi. Look for the PromptMate button in the bottom-right corner and click it to open your sidebar.",
+  },
+  {
+    number: "03",
+    heading: "Save your first prompt",
+    body: 'Click "New Prompt", write your instruction, choose a tone and output format, then save it to your library.',
+  },
+  {
+    number: "04",
+    heading: "Use it in any chat",
+    body: 'Find your prompt in the sidebar, click "Use" — it inserts into the chat with your tone and format applied.',
+  },
+];
+
+const guideSections = [
+  {
+    heading: "Quick start",
+    body: "Install PromptMate, open a supported AI tool, save your first prompt, and use it without leaving the chat page.",
+    href: "#quick-start",
+  },
+  {
+    heading: "Video walkthroughs",
+    body: "Watch the core workflow, editing flow, history restore, and cross-platform use across ChatGPT, Claude, DeepSeek, and Kimi.",
+    href: "#walkthroughs",
+  },
+  {
+    heading: "Prompt construction",
+    body: "See how your saved instruction, selected tone, and selected format become the final prompt inserted into your AI chat.",
+    href: "#prompt-construction",
+  },
+  {
+    heading: "Best practices",
+    body: "Use practical rules for writing prompts that are specific, reusable, easy to test, and worth keeping in your library.",
+    href: "#best-practices",
+  },
+  {
+    heading: "History and restore",
+    body: "If you edited a prompt and want an older version back, learn how version history and restore work.",
+    href: "#tips",
+  },
+];
+
+const walkthroughs = [
+  {
+    label: "Core workflow",
+    heading: "Add a prompt, choose tone and format",
+    body: "Every prompt in PromptMate carries two signals beyond the text: a tone (formal, casual, technical) and an output format (bullets, steps, prose, code). When you click Use, both are appended automatically — no manual adjustment every session.",
+    video: "/promptmate/add-prompt-and-use-tone-format-final.mp4",
+    urlChip: "chatgpt.com",
+  },
+  {
+    label: "Edit & history",
+    heading: "Edit prompts, restore any version",
+    body: "Prompts aren't static. Open any saved prompt and edit it mid-session — your changes save back to the library. Every edit creates a version, so you can browse the history and restore any prior version without losing work.",
+    video: "/promptmate/edit-use-history-restore-final.mp4",
+    urlChip: "claude.ai",
+  },
+  {
+    label: "Cross-platform",
+    heading: "Works on ChatGPT, Claude, DeepSeek, and Kimi",
+    body: "Same sidebar, same library, all four interfaces. Install once and your entire prompt collection is available wherever you work — ChatGPT, Claude, DeepSeek, Kimi. No duplicate setup, no syncing.",
+    video: "/promptmate/works-across-final.mp4",
+    urlChip: "chatgpt.com / claude.ai / deepseek.com / kimi.ai",
+  },
+];
+
+const constructionParts = [
+  {
+    label: "Saved prompt",
+    title: "The reusable instruction",
+    body: "This is the core task you save in PromptMate: what the AI should do, the context it needs, and any constraints that should travel with the prompt.",
+    example: "Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.",
+  },
+  {
+    label: "Tone",
+    title: "How the answer should sound",
+    body: "Tone nudges the response style without changing the task. Technical, concise, friendly, or formal tones keep repeated work consistent.",
+    example: "Use a technical but direct tone. Be precise, avoid fluff, and explain tradeoffs like a senior engineer reviewing the work.",
+  },
+  {
+    label: "Format",
+    title: "How the answer should be shaped",
+    body: "Format tells the AI how to structure the output so you can scan it quickly: bullets, steps, checklist, table, prose, or code.",
+    example: "Return the answer as a checklist with sections for blockers, important fixes, small improvements, and tests to add.",
+  },
+];
+
+const practices = [
+  {
+    number: "01",
+    heading: "Be specific about the task, not the persona",
+    body: 'Write "Review this code for SQL injection vulnerabilities" rather than "Act as a security expert". Task-specific prompts produce consistent, usable output. Persona prompts produce unpredictable responses.',
+    ask: "What exactly do you want done? Start there.",
+  },
+  {
+    number: "02",
+    heading: "Use placeholders for the variable parts",
+    body: 'Build reusable prompts with placeholders like [PASTE_CODE_HERE] or [TOPIC] for the parts that change each session. The static framing — tone, instructions, output shape — stays in the saved prompt.',
+    ask: "What changes session to session? Make that the placeholder.",
+  },
+  {
+    number: "03",
+    heading: "One task per prompt",
+    body: "Prompts that ask for three things produce output that does two of them well and one poorly. Save separate prompts for separate tasks. Compose them manually in a session when you need both.",
+    ask: "Can you split this into two focused prompts?",
+  },
+  {
+    number: "04",
+    heading: "Match tone and format to the reader, not the task",
+    body: "A code review written as prose is slow to scan. A technical spec in bullet points loses nuance. The output format should match how the output will actually be read — not just what feels right to write.",
+    ask: "Who reads this output? How will they consume it?",
+  },
+  {
+    number: "05",
+    heading: "Test before saving, not after",
+    body: "Use a prompt two or three times in real sessions before saving it. If you need to edit it every time, it's not ready. Save the version that works without adjustment — that's the one worth keeping.",
+    ask: "Did this produce the right output without editing? If not, fix first.",
+  },
+  {
+    number: "06",
+    heading: "Include the context the model can't infer",
+    body: "Language, framework, audience, constraints, what to avoid. The model doesn't know you're on a Kubernetes cluster or writing for a non-technical PM. Put that in the prompt — it won't drift session to session.",
+    ask: "What would a smart colleague need to know to do this task well?",
+  },
+];
+
+const tips = [
+  {
+    heading: "Start with prompts you already reuse",
+    body: "Think about instructions you type every week — code review format, email drafts, explaining concepts. Those are your first 5 saves.",
+  },
+  {
+    heading: "Use tone + format for consistent output",
+    body: "Setting tone and format on save means every session starts with the same AI behavior — no drift, no retraining the model each time.",
+  },
+  {
+    heading: "Edit during a session, not before",
+    body: "Don't over-engineer prompts upfront. Save a rough version, use it, notice what's missing, then edit inline. The version history keeps your original.",
+  },
+  {
+    heading: "History catches what you forgot",
+    body: "Every prompt you use is logged. If a session produced great output but you closed the tab, scroll the history — the prompt that worked is still there.",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="paper">
+  <head>
+    <BaseHead title={title} description={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root,
+      html[data-theme="paper"] {
+        --bg: oklch(0.985 0.008 80);
+        --bg-tint: oklch(0.965 0.012 80);
+        --ink: oklch(0.18 0.012 60);
+        --ink-2: oklch(0.30 0.012 60);
+        --muted: oklch(0.50 0.012 60);
+        --hairline: oklch(0.88 0.010 80);
+        --hairline-strong: oklch(0.78 0.012 80);
+        --accent: oklch(0.62 0.20 32);
+        --accent-ink: oklch(0.98 0.005 80);
+        --selection: oklch(0.85 0.14 32 / 0.45);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+
+      html {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        font-feature-settings: "ss01","ss02","cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
+
+      ::selection { background: var(--selection); }
+      body { min-height: 100vh; overflow-x: hidden; }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+        transition: color 150ms ease, opacity 150ms ease;
+      }
+      a:hover { color: var(--accent); }
+
+      p { margin: 0; }
+      ul, ol { margin: 0; padding: 0; list-style: none; }
+      img { max-width: 100%; display: block; }
+
+      .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+      @media (max-width: 540px) { .wrap { padding: 0 20px; } }
+
+      .hairline-t { border-top: 1px solid var(--hairline); }
+
+      .mono {
+        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        font-feature-settings: "ss01","ss02";
+      }
+
+      .eyebrow {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
+
+      .display {
+        font-size: clamp(40px, 5.4vw, 76px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+
+      .h2 {
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: 1.04;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+        font-weight: 500;
+      }
+
+      .lede {
+        font-size: clamp(17px, 1.3vw, 20px);
+        line-height: 1.5;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        max-width: 62ch;
+      }
+
+      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+      .small { font-size: 14px; color: var(--muted); }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in oklch, var(--bg) 88%, transparent);
+        backdrop-filter: saturate(140%) blur(12px);
+        -webkit-backdrop-filter: saturate(140%) blur(12px);
+        border-bottom: 1px solid color-mix(in oklch, var(--hairline) 60%, transparent);
+      }
+      .site-header .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      .nav { display: flex; align-items: center; gap: 28px; font-size: 14.5px; }
+      .nav a { color: var(--ink-2); }
+      .nav a:hover { color: var(--ink); }
+      @media (max-width: 720px) {
+        .nav { gap: 18px; font-size: 13.5px; }
+        .nav a.nav-hide-sm { display: none; }
+      }
+
+      section { padding: 88px 0; position: relative; }
+      section.tight { padding: 64px 0; }
+      @media (max-width: 720px) { section { padding: 64px 0; } }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      }
+      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .btn .arrow { transition: transform 200ms ease; }
+      .btn:hover .arrow { transform: translateX(3px); }
+
+      .site-footer { border-top: 1px solid var(--hairline); padding: 56px 0 40px; }
+      .site-footer .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .site-footer h4 {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .site-footer ul li { padding: 4px 0; }
+      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
+      .site-footer .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 820px) { .site-footer .grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 540px) { .site-footer .grid { grid-template-columns: 1fr; } }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
+
+      /* ===== PAGE-SPECIFIC ===== */
+
+      .page-hero { padding: clamp(64px, 9vh, 120px) 0 64px; }
+
+      /* Quick start steps */
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .step-item {
+        padding: 28px 24px 28px 0;
+        border-bottom: 1px solid var(--hairline);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+      }
+      .step-item + .step-item { padding-left: 24px; border-left: 1px solid var(--hairline); }
+      .step-item .n {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .step-item h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; }
+      .step-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+      @media (max-width: 820px) {
+        .steps-grid { grid-template-columns: 1fr 1fr; }
+        .step-item:nth-child(odd) { padding-left: 0; border-left: none; }
+        .step-item:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--hairline); }
+      }
+      @media (max-width: 540px) {
+        .steps-grid { grid-template-columns: 1fr; }
+        .step-item { padding-left: 0 !important; border-left: none !important; }
+      }
+
+      /* Page guide */
+      .guide-block {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
+        gap: 56px;
+        align-items: start;
+      }
+      .guide-copy {
+        position: sticky;
+        top: 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .guide-copy .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+      .trust-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 2px;
+      }
+      .trust-points span {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 10px;
+        border: 1px solid var(--hairline);
+        border-radius: 999px;
+        background: var(--bg-tint);
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--ink-2);
+      }
+      .guide-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-top: 1px solid var(--hairline);
+      }
+      .guide-item {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 28px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .guide-item h3 {
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+      .guide-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+      .guide-item a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--accent);
+      }
+      @media (max-width: 860px) {
+        .guide-block { grid-template-columns: 1fr; gap: 32px; }
+        .guide-copy { position: static; }
+      }
+      @media (max-width: 560px) {
+        .guide-item { grid-template-columns: 1fr; gap: 8px; }
+      }
+
+      /* Walkthroughs */
+      .walkthrough { padding: 72px 0; border-top: 1px solid var(--hairline); }
+      .walkthrough .inner {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 64px;
+        align-items: start;
+      }
+      .walkthrough .text { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+      .walkthrough h2 { font-size: clamp(24px, 2.8vw, 38px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; }
+      .walkthrough p { font-size: 15px; color: var(--ink-2); line-height: 1.65; max-width: 52ch; }
+      @media (max-width: 820px) {
+        .walkthrough .inner { grid-template-columns: 1fr; gap: 32px; }
+      }
+
+      /* Browser chrome video player */
+      .video-frame {
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .video-chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 14px;
+        background: color-mix(in oklch, var(--ink) 95%, var(--bg));
+        border-bottom: 1px solid color-mix(in oklch, var(--bg) 12%, transparent);
+      }
+      .video-chrome .dot { width: 10px; height: 10px; border-radius: 50%; }
+      .video-chrome .dot.r { background: oklch(0.60 0.18 24 / 0.7); }
+      .video-chrome .dot.y { background: oklch(0.75 0.16 90 / 0.7); }
+      .video-chrome .dot.g { background: oklch(0.68 0.18 150 / 0.7); }
+      .video-chrome .url {
+        margin-left: 10px;
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        color: color-mix(in oklch, var(--bg) 45%, transparent);
+        letter-spacing: 0.01em;
+      }
+      .video-frame video { display: block; width: 100%; }
+
+      /* Prompt construction */
+      .construction-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .construction-part {
+        padding: 28px 24px 28px 0;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .construction-part + .construction-part { padding-left: 24px; border-left: 1px solid var(--hairline); }
+      .construction-part .label {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 12px;
+      }
+      .construction-part h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; margin-bottom: 10px; }
+      .construction-part p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+      .prompt-sample {
+        margin-top: 18px;
+        padding: 14px 16px;
+        background: var(--bg-tint);
+        border: 1px solid var(--hairline);
+        border-radius: 6px;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12.5px;
+        line-height: 1.65;
+        color: var(--ink-2);
+      }
+      .assembled-prompt {
+        margin-top: 40px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .assembled-prompt .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg-tint);
+      }
+      .assembled-prompt .top span {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .assembled-prompt pre {
+        margin: 0;
+        padding: 20px;
+        white-space: pre-wrap;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--ink);
+      }
+      @media (max-width: 860px) {
+        .construction-grid { grid-template-columns: 1fr; }
+        .construction-part,
+        .construction-part + .construction-part {
+          padding: 24px 0;
+          border-left: none;
+        }
+      }
+
+      /* Tips grid */
+      .tips-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border-top: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .tip-item {
+        padding: 32px 32px 32px 0;
+        border-bottom: 1px solid var(--hairline);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tip-item:nth-child(even) {
+        padding-left: 32px;
+        border-left: 1px solid var(--hairline);
+        padding-right: 0;
+      }
+      .tip-item h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; }
+      .tip-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+      @media (max-width: 640px) {
+        .tips-grid { grid-template-columns: 1fr; }
+        .tip-item { padding: 28px 0 !important; border-left: none !important; }
+      }
+
+      /* Best practices */
+      .practice-list {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .practice {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 32px;
+        padding: 32px 0;
+        border-bottom: 1px solid var(--hairline);
+        align-items: start;
+      }
+      .practice .num {
+        font-family: "Geist Mono", monospace;
+        font-size: 13px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        padding-top: 3px;
+      }
+      .practice h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.018em; margin-bottom: 10px; }
+      .practice p { color: var(--ink-2); line-height: 1.6; font-size: 15.5px; max-width: 64ch; }
+      .practice .ask {
+        margin-top: 14px;
+        padding: 12px 16px;
+        background: var(--bg-tint);
+        border-left: 2px solid var(--accent);
+        font-family: "Geist Mono", monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--ink);
+      }
+      .practice .ask::before {
+        content: "Ask";
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      @media (max-width: 640px) { .practice { grid-template-columns: 1fr; gap: 8px; } }
+
+      /* CTA block */
+      .cta-block {
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: end;
+      }
+      .cta-block h2 { margin-bottom: 12px; }
+      .cta-block .btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      @media (max-width: 720px) { .cta-block { grid-template-columns: 1fr; gap: 24px; } }
+    </style>
+  </head>
+
+  <body>
+
+    <SiteHeader />
+
+    <main>
+
+      <!-- HERO -->
+      <section class="page-hero">
+        <div class="wrap reveal">
+          <span class="eyebrow">PromptMate · Getting started</span>
+          <h1 class="display" style="margin-top: 16px;">
+            Get the most out<br />of PromptMate.
+          </h1>
+          <p class="lede" style="margin-top: 24px;">
+            You're a few clicks away from a prompt library that actually works — saved once, used everywhere, in ChatGPT, Claude, DeepSeek, and Kimi.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
+            <a
+              class="btn primary"
+              href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install Free
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/resources/promptmate">
+              <svg style="width:14px;height:14px;" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7H3M6.5 3.5L3 7l3.5 3.5"/></svg>
+              Back to PromptMate
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE GUIDE -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="guide-block reveal">
+            <div class="guide-copy">
+              <span class="eyebrow">Quick guide</span>
+              <h2 class="h2">You are in the right place.</h2>
+              <p class="body">
+                This is the practical guide for PromptMate, a free and open-source prompt library built by Jitan Gupta. If you came here wondering what PromptMate is, how it works, or whether your prompts stay with you, this page has the answers.
+              </p>
+              <div class="trust-points" aria-label="PromptMate trust points">
+                <span>Built by Jitan Gupta</span>
+                <span>Free to use</span>
+                <span>Open source</span>
+                <span>Your data stays with you</span>
+              </div>
+              <div class="btns">
+                <a class="btn primary" href="/resources/promptmate">
+                  PromptMate product page
+                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+                </a>
+                <a
+                  class="btn"
+                  href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Install extension
+                </a>
+              </div>
+            </div>
+            <div class="guide-list">
+              {guideSections.map((section) => (
+                <div class="guide-item">
+                  <h3>{section.heading}</h3>
+                  <div>
+                    <p>{section.body}</p>
+                    <a href={section.href}>
+                      Jump to section
+                      <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK START -->
+      <section id="quick-start" class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Quick start</span>
+            <h2 class="h2" style="margin-top: 16px;">Up and running in 4 steps.</h2>
+            <p class="lede" style="margin-top: 12px;">No account. No backend. Just install, save, and use.</p>
+          </div>
+          <div class="steps-grid">
+            {steps.map((step) => (
+              <div class="step-item reveal">
+                <span class="n">{step.number}</span>
+                <h3>{step.heading}</h3>
+                <p>{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- WALKTHROUGHS -->
+      {walkthroughs.map((wt, index) => (
+        <section id={index === 0 ? "walkthroughs" : undefined} class="tight">
+          <div class="wrap">
+            <div class="walkthrough">
+              <div class="inner reveal">
+                <div class="text">
+                  <span class="eyebrow">{wt.label}</span>
+                  <h2>{wt.heading}</h2>
+                  <p>{wt.body}</p>
+                </div>
+                <div class="video-frame">
+                  <div class="video-chrome">
+                    <span class="dot r"></span>
+                    <span class="dot y"></span>
+                    <span class="dot g"></span>
+                    <span class="url">{wt.urlChip}</span>
+                  </div>
+                  <video src={wt.video} controls preload="metadata">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <!-- PROMPT CONSTRUCTION -->
+      <section id="prompt-construction" class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Prompt construction</span>
+            <h2 class="h2" style="margin-top: 16px;">What tone and format add to your prompt.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              PromptMate keeps the task you wrote as the source of truth, then adds your selected tone and output format when you click Use. The result is a fuller prompt without retyping the same framing every time.
+            </p>
+          </div>
+          <div class="construction-grid">
+            {constructionParts.map((part) => (
+              <div class="construction-part reveal">
+                <span class="label">{part.label}</span>
+                <h3>{part.title}</h3>
+                <p>{part.body}</p>
+                <div class="prompt-sample">{part.example}</div>
+              </div>
+            ))}
+          </div>
+          <div class="assembled-prompt reveal">
+            <div class="top">
+              <span>Example inserted prompt</span>
+              <span>Saved prompt + tone + format</span>
+            </div>
+            <pre>{`Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.
+
+Tone: Technical and direct. Be precise, avoid fluff, and explain tradeoffs like a senior engineer reviewing the work.
+
+Format: Return the answer as a checklist with sections for blockers, important fixes, small improvements, and tests to add.`}</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- BEST PRACTICES -->
+      <section id="best-practices" class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Best practices</span>
+            <h2 class="h2" style="margin-top: 16px;">Write prompts worth saving.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              The difference between a library you use daily and one you abandon in a week comes down to how the prompts are written.
+            </p>
+          </div>
+          <div class="practice-list">
+            {practices.map((p) => (
+              <div class="practice reveal">
+                <span class="num">{p.number}</span>
+                <div>
+                  <h3>{p.heading}</h3>
+                  <p>{p.body}</p>
+                  <div class="ask">{p.ask}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- TIPS -->
+      <section id="tips" class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Tips</span>
+            <h2 class="h2" style="margin-top: 16px;">Build a library that sticks.</h2>
+            <p class="lede" style="margin-top: 12px;">Small habits that make PromptMate worth keeping open.</p>
+          </div>
+          <div class="tips-grid">
+            {tips.map((tip) => (
+              <div class="tip-item reveal">
+                <h3>{tip.heading}</h3>
+                <p>{tip.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="cta-block reveal">
+            <div>
+              <span class="eyebrow">Free · Open source · No backend</span>
+              <h2 class="h2" style="margin-top: 14px;">Your library is waiting.</h2>
+              <p class="body" style="margin-top: 12px; max-width: 52ch;">
+                Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT, Claude, DeepSeek, or Kimi, every session.
+              </p>
+            </div>
+            <div class="btns">
+              <a
+                class="btn primary"
+                href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Install Free
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </a>
+              <a class="btn" href="/resources/promptmate">
+                <svg style="width:14px;height:14px;" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7H3M6.5 3.5L3 7l3.5 3.5"/></svg>
+                PromptMate page
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <a href="/" style="display:inline-block; margin-bottom: 14px;">
+              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
+            </a>
+            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
+              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
+            </p>
+          </div>
+          <div>
+            <h4>Sitemap</h4>
+            <ul>
+              <li><a href="/builds">Builds</a></li>
+              <li><a href="/frameworks">Frameworks</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <ul>
+              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Speak with me</h4>
+            <ul>
+              <li><a href="/contact">Speaking & podcasts</a></li>
+              <li><a href="/contact">Collaboration</a></li>
+              <li><a href="/contact">Anything serious</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <span>© 2026 Jitan Gupta. All rights reserved.</span>
+          <span class="mono">Built in public · Mumbai → web</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) { el.classList.add('in'); }
+        else { io.observe(el); }
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+      }, 1500);
+    </script>
+
+  </body>
+</html>
