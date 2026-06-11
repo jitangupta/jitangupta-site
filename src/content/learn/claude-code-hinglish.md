@@ -26,7 +26,7 @@ videos:
     uploadDate: '2026-03-05'
 faq:
   - question: 'Is Claude Code suitable for Indian engineering teams?'
-    answer: 'Yes. Claude Code works the same way in India as anywhere else, and the API is reachable from Indian networks without special setup. The harder questions are usually about team workflow, CLAUDE.md conventions, and code review discipline. That is what most of my training in Mumbai actually focuses on.'
+    answer: 'Yes. Claude Code works the same way in India as anywhere else, and the API is reachable from Indian networks without special setup. The harder questions are usually about team workflow, CLAUDE.md conventions, and code review discipline. That is what most of my videos and written guides actually focus on.'
   - question: 'Do I need a Claude Pro or Max subscription to learn Claude Code?'
     answer: 'For learning, the free Anthropic API tier is enough to follow along with most lessons. For daily production use on a real codebase, a Pro or Max subscription pays for itself within a week through saved engineer time.'
   - question: 'What is the difference between Claude Code, Cursor, and GitHub Copilot?'
@@ -34,11 +34,9 @@ faq:
   - question: 'Why teach Claude Code in Hinglish? Is the content available in English?'
     answer: 'The videos are in Hinglish because most of my Indian audience codes in English but discusses concepts in Hindi or Hinglish. The technical terms (Claude Code, Plan Mode, MCP) stay in English. Written tutorials on this site, including this page, are in English. If you read English well, you will follow the videos comfortably.'
   - question: 'Can my team adopt Claude Code without leaking proprietary code?'
-    answer: 'Yes, with the right configuration. Claude Code respects .gitignore and .claudeignore files, and Anthropic offers enterprise contracts that exclude your data from training. For Indian teams under DPDP or client-specific compliance, this is the conversation I usually have first in a Team Training session.'
+    answer: 'Yes, with the right configuration. Claude Code respects .gitignore and .claudeignore files, and Anthropic offers enterprise contracts that exclude your data from training. For Indian teams under DPDP or client-specific compliance, this is the conversation to have first, before anyone pastes a line of proprietary code into any AI tool.'
   - question: 'How long does it take to get a team productive on Claude Code?'
-    answer: 'A focused engineer reaches useful daily productivity in two to three days. A team of five reaches a shared baseline in one full-day Team Training session, with another two weeks of practice on real work to settle into the workflow. Anyone selling shorter timelines is selling slides.'
-  - question: 'Do you offer Claude Code training in cities outside Mumbai?'
-    answer: 'Yes, both on-site (anywhere in India, travel costs included separately) and remote. Most teams across Bengaluru, Pune, Hyderabad, Delhi, and Gurgaon have done remote sessions with full results. On-site still works better for full-day Team Training when your team can be in one room.'
+    answer: 'A focused engineer reaches useful daily productivity in two to three days. A team of five reaches a shared baseline in about a week of deliberate practice on real work, provided someone owns the CLAUDE.md and review conventions. Anyone selling shorter timelines is selling slides.'
 ---
 
 ## Claude Code training in India, taught from real work
@@ -64,7 +62,7 @@ Most "Claude Code tutorial" content stops at installation. This guide goes deepe
 - **Running parallel agents with Git Worktree.** A 3-to-4x speed-up for engineers comfortable with branching.
 - **Production safety checks.** Five guardrails I run before any AI-generated code reaches main, documented in the fifth video below and on [/learn/production-safe-ai-code](/learn/production-safe-ai-code).
 
-These map directly to what I teach in [Team AI Training](/services/team-ai-training) sessions in Mumbai and remotely across India.
+These map directly to what I teach on the [YouTube channel](https://www.youtube.com/@jitangupta), video by video, from real production work.
 
 ## The artifacts behind the teaching
 
@@ -84,6 +82,6 @@ For canonical specs and Anthropic's own docs:
 
 These are worth reading once. After that, reach for the videos and the code. Doing beats reading.
 
-## Want hands-on help?
+## Want to go deeper?
 
-If you are a team in India and want this taught against your real codebase, [Team AI Training](/services/team-ai-training) is the full-day session built for that. If you are an individual figuring it out alone, start with the [free Discovery Call](/services/discovery-call).
+Everything on this page is taught free on the [YouTube channel](https://www.youtube.com/@jitangupta), in Hinglish, against real codebases. Start with the videos above, then read the [production safety framework](/learn/production-safe-ai-code) before any AI-generated code reaches your main branch. Questions or feedback? [Get in touch](/contact).

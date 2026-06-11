@@ -20,7 +20,7 @@ faq:
   - question: 'How is this different from a normal code review?'
     answer: 'A normal code review trusts that the human author thought about edge cases. With AI-generated code, you cannot make that assumption. The 5-Check framework explicitly forces the reviewer (often the same engineer who prompted the AI) to verify what the AI did not think about: scope creep, hidden security implications, and silent performance regressions.'
   - question: 'Can I use this framework solo, or does it need a team?'
-    answer: 'Both. Solo engineers run the five checks themselves before merging to main. Teams adopt the same checks as part of PR review. In Team Training sessions, I help engineering managers wire these into their existing review templates so adoption is structural, not personal.'
+    answer: 'Both. Solo engineers run the five checks themselves before merging to main. Teams adopt the same checks as part of PR review. The framework maps cleanly onto existing PR templates, so adoption is structural, not personal.'
   - question: 'Does this slow down development?'
     answer: 'Net, it speeds up development. The five checks add 5 to 15 minutes per non-trivial change. A single production incident from unreviewed AI code costs 10 to 100 times more in engineering hours. Indian teams I have worked with report shipping faster within two weeks because they trust the AI-generated code more.'
   - question: 'Are there real examples of AI-generated code causing production issues?'
@@ -29,7 +29,7 @@ faq:
 
 ## Production-safe AI code: the framework
 
-If you are using AI tools (Claude Code, Cursor, Copilot) to write code that will run in production, this is the framework I apply to my own work and teach to engineering teams in [Team AI Training](/services/team-ai-training) sessions across India.
+If you are using AI tools (Claude Code, Cursor, Copilot) to write code that will run in production, this is the framework I apply to my own work and teach through the [YouTube channel](https://www.youtube.com/@jitangupta) and the written guides on this site.
 
 The premise is simple: **AI-generated code is plausible by default, but not correct by default.** Plausibility passes a casual review. Correctness requires explicit checks.
 
@@ -83,4 +83,4 @@ For the canonical specs:
 
 ## Want this wired into your team's review process?
 
-The framework is free, open, and yours to adopt. If you want me to help your engineering team adopt it (against your real codebase, your real PR templates, your real team), the [Team AI Training](/services/team-ai-training) full-day session is built for exactly that.
+The framework is free, open, and yours to adopt. The [video above](https://www.youtube.com/watch?v=mP4igQr2R0E) walks through each check with real examples, and the artifacts linked earlier show it applied commit by commit. If you adopt it and something doesn't fit your team's workflow, [tell me](/contact) — the framework improves when people push back on it.

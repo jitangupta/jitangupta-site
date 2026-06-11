@@ -22,12 +22,12 @@ const csMeta: Record<string, CsMeta> = {
     domain: "Multi-tenant SaaS",
     tags: ["Probabilistic models", "Release engineering", "Multi-tenant", ".NET / Azure"],
     metrics: [
-      { k: "Annual savings", v: "$17K" },
-      { k: "Decision automation", v: "~80%" },
-      { k: "Failed deploys avoided", v: "Significant" },
-      { k: "Tenants", v: "400+" },
+      { k: "Status", v: "Working POC" },
+      { k: "Planning time", v: "2h → 10min" },
+      { k: "Modeled savings", v: "~$17K/yr" },
+      { k: "Tenants modeled", v: "400+" },
     ],
-    lesson: "The hardest part wasn't the model. It was getting on-call engineers to trust a probability score at 3am. That trust gap is exactly what AI-assisted dev is wrestling with today.",
+    lesson: "The hardest part isn't the model. It's getting on-call engineers to trust a probability score at 3am. That trust gap is exactly what AI-assisted dev is wrestling with today — and driving adoption is this POC's next phase.",
   },
   "multi-tenant-aks-migration": {
     year: "2024 — Present",
@@ -46,7 +46,7 @@ const csMeta: Record<string, CsMeta> = {
     domain: "Higher ed",
     tags: ["Legacy modernization", "Payments", "Cloud-native", "Azure"],
     metrics: [
-      { k: "Revenue uplift", v: "+30%" },
+      { k: "Deployment frequency", v: "+300%" },
       { k: "Legacy systems retired", v: "Several" },
       { k: "Stakeholders aligned", v: "Many" },
       { k: "Domain complexity", v: "High" },
@@ -403,7 +403,7 @@ const caseStudies = allCaseStudies
             Production work, before the AI layer.
           </h1>
           <p class="lede" style="margin-top: 24px;">
-            Identity migrations, multi-tenant Kubernetes, legacy modernization, probabilistic deployment models. The systems work that's the reason I know when AI helps and when it quietly breaks things.
+            Identity migrations, multi-tenant Kubernetes, legacy modernization — plus a working AI release-orchestration POC. The systems work that's the reason I know when AI helps and when it quietly breaks things.
           </p>
         </div>
       </section>

@@ -1,7 +1,7 @@
 ---
 title: 'University Credit System Modernization'
-pageTitle: 'How We Rebuilt a University’s Legacy Credit System with Cloud-Native Architecture – and Boosted Revenue by 30%'
-seoTitle: 'Legacy to Cloud: How We Rebuilt a University Credit System and Boosted Revenue by 30%'
+pageTitle: 'How We Rebuilt a University’s Legacy Credit System with Cloud-Native Architecture – and Improved Deployment Frequency by 300%'
+seoTitle: 'Legacy to Cloud: How We Rebuilt a University Credit System and Improved Deployment Frequency by 300%'
 summary: 'We helped a leading North American university modernize its outdated credit evaluation system by rebuilding it as a scalable, mobile-friendly, cloud-native platform using .NET Core, Angular, and Azure.'
 description: 'Case study: Discover how we replaced three monolithic WebForms applications with a unified .NET Core and Angular platform hosted on Azure, boosting usability, scalability, and performance for a university’s mission-critical credit system.'
 pubDate: '24 Apr 2025'
@@ -20,8 +20,8 @@ stats:
     description: "Improved system usability based on user satisfaction score."
   - percentage: "45%"
     description: "Reduced maintenance overhead by unifying single application and microservice architecture"
-  - percentage: "30%"
-    description: "Revenue increased. With ongoing promotional campaigns, revenue increased further."
+  - percentage: "300%"
+    description: "Improved deployment frequency with CI/CD, Docker, and AKS replacing manual IIS releases."
 draft: false
 aiBridge: "Legacy modernization at its messiest. The kind of system complexity where AI-generated code breaks on day one if you don't understand the domain."
 ---
@@ -71,9 +71,9 @@ We used a CI/CP pipeline with Docker and deployed the application inside AKS.
 
 Other tools like Kong API Gateway, Helm-chart to store built docker images, and ArgoCD to view the Deployed Pods were used.
 
-## What Changed: Tech, Usability, Revenue
+## What Changed: Tech, Usability, Delivery Speed
 
-This migration was a huge jump in tech stack, system usability and revenue.
+This migration was a huge jump in tech stack, system usability and delivery speed.
 ### 1. Tech Stack
 - When we shifted from IIS inside the VM to Azure Kubernetes Service (AKS), scalability improved. The system became fault-tolerant.
 - We cut the tech debt and improved system performance by utilizing AKS, SPA and microservices.
@@ -96,9 +96,9 @@ This migration was a huge jump in tech stack, system usability and revenue.
 - The legacy system wasn’t responsive, so reaching out to mobile, and tablet devices was a significant improvement.
 - With migration, we used UX research to push system usability even further.
 
-### 3. Revenue
-- With migration and system usability, more students were able to access the application, which helped with revenue jump by 30%. 
-- Talking just numbers doesn’t justify this point, as a new system was in place, the organizations started marketing and promoting, which further increased revenue.
+### 3. Delivery Speed
+- With CI/CD, Docker, and AKS replacing manual IIS-on-VM releases, deployment frequency improved by 300%. Releases became routine pipeline runs instead of scheduled events. 
+- Faster, safer releases meant usability improvements reached students sooner, and the organization could market and promote against a system that kept up.
 
 ## What This Project Taught Me
 - Documentation-first approach creates clarity and builds stakeholder confidence.
