@@ -701,6 +701,89 @@ const homepageCaseStudies = caseStudies
         .cs-row .open { text-align: left; }
       }
 
+      /* PromptMate spotlight */
+      .pm-spotlight {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 56px;
+        align-items: start;
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .pm-spotlight-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-top: 6px;
+      }
+      .pm-spotlight-logo img {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+        border-radius: 20px;
+      }
+      .pm-spotlight-logo .pm-badge {
+        font-family: "Geist Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border: 1px solid var(--hairline);
+        border-radius: 4px;
+        padding: 4px 8px;
+        display: inline-block;
+      }
+      .pm-spotlight-body {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .pm-spotlight-body h2 {
+        font-size: clamp(28px, 3.2vw, 44px);
+        letter-spacing: -0.028em;
+        line-height: 1.06;
+        font-weight: 500;
+      }
+      .pm-spotlight-pages {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .pm-spotlight-pages a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border: 1px solid var(--hairline);
+        border-radius: 6px;
+        font-size: 13px;
+        color: var(--ink-2);
+        background: var(--bg-tint);
+        transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+      }
+      .pm-spotlight-pages a:hover { border-color: var(--ink); color: var(--ink); background: var(--bg); }
+      .pm-spotlight-meta {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-top: 4px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 760px) {
+        .pm-spotlight { grid-template-columns: 1fr; gap: 28px; }
+        .pm-spotlight-logo { flex-direction: row; align-items: center; }
+      }
+      @media (max-width: 480px) {
+        .pm-spotlight-logo { flex-direction: column; align-items: flex-start; }
+      }
+
       /* Speaking block */
       .speak {
         display: grid;
@@ -836,6 +919,52 @@ const homepageCaseStudies = caseStudies
               All builds
               <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== PROMPTMATE SPOTLIGHT ====== -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="pm-spotlight reveal">
+            <div class="pm-spotlight-logo">
+              <img src="/prompt-mate-logo.png" alt="PromptMate" />
+              <span class="pm-badge">Free · Open Source</span>
+            </div>
+            <div class="pm-spotlight-body">
+              <span class="eyebrow">Chrome Extension · Featured Build</span>
+              <h2>PromptMate</h2>
+              <p class="lede" style="margin-top: 0;">
+                Your saved prompts, one click away. A personal prompt library that lives inside ChatGPT, Claude, DeepSeek, and Kimi — save once, use everywhere, sync via Google Drive. No backend.
+              </p>
+              <div class="pm-spotlight-pages">
+                <a href="/promptmate/getting-started">Getting started</a>
+                <a href="/promptmate/best-practices">Best practices</a>
+                <a href="/promptmate/starter-prompts">Starter prompts</a>
+              </div>
+              <div class="cta-row">
+                <a
+                  class="btn primary"
+                  href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Install Free
+                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+                </a>
+                <a class="btn" href="/promptmate">
+                  Full details
+                </a>
+                <a class="btn" href="https://github.com/jitangupta/PromptMate" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </div>
+              <div class="pm-spotlight-meta">
+                <span>v0.6.0 Current</span>
+                <span>4 Platforms</span>
+                <span>Chrome · Brave · Edge</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
