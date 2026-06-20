@@ -288,6 +288,47 @@ const screenshots = [
 
       .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
 
+      /* PromptMate sub-nav */
+      .pm-subnav {
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg);
+      }
+      .pm-subnav-inner {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .pm-subnav-inner::-webkit-scrollbar { display: none; }
+      .pm-subnav-brand {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        padding-right: 20px;
+        margin-right: 20px;
+        border-right: 1px solid var(--hairline);
+        flex-shrink: 0;
+      }
+      .pm-subnav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .pm-subnav-links a {
+        padding: 5px 11px;
+        font-size: 13px;
+        color: var(--ink-2);
+        border-radius: 6px;
+        transition: background 120ms ease, color 120ms ease;
+        white-space: nowrap;
+      }
+      .pm-subnav-links a:hover { background: var(--bg-tint); color: var(--ink); }
+      .pm-subnav-links a.active { color: var(--ink); font-weight: 500; }
+
       /* ===== PAGE-SPECIFIC ===== */
 
       .page-hero { padding: clamp(64px, 9vh, 120px) 0 64px; }
@@ -487,11 +528,26 @@ const screenshots = [
 
     <SiteHeader />
 
+    <nav class="pm-subnav">
+      <div class="wrap">
+        <div class="pm-subnav-inner">
+          <span class="pm-subnav-brand">PromptMate</span>
+          <div class="pm-subnav-links">
+            <a href="/promptmate" class="active">Overview</a>
+            <a href="/promptmate/getting-started">Getting started</a>
+            <a href="/promptmate/best-practices">Best practices</a>
+            <a href="/promptmate/starter-prompts">Starter prompts</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <main>
 
       <!-- HERO -->
       <section class="page-hero">
         <div class="wrap reveal">
+          <img src="/prompt-mate-logo.png" alt="PromptMate" style="height: 56px; width: auto; display: block; margin-bottom: 20px;" />
           <span class="eyebrow">Chrome Extension · Free &amp; Open Source</span>
           <h1 class="display" style="margin-top: 16px;">
             Your saved prompts,<br />one click away.
@@ -518,7 +574,7 @@ const screenshots = [
               View on GitHub
               <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
             </a>
-            <a class="btn" href="/promptmate-guide">
+            <a class="btn" href="/promptmate/getting-started">
               Getting started guide
             </a>
           </div>
@@ -726,13 +782,12 @@ const screenshots = [
             </p>
           </div>
           <div>
-            <h4>Sitemap</h4>
+            <h4>PromptMate</h4>
             <ul>
-              <li><a href="/builds">Builds</a></li>
-              <li><a href="/frameworks">Frameworks</a></li>
-              <li><a href="/case-studies">Case studies</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><a href="/promptmate">Overview</a></li>
+              <li><a href="/promptmate/getting-started">Getting started</a></li>
+              <li><a href="/promptmate/best-practices">Best practices</a></li>
+              <li><a href="/promptmate/starter-prompts">Starter prompts</a></li>
             </ul>
           </div>
           <div>
@@ -744,11 +799,12 @@ const screenshots = [
             </ul>
           </div>
           <div>
-            <h4>Speak with me</h4>
+            <h4>More</h4>
             <ul>
-              <li><a href="/contact">Speaking &amp; podcasts</a></li>
-              <li><a href="/contact">Collaboration</a></li>
-              <li><a href="/contact">Anything serious</a></li>
+              <li><a href="/builds">All builds</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
           </div>
         </div>

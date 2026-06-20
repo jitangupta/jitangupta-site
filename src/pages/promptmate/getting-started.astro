@@ -1,6 +1,6 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import SiteHeader from "../components/SiteHeader.astro";
+import BaseHead from '../../components/BaseHead.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
 
 const title = "PromptMate Guide — Save, organize, and use prompts in one click";
 const description = "Step-by-step guide for PromptMate: how to save prompts, use tone and format, browse history, and build your personal AI prompt library inside ChatGPT, Claude, DeepSeek, and Kimi.";
@@ -51,8 +51,13 @@ const guideSections = [
   },
   {
     heading: "Best practices",
-    body: "Use practical rules for writing prompts that are specific, reusable, easy to test, and worth keeping in your library.",
-    href: "#best-practices",
+    body: "Six practical rules for writing prompts that are specific, reusable, easy to test, and worth keeping in your library.",
+    href: "/promptmate/best-practices",
+  },
+  {
+    heading: "Starter prompts",
+    body: "Copy-ready prompts for engineers across code review, writing, debugging, and more. Add them to your library in one click.",
+    href: "/promptmate/starter-prompts",
   },
   {
     heading: "History and restore",
@@ -103,45 +108,6 @@ const constructionParts = [
     title: "How the answer should be shaped",
     body: "Format tells the AI how to structure the output so you can scan it quickly: bullets, steps, checklist, table, prose, or code.",
     example: "Return the answer as a checklist with sections for blockers, important fixes, small improvements, and tests to add.",
-  },
-];
-
-const practices = [
-  {
-    number: "01",
-    heading: "Be specific about the task, not the persona",
-    body: 'Write "Review this code for SQL injection vulnerabilities" rather than "Act as a security expert". Task-specific prompts produce consistent, usable output. Persona prompts produce unpredictable responses.',
-    ask: "What exactly do you want done? Start there.",
-  },
-  {
-    number: "02",
-    heading: "Use placeholders for the variable parts",
-    body: 'Build reusable prompts with placeholders like [PASTE_CODE_HERE] or [TOPIC] for the parts that change each session. The static framing — tone, instructions, output shape — stays in the saved prompt.',
-    ask: "What changes session to session? Make that the placeholder.",
-  },
-  {
-    number: "03",
-    heading: "One task per prompt",
-    body: "Prompts that ask for three things produce output that does two of them well and one poorly. Save separate prompts for separate tasks. Compose them manually in a session when you need both.",
-    ask: "Can you split this into two focused prompts?",
-  },
-  {
-    number: "04",
-    heading: "Match tone and format to the reader, not the task",
-    body: "A code review written as prose is slow to scan. A technical spec in bullet points loses nuance. The output format should match how the output will actually be read — not just what feels right to write.",
-    ask: "Who reads this output? How will they consume it?",
-  },
-  {
-    number: "05",
-    heading: "Test before saving, not after",
-    body: "Use a prompt two or three times in real sessions before saving it. If you need to edit it every time, it's not ready. Save the version that works without adjustment — that's the one worth keeping.",
-    ask: "Did this produce the right output without editing? If not, fix first.",
-  },
-  {
-    number: "06",
-    heading: "Include the context the model can't infer",
-    body: "Language, framework, audience, constraints, what to avoid. The model doesn't know you're on a Kubernetes cluster or writing for a non-technical PM. Put that in the prompt — it won't drift session to session.",
-    ask: "What would a smart colleague need to know to do this task well?",
   },
 ];
 
@@ -276,36 +242,6 @@ const tips = [
       .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
       .small { font-size: 14px; color: var(--muted); }
 
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: color-mix(in oklch, var(--bg) 88%, transparent);
-        backdrop-filter: saturate(140%) blur(12px);
-        -webkit-backdrop-filter: saturate(140%) blur(12px);
-        border-bottom: 1px solid color-mix(in oklch, var(--hairline) 60%, transparent);
-      }
-      .site-header .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 64px;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-      }
-      .nav { display: flex; align-items: center; gap: 28px; font-size: 14.5px; }
-      .nav a { color: var(--ink-2); }
-      .nav a:hover { color: var(--ink); }
-      @media (max-width: 720px) {
-        .nav { gap: 18px; font-size: 13.5px; }
-        .nav a.nav-hide-sm { display: none; }
-      }
-
       section { padding: 88px 0; position: relative; }
       section.tight { padding: 64px 0; }
       @media (max-width: 720px) { section { padding: 64px 0; } }
@@ -372,6 +308,47 @@ const tips = [
       }
 
       .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
+
+      /* PromptMate sub-nav */
+      .pm-subnav {
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg);
+      }
+      .pm-subnav-inner {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .pm-subnav-inner::-webkit-scrollbar { display: none; }
+      .pm-subnav-brand {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        padding-right: 20px;
+        margin-right: 20px;
+        border-right: 1px solid var(--hairline);
+        flex-shrink: 0;
+      }
+      .pm-subnav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .pm-subnav-links a {
+        padding: 5px 11px;
+        font-size: 13px;
+        color: var(--ink-2);
+        border-radius: 6px;
+        transition: background 120ms ease, color 120ms ease;
+        white-space: nowrap;
+      }
+      .pm-subnav-links a:hover { background: var(--bg-tint); color: var(--ink); }
+      .pm-subnav-links a.active { color: var(--ink); font-weight: 500; }
 
       /* ===== PAGE-SPECIFIC ===== */
 
@@ -624,51 +601,6 @@ const tips = [
         .tip-item { padding: 28px 0 !important; border-left: none !important; }
       }
 
-      /* Best practices */
-      .practice-list {
-        display: flex;
-        flex-direction: column;
-        border-top: 1px solid var(--hairline);
-        margin-top: 48px;
-      }
-      .practice {
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        gap: 32px;
-        padding: 32px 0;
-        border-bottom: 1px solid var(--hairline);
-        align-items: start;
-      }
-      .practice .num {
-        font-family: "Geist Mono", monospace;
-        font-size: 13px;
-        color: var(--muted);
-        letter-spacing: 0.04em;
-        padding-top: 3px;
-      }
-      .practice h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.018em; margin-bottom: 10px; }
-      .practice p { color: var(--ink-2); line-height: 1.6; font-size: 15.5px; max-width: 64ch; }
-      .practice .ask {
-        margin-top: 14px;
-        padding: 12px 16px;
-        background: var(--bg-tint);
-        border-left: 2px solid var(--accent);
-        font-family: "Geist Mono", monospace;
-        font-size: 13px;
-        line-height: 1.6;
-        color: var(--ink);
-      }
-      .practice .ask::before {
-        content: "Ask";
-        display: block;
-        color: var(--muted);
-        font-size: 11px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-      }
-      @media (max-width: 640px) { .practice { grid-template-columns: 1fr; gap: 8px; } }
-
       /* CTA block */
       .cta-block {
         padding: 64px 0;
@@ -688,6 +620,20 @@ const tips = [
   <body>
 
     <SiteHeader />
+
+    <nav class="pm-subnav">
+      <div class="wrap">
+        <div class="pm-subnav-inner">
+          <span class="pm-subnav-brand">PromptMate</span>
+          <div class="pm-subnav-links">
+            <a href="/promptmate">Overview</a>
+            <a href="/promptmate/getting-started" class="active">Getting started</a>
+            <a href="/promptmate/best-practices">Best practices</a>
+            <a href="/promptmate/starter-prompts">Starter prompts</a>
+          </div>
+        </div>
+      </div>
+    </nav>
 
     <main>
 
@@ -711,7 +657,7 @@ const tips = [
               Install Free
               <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
             </a>
-            <a class="btn" href="/resources/promptmate">
+            <a class="btn" href="/promptmate">
               <svg style="width:14px;height:14px;" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7H3M6.5 3.5L3 7l3.5 3.5"/></svg>
               Back to PromptMate
             </a>
@@ -736,7 +682,7 @@ const tips = [
                 <span>Your data stays with you</span>
               </div>
               <div class="btns">
-                <a class="btn primary" href="/resources/promptmate">
+                <a class="btn primary" href="/promptmate">
                   PromptMate product page
                   <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
                 </a>
@@ -757,7 +703,7 @@ const tips = [
                   <div>
                     <p>{section.body}</p>
                     <a href={section.href}>
-                      Jump to section
+                      {section.href.startsWith('/') ? 'Go to page' : 'Jump to section'}
                       <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
                     </a>
                   </div>
@@ -850,31 +796,6 @@ Format: Return the answer as a checklist with sections for blockers, important f
         </div>
       </section>
 
-      <!-- BEST PRACTICES -->
-      <section id="best-practices" class="tight hairline-t">
-        <div class="wrap">
-          <div class="reveal">
-            <span class="eyebrow">Best practices</span>
-            <h2 class="h2" style="margin-top: 16px;">Write prompts worth saving.</h2>
-            <p class="lede" style="margin-top: 12px;">
-              The difference between a library you use daily and one you abandon in a week comes down to how the prompts are written.
-            </p>
-          </div>
-          <div class="practice-list">
-            {practices.map((p) => (
-              <div class="practice reveal">
-                <span class="num">{p.number}</span>
-                <div>
-                  <h3>{p.heading}</h3>
-                  <p>{p.body}</p>
-                  <div class="ask">{p.ask}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <!-- TIPS -->
       <section id="tips" class="tight hairline-t">
         <div class="wrap">
@@ -890,6 +811,16 @@ Format: Return the answer as a checklist with sections for blockers, important f
                 <p>{tip.body}</p>
               </div>
             ))}
+          </div>
+          <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn" href="/promptmate/best-practices">
+              Full best practices guide
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/promptmate/starter-prompts">
+              Browse starter prompts
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
           </div>
         </div>
       </section>
@@ -915,7 +846,7 @@ Format: Return the answer as a checklist with sections for blockers, important f
                 Install Free
                 <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
               </a>
-              <a class="btn" href="/resources/promptmate">
+              <a class="btn" href="/promptmate">
                 <svg style="width:14px;height:14px;" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7H3M6.5 3.5L3 7l3.5 3.5"/></svg>
                 PromptMate page
               </a>
@@ -938,13 +869,12 @@ Format: Return the answer as a checklist with sections for blockers, important f
             </p>
           </div>
           <div>
-            <h4>Sitemap</h4>
+            <h4>PromptMate</h4>
             <ul>
-              <li><a href="/builds">Builds</a></li>
-              <li><a href="/frameworks">Frameworks</a></li>
-              <li><a href="/case-studies">Case studies</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><a href="/promptmate">Overview</a></li>
+              <li><a href="/promptmate/getting-started">Getting started</a></li>
+              <li><a href="/promptmate/best-practices">Best practices</a></li>
+              <li><a href="/promptmate/starter-prompts">Starter prompts</a></li>
             </ul>
           </div>
           <div>
@@ -956,11 +886,12 @@ Format: Return the answer as a checklist with sections for blockers, important f
             </ul>
           </div>
           <div>
-            <h4>Speak with me</h4>
+            <h4>More</h4>
             <ul>
-              <li><a href="/contact">Speaking & podcasts</a></li>
-              <li><a href="/contact">Collaboration</a></li>
-              <li><a href="/contact">Anything serious</a></li>
+              <li><a href="/builds">All builds</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
           </div>
         </div>

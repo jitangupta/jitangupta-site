@@ -1,0 +1,806 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+
+const title = "PromptMate Starter Prompts — Ready-to-use prompt library templates";
+const description = "Copy-ready prompts for engineers, writers, and AI power users. Add any of these to your PromptMate library and start using them without writing a single prompt from scratch.";
+
+const categories = [
+  {
+    id: "code",
+    label: "Code & Engineering",
+    prompts: [
+      {
+        title: "Code Review",
+        description: "Drop in a diff or paste the file. Gets you blockers, fixes, improvements, and missing tests — in one checklist.",
+        tone: "Technical",
+        format: "Checklist",
+        text: `Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.
+
+[PASTE_DIFF_OR_CODE_HERE]`,
+      },
+      {
+        title: "Explain This Code",
+        description: "Walks through intent, approach, and anything non-obvious. Flags what looks fragile.",
+        tone: "Technical",
+        format: "Steps",
+        text: `Explain what this code does and how it works. Cover the intent, the approach, and any non-obvious decisions. Then call out anything that looks fragile or could be improved.
+
+[PASTE_CODE_HERE]`,
+      },
+      {
+        title: "Write Unit Tests",
+        description: "Covers happy path, edge cases, and error conditions using whatever testing framework is in the file.",
+        tone: "Technical",
+        format: "Code",
+        text: `Write unit tests for this function. Cover the happy path, edge cases, and error conditions. Use the same testing framework already visible in the file.
+
+[PASTE_FUNCTION_HERE]`,
+      },
+      {
+        title: "Debug This Error",
+        description: "Explains the cause, where to look first, and what to check. Faster than searching docs.",
+        tone: "Technical",
+        format: "Steps",
+        text: `I'm getting this error. Explain what's causing it, where the most likely source is, and what to check first.
+
+Error: [PASTE_ERROR_HERE]
+
+Context: [BRIEFLY_DESCRIBE_WHAT_YOU_WERE_DOING]`,
+      },
+      {
+        title: "Refactor Suggestions",
+        description: "Asks for readability and maintainability improvements only. No hypothetical future requirements.",
+        tone: "Technical",
+        format: "Bullets",
+        text: `Review this code and suggest how to simplify or improve it. Focus on readability and maintainability. Don't refactor for hypothetical future requirements — only what's clearly better now.
+
+[PASTE_CODE_HERE]`,
+      },
+      {
+        title: "Write a Commit Message",
+        description: "Summarizes what changed and why. Follows conventional commit style.",
+        tone: "Technical",
+        format: "Prose",
+        text: `Write a clear commit message for this change. Lead with the type (feat/fix/refactor/chore) and a one-line summary. Add a short body paragraph explaining why this change was made if it's not obvious from the diff.
+
+[PASTE_DIFF_HERE]`,
+      },
+    ],
+  },
+  {
+    id: "writing",
+    label: "Writing & Communication",
+    prompts: [
+      {
+        title: "Email to Non-Technical Stakeholder",
+        description: "Explains something technical without jargon. Leads with impact or decision needed, then background.",
+        tone: "Professional",
+        format: "Prose",
+        text: `Help me write a clear, non-technical explanation of this for a PM or executive. Skip the jargon. Lead with the impact or decision needed, then explain the background.
+
+Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
+      },
+      {
+        title: "Meeting Notes Summary",
+        description: "Turns raw notes into action items, decisions, and open questions grouped by topic.",
+        tone: "Formal",
+        format: "Checklist",
+        text: `Summarize these meeting notes into clear action items, decisions made, and open questions. Group by topic if the meeting covered multiple subjects. Each action item should include who owns it if mentioned.
+
+[PASTE_NOTES_HERE]`,
+      },
+      {
+        title: "Technical Documentation",
+        description: "Documents what something does, how to use it, key parameters, and at least one example.",
+        tone: "Technical",
+        format: "Steps",
+        text: `Write clear technical documentation for this. Cover what it does, how to use it, the key parameters or options, and at least one usage example. Audience: engineers onboarding to this codebase.
+
+[DESCRIBE_OR_PASTE_WHAT_NEEDS_DOCUMENTATION]`,
+      },
+      {
+        title: "Status Update",
+        description: "Turns messy progress notes into a clean, scannable update for a team or manager.",
+        tone: "Professional",
+        format: "Bullets",
+        text: `Write a concise status update based on these notes. Cover: what's done, what's in progress, what's blocked, and what's next. Keep it to the point — this is for a team or manager, not a detailed report.
+
+[PASTE_YOUR_PROGRESS_NOTES_HERE]`,
+      },
+    ],
+  },
+  {
+    id: "learning",
+    label: "Learning & Thinking",
+    prompts: [
+      {
+        title: "Explain a Concept",
+        description: "One-sentence definition, then intuition, then a practical example. Calibrated for engineers.",
+        tone: "Casual",
+        format: "Steps",
+        text: `Explain [CONCEPT] clearly. Start with a one-sentence definition, then give me the intuition behind it, then a practical example. Assume I'm a software engineer who knows the basics but hasn't worked with this specific thing.`,
+      },
+      {
+        title: "Compare Two Options",
+        description: "Gets you the tradeoffs, not just a list of features. Ends with the right questions to ask before choosing.",
+        tone: "Technical",
+        format: "Bullets",
+        text: `Compare [OPTION_A] and [OPTION_B] for [USE_CASE]. What does each do well, where does each fall short, and what should I ask myself before choosing? Don't just list features — explain the real tradeoffs.`,
+      },
+      {
+        title: "Critique My Approach",
+        description: "Finds the biggest risk and what you're missing before you've committed too much to a direction.",
+        tone: "Technical",
+        format: "Bullets",
+        text: `I'm planning to [DESCRIBE_YOUR_APPROACH]. What's the biggest risk? What am I missing? What would you do differently and why?`,
+      },
+      {
+        title: "Summarize This",
+        description: "Pulls out the key points and what you should actually take away from a long doc or article.",
+        tone: "Casual",
+        format: "Bullets",
+        text: `Summarize this. Pull out the key points and what I should actually take away from it. If there's something I should act on or remember, call that out separately at the end.
+
+[PASTE_CONTENT_HERE]`,
+      },
+    ],
+  },
+  {
+    id: "workflow",
+    label: "Productivity & Workflow",
+    prompts: [
+      {
+        title: "Structure a Problem",
+        description: "Forces you to think before building. Good when you're rushing toward a solution you haven't fully defined.",
+        tone: "Technical",
+        format: "Bullets",
+        text: `Help me think through this clearly before I start building or writing. I'll describe the problem and my current thinking — you point out what I'm missing, where I'm making assumptions, and what I should clarify first.
+
+Problem: [DESCRIBE_THE_PROBLEM]
+My current thinking: [DESCRIBE_YOUR_APPROACH]`,
+      },
+      {
+        title: "Write a Technical Spec",
+        description: "Turns a rough idea into a structured spec: problem, approach, constraints, open questions.",
+        tone: "Technical",
+        format: "Steps",
+        text: `Write a short technical spec for this. Cover: the problem being solved, the proposed approach, key constraints or assumptions, and open questions. Keep it to what's needed to get alignment — not a novel.
+
+Feature or change: [DESCRIBE_WHAT_YOU_RE_BUILDING]`,
+      },
+      {
+        title: "Plan a Task Breakdown",
+        description: "Splits a vague goal into concrete, sequenced steps you can actually start working from.",
+        tone: "Technical",
+        format: "Checklist",
+        text: `Break this down into concrete, sequenced steps I can work through. Each step should be small enough to complete in one sitting. Call out any dependencies between steps.
+
+Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
+      },
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="paper">
+  <head>
+    <BaseHead title={title} description={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root,
+      html[data-theme="paper"] {
+        --bg: oklch(0.985 0.008 80);
+        --bg-tint: oklch(0.965 0.012 80);
+        --ink: oklch(0.18 0.012 60);
+        --ink-2: oklch(0.30 0.012 60);
+        --muted: oklch(0.50 0.012 60);
+        --hairline: oklch(0.88 0.010 80);
+        --hairline-strong: oklch(0.78 0.012 80);
+        --accent: oklch(0.62 0.20 32);
+        --accent-ink: oklch(0.98 0.005 80);
+        --selection: oklch(0.85 0.14 32 / 0.45);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+
+      html {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        font-feature-settings: "ss01","ss02","cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
+
+      ::selection { background: var(--selection); }
+      body { min-height: 100vh; overflow-x: hidden; }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+        transition: color 150ms ease, opacity 150ms ease;
+      }
+      a:hover { color: var(--accent); }
+
+      p { margin: 0; }
+      ul, ol { margin: 0; padding: 0; list-style: none; }
+      img { max-width: 100%; display: block; }
+
+      .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+      @media (max-width: 540px) { .wrap { padding: 0 20px; } }
+
+      .hairline-t { border-top: 1px solid var(--hairline); }
+
+      .mono {
+        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        font-feature-settings: "ss01","ss02";
+      }
+
+      .eyebrow {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
+
+      .display {
+        font-size: clamp(40px, 5.4vw, 76px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+
+      .h2 {
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: 1.04;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+        font-weight: 500;
+      }
+
+      .lede {
+        font-size: clamp(17px, 1.3vw, 20px);
+        line-height: 1.5;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        max-width: 62ch;
+      }
+
+      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+      section { padding: 88px 0; position: relative; }
+      section.tight { padding: 64px 0; }
+      @media (max-width: 720px) { section { padding: 64px 0; } }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      }
+      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .btn .arrow { transition: transform 200ms ease; }
+      .btn:hover .arrow { transform: translateX(3px); }
+
+      .site-footer { border-top: 1px solid var(--hairline); padding: 56px 0 40px; }
+      .site-footer .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .site-footer h4 {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .site-footer ul li { padding: 4px 0; }
+      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
+      .site-footer .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 820px) { .site-footer .grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 540px) { .site-footer .grid { grid-template-columns: 1fr; } }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
+
+      /* PromptMate sub-nav */
+      .pm-subnav {
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg);
+      }
+      .pm-subnav-inner {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .pm-subnav-inner::-webkit-scrollbar { display: none; }
+      .pm-subnav-brand {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        padding-right: 20px;
+        margin-right: 20px;
+        border-right: 1px solid var(--hairline);
+        flex-shrink: 0;
+      }
+      .pm-subnav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .pm-subnav-links a {
+        padding: 5px 11px;
+        font-size: 13px;
+        color: var(--ink-2);
+        border-radius: 6px;
+        transition: background 120ms ease, color 120ms ease;
+        white-space: nowrap;
+      }
+      .pm-subnav-links a:hover { background: var(--bg-tint); color: var(--ink); }
+      .pm-subnav-links a.active { color: var(--ink); font-weight: 500; }
+
+      /* ===== PAGE-SPECIFIC ===== */
+
+      .page-hero { padding: clamp(64px, 9vh, 120px) 0 64px; }
+
+      /* How-to block */
+      .how-to {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .how-to-item {
+        background: var(--bg);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .how-to-item .n {
+        font-family: "Geist Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .how-to-item h3 { font-size: 15px; font-weight: 500; }
+      .how-to-item p { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+      @media (max-width: 640px) { .how-to { grid-template-columns: 1fr; } }
+
+      /* Category section */
+      .category-section { padding: 64px 0; border-top: 1px solid var(--hairline); }
+      .category-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .category-header h2 {
+        font-size: clamp(22px, 2.4vw, 32px);
+        font-weight: 500;
+        letter-spacing: -0.022em;
+      }
+      .category-count {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      /* Prompt cards */
+      .prompt-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+      }
+      .prompt-card {
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+      }
+      .prompt-card-header {
+        padding: 20px 24px 14px;
+        border-bottom: 1px solid var(--hairline);
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .prompt-card-header h3 {
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+      .prompt-card-header p {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.5;
+        margin-top: 5px;
+        max-width: 48ch;
+      }
+      .prompt-meta {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .prompt-tag {
+        font-family: "Geist Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 4px 8px;
+        border: 1px solid var(--hairline);
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+      .prompt-body {
+        padding: 16px 24px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .prompt-text {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--ink-2);
+        white-space: pre-wrap;
+        background: var(--bg-tint);
+        border: 1px solid var(--hairline);
+        border-radius: 6px;
+        padding: 14px 16px;
+        flex: 1;
+      }
+      .prompt-copy-btn {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: var(--ink-2);
+        background: transparent;
+        cursor: pointer;
+        transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+        font-family: inherit;
+      }
+      .prompt-copy-btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .prompt-copy-btn.copied { color: oklch(0.50 0.14 150); border-color: oklch(0.78 0.10 150); }
+      @media (max-width: 760px) {
+        .prompt-grid { grid-template-columns: 1fr; }
+        .prompt-meta { flex-direction: column; }
+      }
+      @media (max-width: 540px) {
+        .prompt-card-header { flex-direction: column; }
+      }
+
+      /* CTA block */
+      .cta-block {
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: end;
+      }
+      .cta-block .btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      @media (max-width: 720px) { .cta-block { grid-template-columns: 1fr; gap: 24px; } }
+    </style>
+  </head>
+
+  <body>
+
+    <SiteHeader />
+
+    <nav class="pm-subnav">
+      <div class="wrap">
+        <div class="pm-subnav-inner">
+          <span class="pm-subnav-brand">PromptMate</span>
+          <div class="pm-subnav-links">
+            <a href="/promptmate">Overview</a>
+            <a href="/promptmate/getting-started">Getting started</a>
+            <a href="/promptmate/best-practices">Best practices</a>
+            <a href="/promptmate/starter-prompts" class="active">Starter prompts</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="page-hero">
+        <div class="wrap reveal">
+          <span class="eyebrow">PromptMate · Starter prompts</span>
+          <h1 class="display" style="margin-top: 16px;">
+            Starter prompts<br />for your library.
+          </h1>
+          <p class="lede" style="margin-top: 24px;">
+            Copy-ready prompts for engineers, writers, and AI power users. Use them as-is or adapt them — every one follows the best practices for prompts worth saving.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
+            <a
+              class="btn primary"
+              href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install PromptMate Free
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/promptmate/best-practices">
+              Why these prompts work
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW TO USE -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">How to use</span>
+            <h2 class="h2" style="margin-top: 16px;">Three steps to your first prompt.</h2>
+          </div>
+          <div class="how-to reveal">
+            <div class="how-to-item">
+              <span class="n">01</span>
+              <h3>Copy a prompt</h3>
+              <p>Click "Copy prompt" on any card below. The full text is ready to paste.</p>
+            </div>
+            <div class="how-to-item">
+              <span class="n">02</span>
+              <h3>Open PromptMate</h3>
+              <p>In ChatGPT, Claude, DeepSeek, or Kimi — click the PromptMate button in the bottom-right corner.</p>
+            </div>
+            <div class="how-to-item">
+              <span class="n">03</span>
+              <h3>Save and set tone + format</h3>
+              <p>Paste the text, choose a tone and output format, and save. Your prompt is now in your library — across all four platforms.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROMPT CATEGORIES -->
+      {categories.map((cat) => (
+        <section id={cat.id} class="category-section">
+          <div class="wrap">
+            <div class="category-header reveal">
+              <h2>{cat.label}</h2>
+              <span class="category-count">{cat.prompts.length} prompt{cat.prompts.length !== 1 ? 's' : ''}</span>
+            </div>
+            <div class="prompt-grid">
+              {cat.prompts.map((prompt) => (
+                <div class="prompt-card reveal">
+                  <div class="prompt-card-header">
+                    <div>
+                      <h3>{prompt.title}</h3>
+                      <p>{prompt.description}</p>
+                    </div>
+                    <div class="prompt-meta">
+                      <span class="prompt-tag">{prompt.tone}</span>
+                      <span class="prompt-tag">{prompt.format}</span>
+                    </div>
+                  </div>
+                  <div class="prompt-body">
+                    <pre class="prompt-text">{prompt.text}</pre>
+                    <button
+                      class="prompt-copy-btn"
+                      data-prompt={prompt.text}
+                      type="button"
+                      aria-label={`Copy ${prompt.title} prompt`}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="3.5" width="8" height="8" rx="1.5"/><path d="M3.5 3.5V2.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H8.5"/></svg>
+                      Copy prompt
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <!-- CTA -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="cta-block reveal">
+            <div>
+              <span class="eyebrow">Free · Open source · No backend</span>
+              <h2 class="h2" style="margin-top: 14px;">Build your library once.</h2>
+              <p class="body" style="margin-top: 12px; max-width: 52ch;">
+                These 17 prompts are a starting point. Install PromptMate, save the ones that match your workflow, and add your own as you find what works.
+              </p>
+            </div>
+            <div class="btns">
+              <a
+                class="btn primary"
+                href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Install Free
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </a>
+              <a class="btn" href="/promptmate/best-practices">
+                Best practices
+              </a>
+              <a class="btn" href="/promptmate">
+                PromptMate overview
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <a href="/" style="display:inline-block; margin-bottom: 14px;">
+              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
+            </a>
+            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
+              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
+            </p>
+          </div>
+          <div>
+            <h4>PromptMate</h4>
+            <ul>
+              <li><a href="/promptmate">Overview</a></li>
+              <li><a href="/promptmate/getting-started">Getting started</a></li>
+              <li><a href="/promptmate/best-practices">Best practices</a></li>
+              <li><a href="/promptmate/starter-prompts">Starter prompts</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <ul>
+              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>More</h4>
+            <ul>
+              <li><a href="/builds">All builds</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <span>© 2026 Jitan Gupta. All rights reserved.</span>
+          <span class="mono">Built in public · Mumbai → web</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) { el.classList.add('in'); }
+        else { io.observe(el); }
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+      }, 1500);
+
+      // Copy prompt buttons
+      document.querySelectorAll('.prompt-copy-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const text = btn.getAttribute('data-prompt');
+          if (!text) return;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.classList.add('copied');
+            btn.textContent = '✓ Copied';
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="3.5" width="8" height="8" rx="1.5"/><path d="M3.5 3.5V2.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H8.5"/></svg> Copy prompt`;
+            }, 2000);
+          } catch {
+            // fallback: select text in the pre
+            const pre = btn.closest('.prompt-body')?.querySelector('.prompt-text');
+            if (pre) {
+              const range = document.createRange();
+              range.selectNodeContents(pre);
+              const sel = window.getSelection();
+              sel?.removeAllRanges();
+              sel?.addRange(range);
+            }
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

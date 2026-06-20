@@ -15,6 +15,8 @@ export default defineConfig({
   redirects: {
     '/article': '/learn',
     '/article/[...slug]': '/learn/[...slug]',
+    '/resources/promptmate': '/promptmate',
+    '/promptmate-guide': '/promptmate/getting-started',
   },
 
   vite: {
