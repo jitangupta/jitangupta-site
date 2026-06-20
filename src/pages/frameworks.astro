@@ -64,6 +64,7 @@ const description = "The repeatable parts of working with AI tools — distilled
           <div class="toc-list" style="margin-top: 16px;">
             <a href="#five-check"><span class="n">01</span> 5-Check</a>
             <a href="#dev-loop"><span class="n">02</span> AI-Assisted Development Loop</a>
+            <a href="#agent-qa"><span class="n">03</span> Agent QA Harness</a>
             <a href="#more"><span class="n">→</span> What's next</a>
           </div>
           <p class="small" style="margin-top: 16px; line-height: 1.5;">
@@ -180,6 +181,77 @@ const description = "The repeatable parts of working with AI tools — distilled
             <p class="body" style="margin-top: 24px; max-width: 64ch;">
               The loop is the part most teams skip. They optimize the agent and the merge gate but never close the feedback — so the same failure mode keeps slipping through. The fifth step matters more than the first.
             </p>
+          </article>
+
+          <article class="fw-block reveal" id="agent-qa">
+            <div class="head">
+              <div>
+                <span class="eyebrow">Current · stable</span>
+                <h2 style="margin-top: 14px;">Agent QA Harness</h2>
+                <p class="lede">
+                  A file-based template for using AI agents as browser-based QA operators. Clone it, point the agent at your app, and get a structured test run — no test code required.
+                </p>
+              </div>
+              <span class="status">v1 · stable</span>
+            </div>
+
+            <div class="pull-quote">
+              The agent generates the test cases, runs them, and hands you a bug list. You didn't write a single test file.
+            </div>
+
+            <div class="check-list">
+              <div class="check">
+                <span class="num">01</span>
+                <div>
+                  <h3>Clone and onboard</h3>
+                  <p>
+                    Clone <a href="https://github.com/jitangupta/agent-qa-harness" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">agent-qa-harness</a>, open it in Claude Code or Codex, and say "start onboarding". The agent reads the harness config, asks for your app URL, and generates an initial test plan — categorised by feature area.
+                  </p>
+                  <div class="ask">
+                    Does the generated test plan cover the feature areas you care about? Add any the agent missed.
+                  </div>
+                </div>
+              </div>
+
+              <div class="check">
+                <span class="num">02</span>
+                <div>
+                  <h3>Let the agent run</h3>
+                  <p>
+                    The agent executes each test case in a browser session, logging results to JSONL as it goes. Pass, fail, and observations are structured — not prose. You can watch the run or come back when it finishes.
+                  </p>
+                  <div class="ask">
+                    Are any test categories failing at a rate that suggests a systemic issue, not isolated bugs?
+                  </div>
+                </div>
+              </div>
+
+              <div class="check">
+                <span class="num">03</span>
+                <div>
+                  <h3>Read the handoff</h3>
+                  <p>
+                    The agent writes a development handoff: bugs found, UX observations, and edge cases flagged during the run. It's structured so you can triage directly into your issue tracker. The <a href="https://github.com/jitangupta/promptmate-agent-qa-harness" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">PromptMate worked example</a> produced 86 test cases across 18 categories from a single run.
+                  </p>
+                  <div class="ask">
+                    Which bugs in the handoff would a human tester have caught on the first try? Those are your regression gaps.
+                  </div>
+                </div>
+              </div>
+
+              <div class="check">
+                <span class="num">04</span>
+                <div>
+                  <h3>Iterate the harness</h3>
+                  <p>
+                    After each run, update the harness config with anything the agent missed or over-tested. The config is the institutional knowledge — not the test code. New team members run "start onboarding" and inherit everything.
+                  </p>
+                  <div class="ask">
+                    What did this run miss that the last run caught? Add it to the harness before closing the branch.
+                  </div>
+                </div>
+              </div>
+            </div>
           </article>
 
           <article class="fw-block reveal" id="more" style="border-bottom: none;">
