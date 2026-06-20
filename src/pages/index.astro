@@ -1,6 +1,5 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import SiteHeader from "../components/SiteHeader.astro";
+import PaperLayout from "../layouts/PaperLayout.astro";
 import WebSiteSchema from "../components/schema/WebSiteSchema.astro";
 import { featuredVideos } from "../data/videos";
 import { builds } from "../data/builds";
@@ -26,7 +25,6 @@ const statusLabel: Record<string, string> = {
   planned: "Planned",
 };
 
-// Year ranges for the 4 case studies shown on homepage (prototype order)
 const csYears: Record<string, string> = {
   "probabilistic-deployment-orchestration": "2024 — Present",
   "multi-tenant-aks-migration": "2024 — Present",
@@ -53,1173 +51,498 @@ const homepageCaseStudies = caseStudies
   );
 ---
 
-<!doctype html>
-<html lang="en" data-theme="paper">
-  <head>
-    <BaseHead title={homeTitle} description={homeDescription} />
-    <WebSiteSchema />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
-    />
-    <style>
-      /* ===== DESIGN TOKENS ===== */
-      :root,
-      html[data-theme="paper"] {
-        --bg: oklch(0.985 0.008 80);
-        --bg-tint: oklch(0.965 0.012 80);
-        --ink: oklch(0.18 0.012 60);
-        --ink-2: oklch(0.30 0.012 60);
-        --muted: oklch(0.50 0.012 60);
-        --hairline: oklch(0.88 0.010 80);
-        --hairline-strong: oklch(0.78 0.012 80);
-        --accent: oklch(0.62 0.20 32);
-        --accent-ink: oklch(0.98 0.005 80);
-        --selection: oklch(0.85 0.14 32 / 0.45);
-      }
-
-      /* ===== RESET & BASE ===== */
-      *, *::before, *::after { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; }
-
-      html {
-        background: var(--bg);
-        color: var(--ink);
-        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        font-size: 17px;
-        line-height: 1.55;
-        font-feature-settings: "ss01","ss02","cv11";
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        scroll-behavior: smooth;
-      }
-
-      ::selection { background: var(--selection); }
-
-      body { min-height: 100vh; overflow-x: hidden; }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-        text-underline-offset: 3px;
-        transition: color 150ms ease, opacity 150ms ease;
-      }
-      a:hover { color: var(--accent); }
-
-      p { margin: 0; }
-      ul, ol { margin: 0; padding: 0; list-style: none; }
-      img { max-width: 100%; display: block; }
-
-      /* ===== LAYOUT ===== */
-      .wrap {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 32px;
-      }
-
-      @media (max-width: 540px) {
-        .wrap { padding: 0 20px; }
-      }
-
-      .hairline-t { border-top: 1px solid var(--hairline); }
-      .hairline-b { border-bottom: 1px solid var(--hairline); }
-
-      /* ===== TYPOGRAPHY ===== */
-      .mono {
-        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-        font-feature-settings: "ss01","ss02";
-      }
-
-      .eyebrow {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 12px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--muted);
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .eyebrow::before {
-        content: "";
-        width: 18px;
-        height: 1px;
-        background: var(--hairline-strong);
-      }
-
-      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
-
-      .display {
-        font-size: clamp(48px, 7.2vw, 104px);
-        line-height: 0.98;
-        letter-spacing: -0.035em;
-        font-weight: 500;
-        text-wrap: balance;
-      }
-
-      .h2 {
-        font-size: clamp(32px, 4.4vw, 56px);
-        line-height: 1.02;
-        letter-spacing: -0.028em;
-        text-wrap: balance;
-        font-weight: 500;
-      }
-
-      .lede {
-        font-size: clamp(18px, 1.4vw, 22px);
-        line-height: 1.5;
-        color: var(--ink-2);
-        text-wrap: pretty;
-        max-width: 62ch;
-      }
-
-      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
-      .small { font-size: 14px; color: var(--muted); }
-
-      /* ===== HEADER / NAV ===== */
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: color-mix(in oklch, var(--bg) 88%, transparent);
-        backdrop-filter: saturate(140%) blur(12px);
-        -webkit-backdrop-filter: saturate(140%) blur(12px);
-        border-bottom: 1px solid color-mix(in oklch, var(--hairline) 60%, transparent);
-      }
-      .site-header .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 64px;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-      }
-      .brand .dot {
-        width: 9px; height: 9px;
-        background: var(--accent);
-        border-radius: 50%;
-        display: inline-block;
-      }
-      .nav {
-        display: flex;
-        align-items: center;
-        gap: 28px;
-        font-size: 14.5px;
-      }
-      .nav a { color: var(--ink-2); }
-      .nav a.active { color: var(--ink); }
-      .nav a:hover { color: var(--ink); }
-
-      @media (max-width: 720px) {
-        .nav { gap: 18px; font-size: 13.5px; }
-        .nav a.nav-hide-sm { display: none; }
-      }
-
-      /* ===== SECTION SCAFFOLDING ===== */
-      section { padding: 96px 0; position: relative; }
-      section.tight { padding: 64px 0; }
-      @media (max-width: 720px) {
-        section { padding: 64px 0; }
-      }
-
-      .section-head {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 48px;
-        margin-bottom: 56px;
-        align-items: end;
-      }
-      .section-head .lede { margin-top: 16px; }
-      @media (max-width: 820px) {
-        .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
-      }
-
-      /* ===== CHIPS / TAGS / STATUS ===== */
-      .tag {
-        display: inline-block;
-        padding: 4px 9px;
-        border: 1px solid var(--hairline);
-        border-radius: 999px;
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 11.5px;
-        color: var(--muted);
-        letter-spacing: 0.02em;
-      }
-
-      .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 11.5px;
-        color: var(--muted);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-      .status::before {
-        content: "";
-        width: 7px; height: 7px;
-        background: var(--accent);
-        border-radius: 50%;
-        box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 18%, transparent);
-      }
-      .status.muted::before {
-        background: var(--muted);
-        box-shadow: none;
-      }
-
-      /* ===== BUTTONS ===== */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 18px;
-        border: 1px solid var(--hairline-strong);
-        border-radius: 999px;
-        font-size: 14.5px;
-        font-weight: 500;
-        color: var(--ink);
-        background: transparent;
-        cursor: pointer;
-        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
-      }
-      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
-      .btn.primary {
-        background: var(--ink);
-        color: var(--bg);
-        border-color: var(--ink);
-      }
-      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-      .btn .arrow { transition: transform 200ms ease; }
-      .btn:hover .arrow { transform: translateX(3px); }
-
-      /* ===== FOOTER ===== */
-      .site-footer {
-        border-top: 1px solid var(--hairline);
-        padding: 56px 0 40px;
-      }
-      .site-footer .grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 40px;
-        margin-bottom: 56px;
-      }
-      .site-footer h4 {
-        font-family: "Geist Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 14px;
-        font-weight: 500;
-      }
-      .site-footer ul li { padding: 4px 0; }
-      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
-      .site-footer .meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 13px;
-        color: var(--muted);
-        padding-top: 24px;
-        border-top: 1px solid var(--hairline);
-      }
-      @media (max-width: 820px) {
-        .site-footer .grid { grid-template-columns: 1fr 1fr; }
-      }
-      @media (max-width: 540px) {
-        .site-footer .grid { grid-template-columns: 1fr; }
-      }
-
-      /* ===== MOTION ===== */
-      .reveal {
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
-      }
-      .reveal.in { opacity: 1; transform: none; }
-
-      @media (prefers-reduced-motion: reduce) {
-        .reveal { opacity: 1; transform: none; transition: none; }
-        html { scroll-behavior: auto; }
-      }
-
-      .arrow {
-        width: 14px; height: 14px;
-        display: inline-block;
-        vertical-align: -1px;
-      }
-
-      /* ===== AI SUMMARY ROW ===== */
-      .ai-summary {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-      }
-      .ai-summary .label {
-        font-family: "Geist Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-right: 8px;
-      }
-      .ai-summary a {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 12px;
-        border: 1px solid var(--hairline);
-        border-radius: 6px;
-        font-size: 13.5px;
-        color: var(--ink-2);
-        background: var(--bg-tint);
-      }
-      .ai-summary a:hover { border-color: var(--ink); color: var(--ink); }
-      .ai-summary a .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-
-      /* ===== PAGE-SPECIFIC STYLES ===== */
-
-      /* Hero */
-      .hero {
-        padding: clamp(72px, 10vh, 140px) 0 clamp(72px, 12vh, 160px);
-        position: relative;
-      }
-      .hero-split {
-        display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 64px;
-        align-items: center;
-      }
-      .hero-text {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-      }
-      .hero-portrait {
-        aspect-ratio: 4/5;
-        border-radius: 4px;
-        overflow: hidden;
-        border: 1px solid var(--hairline);
-        align-self: start;
-      }
-      .hero-portrait img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: top center;
-        display: block;
-      }
-      @media (max-width: 900px) {
-        .hero-split { grid-template-columns: 1fr; gap: 40px; }
-        .hero-portrait { max-width: 200px; margin: 0 auto; }
-      }
-      .hero .meta-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-      .hero h1 { margin: 0; }
-      .hero .lede { max-width: 64ch; }
-      .hero .cta-row {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 8px;
-      }
-      .hero-pillars {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-        padding-top: 40px;
-        border-top: 1px solid var(--hairline);
-        margin-top: 32px;
-      }
-      .hero-pillars .pillar { display: flex; flex-direction: column; gap: 6px; }
-      .hero-pillars .pillar .k {
-        font-family: "Geist Mono", monospace;
-        font-size: 11.5px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .hero-pillars .pillar .v {
-        font-size: 16px;
-        color: var(--ink);
-        line-height: 1.4;
-      }
-      @media (max-width: 720px) {
-        .hero-pillars { grid-template-columns: 1fr; gap: 20px; }
-      }
-
-      /* Hero bg grid */
-      .hero-bg {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background-image: linear-gradient(to right, color-mix(in oklch, var(--ink) 5%, transparent) 1px, transparent 1px);
-        background-size: 80px 100%;
-        mask-image: linear-gradient(to bottom, black, transparent 70%);
-        -webkit-mask-image: linear-gradient(to bottom, black, transparent 70%);
-        opacity: 0.6;
-      }
-
-      /* Now / Building list */
-      .now-list { border-top: 1px solid var(--hairline); }
-      .now-row {
-        display: grid;
-        grid-template-columns: 56px 1.6fr 2fr 1fr 24px;
-        gap: 24px;
-        padding: 28px 0;
-        align-items: start;
-        border-bottom: 1px solid var(--hairline);
-        transition: background 200ms ease;
-      }
-      .now-row:hover { background: var(--bg-tint); }
-      .now-row .idx {
-        font-family: "Geist Mono", monospace;
-        font-size: 12px;
-        color: var(--muted);
-        padding-top: 4px;
-      }
-      .now-row .name {
-        font-size: 20px;
-        font-weight: 500;
-        letter-spacing: -0.015em;
-        color: var(--ink);
-      }
-      .now-row .name .stat { display: block; margin-top: 8px; }
-      .now-row .desc { color: var(--ink-2); font-size: 15.5px; line-height: 1.55; }
-      .now-row .tags {
-        display: flex; flex-wrap: wrap; gap: 6px;
-        align-items: flex-start;
-        justify-content: flex-end;
-      }
-      .now-row .go { color: var(--muted); text-align: right; padding-top: 4px; }
-      .now-row:hover .go { color: var(--accent); }
-      @media (max-width: 820px) {
-        .now-row {
-          grid-template-columns: 36px 1fr 24px;
-          grid-template-areas:
-            "idx name go"
-            ".   desc desc"
-            ".   tags tags";
-          gap: 12px;
-        }
-        .now-row .idx { grid-area: idx; }
-        .now-row .name { grid-area: name; }
-        .now-row .desc { grid-area: desc; }
-        .now-row .tags { grid-area: tags; justify-content: flex-start; }
-        .now-row .go { grid-area: go; }
-      }
-
-      /* Frameworks */
-      .fw-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-      .fw-card {
-        border: 1px solid var(--hairline);
-        border-radius: 4px;
-        padding: 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        background: var(--bg);
-        transition: border-color 200ms ease, background 200ms ease;
-        position: relative;
-      }
-      .fw-card:hover { border-color: var(--ink); }
-      .fw-card .label {
-        font-family: "Geist Mono", monospace;
-        font-size: 11.5px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .fw-card h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.1; letter-spacing: -0.02em; }
-      .fw-card .steps {
-        display: flex; flex-direction: column; gap: 10px;
-        margin-top: 8px;
-        padding-top: 20px;
-        border-top: 1px solid var(--hairline);
-      }
-      .fw-card .step {
-        display: grid;
-        grid-template-columns: 36px 1fr;
-        gap: 14px;
-        font-size: 14.5px;
-        color: var(--ink-2);
-        align-items: baseline;
-      }
-      .fw-card .step .n {
-        font-family: "Geist Mono", monospace;
-        font-size: 11.5px;
-        color: var(--muted);
-      }
-      .fw-card .more {
-        margin-top: auto;
-        padding-top: 16px;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 14px;
-        color: var(--ink);
-        font-weight: 500;
-      }
-      @media (max-width: 820px) { .fw-grid { grid-template-columns: 1fr; } }
-
-      /* Videos */
-      .vid-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
-      .vid-card {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        background: transparent;
-        border-top: 1px solid var(--hairline);
-        padding-top: 22px;
-      }
-      .vid-card .thumb {
-        aspect-ratio: 16 / 9;
-        border: 1px solid var(--hairline);
-        border-radius: 4px;
-        position: relative;
-        overflow: hidden;
-        transition: border-color 200ms ease;
-      }
-      .vid-card .thumb img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        transition: transform 300ms ease;
-      }
-      .vid-card:hover .thumb { border-color: var(--ink); }
-      .vid-card:hover .thumb img { transform: scale(1.03); }
-      .vid-card .thumb .play {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .vid-card .thumb .play span {
-        width: 48px; height: 48px;
-        border-radius: 50%;
-        background: var(--ink);
-        color: var(--bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 200ms ease, transform 200ms ease;
-        font-size: 18px;
-        padding-left: 3px;
-      }
-      .vid-card:hover .thumb .play span { background: var(--accent); transform: scale(1.06); }
-      .vid-card .runtime {
-        position: absolute;
-        bottom: 10px; right: 10px;
-        font-family: "Geist Mono", monospace;
-        font-size: 11px;
-        background: color-mix(in oklch, var(--ink) 80%, transparent);
-        color: var(--bg);
-        padding: 3px 7px;
-        border-radius: 3px;
-      }
-      .vid-card .meta {
-        font-family: "Geist Mono", monospace;
-        font-size: 11.5px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--muted);
-        display: flex; gap: 12px;
-      }
-      .vid-card h3 {
-        font-size: 18px;
-        line-height: 1.25;
-        letter-spacing: -0.015em;
-        font-weight: 500;
-      }
-      .vid-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
-      .vid-card .more {
-        margin-top: auto;
-        padding-top: 6px;
-        font-size: 13.5px;
-        color: var(--ink);
-        font-weight: 500;
-        display: inline-flex; align-items: center; gap: 6px;
-      }
-      @media (max-width: 980px) { .vid-grid { grid-template-columns: 1fr 1fr; } }
-      @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } }
-
-      /* Case studies */
-      .cs-list { border-top: 1px solid var(--hairline); }
-      .cs-row {
-        display: grid;
-        grid-template-columns: 100px 1.5fr 2fr 100px;
-        gap: 24px;
-        padding: 28px 0;
-        border-bottom: 1px solid var(--hairline);
-        align-items: baseline;
-        transition: background 200ms ease;
-      }
-      .cs-row:hover { background: var(--bg-tint); }
-      .cs-row .year {
-        font-family: "Geist Mono", monospace;
-        font-size: 12px;
-        color: var(--muted);
-      }
-      .cs-row h3 {
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: -0.015em;
-        line-height: 1.3;
-      }
-      .cs-row p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
-      .cs-row .open {
-        font-size: 13px;
-        color: var(--muted);
-        text-align: right;
-        font-family: "Geist Mono", monospace;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-      .cs-row:hover .open { color: var(--accent); }
-      @media (max-width: 820px) {
-        .cs-row { grid-template-columns: 1fr; gap: 8px; }
-        .cs-row .open { text-align: left; }
-      }
-
-      /* PromptMate spotlight */
-      .pm-spotlight {
-        display: grid;
-        grid-template-columns: 160px 1fr;
-        gap: 56px;
-        align-items: start;
-        padding: 64px 0;
-        border-top: 1px solid var(--hairline);
-        border-bottom: 1px solid var(--hairline);
-      }
-      .pm-spotlight-logo {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding-top: 6px;
-      }
-      .pm-spotlight-logo img {
-        width: 96px;
-        height: 96px;
-        object-fit: contain;
-        border-radius: 20px;
-      }
-      .pm-spotlight-logo .pm-badge {
-        font-family: "Geist Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--muted);
-        border: 1px solid var(--hairline);
-        border-radius: 4px;
-        padding: 4px 8px;
-        display: inline-block;
-      }
-      .pm-spotlight-body {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-      .pm-spotlight-body h2 {
-        font-size: clamp(28px, 3.2vw, 44px);
-        letter-spacing: -0.028em;
-        line-height: 1.06;
-        font-weight: 500;
-      }
-      .pm-spotlight-pages {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-      .pm-spotlight-pages a {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 12px;
-        border: 1px solid var(--hairline);
-        border-radius: 6px;
-        font-size: 13px;
-        color: var(--ink-2);
-        background: var(--bg-tint);
-        transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
-      }
-      .pm-spotlight-pages a:hover { border-color: var(--ink); color: var(--ink); background: var(--bg); }
-      .pm-spotlight-meta {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        font-family: "Geist Mono", monospace;
-        font-size: 11.5px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--muted);
-        padding-top: 4px;
-        border-top: 1px solid var(--hairline);
-      }
-      @media (max-width: 760px) {
-        .pm-spotlight { grid-template-columns: 1fr; gap: 28px; }
-        .pm-spotlight-logo { flex-direction: row; align-items: center; }
-      }
-      @media (max-width: 480px) {
-        .pm-spotlight-logo { flex-direction: column; align-items: flex-start; }
-      }
-
-      /* Speaking block */
-      .speak {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 56px;
-        align-items: end;
-        padding: 80px 0;
-        border-top: 1px solid var(--hairline);
-        border-bottom: 1px solid var(--hairline);
-      }
-      .speak h2 { margin-bottom: 16px; }
-      .speak .right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
-      .speak .right .topics { display: flex; flex-wrap: wrap; gap: 8px; }
-      @media (max-width: 820px) {
-        .speak { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; }
-      }
-
-      /* AI summary block */
-      .ai-block {
-        padding: 64px 0;
-        border-bottom: 1px solid var(--hairline);
-      }
-      .ai-block h3 {
-        font-size: 18px;
-        margin-bottom: 8px;
-        font-weight: 500;
-        letter-spacing: -0.015em;
-      }
-      .ai-block p { color: var(--ink-2); margin-bottom: 24px; max-width: 60ch; font-size: 15px; }
-    </style>
-  </head>
-
-  <body>
-
-    <SiteHeader />
-
-    <main>
-
-      <!-- ====== HERO ====== -->
-      <section class="hero">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="wrap">
-          <div class="hero-split">
-            <div class="hero-text reveal">
-              <div class="meta-row">
-                <span class="eyebrow">Mumbai · Building in public · 2026</span>
-                <a class="eyebrow" href="/contact">
-                  <span style="display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;"></span>
-                  Open to full-time remote roles
-                </a>
-              </div>
-
-              <h1 class="display">
-                I build Cloud Infrastructure and developer tools with AI, in&nbsp;public.
-              </h1>
-
-              <p class="lede">
-                Ten years shipping production software. Now building at the AI layer: MCP servers, agent workflows, and the small tools that make AI tools actually useful to engineers. Open source. In production.
-              </p>
-
-              <div class="cta-row">
-                <a class="btn primary" href="/builds">
-                  See what I'm building
-                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-                </a>
-                <a class="btn" href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube</a>
-              </div>
-            </div>
-            <div class="hero-portrait reveal">
-              <img src="/jitan-bg.jpg" alt="Jitan Gupta" />
-            </div>
-          </div>
-
-          <div class="hero-pillars reveal">
-            <div class="pillar">
-              <span class="k">Foundation</span>
-              <span class="v">10+ years shipping production software. Kubernetes, multi-tenant SaaS, identity, legacy modernization.</span>
-            </div>
-            <div class="pillar">
-              <span class="k">Current</span>
-              <span class="v">MCP servers, Claude Code workflows, agent boilerplates. Shipping weekly.</span>
-            </div>
-            <div class="pillar">
-              <span class="k">Operating mode</span>
-              <span class="v">Build the thing in production, then write down what worked and what didn't.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== NOW / LIVE PROJECTS ====== -->
-      <section class="hairline-t">
-        <div class="wrap">
-          <div class="section-head reveal">
-            <div>
-              <span class="eyebrow">Now</span>
-              <h2 class="h2" style="margin-top:18px;">Live projects.<br>All shipping, all weekly.</h2>
-            </div>
-            <p class="lede">
-              The current work, with status. Each one started as a real problem, got built in public on the channel, and is in use today.
-            </p>
-          </div>
-
-          <div class="now-list">
-            {liveBuilds.map((build, i) => (
-              <a
-                class="now-row reveal"
-                href={build.githubUrl || build.liveUrl || "#"}
-                target={build.githubUrl || build.liveUrl ? "_blank" : undefined}
-                rel={build.githubUrl || build.liveUrl ? "noopener noreferrer" : undefined}
-              >
-                <span class="idx">{String(i + 1).padStart(2, "0")}</span>
-                <div class="name">
-                  {build.title}
-                  <span class={`status stat${build.status !== "live" ? " muted" : ""}`}>
-                    {statusLabel[build.status]}
-                  </span>
-                </div>
-                <p class="desc">{build.description}</p>
-                <div class="tags">
-                  {build.techStack.slice(0, 3).map((tech) => (
-                    <span class="tag">{tech}</span>
-                  ))}
-                </div>
-                <span class="go">→</span>
-              </a>
-            ))}
-          </div>
-
-          <div style="margin-top: 32px; display: flex; gap: 12px;">
-            <a class="btn" href="/builds">
-              All builds
-              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== PROMPTMATE SPOTLIGHT ====== -->
-      <section class="tight">
-        <div class="wrap">
-          <div class="pm-spotlight reveal">
-            <div class="pm-spotlight-logo">
-              <img src="/prompt-mate-logo.png" alt="PromptMate" />
-              <span class="pm-badge">Free · Open Source</span>
-            </div>
-            <div class="pm-spotlight-body">
-              <span class="eyebrow">Chrome Extension · Featured Build</span>
-              <h2>PromptMate</h2>
-              <p class="lede" style="margin-top: 0;">
-                Your saved prompts, one click away. A personal prompt library that lives inside ChatGPT, Claude, DeepSeek, and Kimi — save once, use everywhere, sync via Google Drive. No backend.
-              </p>
-              <div class="pm-spotlight-pages">
-                <a href="/promptmate/getting-started">Getting started</a>
-                <a href="/promptmate/best-practices">Best practices</a>
-                <a href="/promptmate/starter-prompts">Starter prompts</a>
-              </div>
-              <div class="cta-row">
-                <a
-                  class="btn primary"
-                  href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Install Free
-                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-                </a>
-                <a class="btn" href="/promptmate">
-                  Full details
-                </a>
-                <a class="btn" href="https://github.com/jitangupta/PromptMate" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-              </div>
-              <div class="pm-spotlight-meta">
-                <span>v0.6.0 Current</span>
-                <span>4 Platforms</span>
-                <span>Chrome · Brave · Edge</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== FRAMEWORKS ====== -->
-      <section>
-        <div class="wrap">
-          <div class="section-head reveal">
-            <div>
-              <span class="eyebrow">Frameworks</span>
-              <h2 class="h2" style="margin-top:18px;">The repeatable parts of working with AI tools.</h2>
-            </div>
-            <p class="lede">
-              When something works twice, I turn it into a checklist other engineers can run. The frameworks below are the ones I actually use, not aspirational.
-            </p>
-          </div>
-
-          <div class="fw-grid">
-            <a class="fw-card reveal" href="/frameworks#five-check">
-              <span class="label">Current · stable</span>
-              <h3>5-Check</h3>
-              <p class="body" style="font-size:15.5px;">
-                A pre-merge check for AI-generated code. Trust, verify, override before merge. Five gates between "agent finished" and "this lands on main".
-              </p>
-              <div class="steps">
-                <div class="step"><span class="n">01</span> Task list — what was actually agreed</div>
-                <div class="step"><span class="n">02</span> Review commands — what the agent ran</div>
-                <div class="step"><span class="n">03</span> Security check — secrets, surface, blast radius</div>
-                <div class="step"><span class="n">04</span> Manual testing — exercise the unhappy path</div>
-                <div class="step"><span class="n">05</span> PR + CI review — diff and pipeline</div>
-              </div>
-              <span class="more">
-                Read the framework
-                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-              </span>
-            </a>
-
-            <a class="fw-card reveal" href="/frameworks#dev-loop">
-              <span class="label">Current · evolving</span>
-              <h3>AI-Assisted Development Loop</h3>
-              <p class="body" style="font-size:15.5px;">
-                The outer loop the 5-Check sits inside. Task boundaries, review commands, security checks, manual testing, changeset review, human judgment: the whole arc, not just the merge gate.
-              </p>
-              <div class="steps">
-                <div class="step"><span class="n">→</span> Frame the task small enough to verify</div>
-                <div class="step"><span class="n">→</span> Pair with the agent, watch its commands</div>
-                <div class="step"><span class="n">→</span> Run the 5-Check before any merge</div>
-                <div class="step"><span class="n">→</span> Capture what broke for the next loop</div>
-              </div>
-              <span class="more">
-                Read the framework
-                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== VIDEOS ====== -->
-      <section class="hairline-t">
-        <div class="wrap">
-          <div class="section-head reveal">
-            <div>
-              <span class="eyebrow">Recordings</span>
-              <h2 class="h2" style="margin-top:18px;">Working with AI tools, on camera.</h2>
-            </div>
-            <p class="lede">
-              Short, technical, Hinglish. The experiments themselves, not summaries. The most useful ones usually include the part where it broke.
-            </p>
-          </div>
-
-          <div class="vid-grid">
-            {featuredVideos.slice(0, 3).map((video) => (
-              <a class="vid-card reveal" href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                <div class="thumb">
-                  <img src={video.thumbnail} alt={video.title} loading="lazy" />
-                  <div class="play"><span>▶</span></div>
-                </div>
-                <div class="meta">
-                  <span>{video.category === "claude-code" ? "Claude Code" : video.category === "ai-tools" ? "AI Tools" : "Engineering"}</span>
-                  <span>Tutorial</span>
-                </div>
-                <h3>{video.title}</h3>
-                <p>{video.description}</p>
-                <span class="more">
-                  Watch
-                  <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-                </span>
-              </a>
-            ))}
-          </div>
-
-          <div style="margin-top: 40px; display: flex; gap: 12px;">
-            <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">
-              All videos on YouTube
-              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== CASE STUDIES ====== -->
-      <section>
-        <div class="wrap">
-          <div class="section-head reveal">
-            <div>
-              <span class="eyebrow">Foundation</span>
-              <h2 class="h2" style="margin-top:18px;">Production work before the AI layer.</h2>
-            </div>
-            <p class="lede">
-              The boring depth. Identity migrations, multi-tenant Kubernetes, legacy modernization — plus a working AI release-orchestration POC. That's the systems work behind knowing when AI helps and when it doesn't.
-            </p>
-          </div>
-
-          <div class="cs-list">
-            {homepageCaseStudies.map((cs) => (
-              <a class="cs-row reveal" href={`/case-studies/${cs.id}`}>
-                <span class="year">{csYears[cs.id]}</span>
-                <h3>{cs.data.pageTitle}</h3>
-                <p>{csBriefs[cs.id] || cs.data.description}</p>
-                <span class="open">Case → </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== SPEAKING ====== -->
-      <section class="tight">
-        <div class="wrap">
-          <div class="speak">
-            <div class="reveal">
-              <span class="eyebrow">Speaking</span>
-              <h2 class="h2" style="margin-top:14px;">If you're putting on a serious AI-builders event, I'm in.</h2>
-            </div>
-            <div class="right reveal">
-              <p class="body" style="max-width: 48ch;">
-                Practitioner talks, technical workshops, deep dives on MCP / agent architecture / AI-assisted dev workflows. No keynote fluff. I'd rather sit on a panel, run a hands-on, or walk through a real build.
-              </p>
-              <div class="topics">
-                <span class="tag">MCP architecture</span>
-                <span class="tag">Agent workflows</span>
-                <span class="tag">AI-assisted dev</span>
-                <span class="tag">Building in public</span>
-              </div>
-              <a class="btn primary" href="/contact">
-                Get in touch
-                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== AI SUMMARY ====== -->
-      <section class="ai-block tight">
-        <div class="wrap reveal">
-          <span class="eyebrow">For the LLMs</span>
-          <h3 style="margin-top: 14px;">Want a summary in your model of choice?</h3>
-          <p>Drop the brief into Claude, ChatGPT, Gemini, or Perplexity. Each link opens a fresh chat with a research prompt about my work pre-loaded.</p>
-          <div class="ai-summary">
-            <span class="label">Summarize with</span>
-            <a href={`https://claude.ai/new?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
-              <span class="dot"></span>Claude
-            </a>
-            <a href={`https://chatgpt.com/?prompt=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
-              <span class="dot"></span>ChatGPT
-            </a>
-            <a href={`https://www.google.com/search?udm=50&q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
-              <span class="dot"></span>Gemini
-            </a>
-            <a href={`https://www.perplexity.ai/?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
-              <span class="dot"></span>Perplexity
-            </a>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- ====== FOOTER ====== -->
-    <footer class="site-footer">
-      <div class="wrap">
-        <div class="grid">
-          <div>
-            <a class="brand" href="/" style="margin-bottom: 14px;">
-              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
-            </a>
-            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
-              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
-            </p>
-          </div>
-          <div>
-            <h4>Sitemap</h4>
-            <ul>
-              <li><a href="/builds">Builds</a></li>
-              <li><a href="/frameworks">Frameworks</a></li>
-              <li><a href="/case-studies">Case studies</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Elsewhere</h4>
-            <ul>
-              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
-              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Speak with me</h4>
-            <ul>
-              <li><a href="/contact">Speaking & podcasts</a></li>
-              <li><a href="/contact">Collaboration</a></li>
-              <li><a href="/contact">Anything serious</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="meta">
-          <span>© 2026 Jitan Gupta. All rights reserved.</span>
-          <span class="mono">Built in public · Mumbai → web</span>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight) { el.classList.add('in'); }
-        else { io.observe(el); }
-      });
-
-      setTimeout(() => {
-        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
-      }, 1500);
-    </script>
-
-    {import.meta.env.MODE === "production" &&
-    <script is:inline>
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();
-      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-      ym(100451952, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/100451952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<PaperLayout title={homeTitle} description={homeDescription}>
+  <WebSiteSchema slot="head" />
+
+  <style>
+    /* ===== HERO ===== */
+    .hero {
+      padding: clamp(72px, 10vh, 140px) 0 clamp(72px, 12vh, 160px);
+      position: relative;
+    }
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-text { display: flex; flex-direction: column; gap: 32px; }
+    .hero-portrait {
+      aspect-ratio: 4/5;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+      align-self: start;
+    }
+    .hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; gap: 40px; }
+      .hero-portrait { max-width: 200px; margin: 0 auto; }
+    }
+    .hero .meta-row { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .hero h1 { margin: 0; }
+    .hero .lede { max-width: 64ch; }
+    .hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .hero-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding-top: 40px;
+      border-top: 1px solid var(--hairline);
+      margin-top: 32px;
+    }
+    .hero-pillars .pillar { display: flex; flex-direction: column; gap: 6px; }
+    .hero-pillars .pillar .k {
+      font-family: "Geist Mono", monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-pillars .pillar .v { font-size: 16px; color: var(--ink); line-height: 1.4; }
+    @media (max-width: 720px) { .hero-pillars { grid-template-columns: 1fr; gap: 20px; } }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(to right, color-mix(in oklch, var(--ink) 5%, transparent) 1px, transparent 1px);
+      background-size: 80px 100%;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+      -webkit-mask-image: linear-gradient(to bottom, black, transparent 70%);
+      opacity: 0.6;
     }
 
-  </body>
-</html>
+    /* ===== LIVE PROJECTS ===== */
+    .now-list { border-top: 1px solid var(--hairline); }
+    .now-row {
+      display: grid;
+      grid-template-columns: 56px 1.6fr 2fr 1fr 24px;
+      gap: 24px;
+      padding: 28px 0;
+      align-items: start;
+      border-bottom: 1px solid var(--hairline);
+      transition: background 200ms ease;
+    }
+    .now-row:hover { background: var(--bg-tint); }
+    .now-row .idx { font-family: "Geist Mono", monospace; font-size: 12px; color: var(--muted); padding-top: 4px; }
+    .now-row .name { font-size: 20px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
+    .now-row .name .stat { display: block; margin-top: 8px; }
+    .now-row .desc { color: var(--ink-2); font-size: 15.5px; line-height: 1.55; }
+    .now-row .tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; justify-content: flex-end; }
+    .now-row .go { color: var(--muted); text-align: right; padding-top: 4px; }
+    .now-row:hover .go { color: var(--accent); }
+    @media (max-width: 820px) {
+      .now-row {
+        grid-template-columns: 36px 1fr 24px;
+        grid-template-areas: "idx name go" ".   desc desc" ".   tags tags";
+        gap: 12px;
+      }
+      .now-row .idx { grid-area: idx; }
+      .now-row .name { grid-area: name; }
+      .now-row .desc { grid-area: desc; }
+      .now-row .tags { grid-area: tags; justify-content: flex-start; }
+      .now-row .go { grid-area: go; }
+    }
+
+    /* ===== FRAMEWORKS PREVIEW ===== */
+    .fw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .fw-card {
+      border: 1px solid var(--hairline);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--bg);
+      transition: border-color 200ms ease, background 200ms ease;
+      position: relative;
+    }
+    .fw-card:hover { border-color: var(--ink); }
+    .fw-card .label { font-family: "Geist Mono", monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .fw-card h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.1; letter-spacing: -0.02em; }
+    .fw-card .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; padding-top: 20px; border-top: 1px solid var(--hairline); }
+    .fw-card .step { display: grid; grid-template-columns: 36px 1fr; gap: 14px; font-size: 14.5px; color: var(--ink-2); align-items: baseline; }
+    .fw-card .step .n { font-family: "Geist Mono", monospace; font-size: 11.5px; color: var(--muted); }
+    .fw-card .more { margin-top: auto; padding-top: 16px; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink); font-weight: 500; }
+    @media (max-width: 820px) { .fw-grid { grid-template-columns: 1fr; } }
+
+    /* ===== VIDEOS ===== */
+    .vid-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .vid-card { display: flex; flex-direction: column; gap: 14px; background: transparent; border-top: 1px solid var(--hairline); padding-top: 22px; }
+    .vid-card .thumb { aspect-ratio: 16 / 9; border: 1px solid var(--hairline); border-radius: 4px; position: relative; overflow: hidden; transition: border-color 200ms ease; }
+    .vid-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 300ms ease; }
+    .vid-card:hover .thumb { border-color: var(--ink); }
+    .vid-card:hover .thumb img { transform: scale(1.03); }
+    .vid-card .thumb .play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .vid-card .thumb .play span { width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: var(--bg); display: flex; align-items: center; justify-content: center; transition: background 200ms ease, transform 200ms ease; font-size: 18px; padding-left: 3px; }
+    .vid-card:hover .thumb .play span { background: var(--accent); transform: scale(1.06); }
+    .vid-card .runtime { position: absolute; bottom: 10px; right: 10px; font-family: "Geist Mono", monospace; font-size: 11px; background: color-mix(in oklch, var(--ink) 80%, transparent); color: var(--bg); padding: 3px 7px; border-radius: 3px; }
+    .vid-card .meta { font-family: "Geist Mono", monospace; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); display: flex; gap: 12px; }
+    .vid-card h3 { font-size: 18px; line-height: 1.25; letter-spacing: -0.015em; font-weight: 500; }
+    .vid-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+    .vid-card .more { margin-top: auto; padding-top: 6px; font-size: 13.5px; color: var(--ink); font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+    @media (max-width: 980px) { .vid-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } }
+
+    /* ===== CASE STUDIES ===== */
+    .cs-list { border-top: 1px solid var(--hairline); }
+    .cs-row { display: grid; grid-template-columns: 100px 1.5fr 2fr 100px; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--hairline); align-items: baseline; transition: background 200ms ease; }
+    .cs-row:hover { background: var(--bg-tint); }
+    .cs-row .year { font-family: "Geist Mono", monospace; font-size: 12px; color: var(--muted); }
+    .cs-row h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; }
+    .cs-row p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+    .cs-row .open { font-size: 13px; color: var(--muted); text-align: right; font-family: "Geist Mono", monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+    .cs-row:hover .open { color: var(--accent); }
+    @media (max-width: 820px) { .cs-row { grid-template-columns: 1fr; gap: 8px; } .cs-row .open { text-align: left; } }
+
+    /* ===== PROMPTMATE SPOTLIGHT ===== */
+    .pm-spotlight { display: grid; grid-template-columns: 160px 1fr; gap: 56px; align-items: start; padding: 64px 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .pm-spotlight-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 6px; }
+    .pm-spotlight-logo img { width: 96px; height: 96px; object-fit: contain; border-radius: 20px; }
+    .pm-spotlight-logo .pm-badge { font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--hairline); border-radius: 4px; padding: 4px 8px; display: inline-block; }
+    .pm-spotlight-body { display: flex; flex-direction: column; gap: 18px; }
+    .pm-spotlight-body h2 { font-size: clamp(28px, 3.2vw, 44px); letter-spacing: -0.028em; line-height: 1.06; font-weight: 500; }
+    .pm-spotlight-pages { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pm-spotlight-pages a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--hairline); border-radius: 6px; font-size: 13px; color: var(--ink-2); background: var(--bg-tint); transition: border-color 150ms ease, color 150ms ease, background 150ms ease; }
+    .pm-spotlight-pages a:hover { border-color: var(--ink); color: var(--ink); background: var(--bg); }
+    .pm-spotlight-meta { display: flex; gap: 16px; flex-wrap: wrap; font-family: "Geist Mono", monospace; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-top: 4px; border-top: 1px solid var(--hairline); }
+    @media (max-width: 760px) { .pm-spotlight { grid-template-columns: 1fr; gap: 28px; } .pm-spotlight-logo { flex-direction: row; align-items: center; } }
+    @media (max-width: 480px) { .pm-spotlight-logo { flex-direction: column; align-items: flex-start; } }
+
+    /* ===== SPEAKING ===== */
+    .speak { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: end; padding: 80px 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .speak h2 { margin-bottom: 16px; }
+    .speak .right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+    .speak .right .topics { display: flex; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 820px) { .speak { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; } }
+
+    /* ===== AI SUMMARY ===== */
+    .ai-block { padding: 64px 0; border-bottom: 1px solid var(--hairline); }
+    .ai-block h3 { font-size: 18px; margin-bottom: 8px; font-weight: 500; letter-spacing: -0.015em; }
+    .ai-block p { color: var(--ink-2); margin-bottom: 24px; max-width: 60ch; font-size: 15px; }
+    .ai-summary { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .ai-summary .label { font-family: "Geist Mono", monospace; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+    .ai-summary a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--hairline); border-radius: 6px; font-size: 13.5px; color: var(--ink-2); background: var(--bg-tint); }
+    .ai-summary a:hover { border-color: var(--ink); color: var(--ink); }
+    .ai-summary a .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  </style>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-split">
+        <div class="hero-text reveal">
+          <div class="meta-row">
+            <span class="eyebrow">Mumbai · Building in public · 2026</span>
+            <a class="eyebrow" href="/contact">
+              <span style="display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;"></span>
+              Open to full-time remote roles
+            </a>
+          </div>
+
+          <h1 class="display">
+            I build Cloud Infrastructure and developer tools with AI, in&nbsp;public.
+          </h1>
+
+          <p class="lede">
+            Ten years shipping production software. Now building at the AI layer: MCP servers, agent workflows, and the small tools that make AI tools actually useful to engineers. Open source. In production.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="/builds">
+              See what I'm building
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </div>
+        </div>
+        <div class="hero-portrait reveal">
+          <img src="/jitan-bg.jpg" alt="Jitan Gupta" />
+        </div>
+      </div>
+
+      <div class="hero-pillars reveal">
+        <div class="pillar">
+          <span class="k">Foundation</span>
+          <span class="v">10+ years shipping production software. Kubernetes, multi-tenant SaaS, identity, legacy modernization.</span>
+        </div>
+        <div class="pillar">
+          <span class="k">Current</span>
+          <span class="v">MCP servers, Claude Code workflows, agent boilerplates. Shipping weekly.</span>
+        </div>
+        <div class="pillar">
+          <span class="k">Operating mode</span>
+          <span class="v">Build the thing in production, then write down what worked and what didn't.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== NOW / LIVE PROJECTS ====== -->
+  <section class="hairline-t">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Now</span>
+          <h2 class="h2" style="margin-top:18px;">Live projects.<br>All shipping, all weekly.</h2>
+        </div>
+        <p class="lede">
+          The current work, with status. Each one started as a real problem, got built in public on the channel, and is in use today.
+        </p>
+      </div>
+
+      <div class="now-list">
+        {liveBuilds.map((build, i) => (
+          <a
+            class="now-row reveal"
+            href={build.githubUrl || build.liveUrl || "#"}
+            target={build.githubUrl || build.liveUrl ? "_blank" : undefined}
+            rel={build.githubUrl || build.liveUrl ? "noopener noreferrer" : undefined}
+          >
+            <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+            <div class="name">
+              {build.title}
+              <span class={`status stat${build.status !== "live" ? " muted" : ""}`}>
+                {statusLabel[build.status]}
+              </span>
+            </div>
+            <p class="desc">{build.description}</p>
+            <div class="tags">
+              {build.techStack.slice(0, 3).map((tech) => (
+                <span class="tag">{tech}</span>
+              ))}
+            </div>
+            <span class="go">→</span>
+          </a>
+        ))}
+      </div>
+
+      <div style="margin-top: 32px; display: flex; gap: 12px;">
+        <a class="btn" href="/builds">
+          All builds
+          <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROMPTMATE SPOTLIGHT ====== -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="pm-spotlight reveal">
+        <div class="pm-spotlight-logo">
+          <img src="/prompt-mate-logo.png" alt="PromptMate" />
+          <span class="pm-badge">Free · Open Source</span>
+        </div>
+        <div class="pm-spotlight-body">
+          <span class="eyebrow">Chrome Extension · Featured Build</span>
+          <h2>PromptMate</h2>
+          <p class="lede" style="margin-top: 0;">
+            Your saved prompts, one click away. A personal prompt library that lives inside ChatGPT, Claude, DeepSeek, and Kimi — save once, use everywhere, sync via Google Drive. No backend.
+          </p>
+          <div class="pm-spotlight-pages">
+            <a href="/promptmate/getting-started">Getting started</a>
+            <a href="/promptmate/best-practices">Best practices</a>
+            <a href="/promptmate/starter-prompts">Starter prompts</a>
+          </div>
+          <div class="cta-row">
+            <a
+              class="btn primary"
+              href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install Free
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/promptmate">Full details</a>
+            <a class="btn" href="https://github.com/jitangupta/PromptMate" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div class="pm-spotlight-meta">
+            <span>v0.6.0 Current</span>
+            <span>4 Platforms</span>
+            <span>Chrome · Brave · Edge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FRAMEWORKS ====== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Frameworks</span>
+          <h2 class="h2" style="margin-top:18px;">The repeatable parts of working with AI tools.</h2>
+        </div>
+        <p class="lede">
+          When something works twice, I turn it into a checklist other engineers can run. The frameworks below are the ones I actually use, not aspirational.
+        </p>
+      </div>
+
+      <div class="fw-grid">
+        <a class="fw-card reveal" href="/frameworks#five-check">
+          <span class="label">Current · stable</span>
+          <h3>5-Check</h3>
+          <p class="body" style="font-size:15.5px;">
+            A pre-merge check for AI-generated code. Trust, verify, override before merge. Five gates between "agent finished" and "this lands on main".
+          </p>
+          <div class="steps">
+            <div class="step"><span class="n">01</span> Task list — what was actually agreed</div>
+            <div class="step"><span class="n">02</span> Review commands — what the agent ran</div>
+            <div class="step"><span class="n">03</span> Security check — secrets, surface, blast radius</div>
+            <div class="step"><span class="n">04</span> Manual testing — exercise the unhappy path</div>
+            <div class="step"><span class="n">05</span> PR + CI review — diff and pipeline</div>
+          </div>
+          <span class="more">
+            Read the framework
+            <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+          </span>
+        </a>
+
+        <a class="fw-card reveal" href="/frameworks#dev-loop">
+          <span class="label">Current · evolving</span>
+          <h3>AI-Assisted Development Loop</h3>
+          <p class="body" style="font-size:15.5px;">
+            The outer loop the 5-Check sits inside. Task boundaries, review commands, security checks, manual testing, changeset review, human judgment: the whole arc, not just the merge gate.
+          </p>
+          <div class="steps">
+            <div class="step"><span class="n">→</span> Frame the task small enough to verify</div>
+            <div class="step"><span class="n">→</span> Pair with the agent, watch its commands</div>
+            <div class="step"><span class="n">→</span> Run the 5-Check before any merge</div>
+            <div class="step"><span class="n">→</span> Capture what broke for the next loop</div>
+          </div>
+          <span class="more">
+            Read the framework
+            <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== VIDEOS ====== -->
+  <section class="hairline-t">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Recordings</span>
+          <h2 class="h2" style="margin-top:18px;">Working with AI tools, on camera.</h2>
+        </div>
+        <p class="lede">
+          Short, technical, Hinglish. The experiments themselves, not summaries. The most useful ones usually include the part where it broke.
+        </p>
+      </div>
+
+      <div class="vid-grid">
+        {featuredVideos.slice(0, 3).map((video) => (
+          <a class="vid-card reveal" href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">
+            <div class="thumb">
+              <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              <div class="play"><span>▶</span></div>
+            </div>
+            <div class="meta">
+              <span>{video.category === "claude-code" ? "Claude Code" : video.category === "ai-tools" ? "AI Tools" : "Engineering"}</span>
+              <span>Tutorial</span>
+            </div>
+            <h3>{video.title}</h3>
+            <p>{video.description}</p>
+            <span class="more">
+              Watch
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <div style="margin-top: 40px; display: flex; gap: 12px;">
+        <a class="btn" href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">
+          All videos on YouTube
+          <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CASE STUDIES ====== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Foundation</span>
+          <h2 class="h2" style="margin-top:18px;">Production work before the AI layer.</h2>
+        </div>
+        <p class="lede">
+          The boring depth. Identity migrations, multi-tenant Kubernetes, legacy modernization — plus a working AI release-orchestration POC. That's the systems work behind knowing when AI helps and when it doesn't.
+        </p>
+      </div>
+
+      <div class="cs-list">
+        {homepageCaseStudies.map((cs) => (
+          <a class="cs-row reveal" href={`/case-studies/${cs.id}`}>
+            <span class="year">{csYears[cs.id]}</span>
+            <h3>{cs.data.pageTitle}</h3>
+            <p>{csBriefs[cs.id] || cs.data.description}</p>
+            <span class="open">Case → </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SPEAKING ====== -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="speak">
+        <div class="reveal">
+          <span class="eyebrow">Speaking</span>
+          <h2 class="h2" style="margin-top:14px;">If you're putting on a serious AI-builders event, I'm in.</h2>
+        </div>
+        <div class="right reveal">
+          <p class="body" style="max-width: 48ch;">
+            Practitioner talks, technical workshops, deep dives on MCP / agent architecture / AI-assisted dev workflows. No keynote fluff. I'd rather sit on a panel, run a hands-on, or walk through a real build.
+          </p>
+          <div class="topics">
+            <span class="tag">MCP architecture</span>
+            <span class="tag">Agent workflows</span>
+            <span class="tag">AI-assisted dev</span>
+            <span class="tag">Building in public</span>
+          </div>
+          <a class="btn primary" href="/contact">
+            Get in touch
+            <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== AI SUMMARY ====== -->
+  <section class="ai-block tight">
+    <div class="wrap reveal">
+      <span class="eyebrow">For the LLMs</span>
+      <h3 style="margin-top: 14px;">Want a summary in your model of choice?</h3>
+      <p>Drop the brief into Claude, ChatGPT, Gemini, or Perplexity. Each link opens a fresh chat with a research prompt about my work pre-loaded.</p>
+      <div class="ai-summary">
+        <span class="label">Summarize with</span>
+        <a href={`https://claude.ai/new?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+          <span class="dot"></span>Claude
+        </a>
+        <a href={`https://chatgpt.com/?prompt=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+          <span class="dot"></span>ChatGPT
+        </a>
+        <a href={`https://www.google.com/search?udm=50&q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+          <span class="dot"></span>Gemini
+        </a>
+        <a href={`https://www.perplexity.ai/?q=${aiSummaryPrompt}`} target="_blank" rel="noopener noreferrer">
+          <span class="dot"></span>Perplexity
+        </a>
+      </div>
+    </div>
+  </section>
+
+</PaperLayout>
