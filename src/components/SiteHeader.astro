@@ -142,9 +142,9 @@ const isActive = (href: string) =>
       <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" class="hdr-logo" />
     </a>
     <nav class="hdr-nav" aria-label="Primary">
-      <a href="/builds" class={isActive("/builds") ? "active" : ""}>Builds</a>
+      <a href="/builds" class={isActive("/builds") || isActive("/frameworks") ? "active" : ""}>Work</a>
       <a href="/promptmate" class={isActive("/promptmate") ? "active" : ""}>PromptMate</a>
-      <a href="/frameworks" class={isActive("/frameworks") ? "active" : ""}>Frameworks</a>
+      <a href="/writing" class={isActive("/writing") ? "active" : ""}>Writing</a>
       <a href="/case-studies" class={isActive("/case-studies") ? "active" : ""}>Case studies</a>
       <a href="/about" class={isActive("/about") ? "active" : ""}>About</a>
       <a href="/contact" class={isActive("/contact") ? "active" : ""}>Contact</a>
@@ -164,9 +164,9 @@ const isActive = (href: string) =>
 </header>
 
 <div class="hdr-mobile-nav" id="hdr-mobile-nav" aria-hidden="true">
-  <a href="/builds" class={isActive("/builds") ? "active" : ""}>Builds</a>
+  <a href="/builds" class={isActive("/builds") || isActive("/frameworks") ? "active" : ""}>Work</a>
   <a href="/promptmate" class={isActive("/promptmate") ? "active" : ""}>PromptMate</a>
-  <a href="/frameworks" class={isActive("/frameworks") ? "active" : ""}>Frameworks</a>
+  <a href="/writing" class={isActive("/writing") ? "active" : ""}>Writing</a>
   <a href="/case-studies" class={isActive("/case-studies") ? "active" : ""}>Case studies</a>
   <a href="/about" class={isActive("/about") ? "active" : ""}>About</a>
   <a href="/contact" class={isActive("/contact") ? "active" : ""}>Contact</a>

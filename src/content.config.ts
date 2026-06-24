@@ -1,8 +1,8 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
-const learn = defineCollection({
-    loader: glob({ base: './src/content/learn', pattern: '**/*.{md,mdx}' }),
+const writing = defineCollection({
+    loader: glob({ base: './src/content/writing', pattern: '**/*.{md,mdx}' }),
     // Type-check frontmatter using a schema
     schema: z.object({
         title: z.string(),
@@ -77,4 +77,4 @@ const notes = defineCollection({
     }),
 });
 
-export const collections = { learn, caseStudies, notes };
+export const collections = { writing, caseStudies, notes };

@@ -4,13 +4,13 @@ import ArticlePost from '../../layouts/ArticlePost.astro';
 import { render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const entries = await getCollection('learn');
+	const entries = await getCollection('writing');
 	return entries.map((entry) => ({
 		params: { slug: entry.id },
 		props: entry,
 	}));
 }
-type Props = CollectionEntry<'learn'>;
+type Props = CollectionEntry<'writing'>;
 
 const entry = Astro.props;
 const { Content, headings } = await render(entry);

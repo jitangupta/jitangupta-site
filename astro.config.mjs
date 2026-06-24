@@ -13,8 +13,10 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
 
   redirects: {
-    '/article': '/learn',
-    '/article/[...slug]': '/learn/[...slug]',
+    '/article': '/writing',
+    '/article/[...slug]': '/writing/[...slug]',
+    '/learn': '/writing',
+    '/learn/[...slug]': '/writing/[...slug]',
     '/resources/promptmate': '/promptmate',
     '/promptmate-guide': '/promptmate/getting-started',
   },
