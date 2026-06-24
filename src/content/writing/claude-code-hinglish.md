@@ -4,7 +4,7 @@ titleTag: 'For Indian engineers who want to actually use Claude Code in producti
 description: 'A practical, Hinglish-friendly guide to Claude Code for Indian engineering teams. Installation, daily workflows, Plan Mode, CLAUDE.md, multi-project setups, and Git Worktree, all from production use.'
 pubDate: '2026-04-15'
 updatedDate: '2026-05-02'
-heroImage: '/learn/master-claude-code.jpg'
+heroImage: '/writing/master-claude-code.jpg'
 articleTag: 'Claude Code'
 targetQuery: 'claude code training india'
 videos:
@@ -55,12 +55,12 @@ This page is a living guide for Indian engineering teams and individual engineer
 
 Most "Claude Code tutorial" content stops at installation. This guide goes deeper because that is where teams fail in production:
 
-- **Installing Claude Code on Windows via WSL.** A standalone, step-by-step walkthrough lives at [/learn/claude-code-windows-installation-guide](/learn/claude-code-windows-installation-guide).
+- **Installing Claude Code on Windows via WSL.** A standalone, step-by-step walkthrough lives at [/writing/claude-code-windows-installation-guide](/writing/claude-code-windows-installation-guide).
 - **Context engineering with CLAUDE.md.** The single highest-leverage thing a team can do. Covered in the first video below.
 - **Plan Mode and `/init`.** How to get Claude to think before it writes, instead of generating plausible-looking but wrong code.
 - **Multi-project setups with `--add-dir`.** For monorepos and split repos.
 - **Running parallel agents with Git Worktree.** A 3-to-4x speed-up for engineers comfortable with branching.
-- **Production safety checks.** Five guardrails I run before any AI-generated code reaches main, documented in the fifth video below and on [/learn/production-safe-ai-code](/learn/production-safe-ai-code).
+- **Production safety checks.** Five guardrails I run before any AI-generated code reaches main, documented in the fifth video below and on [/writing/production-safe-ai-code](/writing/production-safe-ai-code).
 
 These map directly to what I teach on the [YouTube channel](https://www.youtube.com/@jitangupta), video by video, from real production work.
 
@@ -84,4 +84,4 @@ These are worth reading once. After that, reach for the videos and the code. Doi
 
 ## Want to go deeper?
 
-Everything on this page is taught free on the [YouTube channel](https://www.youtube.com/@jitangupta), in Hinglish, against real codebases. Start with the videos above, then read the [production safety framework](/learn/production-safe-ai-code) before any AI-generated code reaches your main branch. Questions or feedback? [Get in touch](/contact).
+Everything on this page is taught free on the [YouTube channel](https://www.youtube.com/@jitangupta), in Hinglish, against real codebases. Start with the videos above, then read the [production safety framework](/writing/production-safe-ai-code) before any AI-generated code reaches your main branch. Questions or feedback? [Get in touch](/contact).

@@ -4,7 +4,7 @@ titleTag: 'Five guardrails to keep AI-generated code from quietly breaking produ
 description: 'A practical framework for engineering teams shipping AI-generated code. Five checks (correctness, scope, security, performance, observability) before a single AI-written line reaches main.'
 pubDate: '2026-04-22'
 updatedDate: '2026-05-02'
-heroImage: '/learn/guard-rails.jpg'
+heroImage: '/writing/guard-rails.jpg'
 articleTag: 'AI engineering'
 targetQuery: 'production-safe ai code framework'
 videos:
@@ -73,8 +73,8 @@ This is not theoretical. The 5-Check framework comes from real work:
 
 ## Related reading on this site
 
-- [Claude Code Training in India](/learn/claude-code-hinglish): the workflow side of AI adoption, where the 5-Check framework gets applied.
-- [Claude Code Windows installation guide](/learn/claude-code-windows-installation-guide): the prerequisite if you are not yet running Claude Code locally.
+- [Claude Code Training in India](/writing/claude-code-hinglish): the workflow side of AI adoption, where the 5-Check framework gets applied.
+- [Claude Code Windows installation guide](/writing/claude-code-windows-installation-guide): the prerequisite if you are not yet running Claude Code locally.
 
 For the canonical specs:
 
