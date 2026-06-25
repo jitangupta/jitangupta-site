@@ -1,7 +1,7 @@
 ---
 title: 'The Testability Seam: Making State-Gated UI Testable by AI Agents'
 titleTag: 'A URL-parameter pattern for injecting extension storage state — and the production-gating rule that makes it safe'
-description: 'chrome.storage.local is invisible to AI agents. This article covers the testability seam pattern: a build-time-gated URL hook that lets agents reach any state-dependent UI component, plus how to generalize it to other opaque storage boundaries.'
+description: 'A build-time-gated URL hook that lets AI agents seed chrome.storage.local and reach any state-dependent UI component — plus the production rule that makes it safe.'
 pubDate: '2026-06-24'
 heroImage: '/writing/agent-testability-seam-pattern.png'
 articleTag: 'AI engineering'
@@ -31,7 +31,7 @@ This article documents the pattern, the production-gating rule that makes it saf
 
 **Wall one: the UI is injected.** Extension content scripts inject UI panels into the host page. That UI is in the DOM, but its structure changes across extension versions and can conflict with the host page's z-index, focus management, and shadow DOM. Agents relying on stable CSS selectors or fixed screen coordinates fail quickly. Teaching agents to prefer accessible text, visible labels, and DOM semantics — the same signals a real user relies on — resolves most of this.
 
-**Wall two: the storage boundary.** `chrome.storage.local` lives in the extension process, not the page context. No page script can read or write it. DevTools can reach it through a point-and-click GUI in the Application tab, but agents cannot open DevTools panels programmatically. An AI agent — which can inject scripts, manipulate the DOM, and navigate to URLs — cannot touch extension storage at all.
+**Wall two: the storage boundary.** `chrome.storage.local` lives in the extension process, not the page context. No page script can read or write it. DevTools can reach it through a point-and-click GUI in the Application tab, but agents cannot open DevTools panels programmatically. An AI agent constrained to page navigation and page scripts has no channel into the extension process and cannot directly seed `chrome.storage.local`. (Playwright with CDP access to the extension service worker is an exception — but most agent runtimes don't operate at that level.)
 
 | | `localStorage` | `chrome.storage.local` |
 |---|---|---|
@@ -92,21 +92,33 @@ The correct approach is build-time stripping:
 ```javascript
 // content-script.js
 if (process.env.BUILD !== 'production') {
+  // Allowlist prevents arbitrary key writes even in dev builds
+  const ALLOWED_TEST_KEYS = new Set(['ratingPrompt', 'onboardingState', 'usageThreshold']);
+
   const params = new URLSearchParams(window.location.search);
-  const testKey = params.get('pm_test_key');
+  const testKey = params.get('pm_test_key');   // URLSearchParams already decodes percent-encoding
   const testValue = params.get('pm_test_value');
 
-  if (testKey && testValue) {
-    chrome.storage.local.set(
-      { [testKey]: JSON.parse(decodeURIComponent(testValue)) },
-      () => {
-        const url = new URL(window.location.href);
-        url.searchParams.delete('pm_test_key');
-        url.searchParams.delete('pm_test_value');
-        window.history.replaceState({}, '', url.toString());
-        window.location.reload();
+  if (testKey && testValue && ALLOWED_TEST_KEYS.has(testKey)) {
+    let parsed;
+    try {
+      parsed = JSON.parse(testValue);
+    } catch {
+      console.warn('[pm_test] Invalid JSON for key', testKey);
+      return;
+    }
+
+    chrome.storage.local.set({ [testKey]: parsed }, () => {
+      if (chrome.runtime.lastError) {
+        console.warn('[pm_test] Storage write failed:', chrome.runtime.lastError.message);
+        return;
       }
-    );
+      const url = new URL(window.location.href);
+      url.searchParams.delete('pm_test_key');
+      url.searchParams.delete('pm_test_value');
+      window.history.replaceState({}, '', url.toString());
+      window.location.reload();
+    });
   }
 }
 ```
@@ -122,6 +134,8 @@ replace({
 `@rollup/plugin-replace` rewrites `process.env.BUILD` at bundle time. In a production build (`BUILD=production`), the `if` condition evaluates to `false` and the dead-code eliminator removes the entire block. The hook does not exist in the production bundle — not as a runtime conditional, not as a feature flag, not as something that could be accidentally enabled.
 
 This is the invariant that makes the pattern safe to ship as a permanent fixture in your development build. Gate on build environment at the bundler level, not at runtime.
+
+**One more constraint:** the test parameters appear in the initial request URL before the content script strips them. This means they can appear in browser history, server logs, and network proxies. Pass only fixture IDs and non-sensitive state through the seam. Never pass tokens, passwords, or PII — use a lookup table in the content script to map a fixture ID to the full state shape if needed.
 
 ## Generalizing to other storage boundaries
 
@@ -152,7 +166,7 @@ If you author agent-specific test files, you are no longer testing your product 
 
 The full 88-case run across 4 platforms processed 55.85 million input tokens. That number sounds alarming until you look at the breakdown.
 
-Of those 55.85M tokens, 54.84M were served from cache — a **98.1% cache hit rate**. The same run costs $35 with good cache structure and $279 without it.
+Of those 55.85M tokens, 54.84M were served from cache — a **98.1% cache hit rate**. The same run costs $35 with good cache structure and ~$282 without it (treating all input as fresh).
 
 | Token type | Count | Rate | Cost |
 |---|---|---|---|
