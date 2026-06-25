@@ -2,8 +2,8 @@
 import BaseHead from '../../components/BaseHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 
-const title = "PromptMate Guide — Save, organize, and use prompts in one click";
-const description = "Step-by-step guide for PromptMate: how to save prompts, use tone and format, browse history, and build your personal AI prompt library inside ChatGPT, Claude, DeepSeek, and Kimi.";
+const title = "PromptMate Guide — Build a prompt library that works";
+const description = "Step-by-step guide for PromptMate: install the extension, set user context, create groups, use variables, and build a reusable prompt library inside ChatGPT, Claude, DeepSeek, and Kimi.";
 
 const steps = [
   {
@@ -13,30 +13,30 @@ const steps = [
   },
   {
     number: "02",
-    heading: "Connect Google Drive",
-    body: "When you open the sidebar for the first time, PromptMate asks to connect your Google Drive. Your library syncs to your own private folder — nothing stored on any external server.",
+    heading: "Connect Google Drive and set context",
+    body: "Connect your private Google Drive folder, then add your role, background, and preferences in User Context so repeated personal framing travels with every prompt.",
   },
   {
     number: "03",
-    heading: "Open any supported AI",
-    body: "Navigate to ChatGPT, Claude, DeepSeek, or Kimi. Look for the PromptMate button in the bottom-right corner and click it to open your sidebar.",
+    heading: "Create your first group",
+    body: "Make one simple group like Code Review, Writing, or Learning. Add a group instruction only if every prompt in that group should follow the same rules.",
   },
   {
     number: "04",
-    heading: "Save your first prompt",
-    body: 'Click "New Prompt", write your instruction, choose a tone and output format, then save it to your library.',
+    heading: "Save a prompt with variables",
+    body: 'Click "New Prompt", write the task, add {{variables}} for changing inputs, choose a tone and output format, then save it to your group.',
   },
   {
     number: "05",
-    heading: "Use it in any chat",
-    body: 'Find your prompt in the sidebar, click "Use" — it inserts into the chat with your tone and format applied.',
+    heading: "Fill values and use it",
+    body: 'Open ChatGPT, Claude, DeepSeek, or Kimi. Click "Use", fill the variable dialog, preview the final prompt, and insert it into the chat.',
   },
 ];
 
 const guideSections = [
   {
     heading: "Quick start",
-    body: "Install PromptMate, open a supported AI tool, save your first prompt, and use it without leaving the chat page.",
+    body: "Install PromptMate, connect sync, set context, save your first variable prompt, and use it without leaving the chat page.",
     href: "#quick-start",
   },
   {
@@ -45,9 +45,14 @@ const guideSections = [
     href: "#walkthroughs",
   },
   {
-    heading: "Prompt construction",
-    body: "See how your saved instruction, selected tone, and selected format become the final prompt inserted into your AI chat.",
+    heading: "Prompt layers",
+    body: "Learn what belongs in user context, group instructions, prompt body, variables, tone, and format so your library stays clean.",
     href: "#prompt-construction",
+  },
+  {
+    heading: "What's new in v0.8",
+    body: "Variables, groups, group instructions, and user context make saved prompts behave more like reusable tools.",
+    href: "/promptmate/whats-new",
   },
   {
     heading: "Best practices",
@@ -92,22 +97,34 @@ const walkthroughs = [
 
 const constructionParts = [
   {
-    label: "Saved prompt",
-    title: "The reusable instruction",
-    body: "This is the core task you save in PromptMate: what the AI should do, the context it needs, and any constraints that should travel with the prompt.",
-    example: "Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.",
+    label: "User context",
+    title: "What should always be true",
+    body: "Use this for stable background: your role, stack, preferences, audience, and recurring constraints that apply across many prompts.",
+    example: "I am a senior engineer working on TypeScript, cloud, and AI tooling. Prefer practical tradeoffs over abstract theory.",
   },
   {
-    label: "Tone",
-    title: "How the answer should sound",
-    body: "Tone nudges the response style without changing the task. Technical, concise, friendly, or formal tones keep repeated work consistent.",
-    example: "Use a technical but direct tone. Be precise, avoid fluff, and explain tradeoffs like a senior engineer reviewing the work.",
+    label: "Group instruction",
+    title: "What should be true for this group",
+    body: "Use this for shared rules inside a project or workflow. It keeps repeated setup out of every individual prompt.",
+    example: "For this code review group, prioritize correctness, security, regressions, and missing tests before style feedback.",
   },
   {
-    label: "Format",
-    title: "How the answer should be shaped",
-    body: "Format tells the AI how to structure the output so you can scan it quickly: bullets, steps, checklist, table, prose, or code.",
-    example: "Return the answer as a checklist with sections for blockers, important fixes, small improvements, and tests to add.",
+    label: "Prompt body",
+    title: "The reusable task",
+    body: "This is the core instruction you save: what the AI should do, what to inspect, and what good output looks like.",
+    example: "Review {{diff}} for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.",
+  },
+  {
+    label: "Variables",
+    title: "The parts that change",
+    body: "Use variables for session-specific inputs like {{topic}}, {{diff}}, {{audience}}, or {{error_message}}. Fill them only when you click Use.",
+    example: "{{diff}}, {{feature_goal}}, {{target_reader}}",
+  },
+  {
+    label: "Tone + format",
+    title: "How the answer should feel and scan",
+    body: "Tone controls the voice. Format controls the shape. Set both once so repeated work comes back in a consistent form.",
+    example: "Tone: Technical and direct. Format: Checklist with blockers, fixes, improvements, and tests.",
   },
 ];
 
@@ -117,16 +134,16 @@ const tips = [
     body: "Think about instructions you type every week — code review format, email drafts, explaining concepts. Those are your first 5 saves.",
   },
   {
-    heading: "Use tone + format for consistent output",
-    body: "Setting tone and format on save means every session starts with the same AI behavior — no drift, no retraining the model each time.",
+    heading: "Use variables for changing inputs",
+    body: "If you edit the same part every time you paste a prompt, turn that part into a {{variable}} and let PromptMate ask for it at send time.",
   },
   {
-    heading: "Edit during a session, not before",
-    body: "Don't over-engineer prompts upfront. Save a rough version, use it, notice what's missing, then edit inline. The version history keeps your original.",
+    heading: "Put context in the right layer",
+    body: "Use user context for you, group instructions for a workflow, and prompt text for the task. This keeps prompts shorter and easier to reuse.",
   },
   {
-    heading: "History catches what you forgot",
-    body: "Every prompt you use is logged. If a session produced great output but you closed the tab, scroll the history — the prompt that worked is still there.",
+    heading: "Edit after real sessions",
+    body: "Save a rough version, use it, then refine the prompt based on the output. Version history keeps older versions available if a change makes it worse.",
   },
 ];
 ---
@@ -504,16 +521,16 @@ const tips = [
       /* Prompt construction */
       .construction-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0;
-        border-top: 1px solid var(--hairline);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
         margin-top: 48px;
       }
       .construction-part {
-        padding: 28px 24px 28px 0;
-        border-bottom: 1px solid var(--hairline);
+        padding: 24px;
+        background: var(--bg);
       }
-      .construction-part + .construction-part { padding-left: 24px; border-left: 1px solid var(--hairline); }
       .construction-part .label {
         font-family: "Geist Mono", monospace;
         font-size: 12px;
@@ -565,14 +582,7 @@ const tips = [
         line-height: 1.7;
         color: var(--ink);
       }
-      @media (max-width: 860px) {
-        .construction-grid { grid-template-columns: 1fr; }
-        .construction-part,
-        .construction-part + .construction-part {
-          padding: 24px 0;
-          border-left: none;
-        }
-      }
+      @media (max-width: 560px) { .construction-grid { grid-template-columns: 1fr; } }
 
       /* Tips grid */
       .tips-grid {
@@ -646,7 +656,7 @@ const tips = [
             Get the most out<br />of PromptMate.
           </h1>
           <p class="lede" style="margin-top: 24px;">
-            You're a few clicks away from a prompt library that actually works — saved once, used everywhere, in ChatGPT, Claude, DeepSeek, and Kimi.
+            You're a few clicks away from a prompt library that actually works — saved once, organized by workflow, filled with variables, and used everywhere.
           </p>
           <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
             <a
@@ -674,7 +684,7 @@ const tips = [
               <span class="eyebrow">Quick guide</span>
               <h2 class="h2">You are in the right place.</h2>
               <p class="body">
-                This is the practical guide for PromptMate, a free and open-source prompt library built by Jitan Gupta. If you came here wondering what PromptMate is, how it works, or whether your prompts stay with you, this page has the answers.
+                This is the practical guide for PromptMate, a free and open-source prompt library built by Jitan Gupta. If you came here wondering what to save, where context belongs, or how to make prompts reusable, start here.
               </p>
               <div class="trust-points" aria-label="PromptMate trust points">
                 <span>Built by Jitan Gupta</span>
@@ -721,7 +731,7 @@ const tips = [
           <div class="reveal">
             <span class="eyebrow">Quick start</span>
             <h2 class="h2" style="margin-top: 16px;">Up and running in 5 steps.</h2>
-            <p class="lede" style="margin-top: 12px;">No account. No backend. Just install, save, and use.</p>
+            <p class="lede" style="margin-top: 12px;">No PromptMate account. No product backend. Start with one useful group and one reusable prompt.</p>
           </div>
           <div class="steps-grid">
             {steps.map((step) => (
@@ -768,9 +778,9 @@ const tips = [
         <div class="wrap">
           <div class="reveal">
             <span class="eyebrow">Prompt construction</span>
-            <h2 class="h2" style="margin-top: 16px;">What tone and format add to your prompt.</h2>
+            <h2 class="h2" style="margin-top: 16px;">Know what belongs where.</h2>
             <p class="lede" style="margin-top: 12px;">
-              PromptMate keeps the task you wrote as the source of truth, then adds your selected tone and output format when you click Use. The result is a fuller prompt without retyping the same framing every time.
+              PromptMate works best when each layer has a job. Stable background belongs in context, workflow rules belong in groups, and changing inputs belong in variables.
             </p>
           </div>
           <div class="construction-grid">
@@ -786,9 +796,19 @@ const tips = [
           <div class="assembled-prompt reveal">
             <div class="top">
               <span>Example inserted prompt</span>
-              <span>Saved prompt + tone + format</span>
+              <span>Context + group + prompt + variables + tone + format</span>
             </div>
-            <pre>{`Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.
+            <pre>{`User context:
+I am a senior engineer working on TypeScript, cloud, and AI tooling. Prefer practical tradeoffs over abstract theory.
+
+Group instruction:
+For code review prompts, prioritize correctness, security, regressions, and missing tests before style feedback.
+
+Prompt:
+Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.
+
+Variable values:
+diff = [the pull request diff you filled in]
 
 Tone: Technical and direct. Be precise, avoid fluff, and explain tradeoffs like a senior engineer reviewing the work.
 
@@ -831,7 +851,7 @@ Format: Return the answer as a checklist with sections for blockers, important f
         <div class="wrap">
           <div class="cta-block reveal">
             <div>
-              <span class="eyebrow">Free · Open source · No backend</span>
+              <span class="eyebrow">Free · Open source · No product backend</span>
               <h2 class="h2" style="margin-top: 14px;">Your library is waiting.</h2>
               <p class="body" style="margin-top: 12px; max-width: 52ch;">
                 Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT, Claude, DeepSeek, or Kimi, every session.

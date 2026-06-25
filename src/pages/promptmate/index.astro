@@ -2,8 +2,8 @@
 import BaseHead from '../../components/BaseHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 
-const title = "PromptMate · Personal prompt library for ChatGPT, Claude, DeepSeek, and Kimi";
-const description = "A Chrome extension that adds a personal prompt library sidebar to ChatGPT, Claude, DeepSeek, and Kimi. Save, organize, and insert prompts in one click. Built in Mumbai, open source, no backend.";
+const title = "PromptMate · Prompt library with variables, groups, and context";
+const description = "A Chrome extension that adds a personal prompt library sidebar to ChatGPT, Claude, DeepSeek, and Kimi. Save prompts, fill variables, organize groups, add context, and insert in one click.";
 
 const features = [
   {
@@ -11,51 +11,51 @@ const features = [
     body: "No tab switching. Your prompts live where you work — a sidebar that opens on ChatGPT, Claude, DeepSeek, and Kimi with one click.",
   },
   {
-    heading: "Save with tone and format",
-    body: "Each prompt stores a tone (formal, casual, technical) and output format (bullets, steps, prose, code). Inserted together, in one click.",
+    heading: "Variables turn prompts into workflows",
+    body: "Write {{variable}} placeholders once, then fill the changing parts at send time. PromptMate shows a live preview before inserting the final prompt.",
   },
   {
-    heading: "Open source, no backend",
-    body: "Syncs to your own private Google Drive folder. No data on my infrastructure. You own your library.",
+    heading: "Groups and shared instructions",
+    body: "Organize prompts by project, role, or workflow. Add a group instruction once and it travels with every prompt in that group.",
   },
   {
-    heading: "Edit on demand",
-    body: "Prompts aren't locked. Open any saved prompt, tweak it mid-session, save back. The edit is yours.",
+    heading: "User context applied automatically",
+    body: "Save your role, background, and preferences once. PromptMate can prepend that context to every outgoing prompt across supported AI tools.",
   },
   {
-    heading: "Local usage analytics",
-    body: "Tracks how often you create, apply, copy, and delete prompts. Stored locally so you can see what's actually useful.",
+    heading: "Tone, format, edit, and restore",
+    body: "Store tone and output format with each prompt, edit as you learn, and restore older versions when a refinement goes the wrong way.",
   },
   {
-    heading: "Prompt history",
-    body: "Every prompt you use is logged. Go back to any previous prompt from your session history — nothing gets lost between chats.",
+    heading: "Private sync, no product backend",
+    body: "Syncs to your own private Google Drive folder, with local usage history and analytics so you can see which prompts are actually earning their place.",
   },
 ];
 
 const roadmap = [
   {
     live: false,
-    status: "Planned",
-    title: "Group Prompts",
-    body: "Organize your library into named groups — by project, by use case, or by workflow. Find what you need without scrolling through everything.",
+    status: "Exploring",
+    title: "Share prompt packs",
+    body: "Publish a prompt or starter pack to anyone-with-link. The receiver gets their own copy, private by default and editable in their library.",
   },
   {
     live: false,
-    status: "Planned",
-    title: "Share Prompts",
-    body: "Publish a prompt to anyone-with-link. The receiver gets their own copy. Private by default, shareable on demand.",
-  },
-  {
-    live: false,
-    status: "Planned",
+    status: "Exploring",
     title: "Codex & Claude Code desktop",
-    body: "Bring your prompt library into Codex and the Claude Code desktop app — the same one-click insert experience, now for coding workflows too.",
+    body: "Bring the same prompt library into coding agents and desktop workflows, so reusable instructions follow you into implementation work too.",
   },
   {
-    live: true,
-    status: "Live · v0.6.0",
-    title: "Prompt version history",
-    body: "Every edit to a saved prompt creates a version. Browse the history, see what changed, and restore any prior version without losing work.",
+    live: false,
+    status: "Exploring",
+    title: "Import and export libraries",
+    body: "Make it easier to back up, move, and seed a library with starter prompts for a team, project, or repeated workflow.",
+  },
+  {
+    live: false,
+    status: "Exploring",
+    title: "Prompt quality helpers",
+    body: "Lightweight checks that help you spot vague prompts, missing variables, and instructions that should move into user context or group instructions.",
   },
 ];
 
@@ -71,8 +71,8 @@ const screenshots = [
     url: "chatgpt.com",
     src: "/images/promptmate/banner-chatgpt-open.jpg",
     alt: "PromptMate sidebar open on ChatGPT",
-    caption: "Sidebar with tone & format",
-    sub: "Search, pick tone, pick format, click Use. Done.",
+    caption: "Sidebar with your library",
+    sub: "Search, pick a prompt, fill any variables, then insert with the right context.",
   },
   {
     url: "claude.ai",
@@ -86,7 +86,25 @@ const screenshots = [
     src: "/images/promptmate/banner-claude-open.jpg",
     alt: "PromptMate sidebar open on Claude",
     caption: "Insert with full context",
-    sub: "Tone and format instructions are appended automatically.",
+    sub: "User context, group instructions, tone, and format travel with the prompt.",
+  },
+];
+
+const winPaths = [
+  {
+    number: "01",
+    heading: "Save five prompts you already repeat",
+    body: "Start with real work: code review, debugging, status updates, meeting notes, or explaining a concept. Do not invent a library from scratch.",
+  },
+  {
+    number: "02",
+    heading: "Turn changing parts into variables",
+    body: "Use placeholders like {{diff}}, {{topic}}, or {{audience}} for inputs that change every session. That makes each saved prompt reusable instead of brittle.",
+  },
+  {
+    number: "03",
+    heading: "Move repeated context up a level",
+    body: "Put your personal background in user context, project rules in group instructions, and only the task itself in the prompt body.",
   },
 ];
 ---
@@ -419,6 +437,38 @@ const screenshots = [
       .screenshot-caption p { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
       @media (max-width: 720px) { .screenshot-grid { grid-template-columns: 1fr; } }
 
+      /* Win path */
+      .win-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .win-item {
+        background: var(--bg);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .win-item .n {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .win-item h3 {
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+      .win-item p { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+      @media (max-width: 780px) { .win-grid { grid-template-columns: 1fr; } }
+
       /* Origin/story block */
       .origin-block {
         display: grid;
@@ -580,9 +630,9 @@ const screenshots = [
             </a>
           </div>
           <div class="meta-row">
-            <span><b>v0.6.0</b> Current</span>
+            <span><b>v0.8.0</b> Current</span>
             <span><b>4</b> Platforms</span>
-            <span><b>Free</b> No account</span>
+            <span><b>Free</b> No PromptMate account</span>
             <span>Works on Chrome, Brave, Edge, and all Chromium-based browsers</span>
           </div>
         </div>
@@ -643,6 +693,28 @@ const screenshots = [
         </div>
       </section>
 
+      <!-- FIRST WIN -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">First session</span>
+            <h2 class="h2" style="margin-top: 16px;">Win in the first 10 minutes.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              PromptMate works best when your library reflects work you already repeat. Start small, then let variables, groups, and context remove the extra typing.
+            </p>
+          </div>
+          <div class="win-grid">
+            {winPaths.map((item) => (
+              <div class="win-item reveal">
+                <span class="n">{item.number}</span>
+                <h3>{item.heading}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <!-- ORIGIN -->
       <section class="tight">
         <div class="wrap">
@@ -677,9 +749,9 @@ const screenshots = [
       <section class="tight hairline-t">
         <div class="wrap">
           <div class="reveal">
-            <span class="eyebrow">What it does now · v0.6.0</span>
+            <span class="eyebrow">What it does now · v0.8.0</span>
             <h2 class="h2" style="margin-top: 16px;">Current state, honestly scoped.</h2>
-            <p class="lede" style="margin-top: 12px;">This is what's shipped. Not what's planned — that's the roadmap below.</p>
+            <p class="lede" style="margin-top: 12px;">This is what's shipped today: the pieces that help a small prompt collection become a working system.</p>
           </div>
           <div class="feature-grid">
             {features.map((f) => (
@@ -699,7 +771,7 @@ const screenshots = [
             <span class="eyebrow">Roadmap</span>
             <h2 class="h2" style="margin-top: 16px;">What's next.</h2>
             <p class="lede" style="margin-top: 12px;">
-              Three features in active design. If any of these matter to you, raise an issue or vote via the feature request form.
+              The next ideas are about making libraries easier to share, move, and reuse in more places. If any of these matter to you, raise an issue or vote via the feature request form.
             </p>
           </div>
           <div class="roadmap-grid">
@@ -739,7 +811,7 @@ const screenshots = [
         <div class="wrap">
           <div class="cta-block reveal">
             <div>
-              <span class="eyebrow">Free · Open source · No backend</span>
+              <span class="eyebrow">Free · Open source · No product backend</span>
               <h2 class="h2" style="margin-top: 14px;">Stop retyping. Build your library once.</h2>
               <p class="body" style="margin-top: 12px; max-width: 52ch;">
                 Install PromptMate, save the prompts you actually use, and get them back in one click — in ChatGPT, Claude, DeepSeek, or Kimi, on any device.

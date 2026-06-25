@@ -3,7 +3,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 
 const title = "PromptMate Best Practices — Write prompts worth saving";
-const description = "Six rules for writing PromptMate prompts that produce consistent, reusable, and usable output. Build a library you actually use — every session.";
+const description = "Six rules for writing PromptMate prompts with variables, context, groups, tone, and format. Build a reusable prompt library you actually use every session.";
 
 const practices = [
   {
@@ -18,12 +18,12 @@ const practices = [
   },
   {
     number: "02",
-    heading: "Use placeholders for the variable parts",
-    body: 'Build reusable prompts with placeholders like [PASTE_CODE_HERE] or [TOPIC] for the parts that change each session. The static framing — tone, instructions, output shape — stays in the saved prompt.',
-    ask: "What changes session to session? Make that the placeholder.",
+    heading: "Use variables for the parts that change",
+    body: 'Build reusable prompts with {{variables}} like {{diff}}, {{topic}}, or {{audience}} for the parts that change each session. Static framing stays saved; PromptMate asks for the variable values when you click Use.',
+    ask: "What changes session to session? Make that a variable.",
     example: {
       bad: "Explain Kubernetes to me.",
-      good: "Explain [TOPIC] clearly. Start with a one-sentence definition, then give me the intuition, then a practical example. Assume I know software engineering basics.",
+      good: "Explain {{topic}} clearly. Start with a one-sentence definition, then give me the intuition, then a practical example. Assume I know software engineering basics.",
     },
   },
   {
@@ -74,16 +74,39 @@ const tips = [
     body: "Think about instructions you type every week — code review format, email drafts, explaining concepts to teammates. Those are your first 5 saves. Don't start from scratch — start from what's already working.",
   },
   {
-    heading: "Use tone + format for consistent output",
-    body: "Setting tone and format on save means every session starts with the same AI behavior — no drift, no retraining the model each time. The same prompt with 'technical' tone and 'checklist' format produces predictably scannable output.",
+    heading: "Use variables instead of editing pasted text",
+    body: "If the same part changes every time, make it a variable. The same prompt with {{diff}} or {{audience}} becomes reusable without manual cleanup in the chat box.",
+  },
+  {
+    heading: "Move repeated framing out of the prompt",
+    body: "Your role belongs in user context. Project rules belong in group instructions. Keep the prompt body focused on the task, or your library becomes hard to maintain.",
   },
   {
     heading: "Edit during a session, not before",
-    body: "Don't over-engineer prompts upfront. Save a rough version, use it in real work, notice what's missing, then edit inline. Version history keeps your original — you're never losing work by refining.",
+    body: "Don't over-engineer prompts upfront. Save a rough version, use it in real work, notice what's missing, then edit inline. Version history keeps your original.",
+  },
+];
+
+const layerDecisions = [
+  {
+    label: "User context",
+    use: "Use for stable facts about you: role, stack, audience preferences, and how you like answers.",
+    avoid: "Do not put one project, one task, or one pasted input here.",
   },
   {
-    heading: "History catches what you forgot",
-    body: "Every prompt you use is logged in history. If a session produced great output but you closed the tab, scroll the history — the prompt that worked is still there and you can promote it to your saved library.",
+    label: "Group instruction",
+    use: "Use for rules shared by a workflow: code review standards, writing voice, product constraints, or team conventions.",
+    avoid: "Do not repeat the same group instruction inside every prompt.",
+  },
+  {
+    label: "Prompt body",
+    use: "Use for the reusable task: what to do, what to inspect, and what a good answer should include.",
+    avoid: "Do not make one prompt do three unrelated jobs.",
+  },
+  {
+    label: "Variables",
+    use: "Use for changing values: {{diff}}, {{topic}}, {{error_message}}, {{target_reader}}, or {{feature_goal}}.",
+    avoid: "Do not save a prompt that forces you to edit text after inserting it.",
   },
 ];
 ---
@@ -389,6 +412,40 @@ const tips = [
         .practice { grid-template-columns: 1fr; gap: 8px; }
       }
 
+      /* Layer decisions */
+      .decision-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 48px;
+      }
+      .decision-card {
+        background: var(--bg);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .decision-card h3 {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+      .decision-card p {
+        font-size: 14.5px;
+        color: var(--ink-2);
+        line-height: 1.6;
+      }
+      .decision-card .avoid {
+        padding-top: 14px;
+        border-top: 1px solid var(--hairline);
+        color: var(--muted);
+      }
+      @media (max-width: 700px) { .decision-grid { grid-template-columns: 1fr; } }
+
       /* Tips */
       .tips-grid {
         display: grid;
@@ -482,7 +539,7 @@ const tips = [
             <span class="eyebrow">Six rules</span>
             <h2 class="h2" style="margin-top: 16px;">What separates prompts that stick from ones that rot.</h2>
             <p class="lede" style="margin-top: 12px;">
-              These aren't theoretical. They come from testing the same prompts across hundreds of sessions in ChatGPT, Claude, DeepSeek, and Kimi.
+              These aren't theoretical. They come from the patterns that actually make prompts reusable across sessions — the difference between a library you open every day and one you forget about.
             </p>
           </div>
           <div class="practice-list">
@@ -504,6 +561,28 @@ const tips = [
                     </div>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- LAYER DECISIONS -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">Library design</span>
+            <h2 class="h2" style="margin-top: 16px;">Put each instruction in the right place.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              A prompt library gets easier to use when repeated context moves up a level and the saved prompt stays focused on the task.
+            </p>
+          </div>
+          <div class="decision-grid">
+            {layerDecisions.map((item) => (
+              <div class="decision-card reveal">
+                <h3>{item.label}</h3>
+                <p>{item.use}</p>
+                <p class="avoid">{item.avoid}</p>
               </div>
             ))}
           </div>

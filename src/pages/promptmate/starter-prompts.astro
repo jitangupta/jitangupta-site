@@ -3,7 +3,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 
 const title = "PromptMate Starter Prompts — Ready-to-use prompt library templates";
-const description = "Copy-ready prompts for engineers, writers, and AI power users. Add any of these to your PromptMate library and start using them without writing a single prompt from scratch.";
+const description = "Copy-ready PromptMate prompts for engineers, writers, and AI power users. Each prompt uses variables, tone, and format so it can become a reusable library entry.";
 
 const categories = [
   {
@@ -17,7 +17,7 @@ const categories = [
         format: "Checklist",
         text: `Review this pull request for correctness, edge cases, and maintainability. Call out risky assumptions before suggesting changes.
 
-[PASTE_DIFF_OR_CODE_HERE]`,
+{{diff_or_code}}`,
       },
       {
         title: "Explain This Code",
@@ -26,7 +26,7 @@ const categories = [
         format: "Steps",
         text: `Explain what this code does and how it works. Cover the intent, the approach, and any non-obvious decisions. Then call out anything that looks fragile or could be improved.
 
-[PASTE_CODE_HERE]`,
+{{code}}`,
       },
       {
         title: "Write Unit Tests",
@@ -35,7 +35,7 @@ const categories = [
         format: "Code",
         text: `Write unit tests for this function. Cover the happy path, edge cases, and error conditions. Use the same testing framework already visible in the file.
 
-[PASTE_FUNCTION_HERE]`,
+{{function_or_file}}`,
       },
       {
         title: "Debug This Error",
@@ -44,9 +44,9 @@ const categories = [
         format: "Steps",
         text: `I'm getting this error. Explain what's causing it, where the most likely source is, and what to check first.
 
-Error: [PASTE_ERROR_HERE]
+Error: {{error_message}}
 
-Context: [BRIEFLY_DESCRIBE_WHAT_YOU_WERE_DOING]`,
+Context: {{what_you_were_doing}}`,
       },
       {
         title: "Refactor Suggestions",
@@ -55,7 +55,7 @@ Context: [BRIEFLY_DESCRIBE_WHAT_YOU_WERE_DOING]`,
         format: "Bullets",
         text: `Review this code and suggest how to simplify or improve it. Focus on readability and maintainability. Don't refactor for hypothetical future requirements — only what's clearly better now.
 
-[PASTE_CODE_HERE]`,
+{{code}}`,
       },
       {
         title: "Write a Commit Message",
@@ -64,7 +64,7 @@ Context: [BRIEFLY_DESCRIBE_WHAT_YOU_WERE_DOING]`,
         format: "Prose",
         text: `Write a clear commit message for this change. Lead with the type (feat/fix/refactor/chore) and a one-line summary. Add a short body paragraph explaining why this change was made if it's not obvious from the diff.
 
-[PASTE_DIFF_HERE]`,
+{{diff}}`,
       },
     ],
   },
@@ -79,7 +79,7 @@ Context: [BRIEFLY_DESCRIBE_WHAT_YOU_WERE_DOING]`,
         format: "Prose",
         text: `Help me write a clear, non-technical explanation of this for a PM or executive. Skip the jargon. Lead with the impact or decision needed, then explain the background.
 
-Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
+Topic: {{topic_to_explain}}`,
       },
       {
         title: "Meeting Notes Summary",
@@ -88,7 +88,7 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         format: "Checklist",
         text: `Summarize these meeting notes into clear action items, decisions made, and open questions. Group by topic if the meeting covered multiple subjects. Each action item should include who owns it if mentioned.
 
-[PASTE_NOTES_HERE]`,
+{{meeting_notes}}`,
       },
       {
         title: "Technical Documentation",
@@ -97,7 +97,7 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         format: "Steps",
         text: `Write clear technical documentation for this. Cover what it does, how to use it, the key parameters or options, and at least one usage example. Audience: engineers onboarding to this codebase.
 
-[DESCRIBE_OR_PASTE_WHAT_NEEDS_DOCUMENTATION]`,
+{{thing_to_document}}`,
       },
       {
         title: "Status Update",
@@ -106,7 +106,7 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         format: "Bullets",
         text: `Write a concise status update based on these notes. Cover: what's done, what's in progress, what's blocked, and what's next. Keep it to the point — this is for a team or manager, not a detailed report.
 
-[PASTE_YOUR_PROGRESS_NOTES_HERE]`,
+{{progress_notes}}`,
       },
     ],
   },
@@ -119,21 +119,21 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         description: "One-sentence definition, then intuition, then a practical example. Calibrated for engineers.",
         tone: "Casual",
         format: "Steps",
-        text: `Explain [CONCEPT] clearly. Start with a one-sentence definition, then give me the intuition behind it, then a practical example. Assume I'm a software engineer who knows the basics but hasn't worked with this specific thing.`,
+        text: `Explain {{concept}} clearly. Start with a one-sentence definition, then give me the intuition behind it, then a practical example. Assume I'm a software engineer who knows the basics but hasn't worked with this specific thing.`,
       },
       {
         title: "Compare Two Options",
         description: "Gets you the tradeoffs, not just a list of features. Ends with the right questions to ask before choosing.",
         tone: "Technical",
         format: "Bullets",
-        text: `Compare [OPTION_A] and [OPTION_B] for [USE_CASE]. What does each do well, where does each fall short, and what should I ask myself before choosing? Don't just list features — explain the real tradeoffs.`,
+        text: `Compare {{option_a}} and {{option_b}} for {{use_case}}. What does each do well, where does each fall short, and what should I ask myself before choosing? Don't just list features — explain the real tradeoffs.`,
       },
       {
         title: "Critique My Approach",
         description: "Finds the biggest risk and what you're missing before you've committed too much to a direction.",
         tone: "Technical",
         format: "Bullets",
-        text: `I'm planning to [DESCRIBE_YOUR_APPROACH]. What's the biggest risk? What am I missing? What would you do differently and why?`,
+        text: `I'm planning to {{approach}}. What's the biggest risk? What am I missing? What would you do differently and why?`,
       },
       {
         title: "Summarize This",
@@ -142,7 +142,7 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         format: "Bullets",
         text: `Summarize this. Pull out the key points and what I should actually take away from it. If there's something I should act on or remember, call that out separately at the end.
 
-[PASTE_CONTENT_HERE]`,
+{{content}}`,
       },
     ],
   },
@@ -157,8 +157,8 @@ Topic: [DESCRIBE_WHAT_YOU_NEED_TO_EXPLAIN]`,
         format: "Bullets",
         text: `Help me think through this clearly before I start building or writing. I'll describe the problem and my current thinking — you point out what I'm missing, where I'm making assumptions, and what I should clarify first.
 
-Problem: [DESCRIBE_THE_PROBLEM]
-My current thinking: [DESCRIBE_YOUR_APPROACH]`,
+Problem: {{problem}}
+My current thinking: {{current_approach}}`,
       },
       {
         title: "Write a Technical Spec",
@@ -167,7 +167,7 @@ My current thinking: [DESCRIBE_YOUR_APPROACH]`,
         format: "Steps",
         text: `Write a short technical spec for this. Cover: the problem being solved, the proposed approach, key constraints or assumptions, and open questions. Keep it to what's needed to get alignment — not a novel.
 
-Feature or change: [DESCRIBE_WHAT_YOU_RE_BUILDING]`,
+Feature or change: {{feature_or_change}}`,
       },
       {
         title: "Plan a Task Breakdown",
@@ -176,11 +176,13 @@ Feature or change: [DESCRIBE_WHAT_YOU_RE_BUILDING]`,
         format: "Checklist",
         text: `Break this down into concrete, sequenced steps I can work through. Each step should be small enough to complete in one sitting. Call out any dependencies between steps.
 
-Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
+Goal: {{goal}}`,
       },
     ],
   },
 ];
+
+const variablePattern = /\{\{[^}]+\}\}/g;
 ---
 
 <!doctype html>
@@ -593,7 +595,7 @@ Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
             Starter prompts<br />for your library.
           </h1>
           <p class="lede" style="margin-top: 24px;">
-            Copy-ready prompts for engineers, writers, and AI power users. Use them as-is or adapt them — every one follows the best practices for prompts worth saving.
+            Copy-ready prompts for engineers, writers, and AI power users. Each one uses PromptMate variables so you can save it once and fill the changing parts at send time.
           </p>
           <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
             <a
@@ -623,7 +625,7 @@ Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
             <div class="how-to-item">
               <span class="n">01</span>
               <h3>Copy a prompt</h3>
-              <p>Click "Copy prompt" on any card below. The full text is ready to paste.</p>
+              <p>Click "Copy prompt" on any card below. Variables like {"{{topic}}"} and {"{{diff}}"} are included in the copied text.</p>
             </div>
             <div class="how-to-item">
               <span class="n">02</span>
@@ -632,8 +634,8 @@ Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
             </div>
             <div class="how-to-item">
               <span class="n">03</span>
-              <h3>Save and set tone + format</h3>
-              <p>Paste the text, choose a tone and output format, and save. Your prompt is now in your library — across all four platforms.</p>
+              <h3>Save, group, and use</h3>
+              <p>Paste the text, choose a group, tone, and output format, then save. When you click Use, PromptMate asks for the variable values.</p>
             </div>
           </div>
         </div>
@@ -658,6 +660,7 @@ Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
                     <div class="prompt-meta">
                       <span class="prompt-tag">{prompt.tone}</span>
                       <span class="prompt-tag">{prompt.format}</span>
+                      <span class="prompt-tag">{(prompt.text.match(variablePattern) ?? []).length} vars</span>
                     </div>
                   </div>
                   <div class="prompt-body">
@@ -684,7 +687,7 @@ Goal: [DESCRIBE_WHAT_YOU_RE_TRYING_TO_DO]`,
         <div class="wrap">
           <div class="cta-block reveal">
             <div>
-              <span class="eyebrow">Free · Open source · No backend</span>
+              <span class="eyebrow">Free · Open source · No product backend</span>
               <h2 class="h2" style="margin-top: 14px;">Build your library once.</h2>
               <p class="body" style="margin-top: 12px; max-width: 52ch;">
                 These 17 prompts are a starting point. Install PromptMate, save the ones that match your workflow, and add your own as you find what works.
