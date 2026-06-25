@@ -3,7 +3,7 @@ title: 'The Testability Seam: Making State-Gated UI Testable by AI Agents'
 titleTag: 'A URL-parameter pattern for injecting extension storage state — and the production-gating rule that makes it safe'
 description: 'chrome.storage.local is invisible to AI agents. This article covers the testability seam pattern: a build-time-gated URL hook that lets agents reach any state-dependent UI component, plus how to generalize it to other opaque storage boundaries.'
 pubDate: '2026-06-24'
-heroImage: '/articles/agent-testability-seam-pattern.jpg'
+heroImage: '/writing/agent-testability-seam-pattern.png'
 articleTag: 'AI engineering'
 targetQuery: 'chrome extension ai agent testing testability seam'
 faq:
