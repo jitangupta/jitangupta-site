@@ -1,0 +1,753 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+
+const title = "What's New in PromptMate 0.8.0 — Variables, Prompt Groups & User Context";
+const description = "PromptMate 0.8.0 ships variables, prompt groups, group instructions, and persistent user context. Reusable prompts now behave like small, structured tools.";
+
+const features = [
+  {
+    id: "variables",
+    eyebrow: "Feature 01 · Variables in Prompts",
+    headline: "Turn any prompt into a fill-in workflow.",
+    body: "Add {{variable}} placeholders to any prompt. When you click Use, PromptMate opens a fill-in dialog, collects the missing values, and shows a live preview before inserting the final prompt. No more editing in the chat box after pasting.",
+    video: "/images/promptmate/whats-new/variables.mp4",
+    poster: "/images/promptmate/whats-new/variables-fill-dialog.webp",
+    urlChip: "chatgpt.com",
+    screenshots: [
+      {
+        src: "/images/promptmate/whats-new/variables-fill-dialog.webp",
+        alt: "PromptMate fill-in variables dialog showing topic and experience fields with a live preview of the final prompt.",
+        caption: "Fill in the dialog",
+        sub: "Variables are detected automatically. Fill in each field, see the live preview, then send.",
+      },
+      {
+        src: "/images/promptmate/whats-new/variables-prompt-editor.webp",
+        alt: "PromptMate prompt editor showing a {{variable}} placeholder being detected.",
+        caption: "Write {{variable}} anywhere",
+        sub: "Type any {{placeholder}} in the prompt editor. PromptMate picks it up at send time.",
+      },
+    ],
+  },
+  {
+    id: "prompt-groups",
+    eyebrow: "Feature 02 · Prompt Groups",
+    headline: "Keep the sidebar tidy with named groups.",
+    body: "Organize prompts into named groups — by project, platform, or use case. Each group shows a count and collapses cleanly so the sidebar stays fast to scan, even when your library grows.",
+    video: "/images/promptmate/whats-new/prompt-groups.mp4",
+    poster: "/images/promptmate/whats-new/prompt-groups-sidebar.webp",
+    urlChip: "chatgpt.com",
+    screenshots: [
+      {
+        src: "/images/promptmate/whats-new/prompt-groups-sidebar.webp",
+        alt: "PromptMate sidebar showing prompts organized into named groups with prompt cards and variable badges.",
+        caption: "Groups in the sidebar",
+        sub: "Named groups with counts and grouped prompt cards. Variable badges show which prompts have fill-in fields.",
+      },
+    ],
+  },
+  {
+    id: "group-instructions",
+    eyebrow: "Feature 03 · Group Instructions",
+    headline: "Attach shared instructions once, apply to every prompt.",
+    body: "Set a group instruction and PromptMate appends it to every prompt in that group — after user context, before the prompt body. Shared role setup, tone guidelines, or system context: write it once at the group level, not on every individual prompt.",
+    video: "/images/promptmate/whats-new/prompt-groups.mp4",
+    poster: "/images/promptmate/whats-new/group-instructions-modal.webp",
+    urlChip: "chatgpt.com",
+    screenshots: [
+      {
+        src: "/images/promptmate/whats-new/group-instructions-modal.webp",
+        alt: "PromptMate group instruction modal showing an enabled shared instruction applied to prompts in the LinkedIn group.",
+        caption: "Group instruction modal",
+        sub: "Enable a shared instruction for the whole group. It travels with every prompt in that group.",
+      },
+    ],
+  },
+  {
+    id: "user-context",
+    eyebrow: "Feature 04 · User Context",
+    headline: "Your background, attached to every prompt.",
+    body: "Save your role, background, and preferences once in the User Context settings. PromptMate appends it at the top of every outgoing prompt — across all supported platforms — without you touching it again.",
+    video: "/images/promptmate/whats-new/user-context.mp4",
+    poster: "/images/promptmate/whats-new/user-context-settings.webp",
+    urlChip: "claude.ai",
+    screenshots: [
+      {
+        src: "/images/promptmate/whats-new/user-context-settings.webp",
+        alt: "PromptMate user context settings modal showing a persistent personal context saved on device.",
+        caption: "Set it once",
+        sub: "Write your context in the settings modal. Stored locally on your device — never leaves your browser.",
+      },
+      {
+        src: "/images/promptmate/whats-new/user-context-applied.webp",
+        alt: "PromptMate outgoing prompt with user context inserted before the prompt body in the chat composer.",
+        caption: "Applied automatically",
+        sub: "User context is prepended to every outgoing prompt, across ChatGPT, Claude, DeepSeek, and Kimi.",
+      },
+    ],
+  },
+];
+
+const promptOrder = [
+  { label: "User context", color: "var(--accent)", note: "Your role and background — set once, applied always." },
+  { label: "Group instruction", color: "oklch(0.55 0.16 230)", note: "Shared instruction from the group — appended automatically." },
+  { label: "Prompt body", color: "var(--ink)", note: "Your saved prompt — the core task." },
+  { label: "Variables resolved", color: "oklch(0.52 0.18 150)", note: "{{variable}} placeholders replaced with your fill-in values." },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="paper">
+  <head>
+    <BaseHead title={title} description={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root,
+      html[data-theme="paper"] {
+        --bg: oklch(0.985 0.008 80);
+        --bg-tint: oklch(0.965 0.012 80);
+        --ink: oklch(0.18 0.012 60);
+        --ink-2: oklch(0.30 0.012 60);
+        --muted: oklch(0.50 0.012 60);
+        --hairline: oklch(0.88 0.010 80);
+        --hairline-strong: oklch(0.78 0.012 80);
+        --accent: oklch(0.62 0.20 32);
+        --accent-ink: oklch(0.98 0.005 80);
+        --selection: oklch(0.85 0.14 32 / 0.45);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+
+      html {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        font-feature-settings: "ss01","ss02","cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
+
+      ::selection { background: var(--selection); }
+      body { min-height: 100vh; overflow-x: hidden; }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+        transition: color 150ms ease, opacity 150ms ease;
+      }
+      a:hover { color: var(--accent); }
+
+      p { margin: 0; }
+      ul, ol { margin: 0; padding: 0; list-style: none; }
+      img { max-width: 100%; display: block; }
+
+      .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+      @media (max-width: 540px) { .wrap { padding: 0 20px; } }
+
+      .hairline-t { border-top: 1px solid var(--hairline); }
+
+      .mono {
+        font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        font-feature-settings: "ss01","ss02";
+      }
+
+      .eyebrow {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--hairline-strong);
+      }
+
+      h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.02em; }
+
+      .display {
+        font-size: clamp(40px, 5.4vw, 76px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+
+      .h2 {
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: 1.04;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+        font-weight: 500;
+      }
+
+      .lede {
+        font-size: clamp(17px, 1.3vw, 20px);
+        line-height: 1.5;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        max-width: 62ch;
+      }
+
+      .body { font-size: 17px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+      .small { font-size: 14px; color: var(--muted); }
+
+      section { padding: 88px 0; position: relative; }
+      section.tight { padding: 64px 0; }
+      @media (max-width: 720px) { section { padding: 64px 0; } }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      }
+      .btn:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--ink); }
+      .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .btn .arrow { transition: transform 200ms ease; }
+      .btn:hover .arrow { transform: translateX(3px); }
+
+      .arrow { width: 14px; height: 14px; display: inline-block; vertical-align: -1px; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms cubic-bezier(.2,.7,.2,1), transform 600ms cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      /* PromptMate sub-nav */
+      .pm-subnav {
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg);
+      }
+      .pm-subnav-inner {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .pm-subnav-inner::-webkit-scrollbar { display: none; }
+      .pm-subnav-brand {
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        padding-right: 20px;
+        margin-right: 20px;
+        border-right: 1px solid var(--hairline);
+        flex-shrink: 0;
+      }
+      .pm-subnav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .pm-subnav-links a {
+        padding: 5px 11px;
+        font-size: 13px;
+        color: var(--ink-2);
+        border-radius: 6px;
+        transition: background 120ms ease, color 120ms ease;
+        white-space: nowrap;
+      }
+      .pm-subnav-links a:hover { background: var(--bg-tint); color: var(--ink); }
+      .pm-subnav-links a.active { color: var(--ink); font-weight: 500; }
+      .pm-subnav-links a.new-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pm-subnav-links a.new-badge::after {
+        content: "new";
+        font-family: "Geist Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--accent);
+        color: var(--accent-ink);
+        padding: 2px 5px;
+        border-radius: 999px;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      /* Page hero */
+      .page-hero { padding: clamp(64px, 9vh, 120px) 0 64px; }
+
+      .version-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 999px;
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--ink-2);
+        margin-bottom: 20px;
+      }
+      .version-badge .dot {
+        width: 7px; height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 18%, transparent);
+      }
+
+      .meta-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .meta-row b { color: var(--ink); font-weight: 500; }
+
+      /* Feature sections — alternating layout */
+      .feature-section {
+        padding: 80px 0;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .feature-header {
+        margin-bottom: 48px;
+      }
+      .feature-header h2 {
+        font-size: clamp(26px, 3.2vw, 44px);
+        line-height: 1.06;
+        letter-spacing: -0.026em;
+        font-weight: 500;
+        margin-top: 14px;
+        text-wrap: balance;
+      }
+      .feature-header p {
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--ink-2);
+        max-width: 68ch;
+        margin-top: 14px;
+        text-wrap: pretty;
+      }
+
+      /* Video player */
+      .video-frame {
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .video-chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 14px;
+        background: color-mix(in oklch, var(--ink) 95%, var(--bg));
+        border-bottom: 1px solid color-mix(in oklch, var(--bg) 12%, transparent);
+      }
+      .video-chrome .dot { width: 10px; height: 10px; border-radius: 50%; }
+      .video-chrome .dot.r { background: oklch(0.60 0.18 24 / 0.7); }
+      .video-chrome .dot.y { background: oklch(0.75 0.16 90 / 0.7); }
+      .video-chrome .dot.g { background: oklch(0.68 0.18 150 / 0.7); }
+      .video-chrome .url {
+        margin-left: 10px;
+        font-family: "Geist Mono", monospace;
+        font-size: 11.5px;
+        color: color-mix(in oklch, var(--bg) 45%, transparent);
+        letter-spacing: 0.01em;
+      }
+      .video-frame video { display: block; width: 100%; }
+      .video-frame img { display: block; width: 100%; }
+
+      /* Screenshot grid under video */
+      .screenshot-grid {
+        display: grid;
+        gap: 1px;
+        background: var(--hairline);
+        border: 1px solid var(--hairline);
+        margin-top: 32px;
+      }
+      .screenshot-grid.two { grid-template-columns: 1fr 1fr; }
+      .screenshot-grid.one { grid-template-columns: 1fr; }
+      .screenshot-item {
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .screenshot-item img { display: block; width: 100%; }
+      .screenshot-caption {
+        padding: 14px 18px;
+        border-top: 1px solid var(--hairline);
+      }
+      .screenshot-caption h4 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+      .screenshot-caption p { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+      @media (max-width: 640px) {
+        .screenshot-grid.two { grid-template-columns: 1fr; }
+      }
+
+      /* Prompt anatomy */
+      .anatomy-block {
+        margin-top: 48px;
+        border: 1px solid var(--hairline-strong);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .anatomy-header {
+        padding: 14px 20px;
+        background: var(--bg-tint);
+        border-bottom: 1px solid var(--hairline);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .anatomy-header span {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .anatomy-layers {
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .anatomy-layer {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 14px 16px;
+        border-radius: 4px;
+        border: 1px solid var(--hairline);
+        background: var(--bg);
+      }
+      .anatomy-layer .label {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        padding-top: 1px;
+      }
+      .anatomy-layer .note {
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+      @media (max-width: 560px) {
+        .anatomy-layer { grid-template-columns: 1fr; gap: 6px; }
+      }
+
+      /* Site footer */
+      .site-footer { border-top: 1px solid var(--hairline); padding: 56px 0 40px; }
+      .site-footer .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .site-footer h4 {
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .site-footer ul li { padding: 4px 0; }
+      .site-footer ul li a { color: var(--ink-2); font-size: 14.5px; }
+      .site-footer .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      @media (max-width: 820px) { .site-footer .grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 540px) { .site-footer .grid { grid-template-columns: 1fr; } }
+
+      /* CTA block */
+      .cta-block {
+        padding: 64px 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: end;
+      }
+      .cta-block .btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      @media (max-width: 720px) { .cta-block { grid-template-columns: 1fr; gap: 24px; } }
+    </style>
+  </head>
+
+  <body>
+
+    <SiteHeader />
+
+    <nav class="pm-subnav">
+      <div class="wrap">
+        <div class="pm-subnav-inner">
+          <span class="pm-subnav-brand">PromptMate</span>
+          <div class="pm-subnav-links">
+            <a href="/promptmate">Overview</a>
+            <a href="/promptmate/getting-started">Getting started</a>
+            <a href="/promptmate/best-practices">Best practices</a>
+            <a href="/promptmate/starter-prompts">Starter prompts</a>
+            <a href="/promptmate/whats-new" class="active new-badge">What's new</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="page-hero">
+        <div class="wrap reveal">
+          <div class="version-badge">
+            <span class="dot"></span>
+            v0.8.0 · Released
+          </div>
+          <span class="eyebrow">PromptMate · What's new</span>
+          <h1 class="display" style="margin-top: 16px;">
+            Variables, Groups<br />&amp; User Context.
+          </h1>
+          <p class="lede" style="margin-top: 24px;">
+            PromptMate now lets reusable prompts behave more like small, structured tools. Fill variables at send time, organize prompts into groups, attach shared group instructions, and append persistent personal context across platforms.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;">
+            <a
+              class="btn primary"
+              href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install Free
+              <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+            </a>
+            <a class="btn" href="/promptmate/getting-started">
+              Getting started guide
+            </a>
+            <a
+              class="btn"
+              href="https://github.com/jitangupta/PromptMate"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub
+            </a>
+          </div>
+          <div class="meta-row">
+            <span><b>v0.8.0</b> · Latest</span>
+            <span><b>4</b> New features</span>
+            <span><b>Free</b> · No account needed</span>
+            <span>Chrome · Brave · Edge · Chromium</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      {features.map((f) => (
+        <section id={f.id} class="feature-section">
+          <div class="wrap">
+            <div class="feature-header reveal">
+              <span class="eyebrow">{f.eyebrow}</span>
+              <h2>{f.headline}</h2>
+              <p>{f.body}</p>
+            </div>
+
+            <div class="video-frame reveal">
+              <div class="video-chrome">
+                <span class="dot r"></span>
+                <span class="dot y"></span>
+                <span class="dot g"></span>
+                <span class="url">{f.urlChip}</span>
+              </div>
+              <video
+                src={f.video}
+                controls
+                preload="metadata"
+                poster={f.poster}
+              >
+                <img src={f.poster} alt={`${f.headline} demo screenshot`} loading="lazy" />
+              </video>
+            </div>
+
+            <div class={`screenshot-grid ${f.screenshots.length > 1 ? 'two' : 'one'}`}>
+              {f.screenshots.map((s) => (
+                <div class="screenshot-item reveal">
+                  <img src={s.src} alt={s.alt} loading="lazy" />
+                  <div class="screenshot-caption">
+                    <h4>{s.caption}</h4>
+                    <p>{s.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <!-- PROMPT ANATOMY -->
+      <section class="tight hairline-t">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow">How it stacks</span>
+            <h2 class="h2" style="margin-top: 16px;">The anatomy of an outgoing prompt.</h2>
+            <p class="lede" style="margin-top: 12px;">
+              In v0.8.0, PromptMate assembles your final prompt in a defined order — so every layer lands in the right place for the AI to read it correctly.
+            </p>
+          </div>
+          <div class="anatomy-block reveal">
+            <div class="anatomy-header">
+              <span>Final prompt sent to the AI</span>
+              <span>Top → Bottom</span>
+            </div>
+            <div class="anatomy-layers">
+              {promptOrder.map((layer) => (
+                <div class="anatomy-layer">
+                  <span class="label" style={`color: ${layer.color};`}>{layer.label}</span>
+                  <span class="note">{layer.note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="tight">
+        <div class="wrap">
+          <div class="cta-block reveal">
+            <div>
+              <span class="eyebrow">Free · Open source · No backend</span>
+              <h2 class="h2" style="margin-top: 14px;">Prompts that work like tools.</h2>
+              <p class="body" style="margin-top: 12px; max-width: 52ch;">
+                Update to v0.8.0, set your user context once, organize your library into groups, and start writing prompts with variables. The same library — smarter now.
+              </p>
+            </div>
+            <div class="btns">
+              <a
+                class="btn primary"
+                href="https://chromewebstore.google.com/detail/promptmate/oknglgpcglngpaobpjndcaaljdchmgai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Install Free
+                <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg>
+              </a>
+              <a class="btn" href="/promptmate">
+                <svg style="width:14px;height:14px;" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7H3M6.5 3.5L3 7l3.5 3.5"/></svg>
+                PromptMate overview
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <a href="/" style="display:inline-block; margin-bottom: 14px;">
+              <img src="/JitanGupta%20Logo.png" alt="Jitan Gupta" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" />
+            </a>
+            <p class="body" style="font-size:14.5px; max-width: 42ch; margin-top: 12px;">
+              Engineer building AI infrastructure and developer tooling, in public. Mumbai, India.
+            </p>
+          </div>
+          <div>
+            <h4>PromptMate</h4>
+            <ul>
+              <li><a href="/promptmate">Overview</a></li>
+              <li><a href="/promptmate/getting-started">Getting started</a></li>
+              <li><a href="/promptmate/best-practices">Best practices</a></li>
+              <li><a href="/promptmate/starter-prompts">Starter prompts</a></li>
+              <li><a href="/promptmate/whats-new">What's new</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <ul>
+              <li><a href="https://github.com/jitangupta" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.youtube.com/@jitangupta" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/jitangupta/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>More</h4>
+            <ul>
+              <li><a href="/builds">All builds</a></li>
+              <li><a href="/case-studies">Case studies</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <span>© 2026 Jitan Gupta. All rights reserved.</span>
+          <span class="mono">Built in public · Mumbai → web</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) { el.classList.add('in'); }
+        else { io.observe(el); }
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+      }, 1500);
+    </script>
+
+  </body>
+</html>
